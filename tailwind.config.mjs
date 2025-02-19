@@ -8,6 +8,7 @@ export default {
   theme: {
     fontSize: {
       '1px': '1px',
+      '4px': '4px',
       '5px': '5px',
       '6px': '6px',
       '7px': '7px',

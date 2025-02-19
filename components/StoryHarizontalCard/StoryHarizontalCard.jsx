@@ -26,31 +26,31 @@ export default function StoryHarizontalCard() {
         <div className="col-span-4 grid grid-cols-3 gap absolute bottom-0">
           <div className="col-span-1">
             <div className="rtl flex text-right">
-              <p className="font-common-bold ml-1 text-12px xl:text-14px">
+              <p className="font-common-thin ml-1 text-8px xl:text-14px">
                 نویسنده:
               </p>
-              <p className="font-common-thin text-12px xl:text-14px">
+              <p className="font-common-thin text-8px xl:text-14px">
                 باسط یزدانی
               </p>
             </div>
           </div>
           <div className="col-span-1">
             <div className="rtl flex text-right">
-              <p className="font-common-bold ml-1 text-12px xl:text-14px">
+              <p className="font-common-thin ml-1 text-8px xl:text-14px">
                 تاریخ:
               </p>
-              <p className="font-common-thin text-12px xl:text-14px">
+              <p className="font-common-thin text-8px xl:text-14px">
                 1403/12/05
               </p>
             </div>
           </div>
           <div className="col-span-1">
             <div className="rtl flex text-right">
-              <p className="font-common-bold ml-1 text-12px xl:text-14px">
+              <p className="font-common-thin ml-1 text-8px xl:text-14px">
                 زمان:
               </p>
-              <p className="font-common-thin text-12px xl:text-14px">12 </p>
-              <p className="font-common-thin text-12px xl:text-14px">دقیقه</p>
+              <p className="font-common-thin text-8px xl:text-14px">12 </p>
+              <p className="font-common-thin text-8px xl:text-14px">دقیقه</p>
             </div>
           </div>
         </div>

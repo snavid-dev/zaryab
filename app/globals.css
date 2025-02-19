@@ -124,72 +124,42 @@ body {
 
 .font-common {
   font-family: Yekan Bakh;
-  font-size: 16px;
-  font-weight: 700;
-  word-spacing: -0.05em;
-  line-height: 25px;
 }
 
 .font-common-thin {
   font-family: Yekan Bakh thin;
-  font-size: 14px;
-  font-weight: 300;
-  word-spacing: -0.05em;
-  line-height: 25px;
 }
 
 .font-common-med {
   font-family: Yekan Bakh;
-  font-size: 16px;
-  font-weight: 700;
-  word-spacing: -0.05em;
-  line-height: 35.3px;
 }
 
 .font-common-lg {
   font-family: Yekn Bakh bold;
-  font-size: 40px;
-  font-weight: 900;
-  word-spacing: -0.05em;
-  line-height: 35.3px;
 }
 
 .font-common-heading2 {
   font-family: Yekn Bakh bold;
-  font-weight: 900;
-  font-size: 25px;
-  word-spacing: -0.05em;
 }
 
 .font-common-heading {
   font-family: Radin;
-  font-size: 80px;
-  font-weight: 700;
-  line-height: 60px;
 }
 
 .font-smallText {
   font-family: Yekan Bakh thin;
-  font-size: 10px;
-  font-weight: 300;
-  word-spacing: -0.05em;
 }
 
 .font-smallTitle {
   font-family: Yekn Bakh bold;
-  font-size: 10px;
-  font-weight: 900;
-  word-spacing: -0.05em;
 }
 
 .font-common-heavy {
   font-family: 'Yekan Bakh Heavy';
-  font-size: 51px;
 }
 
 .font-common-regular {
   font-family: 'Yekan Bakh Regular';
-  font-size: 18px;
 }
 
 .font-new {
