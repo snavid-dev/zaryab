@@ -1,6 +1,6 @@
 import React from 'react';
 import Heading1 from '../Heading1/Heading1';
-import Genre from '../Genre/genre';
+import Genre from '../Genre/Genre';
 import Image from 'next/image';
 
 export default function StoryOfDay() {
