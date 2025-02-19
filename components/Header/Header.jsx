@@ -13,7 +13,7 @@ export default function Header() {
     <header
       className={`w-full flex justify-center overflow-y-hidden xl:h-150px pt-20px md:pt-10px xl:pt-20px ${
         menu ? 'h-100px' : 'h-500px'
-      } transition-all duration-700`}
+      } transition-all duration-700 absolute top-0 bg-white z-10 xl:relative`}
     >
       <div className="main-container border-b-2 pb-10px xl:pb-0">
         {/* mobile menu icon */}

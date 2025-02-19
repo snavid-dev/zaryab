@@ -9,11 +9,19 @@
   gap: 10px;
 }
 
+.gap {
+  gap: 10px;
+}
+
 @media only screen and (min-width: 767px) {
   .main-container {
     width: 750px;
     display: grid;
     grid-template-columns: repeat(6, 100px);
+    gap: 30px;
+  }
+
+  .gap {
     gap: 30px;
   }
 }
@@ -25,6 +33,10 @@
     grid-template-columns: repeat(12, 80px);
     gap: 20px;
   }
+
+  .gap {
+    gap: 20px;
+  }
 }
 
 @media only screen and (min-width: 1920px) {
@@ -32,6 +44,10 @@
     width: 1530px;
     display: grid;
     grid-template-columns: repeat(12, 100px);
+    gap: 30px;
+  }
+
+  .gap {
     gap: 30px;
   }
 }
