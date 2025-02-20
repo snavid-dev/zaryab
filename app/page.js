@@ -1,4 +1,5 @@
 import BookDesk from '@/components/BookDesk/BookDesk';
+import BookMailMobile from '@/components/BookMailMobile/BookMailMobile';
 import FullAd from '@/components/FullAd/FullAd';
 import SmallAd from '@/components/SmallAd/SmallAd';
 import StoryMail from '@/components/StoryMailDesk/StoryMail';
@@ -15,9 +16,12 @@ export default function Home() {
       <StoryMail />
       {/* ad */}
       <SmallAd />
-      {/* desktop book section */}
+      {/* desktop book section and moblie tablet*/}
       <div className="w-full hidden xl:flex flex-col items-center">
         <BookDesk />
+      </div>
+      <div className="w-full flex flex-col items-center xl:hidden">
+        <BookMailMobile />
       </div>
     </main>
   );
