@@ -1,3 +1,5 @@
+import Authors from '@/components/Authors/Authors';
+import AuthorWeek from '@/components/AuthorWeek/AuthorWeek';
 import BookDesk from '@/components/BookDesk/BookDesk';
 import BookMailMobile from '@/components/BookMailMobile/BookMailMobile';
 import FullAd from '@/components/FullAd/FullAd';
@@ -23,6 +25,14 @@ export default function Home() {
       <div className="w-full flex flex-col items-center xl:hidden">
         <BookMailMobile />
       </div>
+      {/* ad */}
+      <FullAd />
+      {/* author of the week */}
+      <AuthorWeek />
+      {/* ad */}
+      <SmallAd />
+      {/* authors */}
+      <Authors />
     </main>
   );
 }

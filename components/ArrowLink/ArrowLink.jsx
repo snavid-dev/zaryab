@@ -5,7 +5,7 @@ export default function ArrowLink({ title, path }) {
   return (
     <Link
       href={`${path}`}
-      className="flex items-center group md:mt-5 lg:mt-0"
+      className="flex items-center group md:mt-5 lg:mt-0 rtl"
     >
       <p className="group-hover:text-[#FCA30A] transition-all duration-1000 font-common-lg text-15px xl:text-27px">
         {title}
