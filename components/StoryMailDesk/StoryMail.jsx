@@ -1,5 +1,6 @@
 import React from 'react';
 import StoryHarizontalCard from '../StoryHarizontalCard/StoryHarizontalCard';
+import Mail from '../Mail/mail';
 
 export default function StoryMail() {
   return (
@@ -11,7 +12,9 @@ export default function StoryMail() {
         <StoryHarizontalCard />
         <StoryHarizontalCard />
       </div>
-      <div className="h-5 hidden xl:block xl:col-span-3 bg-blue-500"></div>
+      <div className="hidden xl:block xl:col-span-3">
+        <Mail />
+      </div>
     </div>
   );
 }

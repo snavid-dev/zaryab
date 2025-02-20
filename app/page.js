@@ -1,4 +1,5 @@
 import FullAd from '@/components/FullAd/FullAd';
+import SmallAd from '@/components/SmallAd/SmallAd';
 import StoryMail from '@/components/StoryMailDesk/StoryMail';
 import StoryOfDay from '@/components/StoryOfDay/StoryOfDay';
 
@@ -11,6 +12,8 @@ export default function Home() {
       <FullAd />
       {/* letters and  mailes for desktop*/}
       <StoryMail />
+      {/* ad */}
+      <SmallAd />
     </main>
   );
 }

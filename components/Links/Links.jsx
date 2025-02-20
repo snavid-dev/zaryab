@@ -13,7 +13,7 @@ export default function Links({ link, title }) {
             : pathname === '/about'
             ? 'text-white'
             : 'text-black'
-        }`}
+        } mt-2`}
       >
         {title}
       </p>
@@ -24,7 +24,7 @@ export default function Links({ link, title }) {
             : pathname === '/about'
             ? 'text-white'
             : 'text-black'
-        }`}
+        } mt-2`}
       >
         <Link href={`${link}`}>{title}</Link>
       </p>

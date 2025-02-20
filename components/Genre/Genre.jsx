@@ -3,9 +3,7 @@ import React from 'react';
 export default function Genre({ title }) {
   return (
     <div className="relative flex group h-21px">
-      <div className="font-common-thin z-20 text-16px md:text-18px text-right">
-        {title}
-      </div>
+      <div className="font-common-thin z-20 text-16px  text-right">{title}</div>
       <svg
         width="21"
         height="21"

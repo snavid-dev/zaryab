@@ -17,7 +17,7 @@ export default function StoryHarizontalCard() {
         <div className="col-span-4 text-27px md:text-59px font-new-extra-black">
           صندوقچه ‌‌بی‌بی
         </div>
-        <div className="col-span-4 text-6px md:12px font-smallText">
+        <div className="col-span-4 text-6px md:text-12px font-smallText">
           یادم می‌آید که روز ختم ما کنارش می‌نشستیم و انتظار می‌کشیدم تا قرائت
           خود را تمام کند و نخود و کشمش دَم‌کرده برای ما بدهد. سوالی که همیشه در
           ذهن داشتم این بود که چرا این نخود و کشمش‌ها از خلاصی نیستند. او چنان

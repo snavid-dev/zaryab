@@ -40,31 +40,33 @@ export default function StoryOfDay() {
               <div className="col-span-1 hidden xl:block"></div>
               <div className="col-span-1 xl:mt-6">
                 <div className="rtl flex justify-center text-right">
-                  <p className="font-common-thin ml-1 text-12px xl:text-14px">
+                  <p className="font-common-thin ml-1 text-12px md:text-25px xl:text-18px">
                     نویسنده:
                   </p>
-                  <p className="font-common-thin text-12px xl:text-14px">
+                  <p className="font-common-thin text-12px md:text-25px xl:text-18px">
                     باسط یزدانی
                   </p>
                 </div>
               </div>
               <div className="col-span-1 xl:mt-6">
                 <div className="rtl flex justify-center text-right">
-                  <p className="font-common-thin ml-1 text-12px xl:text-14px">
+                  <p className="font-common-thin ml-1 text-12px md:text-25px xl:text-18px">
                     تاریخ:
                   </p>
-                  <p className="font-common-thin text-12px xl:text-14px">
+                  <p className="font-common-thin text-12px md:text-25px xl:text-18px">
                     1403/12/05
                   </p>
                 </div>
               </div>
               <div className="col-span-1 xl:mt-6">
                 <div className="rtl flex justify-center text-right">
-                  <p className="font-common-thin ml-1 text-12px xl:text-14px">
+                  <p className="font-common-thin ml-1 text-12px md:text-25px xl:text-18px">
                     زمان:
                   </p>
-                  <p className="font-common-thin text-12px xl:text-14px">12 </p>
-                  <p className="font-common-thin text-12px xl:text-14px">
+                  <p className="font-common-thin text-12px md:text-25px xl:text-18px">
+                    12{' '}
+                  </p>
+                  <p className="font-common-thin text-12px md:text-25px xl:text-18px">
                     دقیقه
                   </p>
                 </div>
