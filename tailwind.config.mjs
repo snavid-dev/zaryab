@@ -22,6 +22,7 @@ export default {
       '17px': '17px',
       '18px': '18px',
       '20px': '20px',
+      '24px': '24px',
       '25px': '25px',
       '26px': '26px',
       '27px': '27px',
