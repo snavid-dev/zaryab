@@ -1,6 +1,6 @@
 import React from 'react';
 import StoryHarizontalCard from '../StoryHarizontalCard/StoryHarizontalCard';
-import Mail from '../Mail/mail';
+import Mail from '../Mail/Mail';
 
 export default function StoryMail() {
   return (
