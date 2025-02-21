@@ -152,7 +152,10 @@ export default function AuthorPage({ params }) {
           {/* it have two rows */}
           <div className="flex flex-col-reverse items-end w-full lg:flex-row-reverse md:justify-between">
             <Heading1 title="نویسنده ها و شاعران آوای زریاب" />
-            <ArrowLink title="همه نویسنده و شاعران" />
+            <ArrowLink
+              title="همه نویسنده و شاعران"
+              path="/authors"
+            />
           </div>
           <div className="main-container mt-7">
             {/* {similarData?.map((data, index) => (
