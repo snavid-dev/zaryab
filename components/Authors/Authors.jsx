@@ -25,7 +25,7 @@ export default function Authors() {
   return (
     <div className="main-container">
       {/* it have two rows */}
-      <div className="col-span-6 xl:col-span-12 flex flex-col-reverse items-end md:flex-row-reverse md:justify-between">
+      <div className="col-span-6 xl:col-span-12 flex flex-col items-end md:flex-row-reverse md:justify-between">
         <Heading1 title="نویسنده ها و شاعران آوای زریاب" />
         <ArrowLink
           title="همه نویسنده و شاعران"

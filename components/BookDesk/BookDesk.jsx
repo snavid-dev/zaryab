@@ -96,11 +96,12 @@ export default function BookDesk() {
       </div>
       <div className="main-container rtl">
         {/*  it has two columns  */}
+        <div className="hidden md:block md:col-span-1 xl:hidden"></div>
         <div
           ref={imageRef}
-          className="col-span-6"
+          className="col-span-6 md:col-span-4 xl:col-span-6"
         >
-          <div className="relative w-full xl:h-780px 2xl:h-1020px flex flex-col">
+          <div className="relative w-full h-500px md:h-670px xl:h-780px 2xl:h-1020px flex flex-col">
             <Image
               src="/assets/img/book.png"
               alt=""
@@ -109,17 +110,18 @@ export default function BookDesk() {
             />
           </div>
         </div>
+        <div className="hidden md:block md:col-span-1 xl:hidden"></div>
         <div className="col-span-6">
           <div className="flex flex-col w-full items-start">
             <h3
               ref={subtitleRef}
-              className="font-common-lg xl:text-65px 2xl:text-92px flex flex-col items-end justify-between lg:mt-5"
+              className="font-common-lg text-30px xl:text-65px 2xl:text-92px flex flex-col items-end justify-between lg:mt-5"
             >
               هریپاتر و سنگ فلاسفر
             </h3>
             <div
               ref={textRef}
-              className="rtl mt-7 font-common-regular hidden lg:block xl:text-20px 2xl:text-28px"
+              className="rtl mt-7 font-common-regular text-14px xl:text-20px 2xl:text-28px"
             >
               <p className="">
                 اگر به دنبال کتابی هستید که شما را به دنیایی پر از جادو، دوستی،
@@ -153,7 +155,7 @@ export default function BookDesk() {
       {/*  buttons   */}
       <div
         ref={buttonRef}
-        className="col-span-12 gap-4 grid grid-cols-2"
+        className="col-span-6 xl:col-span-12 gap-4 grid grid-cols-2"
       >
         <Link
           href="#"
