@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Heading1({ title }) {
   return (
-    <div className="inline  relative p-1px box-border">
+    <div className="inline relative p-1px box-border">
       <p className={`font-common-lg inline text-26px md:28px xl:text-60px`}>
         {title}
       </p>

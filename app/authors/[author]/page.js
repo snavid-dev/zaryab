@@ -1,0 +1,179 @@
+'use client';
+import Image from 'next/image';
+import Link from 'next/link';
+
+import { use, useRef } from 'react';
+import { useState, useEffect } from 'react';
+import axios from '@/utils/api';
+import Heading1 from '@/components/Heading1/Heading1';
+import ArrowLink from '@/components/ArrowLink/ArrowLink';
+import OurAuthorCard from '@/components/OurAuthorCard/OurAuthorCard';
+import FullAd from '@/components/FullAd/FullAd';
+import SmallAd from '@/components/SmallAd/SmallAd';
+
+export default function AuthorPage({ params }) {
+  const [data, setData] = useState(null);
+  const [Error, setError] = useState(null);
+  const [similarData, setSimilarData] = useState(null);
+
+  const param = use(params);
+
+  //   useEffect(() => {
+  //     const fetchData = async () => {
+  //       try {
+  //         const response = await axios.get(`/v1/authors/${param.author}`);
+  //         setData(response.data);
+  //       } catch (err) {
+  //         setError(err.response?.data?.message || err.message);
+  //       }
+  //     };
+  //     fetchData();
+  //   }, []);
+
+  //   useEffect(() => {
+  //     const fetchData = async () => {
+  //       try {
+  //         const response = await axios.get(
+  //           `/v1/similar_authors/${param.author}?per_page=8`
+  //         );
+  //         setSimilarData(response.data.authors);
+  //       } catch (err) {
+  //         setError(err.respons?.data.message || err.message);
+  //       }
+  //     };
+  //     fetchData();
+  //   }, []);
+  const ref = useRef(null);
+
+  return (
+    // the main container of the page
+    <div className="flex flex-col items-center mt-150px">
+      {/* the author section */}
+      <div className="main-container mt-7 rtl">
+        {/*  it has 7 rows  */}
+        <div className="col-span-6 md:col-span-3 border-2 border-black p-7">
+          <div className="w-full h-290px md:h-300px xl:h-220px 2xl:h-300px relative">
+            {true ? (
+              <Image
+                src={data?.featured_image || '/assets/img/authorPic.png'}
+                alt=""
+                layout="fill"
+                objectFit="cover"
+                className="absolute"
+              />
+            ) : (
+              <div>failed to display image!!!</div>
+            )}
+          </div>
+        </div>
+        <div className="col-span-6 md:col-span-3 xl:col-span-9 flex flex-col justify-end mr-7">
+          <div className="font-common-heavy text-50px md:text-60px rtl text-black">
+            {data?.title || 'باسط یزدانی'}
+          </div>
+          <div className="flex rtl mt-7 text-black">
+            <div className="font-common-heavy text-20px">موقعیت:</div>
+            <div className="font-common-regular text-20px">
+              {data?.meta.location || 'هرات'}
+            </div>
+          </div>
+          <div className="flex rtl mt-3 text-black">
+            <div className="font-common-heavy text-20px">وظیفه:</div>
+            <div className="font-common-regular text-20px">
+              {data?.meta.job || 'نویسنده'}
+            </div>
+          </div>
+          <div className="flex rtl mt-3 text-black">
+            <div className="font-common-heavy text-20px">تعداد نوشته ها:</div>
+            <div className="font-common-regular text-20px">
+              {data?.meta.sum_topics || '23'}
+            </div>
+          </div>
+          <div className="flex rtl mt-3 text-black">
+            <div className="font-common-heavy text-20px">سن:</div>
+            <div className="font-common-regular text-20px">
+              {data?.meta.age || '20'}
+            </div>
+          </div>
+          <div className="flex mt-3 justify-start">
+            <Link href={data?.meta.facebook_link || '#'}>
+              <Image
+                src="/assets/svg/facebook.svg"
+                alt="facebook logo"
+                width={20}
+                height={20}
+              />
+            </Link>
+            <Link href={data?.meta.instagram_link || '#'}>
+              <Image
+                src="/assets/svg/instagram.svg"
+                alt="instagram logo"
+                width={20}
+                height={20}
+              />
+            </Link>
+            <Link href={data?.meta.telegram_link || '#'}>
+              <Image
+                src="/assets/svg/telegram.svg"
+                alt="telegram logo"
+                width={20}
+                height={20}
+              />
+            </Link>
+            <Link href={data?.meta.youtube_link || '#'}>
+              <Image
+                src="/assets/svg/youtube.svg"
+                alt="youtube logo"
+                width={20}
+                height={20}
+              />
+            </Link>
+          </div>
+        </div>
+      </div>
+      {/*  introduction section  */}
+      <div className="main-container mt-14 rtl">
+        {/*  title  */}
+        <div className="col-span-6 xl:col-span-12">
+          <Heading1 title="معرفی نامه" />
+        </div>
+        {/*  the text  */}
+        <div
+          dangerouslySetInnerHTML={{
+            __html: data?.content || '<div>Hello</div>',
+          }}
+          className="font-common-regular col-span-6 xl:col-span-12  text-justify md:text-right text-20px lg:text-25px xl:text-30px rtl mt-7"
+        ></div>
+      </div>
+      {/* full ad */}
+      <FullAd />
+      {/* authors section */}
+      <div className="mt-7">
+        <div className="flex flex-col">
+          {/* it have two rows */}
+          <div className="flex flex-col-reverse items-end w-full lg:flex-row-reverse md:justify-between">
+            <Heading1 title="نویسنده ها و شاعران آوای زریاب" />
+            <ArrowLink title="همه نویسنده و شاعران" />
+          </div>
+          <div className="main-container mt-7">
+            {/* {similarData?.map((data, index) => (
+              <OurAuthorCard
+                key={index}
+                data={data}
+              />
+            ))} */}
+            <OurAuthorCard />
+            <OurAuthorCard />
+            <OurAuthorCard />
+            <OurAuthorCard />
+            <OurAuthorCard />
+            <OurAuthorCard />
+            <OurAuthorCard />
+            <OurAuthorCard />
+          </div>
+        </div>
+      </div>
+      {/* small ad */}
+      <SmallAd />
+    </div>
+  );
+}
