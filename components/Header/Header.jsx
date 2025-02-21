@@ -210,30 +210,37 @@ export default function Header() {
               <Links
                 title="کلبه"
                 link={'/'}
+                onClick={() => setMenu(!menu)}
               />
               <Links
                 title="نوشته های ادبی"
                 link={'/literarywritings'}
+                onClick={() => setMenu(!menu)}
               />
               <Links
                 title="مقاله ها"
                 link={'/articles'}
+                onClick={() => setMenu(!menu)}
               />
               <Links
                 title="نقد و نظر ها"
                 link={'/reviewsandopinions'}
+                onClick={() => setMenu(!menu)}
               />
               <Links
                 title="نشست ها"
                 link={'/podcasts'}
+                onClick={() => setMenu(!menu)}
               />
               <Links
                 title="نامه ها"
                 link={'/letters'}
+                onClick={() => setMenu(!menu)}
               />
               <Links
                 title="درباره ما"
                 link={'/about'}
+                onClick={() => setMenu(!menu)}
               />
               {/* social media links */}
               <div className="col-span-6 w-20% grid grid-cols-4 text-center">
