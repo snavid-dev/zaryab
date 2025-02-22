@@ -16,7 +16,7 @@ import SimilarPoems from '@/components/SimilarPoems/SimilarPoems';
 import FullAd from '@/components/FullAd/FullAd';
 import SmallAd from '@/components/SmallAd/SmallAd';
 
-export default function PoemsSinglePage({ params }) {
+export default function StorySinglePage({ params }) {
   // fetch data
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
@@ -217,16 +217,16 @@ export default function PoemsSinglePage({ params }) {
       <div>
         <div className="main-container mt-14 rtl">
           <div className="col-span-6 xl:col-span-6">
-            <Heading1 title="داستان ها" />
+            <Heading1 title="اشعار" />
           </div>
           <div className="col-span-6 xl-col-span-6 flex justify-start md:justify-end">
-            <ArrowLink title="همه داستان ها" />
+            <ArrowLink title="همه اشعار" />
           </div>
         </div>
         <div className="main-container mt-7">
-          <StoryPoemCard isStory={true} />
-          <StoryPoemCard isStory={true} />
-          <StoryPoemCard isStory={true} />
+          <StoryPoemCard />
+          <StoryPoemCard />
+          <StoryPoemCard />
         </div>
       </div>
       {/* small ad */}
