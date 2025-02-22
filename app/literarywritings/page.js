@@ -1,5 +1,7 @@
+import Authors from '@/components/Authors/Authors';
 import FullAd from '@/components/FullAd/FullAd';
 import PoemSection from '@/components/PoemSection/PoemSection';
+import SmallAd from '@/components/SmallAd/SmallAd';
 import StorySection from '@/components/SorySection/StorySection';
 import React from 'react';
 
@@ -10,6 +12,11 @@ export default function LiteraryWritingsPage() {
       {/* full ad */}
       <FullAd />
       <PoemSection />
+
+      <Authors />
+
+      {/* small ad */}
+      <SmallAd />
     </div>
   );
 }
