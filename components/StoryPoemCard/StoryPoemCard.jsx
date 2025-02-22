@@ -70,10 +70,10 @@ export default function StoryPoemCard({ data, isStory }) {
           <b className="font-common-bold text-8px md:text-18px lg:text-12px ml-1">
             زمان:
           </b>
-          <p className="font-common-thin mt-1 text-8px md:text-18px lg:text-12px">
+          <p className="font-common-thin md:mt-1 text-8px md:text-18px lg:text-12px">
             {data?.time || '12'}
           </p>
-          <p className="font-common-thin mt-1 text-8px md:text-18px lg:text-12px">
+          <p className="font-common-thin md:mt-1 text-8px md:text-18px lg:text-12px">
             دقیقه
           </p>
         </div>
@@ -81,7 +81,7 @@ export default function StoryPoemCard({ data, isStory }) {
           <b className="font-common-bold text-8px md:text-18px lg:text-12px ml-1">
             تاریخ:
           </b>
-          <p className="font-common-thin mt-1 text-8px md:text-18px lg:text-12px">
+          <p className="font-common-thin md:mt-1 text-8px md:text-18px lg:text-12px">
             {data?.shamsi_date || '12/2/1403'}
           </p>
         </div>
@@ -89,7 +89,7 @@ export default function StoryPoemCard({ data, isStory }) {
           <b className="font-common-bold text-8px md:text-18px lg:text-12px ml-1">
             نویسنده:
           </b>
-          <p className="font-common-thin mt-1 text-8px md:text-18px lg:text-12px">
+          <p className="font-common-thin md:mt-1 text-8px md:text-18px lg:text-12px">
             {data?.author.name || 'باسط یزدانی'}
           </p>
         </div>
