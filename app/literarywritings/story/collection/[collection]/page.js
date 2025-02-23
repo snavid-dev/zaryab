@@ -37,19 +37,19 @@ export default function StoryCollectionPage() {
       </div>
 
       <div className="main-container mt-7 pb-14">
-        <StoryPoemCard />
-        <StoryPoemCard />
-        <StoryPoemCard />
+        <StoryPoemCard isStory={true} />
+        <StoryPoemCard isStory={true} />
+        <StoryPoemCard isStory={true} />
         {/* full ad */}
         <FullAd />
-        <StoryPoemCard />
-        <StoryPoemCard />
-        <StoryPoemCard />
+        <StoryPoemCard isStory={true} />
+        <StoryPoemCard isStory={true} />
+        <StoryPoemCard isStory={true} />
         {/* full ad */}
         <FullAd />
-        <StoryPoemCard />
-        <StoryPoemCard />
-        <StoryPoemCard />
+        <StoryPoemCard isStory={true} />
+        <StoryPoemCard isStory={true} />
+        <StoryPoemCard isStory={true} />
         {/* full ad */}
         <FullAd />
       </div>
