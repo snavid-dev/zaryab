@@ -15,6 +15,7 @@ import Authors from '@/components/Authors/Authors';
 import SimilarPoems from '@/components/SimilarPoems/SimilarPoems';
 import FullAd from '@/components/FullAd/FullAd';
 import SmallAd from '@/components/SmallAd/SmallAd';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
 export default function StorySinglePage({ params }) {
   // fetch data
@@ -99,6 +100,58 @@ export default function StorySinglePage({ params }) {
                 </div>
               </div>
             </div>
+            {/* the links of the episodes */}
+            <div className="w-full mt-7 md:mt-14 flex flex-col">
+              {/*  it has 3 columns  */}
+              <div className="flex flex-row-reverse justify-between items-center">
+                <div className="font-common-heavy text-8px md:text-20px lg:text-25px">
+                  قسمت اول
+                </div>
+                <div className="w-[60%] justify-between items-center hidden md:flex flex-row-reverse">
+                  <button
+                    className="flex flex-row-reverse justify-around items-center font-common-heavy text-lg border-2 border-black
+                            hover:bg-black hover:text-white transition-all duration-700 px-2"
+                  >
+                    <IoIosArrowBack className="text-white text-10px md:text-20px lg:text-25px" />
+                    <p className="mt-1 text-8px md:text-12px lg:text-17px">
+                      قسمت قبلی
+                    </p>
+                  </button>
+                  <button
+                    className="flex flex-row-reverse justify-around items-center font-common-heavy text-lg border-2 border-black
+                            hover:bg-black hover:text-white transition-all duration-700 px-2"
+                  >
+                    <p className="mt-1 text-8px md:text-12px lg:text-17px">
+                      قسمت بعدی
+                    </p>
+                    <IoIosArrowForward className="text-white text-10px md:text-20px lg:text-25px" />
+                  </button>
+                </div>
+                <div className="">
+                  <ArrowLink title="همه قسمت ها" />
+                </div>
+              </div>
+              <div className="w-full flex flex-row-reverse mt-7 justify-between md:hidden">
+                <button
+                  className="flex flex-row-reverse justify-around items-center font-common-heavy text-lg border-2 border-black
+                            hover:bg-black hover:text-white transition-all duration-700 px-2"
+                >
+                  <IoIosArrowBack className="text-white text-10px md:text-20px lg:text-25px" />
+                  <p className="mt-1 text-8px md:text-12px lg:text-17px">
+                    قسمت قبلی
+                  </p>
+                </button>
+                <button
+                  className="flex flex-row-reverse justify-around items-center font-common-heavy text-lg border-2 border-black
+                            hover:bg-black hover:text-white transition-all duration-700 px-2"
+                >
+                  <p className="mt-1 text-8px md:text-12px lg:text-17px">
+                    قسمت بعدی
+                  </p>
+                  <IoIosArrowForward className="text-white text-10px md:text-20px lg:text-25px" />
+                </button>
+              </div>
+            </div>
           </div>
           {/*  the story text  */}
           <div
@@ -107,6 +160,27 @@ export default function StorySinglePage({ params }) {
             }}
             className="font-common-lg text-10px md:text-18px rtl mt-7"
           ></div>
+          {/* the episode section button */}
+          <div className="flex flex-row-reverse justify-between mt-7">
+            <button
+              className="flex flex-row-reverse justify-around items-center font-common-heavy text-2xl border-2 border-black
+                    hover:bg-black hover:text-white transition-all duration-700 px-3"
+            >
+              <IoIosArrowBack className="text-white text-10px md:text-20px lg:text-25px" />
+              <p className="mt-1 text-10px md:text-25px lg:text-30px">
+                قسمت قبلی
+              </p>
+            </button>
+            <button
+              className="flex flex-row-reverse justify-around items-center font-common-heavy text-2xl border-2 border-black
+                            hover:bg-black hover:text-white transition-all duration-700 px-3"
+            >
+              <p className="mt-1 text-10px md:text-25px lg:text-30px">
+                قسمت بعدی
+              </p>
+              <IoIosArrowForward className="text-white text-10px md:text-20px lg:text-25px" />
+            </button>
+          </div>
         </div>
         {/* the author section */}
         <div className="col-span-6 xl:col-span-3 mt-14 xl:mt-64 md:items-center xl:flex-col items-end">
