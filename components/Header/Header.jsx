@@ -9,7 +9,6 @@ import Links from '../Links/Links';
 export default function Header() {
   const [menu, setMenu] = useState(true);
   const pathname = usePathname();
-  console.log(pathname);
 
   return (
     <header
@@ -73,25 +72,20 @@ export default function Header() {
             </div>
             <div className="col-span-3"></div>
             <div className="col-span-6">
-              <div
-                className={`flex border-b-2 w-90% mx-auto ${
-                  pathname === '/about' ? 'border-white' : 'border-black'
-                }`}
-              >
-                <input
-                  type="text"
-                  className={`outline-none w-full rtl px-1  ${
-                    pathname === '/about'
-                      ? 'bg-black text-white'
-                      : 'bg-white text-black'
+              <Link href="/search">
+                <div
+                  className={`flex border-b-2 w-90% mx-auto ${
+                    pathname === '/about' ? 'border-white' : 'border-black'
                   }`}
-                />
-                <IoIosSearch
-                  className={`text-xl ${
-                    pathname === '/about' ? 'text-white' : 'text-black'
-                  }`}
-                />
-              </div>
+                >
+                  <div className="w-full h-5"></div>
+                  <IoIosSearch
+                    className={`text-xl ${
+                      pathname === '/about' ? 'text-white' : 'text-black'
+                    }`}
+                  />
+                </div>
+              </Link>
             </div>
           </div>
           {/* links */}
@@ -198,17 +192,19 @@ export default function Header() {
         {/* logo container */}
         <div className="col-span-1 xl:col-span-2">
           <div className="w-full xl:w-60% h-60px md:h-80px xl:h-100px relative">
-            <Image
-              src={`${
-                pathname === '/about'
-                  ? '/assets/svg/whiteLogo.svg'
-                  : '/assets/svg/logo.svg'
-              }`}
-              alt="logo"
-              layout="fill"
-              objectFit="contain"
-              className="absolute"
-            />
+            <Link href="/">
+              <Image
+                src={`${
+                  pathname === '/about'
+                    ? '/assets/svg/whiteLogo.svg'
+                    : '/assets/svg/logo.svg'
+                }`}
+                alt="logo"
+                layout="fill"
+                objectFit="contain"
+                className="absolute"
+              />
+            </Link>
           </div>
         </div>
         {/* mobile links */}
