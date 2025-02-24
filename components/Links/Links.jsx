@@ -16,7 +16,7 @@ export default function Links({ link, title, onClick }) {
             : pathname === '/about'
             ? 'text-white'
             : 'text-black'
-        } mt-2`}
+        } mt-2 font-common-lg font-bold`}
       >
         {title}
       </p>
@@ -27,7 +27,7 @@ export default function Links({ link, title, onClick }) {
             : pathname === '/about'
             ? 'text-white'
             : 'text-black'
-        } mt-2`}
+        } mt-2 font-common-lg font-bold`}
       >
         <Link href={`${link}`}>{title}</Link>
       </p>
