@@ -9,13 +9,21 @@ import Links from '../Links/Links';
 export default function Header() {
   const [menu, setMenu] = useState(true);
   const pathname = usePathname();
+  console.log(pathname);
+
   return (
     <header
       className={`w-full flex justify-center overflow-y-hidden xl:h-150px pt-20px md:pt-10px xl:pt-20px ${
         menu ? 'h-100px' : 'h-500px'
-      } transition-all duration-700 absolute top-0 bg-white z-50 xl:relative`}
+      } ${
+        pathname === '/about' ? 'bg-black' : 'bg-white'
+      }  transition-all duration-700 absolute top-0 z-50 xl:relative`}
     >
-      <div className="main-container border-b-2 pb-10px xl:pb-0">
+      <div
+        className={`main-container border-b-2 pb-10px xl:pb-0 ${
+          pathname === '/about' ? 'border-white' : 'border-black'
+        }`}
+      >
         {/* mobile menu icon */}
         <div className="col-span-1 xl:hidden mt-2 md:mt-4">
           <div
