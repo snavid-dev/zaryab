@@ -310,25 +310,30 @@ export default function Header() {
                 </Link>
               </div>
               <div className="col-span-6 mt-20px">
-                <div
-                  className={`flex border-b-2  w-full rtl ${
-                    pathname === '/about' ? 'border-white' : 'border-black'
-                  }`}
+                <Link
+                  href="/search"
+                  onClick={() => setMenu(!menu)}
                 >
-                  <IoIosSearch
-                    className={`text-30px ${
-                      pathname === '/about' ? 'text-white' : 'text-black'
+                  <div
+                    className={`flex border-b-2  w-full rtl ${
+                      pathname === '/about' ? 'border-white' : 'border-black'
                     }`}
-                  />
-                  <input
-                    type="text"
-                    className={`outline-none w-full rtl px-1  ${
-                      pathname === '/about'
-                        ? 'bg-black text-white'
-                        : 'bg-white text-black'
-                    }`}
-                  />
-                </div>
+                  >
+                    <IoIosSearch
+                      className={`text-30px ${
+                        pathname === '/about' ? 'text-white' : 'text-black'
+                      }`}
+                    />
+                    <div
+                      type="text"
+                      className={`outline-none w-full rtl px-1  ${
+                        pathname === '/about'
+                          ? 'bg-black text-white'
+                          : 'bg-white text-black'
+                      }`}
+                    />
+                  </div>
+                </Link>
               </div>
             </ul>
           </nav>
