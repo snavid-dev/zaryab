@@ -1,60 +1,87 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
+import Genre from '../Genre/Genre';
 
-export default function SimilarHorizontalCard() {
+export default function SimilarHorizontalCard({ data }) {
   return (
-    <div className="col-span-6 xl:col-span-12 grid grid-cols-6 xl:grid-cols-9 gap border-b-4 py-20px border-black">
+    <Link
+      href={`/articles/${data?.slug}`}
+      className="col-span-6 xl:col-span-12 grid grid-cols-6 xl:grid-cols-9 gap border-b-4 py-20px border-black"
+    >
       <div className="relative col-span-2 h-95px md:h-200px xl:h-210px 2xl:h-270px">
-        <Image
-          src="/assets/img/story-card.png"
-          alt="story image"
-          layout="fill"
-          objectFit="cover"
-          className="absolute"
-        />
+        {data?.image ? (
+          <Image
+            src={data?.image}
+            alt="story image"
+            layout="fill"
+            objectFit="cover"
+            className="absolute"
+          />
+        ) : (
+          <div className="w-full h-full flex justify-center items-center">
+            the article image not found
+          </div>
+        )}
       </div>
       <div className="col-span-4 xl:col-span-7 gap relative">
         <div className="col-span-4 text-27px md:text-59px font-new-extra-black">
-          صندوقچه ‌‌بی‌بی
+          {data?.title}
         </div>
-        <div className="col-span-4 text-6px md:text-12px font-smallText">
-          یادم می‌آید که روز ختم ما کنارش می‌نشستیم و انتظار می‌کشیدم تا قرائت
-          خود را تمام کند و نخود و کشمش دَم‌کرده برای ما بدهد. سوالی که همیشه در
-          ذهن داشتم این بود که چرا این نخود و کشمش‌ها از خلاصی نیستند. او چنان
-          در تقسیم مهارت داشت که حتی یک نخود و یک کشمش از کسی زیاد و کم نبود.
-        </div>
-        <div className="col-span-4 grid grid-cols-3 gap absolute bottom-0">
-          <div className="col-span-1">
-            <div className="rtl flex text-right">
-              <p className="font-common-thin ml-1 text-8px xl:text-14px">
-                نویسنده:
-              </p>
-              <p className="font-common-thin text-8px xl:text-14px">
-                باسط یزدانی
-              </p>
+        <div
+          className="col-span-4 text-6px md:text-12px font-smallText"
+          dangerouslySetInnerHTML={{ __html: data?.excerpt }}
+        ></div>
+        <div className="col-span-7 grid grid-cols-7 gap absolute bottom-0">
+          <div className="col-span-3 grid grid-cols-3 gap">
+            <div className="col-span-1">
+              <div className="rtl flex text-right">
+                <p className="font-common-thin ml-1 text-8px xl:text-14px">
+                  نویسنده:
+                </p>
+                <p className="font-common-thin text-8px xl:text-14px">
+                  {data?.author}
+                </p>
+              </div>
+            </div>
+            <div className="col-span-1">
+              <div className="rtl flex text-right">
+                <p className="font-common-thin ml-1 text-8px xl:text-14px">
+                  تاریخ:
+                </p>
+                <p className="font-common-thin text-8px xl:text-14px">
+                  {data?.date_shamsi}
+                </p>
+              </div>
+            </div>
+            <div className="col-span-1">
+              <div className="rtl flex text-right">
+                <p className="font-common-thin ml-1 text-8px xl:text-14px">
+                  زمان:
+                </p>
+                <p className="font-common-thin text-8px xl:text-14px">
+                  {data?.time}
+                </p>
+                <p className="font-common-thin text-8px xl:text-14px">دقیقه</p>
+              </div>
             </div>
           </div>
-          <div className="col-span-1">
-            <div className="rtl flex text-right">
-              <p className="font-common-thin ml-1 text-8px xl:text-14px">
-                تاریخ:
-              </p>
-              <p className="font-common-thin text-8px xl:text-14px">
-                1403/12/05
-              </p>
-            </div>
-          </div>
-          <div className="col-span-1">
-            <div className="rtl flex text-right">
-              <p className="font-common-thin ml-1 text-8px xl:text-14px">
-                زمان:
-              </p>
-              <p className="font-common-thin text-8px xl:text-14px">12 </p>
-              <p className="font-common-thin text-8px xl:text-14px">دقیقه</p>
-            </div>
+          <div className="col-span-1 h-5"></div>
+          <div className="col-span-2 grid grid-cols-3 gap">
+            {data?.categories.map(
+              (category, index) =>
+                index + 1 < 4 && (
+                  <div
+                    className="col-span-1"
+                    key={index}
+                  >
+                    <Genre title={category.name} />
+                  </div>
+                )
+            )}
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
