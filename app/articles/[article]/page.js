@@ -34,7 +34,6 @@ export default function ArticleSinglePage({ params }) {
     };
     fetchData();
   }, []);
-  console.log(data);
 
   return (
     // the main container of the page

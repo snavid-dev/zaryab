@@ -6,28 +6,31 @@ import FullAd from '@/components/FullAd/FullAd';
 import Heading1 from '@/components/Heading1/Heading1';
 import SimilarHorizontalCard from '@/components/SimilarHorizontalCard/SimilarHorizontalCard';
 import SmallAd from '@/components/SmallAd/SmallAd';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import axios from '@/utils/api';
+import Pagination from '@/components/Pagination/Pagination';
 
 export default function ReviewsAndOpinionsPage() {
-  const items = [
-    1, 2, 3, 4, 5, 6, 7, 8, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-    21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34,
-  ];
-
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 18;
+  const [totalPages, setTotalPages] = useState(0);
 
-  // Calculate the total number of pages
-  const totalPages = Math.ceil(items.length / itemsPerPage);
+  const [data, setData] = useState(null);
+  const [Error, setError] = useState(null);
 
-  // Calculate the index range of cards to display
-  const indexOfLastCard = currentPage * itemsPerPage;
-  const indexOfFirstCard = indexOfLastCard - itemsPerPage;
-  const currentCards = items.slice(indexOfFirstCard, indexOfLastCard);
-
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `/v1/author-reviews?per_page=8&page=${currentPage}`
+        );
+        setData(response.data.data);
+        setTotalPages(response.data.meta.pages);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+    fetchData();
+  }, [currentPage]);
 
   return (
     // main container of the page
@@ -52,39 +55,21 @@ export default function ReviewsAndOpinionsPage() {
 
       {/*  the body of the page  */}
       <div className="main-container rtl">
-        {/* {currentCards.map((item, index) => (
-          <ArticlesHorizontalCard
+        {data?.map((data, index) => (
+          <SimilarHorizontalCard
+            data={data}
+            isArticle={false}
             key={index}
-            vlaue={item}
           />
-        ))} */}
-        <SimilarHorizontalCard />
-        <SimilarHorizontalCard />
-        <SimilarHorizontalCard />
-        <SimilarHorizontalCard />
-        <SimilarHorizontalCard />
-        <SimilarHorizontalCard />
-        <SimilarHorizontalCard />
-        <SimilarHorizontalCard />
-        <SimilarHorizontalCard />
-        <SimilarHorizontalCard />
+        ))}
       </div>
       {/* Pagination controls */}
       <div className="flex justify-center mt-5">
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button
-            key={index + 1}
-            onClick={() => handlePageChange(index + 1)}
-            className={`w-20 h-20 mr-1 pt-3 flex justify-center items-center border-2 border-black font-common-heavy text-3xl
-                                ${
-                                  currentPage === index + 1
-                                    ? 'bg-black text-white'
-                                    : ''
-                                }`}
-          >
-            {index + 1}
-          </button>
-        ))}
+        <Pagination
+          totalPages={totalPages}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
       </div>
 
       {/* full ad */}

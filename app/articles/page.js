@@ -58,6 +58,7 @@ export default function ArticlesPage() {
         {data?.map((data, index) => (
           <SimilarHorizontalCard
             data={data}
+            isArticle={true}
             key={index}
           />
         ))}

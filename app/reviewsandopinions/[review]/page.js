@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 import { useRef, useState, useEffect } from 'react';
 
-// import axios from '@/utils/api';
+import axios from '@/utils/api';
 
 import { use } from 'react';
 import Genre from '@/components/Genre/Genre';
@@ -18,22 +18,21 @@ import SimilarReviews from '@/components/SimilarReviews/SimilarReviews';
 
 export default function ReviewsAndOpinionsSinglePage({ params }) {
   // fetch data
+  const param = use(params);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
-  const param = use(params);
-
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       try {
-  //         const response = await axios.get(`v1/poem/${param.poems}`);
-  //         setData(response.data);
-  //       } catch (err) {
-  //         setError(err.response?.data?.message || err.message);
-  //       }
-  //     };
-  //     fetchData();
-  //   }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`/v1/author-reviews/${param.review}`);
+        setData(response.data);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     // the main container of the page
@@ -41,13 +40,19 @@ export default function ReviewsAndOpinionsSinglePage({ params }) {
       {/* article picture */}
       <div className="main-container">
         <div className="col-span-6 xl:col-span-12 relative h-190px md:h-410px xl:h-650px 2xl:h-840px">
-          <Image
-            src="/assets/img/article-single-page-picture.png"
-            alt="article picture"
-            layout="fill"
-            objectFit="cover"
-            className="absolute"
-          />
+          {data?.big_image ? (
+            <Image
+              src={data?.big_image}
+              alt="article picture"
+              layout="fill"
+              objectFit="cover"
+              className="absolute"
+            />
+          ) : (
+            <div className="w-full h-full flex justify-center items-center">
+              the review page is not found
+            </div>
+          )}
         </div>
       </div>
       {/*  it has two columns  */}
@@ -57,7 +62,7 @@ export default function ReviewsAndOpinionsSinglePage({ params }) {
           {/*  the title section of the story  */}
           <div className="mt-14 flex flex-col items-end">
             <div className="w-full font-new-black text-50px md:text-60px lg:text-94px rtl">
-              {data?.title || 'صندوقچه بی بی'}
+              {data?.title}
             </div>
             <div className="w-full grid grid-cols-6 xl:grid-cols-9 items-center gap">
               {/* time */}
@@ -67,7 +72,7 @@ export default function ReviewsAndOpinionsSinglePage({ params }) {
                     زمان:
                   </b>
                   <p className="font-common-thin mt-10px md:mt-1 text-6px md:text-7px lg:text-12px">
-                    {data?.time || 12}
+                    {data?.time}
                   </p>
                   <p className="font-common-thin mt-10px md:mt-1 text-6px md:text-7px lg:text-12px">
                     دقیقه
@@ -78,41 +83,27 @@ export default function ReviewsAndOpinionsSinglePage({ params }) {
                     تاریخ:
                   </b>
                   <p className="font-common-thin mt-10px md:mt-1 text-6px md:text-7px lg:text-12px">
-                    {data?.shamsi_date || '2/5/1403'}
+                    {data?.date_shamsi}
                   </p>
                 </div>
               </div>
               {/* genre */}
               <div className="col-span-7 grid grid-cols-6">
-                {/* {data?.categories.map((category, index) => (
-                 
-                ))} */}
-
-                <div className="cols-span-1">
-                  <Genre title="ترسناک" />
-                </div>
-                <div className="cols-span-1">
-                  <Genre title="ترسناک" />
-                </div>
-                <div className="cols-span-1">
-                  <Genre title="ترسناک" />
-                </div>
-                <div className="cols-span-1">
-                  <Genre title="ترسناک" />
-                </div>
-                <div className="cols-span-1">
-                  <Genre title="ترسناک" />
-                </div>
-                <div className="cols-span-1">
-                  <Genre title="ترسناک" />
-                </div>
+                {data?.categories.map((category, index) => (
+                  <div
+                    className="cols-span-1"
+                    key={index}
+                  >
+                    <Genre title={category.name} />
+                  </div>
+                ))}
               </div>
             </div>
           </div>
           {/*  the story text  */}
           <div
             dangerouslySetInnerHTML={{
-              __html: data?.content || '<div>Hello</div>',
+              __html: data?.content,
             }}
             className="font-common-lg text-10px md:text-18px rtl mt-7"
           ></div>
@@ -122,11 +113,9 @@ export default function ReviewsAndOpinionsSinglePage({ params }) {
           {/*  it has 7 rows  */}
           <div className="w-1/2 xl:w-full border-2 border-black p-3 md:p-7">
             <div className="w-full h-150px md:h-310px xl:h-220px 2xl:h-300px relative">
-              {data?.author.featured_image || true ? (
+              {data?.author.featured_image ? (
                 <Image
-                  src={
-                    data?.author.featured_image || '/assets/img/authorPic.png'
-                  }
+                  src={data?.author.featured_image}
                   alt=""
                   layout="fill"
                   objectFit="cover"
@@ -139,16 +128,14 @@ export default function ReviewsAndOpinionsSinglePage({ params }) {
           </div>
           <div className="w-full flex flex-col mr-7 xl:mr-0 rtl">
             <div className="font-common-heavy text-25px md:text-50px rtl mt-7 md:mt-0 xl:mt-7 text-black">
-              <Link href={`/authors/${data?.author.slug}`}>
-                {data?.author.name || 'باسط یزدانی'}
-              </Link>
+              {data?.author.name}
             </div>
             <div className="flex rtl md:mt-7 text-black">
               <div className="font-common-heavy text-10px md:text-18px ml-1">
                 موقعیت:
               </div>
               <div className="font-common-regular text-10px md:text-18px">
-                {data?.author.location || 'هرات'}
+                {data?.author.location}
               </div>
             </div>
             <div className="flex rtl mt-3 text-black">
@@ -156,7 +143,7 @@ export default function ReviewsAndOpinionsSinglePage({ params }) {
                 وظیفه:
               </div>
               <div className="font-common-regular text-10px md:text-18px">
-                {data?.author.job || 'نویسنده'}
+                {data?.author.job}
               </div>
             </div>
             <div className="flex rtl mt-3 text-black">
@@ -164,7 +151,7 @@ export default function ReviewsAndOpinionsSinglePage({ params }) {
                 تعداد نوشته ها:
               </div>
               <div className="font-common-regular text-10px md:text-18px">
-                3000
+                {data?.author.total_letters}
               </div>
             </div>
             <div className="flex rtl mt-3 text-black">
@@ -172,11 +159,11 @@ export default function ReviewsAndOpinionsSinglePage({ params }) {
                 سن:
               </div>
               <div className="font-common-regular text-10px md:text-18px">
-                {data?.author.age || '23'}
+                {data?.author.age}
               </div>
             </div>
             <div className="flex md:mt-3">
-              <Link href={data?.author.facebook_link || '#'}>
+              <Link href={data?.author.facebook || '#'}>
                 <Image
                   src="/assets/svg/facebook.svg"
                   alt="facebook logo"
@@ -184,7 +171,7 @@ export default function ReviewsAndOpinionsSinglePage({ params }) {
                   height={20}
                 />
               </Link>
-              <Link href={data?.author.instagram_link || '#'}>
+              <Link href={data?.author.instagram || '#'}>
                 <Image
                   src="/assets/svg/instagram.svg"
                   alt="instagram logo"
@@ -192,7 +179,7 @@ export default function ReviewsAndOpinionsSinglePage({ params }) {
                   height={20}
                 />
               </Link>
-              <Link href={data?.author.telegram_link || '#'}>
+              <Link href={data?.author.telegram || '#'}>
                 <Image
                   src="/assets/svg/telegram.svg"
                   alt="telegram logo"
@@ -200,7 +187,7 @@ export default function ReviewsAndOpinionsSinglePage({ params }) {
                   height={20}
                 />
               </Link>
-              <Link href={data?.author.youtube_link || '#'}>
+              <Link href={data?.author.youtube || '#'}>
                 <Image
                   src="/assets/svg/youtube.svg"
                   alt="youtube logo"
@@ -217,7 +204,7 @@ export default function ReviewsAndOpinionsSinglePage({ params }) {
       {/*  the similar stories  */}
       <div className="w-full flex justify-end">
         <div className="w-full">
-          <SimilarReviews slug={param.poems} />
+          <SimilarReviews slug={param.review} />
         </div>
       </div>
       {/* full ad */}

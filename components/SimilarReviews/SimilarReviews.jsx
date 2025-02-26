@@ -2,26 +2,26 @@ import { useState, useEffect } from 'react';
 import Heading1 from '../Heading1/Heading1';
 import SimilarHorizontalCard from '../SimilarHorizontalCard/SimilarHorizontalCard';
 
-// import axios from '@/utils/api';
+import axios from '@/utils/api';
 
 export default function SimilarReviews({ slug }) {
   // fetch data
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       try {
-  //         const response = await axios.get(
-  //           `/v1/similar-poems/${slug}?per_page=5`
-  //         );
-  //         setData(response.data);
-  //       } catch (err) {
-  //         setError(err.response?.data?.message || err.message);
-  //       }
-  //     };
-  //     fetchData();
-  //   }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `/v1/author-reviews/similar/${slug}?per_page=6`
+        );
+        setData(response.data.data);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     // the main container of the section
@@ -32,22 +32,12 @@ export default function SimilarReviews({ slug }) {
         </div>
       </div>
       <div className="main-container rtl">
-        {/* {data?.similar_poems.map((data, index) => (
-          <StoryCard
-            data={data}
+        {data?.map((data, index) => (
+          <SimilarHorizontalCard
             key={index}
+            data={data}
           />
-        ))} */}
-        <SimilarHorizontalCard />
-        <SimilarHorizontalCard />
-        <SimilarHorizontalCard />
-        <SimilarHorizontalCard />
-        <SimilarHorizontalCard />
-        <SimilarHorizontalCard />
-        <SimilarHorizontalCard />
-        <SimilarHorizontalCard />
-        <SimilarHorizontalCard />
-        <SimilarHorizontalCard />
+        ))}
       </div>
     </div>
   );

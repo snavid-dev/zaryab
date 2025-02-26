@@ -3,10 +3,10 @@ import Link from 'next/link';
 import React from 'react';
 import Genre from '../Genre/Genre';
 
-export default function SimilarHorizontalCard({ data }) {
+export default function SimilarHorizontalCard({ data, isArticle }) {
   return (
     <Link
-      href={`/articles/${data?.slug}`}
+      href={`/${isArticle ? 'articles' : 'reviewsandopinions'}/${data?.slug}`}
       className="col-span-6 xl:col-span-12 grid grid-cols-6 xl:grid-cols-9 gap border-b-4 py-20px border-black"
     >
       <div className="relative col-span-2 h-95px md:h-200px xl:h-210px 2xl:h-270px">
