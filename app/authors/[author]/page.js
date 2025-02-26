@@ -18,32 +18,31 @@ export default function AuthorPage({ params }) {
 
   const param = use(params);
 
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       try {
-  //         const response = await axios.get(`/v1/authors/${param.author}`);
-  //         setData(response.data);
-  //       } catch (err) {
-  //         setError(err.response?.data?.message || err.message);
-  //       }
-  //     };
-  //     fetchData();
-  //   }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`/v1/authors/${param.author}`);
+        setData(response.data);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+    fetchData();
+  }, []);
 
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       try {
-  //         const response = await axios.get(
-  //           `/v1/similar_authors/${param.author}?per_page=8`
-  //         );
-  //         setSimilarData(response.data.authors);
-  //       } catch (err) {
-  //         setError(err.respons?.data.message || err.message);
-  //       }
-  //     };
-  //     fetchData();
-  //   }, []);
-  const ref = useRef(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `/v1/authors/similar/${param.author}/?per_page=8`
+        );
+        setSimilarData(response.data.data);
+      } catch (err) {
+        setError(err.respons?.data.message || err.message);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     // the main container of the page
@@ -53,49 +52,47 @@ export default function AuthorPage({ params }) {
         {/*  it has 7 rows  */}
         <div className="col-span-6 md:col-span-3 border-2 border-black p-7">
           <div className="w-full h-290px md:h-300px xl:h-220px 2xl:h-300px relative">
-            {true ? (
+            {data?.featured_image ? (
               <Image
-                src={data?.featured_image || '/assets/img/authorPic.png'}
+                src={data?.featured_image}
                 alt=""
                 layout="fill"
                 objectFit="cover"
                 className="absolute"
               />
             ) : (
-              <div>failed to display image!!!</div>
+              <div className="w-full h-full flex justify-center items-center">
+                failed to display image!!!
+              </div>
             )}
           </div>
         </div>
         <div className="col-span-6 md:col-span-3 xl:col-span-9 flex flex-col justify-end mr-7">
           <div className="font-common-heavy text-50px md:text-60px rtl text-black">
-            {data?.title || 'باسط یزدانی'}
+            {data?.name}
           </div>
           <div className="flex rtl mt-7 text-black">
             <div className="font-common-heavy text-20px">موقعیت:</div>
             <div className="font-common-regular text-20px">
-              {data?.meta.location || 'هرات'}
+              {data?.location}
             </div>
           </div>
           <div className="flex rtl mt-3 text-black">
             <div className="font-common-heavy text-20px">وظیفه:</div>
-            <div className="font-common-regular text-20px">
-              {data?.meta.job || 'نویسنده'}
-            </div>
+            <div className="font-common-regular text-20px">{data?.job}</div>
           </div>
           <div className="flex rtl mt-3 text-black">
             <div className="font-common-heavy text-20px">تعداد نوشته ها:</div>
             <div className="font-common-regular text-20px">
-              {data?.meta.sum_topics || '23'}
+              {data?.total_letters}
             </div>
           </div>
           <div className="flex rtl mt-3 text-black">
             <div className="font-common-heavy text-20px">سن:</div>
-            <div className="font-common-regular text-20px">
-              {data?.meta.age || '20'}
-            </div>
+            <div className="font-common-regular text-20px">{data?.age}</div>
           </div>
           <div className="flex mt-3 justify-start">
-            <Link href={data?.meta.facebook_link || '#'}>
+            <Link href={data?.facebook || '#'}>
               <Image
                 src="/assets/svg/facebook.svg"
                 alt="facebook logo"
@@ -103,7 +100,7 @@ export default function AuthorPage({ params }) {
                 height={20}
               />
             </Link>
-            <Link href={data?.meta.instagram_link || '#'}>
+            <Link href={data?.instagram || '#'}>
               <Image
                 src="/assets/svg/instagram.svg"
                 alt="instagram logo"
@@ -111,7 +108,7 @@ export default function AuthorPage({ params }) {
                 height={20}
               />
             </Link>
-            <Link href={data?.meta.telegram_link || '#'}>
+            <Link href={data?.telegram || '#'}>
               <Image
                 src="/assets/svg/telegram.svg"
                 alt="telegram logo"
@@ -119,7 +116,7 @@ export default function AuthorPage({ params }) {
                 height={20}
               />
             </Link>
-            <Link href={data?.meta.youtube_link || '#'}>
+            <Link href={data?.youtube || '#'}>
               <Image
                 src="/assets/svg/youtube.svg"
                 alt="youtube logo"
@@ -139,7 +136,7 @@ export default function AuthorPage({ params }) {
         {/*  the text  */}
         <div
           dangerouslySetInnerHTML={{
-            __html: data?.content || '<div>Hello</div>',
+            __html: data?.content,
           }}
           className="font-common-regular col-span-6 xl:col-span-12  text-justify md:text-right text-20px lg:text-25px xl:text-30px rtl mt-7"
         ></div>
@@ -158,20 +155,12 @@ export default function AuthorPage({ params }) {
             />
           </div>
           <div className="main-container mt-7">
-            {/* {similarData?.map((data, index) => (
+            {similarData?.map((data, index) => (
               <OurAuthorCard
                 key={index}
                 data={data}
               />
-            ))} */}
-            <OurAuthorCard />
-            <OurAuthorCard />
-            <OurAuthorCard />
-            <OurAuthorCard />
-            <OurAuthorCard />
-            <OurAuthorCard />
-            <OurAuthorCard />
-            <OurAuthorCard />
+            ))}
           </div>
         </div>
       </div>

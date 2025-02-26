@@ -10,33 +10,27 @@ import BookDesk from '@/components/BookDesk/BookDesk';
 import AuthorWeek from '@/components/AuthorWeek/AuthorWeek';
 import FullAd from '@/components/FullAd/FullAd';
 import SmallAd from '@/components/SmallAd/SmallAd';
+import Pagination from '@/components/Pagination/Pagination';
 
 export default function AuthorPage() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(3);
+  const [totalPages, setTotalPages] = useState(0);
 
-  //   const fetchData = async (page) => {
-  //     try {
-  //       const response = await axios.get(`/v1/authors?per_page=5&page=${page}`);
-  //       setData(response.data);
-  //       setTotalPages(response.data.pagination.total_pages); // Assuming the API provides total pages
-  //       console.log('fetch again');
-  //     } catch (err) {
-  //       setError(err.response?.data?.message || err.message);
-  //     }
-  //   };
-
-  //   useEffect(() => {
-  //     fetchData(currentPage);
-  //   }, [currentPage]);
-
-  const handlePageChange = (pageNumber) => {
-    if (pageNumber > 0 && pageNumber <= totalPages) {
-      setCurrentPage(pageNumber);
+  const fetchData = async (page) => {
+    try {
+      const response = await axios.get(`/v1/authors?per_page=8&page=${page}`);
+      setData(response.data);
+      setTotalPages(response.data.meta.pages); // Assuming the API provides total pages
+    } catch (err) {
+      setError(err.response?.data?.message || err.message);
     }
   };
+
+  useEffect(() => {
+    fetchData(currentPage);
+  }, [currentPage]);
 
   return (
     // the main container of the page
@@ -52,39 +46,22 @@ export default function AuthorPage() {
       </div>
       {/*  the authors section  */}
       <div className="main-container mt-14">
-        {/* {data?.data.map((data, index) => (
+        {data?.data.map((data, index) => (
           <OurAuthorCard
             key={index}
             data={data}
           />
-        ))} */}
-        <OurAuthorCard />
-        <OurAuthorCard />
-        <OurAuthorCard />
-        <OurAuthorCard />
-        <OurAuthorCard />
-        <OurAuthorCard />
-        <OurAuthorCard />
-        <OurAuthorCard />
+        ))}
       </div>
       <div className="main-container mt-5">
         <div className="xl:col-span-4"></div>
-        <div className="col-span-6 xl:col-span-4 flex justify-center gap-10px">
-          {Array.from({ length: totalPages }, (_, index) => (
-            <button
-              key={index + 1}
-              onClick={() => handlePageChange(index + 1)}
-              className={`w-20 h-20 mr-1 pt-3 flex justify-center items-center border-2 border-black font-common-heavy text-3xl
-                            ${
-                              currentPage === index + 1
-                                ? 'bg-black text-white'
-                                : ''
-                            }`}
-            >
-              {index + 1}
-            </button>
-          ))}
-        </div>
+
+        <Pagination
+          totalPages={totalPages}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+
         <div className="xl:col-span-4"></div>
       </div>
       {/* small ad */}
