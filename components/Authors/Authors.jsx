@@ -21,8 +21,6 @@ export default function Authors() {
     };
     fetchData();
   }, []);
-  console.log(data);
-  console.log(error);
 
   return (
     <div className="main-container">

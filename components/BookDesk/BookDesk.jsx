@@ -1,11 +1,12 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 // import { useGSAP } from '@gsap/react';
 // import gsap from 'gsap';
 // import ScrollTrigger from 'gsap/ScrollTrigger';
 import Heading1 from '../Heading1/Heading1';
+import axios from '@/utils/api';
 
 // gsap.registerPlugin(ScrollTrigger);
 
@@ -15,6 +16,10 @@ export default function BookDesk() {
   const subtitleRef = useRef(null);
   const textRef = useRef(null);
   const buttonRef = useRef(null);
+
+  // data states
+  const [data, setData] = useState(null);
+  const [Error, setError] = useState(null);
 
   //   useGSAP(() => {
   //     gsap.to(titleRef.current, {
@@ -86,6 +91,31 @@ export default function BookDesk() {
   //     });
   //   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/v1/books/featured');
+        setData(response.data);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const handleDownload = () => {
+    const fileUrl = data?.pdf;
+
+    // Create a temporary <a> element to simulate a download
+    const link = document.createElement('a');
+    link.href = fileUrl;
+
+    link.download = fileUrl.split('/')[fileUrl.split('/').length - 1]; // Specify the file name for download
+    document.body.appendChild(link); // Append link to the body
+    link.click(); // Trigger the download
+    document.body.removeChild(link); // Clean up by removing the link
+  };
+
   return (
     <div className="main-container mt-50px">
       <div
@@ -102,12 +132,18 @@ export default function BookDesk() {
           className="col-span-6 md:col-span-4 xl:col-span-6"
         >
           <div className="relative w-full h-500px md:h-670px xl:h-780px 2xl:h-1020px flex flex-col">
-            <Image
-              src="/assets/img/book.png"
-              alt=""
-              fill
-              className="absolute object-cover"
-            />
+            {data?.featured_image ? (
+              <Image
+                src={data?.featured_image}
+                alt=""
+                fill
+                className="absolute object-cover"
+              />
+            ) : (
+              <div className="w-full h-full flex justify-center items-center">
+                image of the book not found
+              </div>
+            )}
           </div>
         </div>
         <div className="hidden md:block md:col-span-1 xl:hidden"></div>
@@ -117,38 +153,15 @@ export default function BookDesk() {
               ref={subtitleRef}
               className="font-common-lg text-30px xl:text-65px 2xl:text-92px flex flex-col items-end justify-between lg:mt-5"
             >
-              هریپاتر و سنگ فلاسفر
+              {data?.title}
             </h3>
             <div
               ref={textRef}
+              dangerouslySetInnerHTML={{
+                __html: data?.excerpt,
+              }}
               className="rtl mt-7 font-common-regular text-14px xl:text-20px 2xl:text-28px"
-            >
-              <p className="">
-                اگر به دنبال کتابی هستید که شما را به دنیایی پر از جادو، دوستی،
-                و ماجراجویی ببرد، هری پاتر و سنگ جادو اثر جی. کی. رولینگ انتخابی
-                بی‌نظیر است. این کتاب نه تنها برای کودکان و نوجوانان، بلکه برای
-                بزرگسالانی که در پی لمس دوباره تخیلات کودکی هستند نیز جذاب خواهد
-                بود. داستان با پسری به نام هری آغاز می‌شود که در سن یازده سالگی
-                متوجه می‌شود که در حقیقت یک جادوگر است. او وارد مدرسه‌ای به نام
-                هاگوارتز می‌شود؛ جایی که با دوستان جدیدش، هرمیون و رون، همراه
-                می‌شود و ماجراهای شگفت‌انگیزی را تجربه می‌کند.
-              </p>
-              <p className="mt-3">
-                رولینگ با قلمی بسیار توانمند، دنیایی را خلق کرده است که هر
-                صفحه‌اش خواننده را به خود جذب می‌کند. دنیای جادوگران با تمامی
-                جزئیات، از چوبدستی‌های جادویی گرفته تا مسابقات کوییدیچ، همه و
-                همه با چنان دقتی توصیف شده‌اند که گویی شما خودتان در این دنیا
-                زندگی می‌کنید. شخصیت‌های کتاب نیز عمیق و چندلایه هستند؛ از
-                دلیرانه‌های هری گرفته تا درایت هرمیون و شوخ‌طبعی رون.
-              </p>
-              <p className="mt-3">
-                این کتاب صرفاً یک داستان ماجراجویی نیست؛ بلکه درس‌هایی از دوستی،
-                شجاعت، و رویارویی با ترس‌ها را نیز در دل خود جای داده است. هری
-                پاتر و سنگ جادو سفری است به قلب دنیایی که به هرکس یادآوری می‌کند
-                که حتی در تاریک‌ترین لحظات، جادو همیشه وجود دارد—اگر بدانیم کجا
-                به دنبالش بگردیم.
-              </p>
-            </div>
+            ></div>
           </div>
         </div>
       </div>
@@ -159,13 +172,15 @@ export default function BookDesk() {
       >
         <Link
           href="#"
+          onClick={handleDownload}
           className="w-full h-[50px] lg:h-[100px] bg-black flex justify-center items-center mt-7
                 font-common-heavy text-28px lg:text-59px text-white hover:text-black hover:bg-white transition-all duration-500 border-4 border-black"
         >
           دانلود کتاب
         </Link>
+
         <Link
-          href="/literarywritings/book/bookid"
+          href={`/literarywritings/book/${data?.slug}`}
           className="w-full h-[50px] lg:h-[100px] bg-footerBtn flex justify-center items-center mt-7
                 font-common-heavy text-28px lg:text-59px text-white hover:text-footerBtn hover:bg-white transition-all duration-500 border-4 border-footerBtn"
         >
