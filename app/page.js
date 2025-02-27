@@ -2,6 +2,7 @@ import Authors from '@/components/Authors/Authors';
 import AuthorWeek from '@/components/AuthorWeek/AuthorWeek';
 import BookDesk from '@/components/BookDesk/BookDesk';
 import BookMailMobile from '@/components/BookMailMobile/BookMailMobile';
+import ChampionPopUp from '@/components/ChampionPopUp/ChampionPopUp';
 import FullAd from '@/components/FullAd/FullAd';
 import HarizontalLine from '@/components/HarizontalLine/HarizontalLine';
 import Podcasts from '@/components/Podcasts/Podcasts';
@@ -41,6 +42,7 @@ export default function Home() {
       <Podcasts />
       {/* ad */}
       <SmallAd />
+      <ChampionPopUp />
     </main>
   );
 }
