@@ -73,7 +73,7 @@ export default function ChampionPopUp() {
         </div>
         <div className="w-full flex flex-row-reverse justify-between mt-3 mb-3">
           <Link
-            href={`/story/${data?.story.slug}`}
+            href={`/literarywritings/story/${data?.story.slug}`}
             className="flex justify-center items-center font-common-heavy text-18px px-7 py-2 md:px-12 md:text-20px md:py-3 xl:px-20 xl:py-5 xl:text-25px bg-black border-2 border-black text-white"
           >
             خواندن داستان
