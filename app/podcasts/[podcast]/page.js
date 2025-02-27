@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useRef, useState, useEffect } from 'react';
 import { FaPause, FaPlay } from 'react-icons/fa6';
 
-// import axios from '@/utils/api';
+import axios from '@/utils/api';
 import { use } from 'react';
 import Heading1 from '@/components/Heading1/Heading1';
 import ArrowLink from '@/components/ArrowLink/ArrowLink';
@@ -18,35 +18,36 @@ export default function PodcastSinglePage({ params }) {
 
   const param = use(params);
 
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       try {
-  //         const response = await axios.get(
-  //           `/v1/podcasts/similar/${param.podcast}?per_page=6`
-  //         );
-  //         setData(response.data);
-  //       } catch (err) {
-  //         setError(err.response?.data?.message || err.message);
-  //       }
-  //     };
-  //     fetchData();
-  //   }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `/v1/podcasts/similar/${param.podcast}?per_page=9`
+        );
+        setData(response.data.data);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+    fetchData();
+  }, []);
 
   // fetch one podcasts
   const [podcast, setPodcast] = useState(null);
   const [podcastError, setPodcastError] = useState(null);
 
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       try {
-  //         const response = await axios.get(`/v1/podcast/${param.podcast}`);
-  //         setPodcast(response.data);
-  //       } catch (err) {
-  //         setPodcastError(err.response?.data?.message || err.message);
-  //       }
-  //     };
-  //     fetchData();
-  //   }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`/v1/podcasts/${param.podcast}`);
+        setPodcast(response.data);
+      } catch (err) {
+        setPodcastError(err.response?.data?.message || err.message);
+      }
+    };
+    fetchData();
+  }, []);
+  console.log(podcast);
 
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -118,9 +119,9 @@ export default function PodcastSinglePage({ params }) {
         <div className="hidden md:block md:col-span-1 xl:col-span-3"></div>
         <div className="col-span-6 md:col-span-4 xl:col-span-6  border-4 border-black p-14">
           <div className="relative w-full h-230px md:h-370px xl:h-460px 2xl:h-630px">
-            {podcast?.featured_image || true ? (
+            {podcast?.image ? (
               <Image
-                src={podcast?.featured_image || '/assets/img/podcastPic.png'}
+                src={podcast?.image}
                 alt=""
                 layout="fill"
                 objectFit="cover"
@@ -135,7 +136,7 @@ export default function PodcastSinglePage({ params }) {
         <div className="hidden md:block md:col-span-1 xl:col-span-3"></div>
         {/* the title of the podcast */}
         <div className="col-span-6 xl:col-span-12 flex justify-center rtl mt-5 font-common-heavy text-20px md:text-25px lg:text-30px">
-          {podcast?.title || 'سلام بهار'}
+          {podcast?.name}
         </div>
         {/* the host and guest section */}
         <div className="hidden md:block md:col-span-1 xl:col-span-3"></div>
@@ -145,13 +146,13 @@ export default function PodcastSinglePage({ params }) {
               مهمان دار:
             </div>
             <div className="font-common-regular text-16px xl:text-20px">
-              {podcast?.meta.host_name || 'باسط یزدانی'}
+              {podcast?.host}
             </div>
           </div>
           <div className="flex justify-start items-center rtl w-1/2">
             <div className="font-common-lg text-16px xl:text-20px">مهمان:</div>
             <div className="font-common-regular text-16px xl:text-20px">
-              {podcast?.meta.guest_name || 'باسط یزدانی'}
+              {podcast?.guest}
             </div>
           </div>
         </div>
@@ -161,7 +162,7 @@ export default function PodcastSinglePage({ params }) {
         <div className="w-full mt-14 col-span-6 md:col-span-4 xl:col-span-6 flex flex-col items-center">
           <audio
             ref={audioRef}
-            src={podcast?.meta.audio_file || '/assets/audio/sample.mp3'}
+            src={podcast?.mp3_file}
             onTimeUpdate={handleTimeUpdate}
           />
           {/* Progress Bar */}
@@ -294,27 +295,12 @@ export default function PodcastSinglePage({ params }) {
             />
           </div>
           <div className="main-container mt-7">
-            {/* {data?.map((data, index) => (
-              <Podcast
-                key={index}
+            {data?.map((data, index) => (
+              <PodcastCard
                 data={data}
+                key={index}
               />
-            ))} */}
-            <PodcastCard />
-            <PodcastCard />
-            <PodcastCard />
-            {/* full ad */}
-            <FullAd />
-            <PodcastCard />
-            <PodcastCard />
-            <PodcastCard />
-            {/* full ad */}
-            <FullAd />
-            <PodcastCard />
-            <PodcastCard />
-            <PodcastCard />
-            {/* full ad */}
-            <FullAd />
+            ))}
           </div>
         </div>
       </div>

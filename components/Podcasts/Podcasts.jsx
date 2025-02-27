@@ -3,23 +3,25 @@ import { useEffect, useRef, useState } from 'react';
 import Heading1 from '../Heading1/Heading1';
 import ArrowLink from '../ArrowLink/ArrowLink';
 import PodcastCard from '../PodcastCard/PodcastCard';
+import axios from '@/utils/api';
 
 export default function Podcasts() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       try {
-  //         const response = await axios.get('/v1/podcasts?per_page=3');
-  //         setData(response.data.podcasts);
-  //       } catch (err) {
-  //         setError(err.response?.data?.message || err.message);
-  //       }
-  //     };
-  //     fetchData();
-  //   }, []);
-  const ref = useRef(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/v1/podcasts?per_page=3');
+        setData(response.data.data);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+    fetchData();
+  }, []);
+  console.log(data);
+
   return (
     <div className="main-container mt-50px">
       {/*  it has two rows  */}
@@ -28,15 +30,12 @@ export default function Podcasts() {
         <ArrowLink title="همه نشست ها" />
       </div>
       <div className="main-container">
-        {/* {data?.map((data, index) => (
-          <Podcast
+        {data?.map((data, index) => (
+          <PodcastCard
             data={data}
             key={index}
           />
-        ))} */}
-        <PodcastCard />
-        <PodcastCard />
-        <PodcastCard />
+        ))}
       </div>
     </div>
   );

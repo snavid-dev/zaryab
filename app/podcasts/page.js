@@ -6,29 +6,33 @@ import Heading1 from '@/components/Heading1/Heading1';
 import PodcastCard from '@/components/PodcastCard/PodcastCard';
 import { useRef, useState, useEffect } from 'react';
 
-// import axios from '@/utils/api';
+import axios from '@/utils/api';
+import Pagination from '@/components/Pagination/Pagination';
 
 export default function PodcastsPage() {
   // get data
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(3);
+  const [totalPages, setTotalPages] = useState(0);
 
-  //   const fetchData = async (page) => {
-  //     try {
-  //       const response = await axios.get(`/v1/podcasts?per_page=5&page=${page}`);
-  //       setData(response.data);
-  //       setTotalPages(response.data.pages); // Assuming the API provides total pages
-  //       console.log('fetch again');
-  //     } catch (err) {
-  //       setError(err.response?.data?.message || err.message);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `/v1/podcasts?per_page=15&page=${currentPage}`
+        );
 
-  //   useEffect(() => {
-  //     fetchData(currentPage);
-  //   }, [currentPage]);
+        setData(response.data.data);
+        setTotalPages(response.data.meta.pages); // Assuming the API provides total pages
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+    fetchData();
+  }, [currentPage]);
+
+  console.log(data, 'podcasts');
 
   const handlePageChange = (pageNumber) => {
     if (pageNumber > 0 && pageNumber <= totalPages) {
@@ -50,64 +54,20 @@ export default function PodcastsPage() {
       </div>
       {/* the body of the page the cards sections */}
       <div className="main-container mt-7">
-        {/* {data?.podcasts.map((data, index) => (
-          <Podcast
-            key={index}
+        {data?.map((data, index) => (
+          <PodcastCard
             data={data}
+            key={index}
           />
-        ))} */}
-        <PodcastCard />
-        <PodcastCard />
-        <PodcastCard />
-        {/* full ad */}
-        <FullAd />
-        <PodcastCard />
-        <PodcastCard />
-        <PodcastCard />
-        {/* full ad */}
-        <FullAd />
-        <PodcastCard />
-        <PodcastCard />
-        <PodcastCard />
-        {/* full ad */}
-        <FullAd />
-        <PodcastCard />
-        <PodcastCard />
-        <PodcastCard />
-        {/* full ad */}
-        <FullAd />
-        <PodcastCard />
-        <PodcastCard />
-        <PodcastCard />
-        {/* full ad */}
-        <FullAd />
-        <PodcastCard />
-        <PodcastCard />
-        <PodcastCard />
-        {/* full ad */}
-        <FullAd />
-        <PodcastCard />
-        <PodcastCard />
-        <PodcastCard />
-        {/* full ad */}
-        <FullAd />
+        ))}
       </div>
       {/* Pagination controls */}
       <div className="flex justify-center mt-5">
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button
-            key={index + 1}
-            onClick={() => handlePageChange(index + 1)}
-            className={`w-20 h-20 mr-1 pt-3 flex justify-center items-center border-2 border-black font-common-heavy text-3xl
-                            ${
-                              currentPage === index + 1
-                                ? 'bg-black text-white'
-                                : ''
-                            }`}
-          >
-            {index + 1}
-          </button>
-        ))}
+        <Pagination
+          totalPages={totalPages}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
       </div>
     </div>
   );

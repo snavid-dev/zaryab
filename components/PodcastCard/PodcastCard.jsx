@@ -17,18 +17,24 @@ export default function PodcastCard({ data }) {
         <div className="w-full flex flex-col items-end">
           {/*  it has two rows  */}
           <div className="w-full h-300px md:h-320px xl:h-330px 2xl:h-450px relative overflow-hidden">
-            <Image
-              src={data?.featured_image || '/assets/img/podcastPic.png'}
-              alt=""
-              layout="fill"
-              objectFit="cover"
-              className="absolute
+            {data?.image ? (
+              <Image
+                src={data?.image}
+                alt=""
+                layout="fill"
+                objectFit="cover"
+                className="absolute
                     hover:scale-110 transition-all duration-300"
-            />
+              />
+            ) : (
+              <div className="h-full w-full flex justify-center items-center">
+                the podcast image not found
+              </div>
+            )}
           </div>
           <div>
             <h3 className="font-common-heavy rtl text-30px md:text-36px mt-3">
-              {data?.title || 'راه زنده گی'}
+              {data?.name}
             </h3>
           </div>
         </div>
@@ -38,13 +44,13 @@ export default function PodcastCard({ data }) {
             <div className="rtl flex">
               <p className="font-common-heavy text-xl text-20px ">میزبان:</p>
               <p className="font-common-regular text-xl text-20px ">
-                {data?.meta.host_name || 'باسط یزدانی'}
+                {data?.host}
               </p>
             </div>
             <div className="rtl flex">
               <p className="font-common-heavy text-xl text-20px ">مهمان:</p>
               <p className="font-common-regular text-xl text-20px ">
-                {data?.meta.guest_name || 'باسط یزدانی'}
+                {data?.guest}
               </p>
             </div>
           </div>
@@ -52,14 +58,14 @@ export default function PodcastCard({ data }) {
             <div className="flex ml-4">
               <p className="font-common-heavy text-12px md:text-18px">تاریخ:</p>
               <p className="font-common-regular text-12px md:text-18px">
-                {data?.meta.podcast_date_shamsi || '۱۴۰۳.۰۸.۰۹'}
+                {data?.date}
               </p>
             </div>
             <div className="flex">
               <p className="font-common-heavy text-12px md:text-18px">طول:</p>
               <p className="font-common-regular text-12px md:text-18px">
                 <span className="font-common-heavy text-12px md:text-18px">
-                  {data?.meta.podcast_duration || '40'}
+                  {data?.duration}
                 </span>
                 دقیقه
               </p>
