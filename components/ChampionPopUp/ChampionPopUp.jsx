@@ -34,7 +34,7 @@ export default function ChampionPopUp() {
     <div
       className={`flex flex-col items-center fixed z-50 w-full md:w-600px xl:w-900px border-4 border-black p-1 bg-white ${
         showPopUp ? 'top-5' : '-top-100%'
-      } transition-all duration-[5s] 2xl:duration-1000`}
+      } transition-all duration-1000`}
     >
       <div className="w-full rtl">
         <IoClose
