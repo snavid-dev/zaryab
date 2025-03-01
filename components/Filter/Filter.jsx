@@ -1,9 +1,36 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FilterItem from '../FilterItem/FilterItem';
+import axios from '@/utils/api';
 
 export default function Filter({ items, genre, title }) {
   const [showFilterBody, setShowFilterBody] = useState(false);
+  const [categories, setCategories] = useState(null);
+  const [Error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/v1/categories');
+        let data = response.data;
+
+        // محاسبه نزدیک‌ترین مضرب 6 بزرگتر از طول آرایه
+        const nextMultipleOfSix = Math.ceil(data.length / 6) * 6;
+
+        // اضافه کردن استرینگ خالی تا رسیدن به مضرب 6
+        while (data.length < nextMultipleOfSix) {
+          data.push({ name: '', slug: '#' });
+        }
+
+        setCategories(data);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const itemsfilled =
     items.length > 16
       ? [...items, ...Array(30 - items.length).fill('')]
@@ -71,21 +98,20 @@ export default function Filter({ items, genre, title }) {
           </div>
         </div>
         <div className="w-full border-t-2 border-b-2 border-black mt-1">
-          {genre.length !== 0 ? (
-            <>
-              <div className="w-full flex justify-end font-common-heavy text-20px md:text-30px my-5">
-                جانر ها
-              </div>
-              <div className="flex flex-col h-[200px] flex-wrap rtl">
-                {itemsfilled2?.map((item, index) => (
+          <div className="w-full flex justify-end font-common-heavy text-20px md:text-30px my-5">
+            جانر ها
+          </div>
+          <div className="flex flex-col h-[200px] flex-wrap rtl">
+            {categories?.map(
+              (data, index) =>
+                data?.name && (
                   <FilterItem
                     key={index}
-                    title={item}
+                    title={data.name}
                   />
-                ))}
-              </div>
-            </>
-          ) : null}
+                )
+            )}
+          </div>
         </div>
         <div className="flex flex-row-reverse justify-between w-2/3 mt-3">
           <button

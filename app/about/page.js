@@ -18,7 +18,6 @@ export default function AboutPage() {
     };
     fetchData();
   }, []);
-  console.log(data);
 
   return (
     <div className="flex flex-col items-center bg-aboutPagePic bg-no-repeat bg-bottom min-h-1500px mt-150px xl:mt-50px">

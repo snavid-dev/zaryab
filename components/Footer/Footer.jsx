@@ -1,11 +1,38 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link2 from '../Link2/Link2';
+import axios from '@/utils/api';
 
 export default function Footer() {
   const [inputDisable, setInputDisable] = useState(true);
+  const [categories, setCategories] = useState(null);
+  const [Error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/v1/categories');
+        let data = response.data;
+
+        // محاسبه نزدیک‌ترین مضرب 6 بزرگتر از طول آرایه
+        const nextMultipleOfSix = Math.ceil(data.length / 6) * 6;
+
+        // اضافه کردن استرینگ خالی تا رسیدن به مضرب 6
+        while (data.length < nextMultipleOfSix) {
+          data.push({ name: '', slug: '#' });
+        }
+
+        setCategories(data);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <footer className="bg-footer">
       {/*main div of footer*/}
@@ -484,180 +511,19 @@ export default function Footer() {
           <div className="col-span-1 xl:col-span-2"></div>
           <div className="col-span-1 xl:col-span-2"></div>
 
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="هنر"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="بیوگرافی"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="تجارت"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="کودکان"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="دینی"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="کامیک"
-            />
-          </div>
-
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="رهنمای آشپزی"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="رویایی (فانتزی)"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="تخیلی"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="رمان تصویری"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="تاریخی تخیلی"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="تاریخی"
-            />
-          </div>
-
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="ترسناک"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="خاطرات"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="موسیقی"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="رمز آلود"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="غیر تخیلی"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="شاعرانه"
-            />
-          </div>
-
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="روان شناسی"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="عاشقانه"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="علمی"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="علمی تخیلی"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="فلسفی"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="خود سازی"
-            />
-          </div>
-
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="ورزشی"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="هیجان انگیز"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="سفرنامه"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="وطن دوستی"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2"></div>
-          <div className="col-span-1 xl:col-span-2"></div>
+          {categories?.map((data, index) => (
+            <div
+              className="col-span-1 xl:col-span-2"
+              key={index}
+            >
+              {data?.name && (
+                <Link2
+                  link={data.slug}
+                  title={data.name}
+                />
+              )}
+            </div>
+          ))}
         </div>
       </div>
       {/* copyrighting policy */}
