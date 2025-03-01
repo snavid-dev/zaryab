@@ -25,16 +25,16 @@ export default function SimilarHorizontalCard({ data, isArticle }) {
         )}
       </div>
       <div className="col-span-4 xl:col-span-7 gap relative">
-        <div className="col-span-4 text-27px md:text-59px font-new-extra-black">
+        <div className="col-span-4 text-16px md:text-30px xl:text-43px font-new-extra-black">
           {data?.title}
         </div>
         <div
-          className="col-span-4 text-6px md:text-12px font-smallText"
+          className="col-span-4 text-6px md:text-12px xl:text-14px 2xl:text-20px font-smallText"
           dangerouslySetInnerHTML={{ __html: data?.excerpt }}
         ></div>
-        <div className="col-span-7 grid grid-cols-7 gap absolute bottom-0">
-          <div className="col-span-3 grid grid-cols-3 gap">
-            <div className="col-span-1">
+        <div className="w-full xl:col-span-7 xl:grid xl:grid-cols-7 xl:gap absolute bottom-0">
+          <div className="w-full flex xl:col-span-3 xl:grid xl:grid-cols-3 gap">
+            <div className="xl:col-span-1">
               <div className="rtl flex text-right">
                 <p className="font-common-thin ml-1 text-8px xl:text-14px">
                   نویسنده:
@@ -44,7 +44,7 @@ export default function SimilarHorizontalCard({ data, isArticle }) {
                 </p>
               </div>
             </div>
-            <div className="col-span-1">
+            <div className="xl:col-span-1">
               <div className="rtl flex text-right">
                 <p className="font-common-thin ml-1 text-8px xl:text-14px">
                   تاریخ:
@@ -54,7 +54,7 @@ export default function SimilarHorizontalCard({ data, isArticle }) {
                 </p>
               </div>
             </div>
-            <div className="col-span-1">
+            <div className="xl:col-span-1">
               <div className="rtl flex text-right">
                 <p className="font-common-thin ml-1 text-8px xl:text-14px">
                   زمان:
@@ -66,8 +66,8 @@ export default function SimilarHorizontalCard({ data, isArticle }) {
               </div>
             </div>
           </div>
-          <div className="col-span-1 h-5"></div>
-          <div className="col-span-2 grid grid-cols-3 gap">
+          <div className="col-span-1 h-5 hidden xl:block"></div>
+          <div className="col-span-2 xl:grid grid-cols-3 gap hidden">
             {data?.categories.map(
               (category, index) =>
                 index + 1 < 4 && (
