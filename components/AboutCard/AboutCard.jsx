@@ -39,9 +39,10 @@ export default function AboutCord({ title, text, num }) {
           {title}
         </div>
       </div>
-      <div className="rtl py-7 text-white font-common-regular text-20px md:text-30px lg:text-46px">
-        {text}
-      </div>
+      <div
+        className="rtl py-7 text-white font-common-regular text-20px md:text-30px lg:text-46px"
+        dangerouslySetInnerHTML={{ __html: text }}
+      ></div>
     </div>
   );
 }
