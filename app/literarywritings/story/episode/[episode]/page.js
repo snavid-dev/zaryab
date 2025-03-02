@@ -1,12 +1,33 @@
+'use client';
 import Authors from '@/components/Authors/Authors';
 import Episode from '@/components/Episode/Episode';
 import Filter from '@/components/Filter/Filter';
 import FullAd from '@/components/FullAd/FullAd';
 import Heading1 from '@/components/Heading1/Heading1';
 import SmallAd from '@/components/SmallAd/SmallAd';
+import axios from '@/utils/api';
+import { use, useEffect, useState } from 'react';
 import { IoIosSearch } from 'react-icons/io';
 
-export default function EposidesPage() {
+export default function EposidesPage({ params }) {
+  const param = use(params);
+  const [data, setData] = useState(null);
+  const [Error, setError] = useState(null);
+  console.log(param.episode);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`/v1/stories/${param.episode}`);
+        setData(response.data);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+    fetchData();
+  }, []);
+  console.log(data);
+
   return (
     // main container of the page
     <div className="flex flex-col items-center mt-150px xl:mt-50px mb-50px">
@@ -32,7 +53,7 @@ export default function EposidesPage() {
       {/*  title of the page  */}
       <div className="main-container mt-7 rtl">
         <div className="col-span-6 xl:col-span-6">
-          <Heading1 title="داستان هری پاتر" />
+          <Heading1 title={data?.story_title} />
         </div>
 
         {/*  the search bar of the eposides  */}
@@ -48,22 +69,13 @@ export default function EposidesPage() {
       </div>
 
       {/*  list of the   episodes*/}
-      <div className="mt-7 main-container">
-        <Episode />
-        <Episode />
-        <Episode />
-        {/* full ad */}
-        <FullAd />
-        <Episode />
-        <Episode />
-        <Episode />
-        {/* full ad */}
-        <FullAd />
-        <Episode />
-        <Episode />
-        <Episode />
-        {/* full ad */}
-        <FullAd />
+      <div className="mt-7 main-container rtl">
+        {data?.data.map((data, index) => (
+          <Episode
+            data={data}
+            key={index}
+          />
+        ))}
       </div>
 
       {/*  the authors section  */}

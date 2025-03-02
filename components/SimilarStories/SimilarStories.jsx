@@ -2,26 +2,28 @@ import { useState, useEffect } from 'react';
 import Heading1 from '../Heading1/Heading1';
 import SimilarHorizontalCard from '../SimilarHorizontalCard/SimilarHorizontalCard';
 
-// import axios from '@/utils/api';
+import axios from '@/utils/api';
+import SimilarHorizontalStoryCard from '../SimilarHorizontalStoryCard/SimilarHorizontalStoryCard';
 
 export default function SimilarStories({ slug }) {
   // fetch data
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       try {
-  //         const response = await axios.get(
-  //           `/v1/similar-poems/${slug}?per_page=5`
-  //         );
-  //         setData(response.data);
-  //       } catch (err) {
-  //         setError(err.response?.data?.message || err.message);
-  //       }
-  //     };
-  //     fetchData();
-  //   }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `/v1/stories/similar/${slug}?per_page=5`
+        );
+        setData(response.data.data);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+    fetchData();
+  }, []);
+  console.log(data, 'similar');
 
   return (
     // the main container of the section
@@ -32,22 +34,13 @@ export default function SimilarStories({ slug }) {
         </div>
       </div>
       <div className="main-container rtl">
-        {/* {data?.similar_poems.map((data, index) => (
-          <StoryCard
+        {data?.map((data, index) => (
+          <SimilarHorizontalStoryCard
             data={data}
             key={index}
+            isStory={true}
           />
-        ))} */}
-        <SimilarHorizontalCard />
-        <SimilarHorizontalCard />
-        <SimilarHorizontalCard />
-        <SimilarHorizontalCard />
-        <SimilarHorizontalCard />
-        <SimilarHorizontalCard />
-        <SimilarHorizontalCard />
-        <SimilarHorizontalCard />
-        <SimilarHorizontalCard />
-        <SimilarHorizontalCard />
+        ))}
       </div>
     </div>
   );

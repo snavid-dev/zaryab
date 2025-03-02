@@ -18,8 +18,8 @@ export default function StoryPoemCard({ data, isStory }) {
 
   // handle the length of the string
   function truncateString(str) {
-    if (str?.length > 13) {
-      return str.substring(0, 13) + '...';
+    if (str?.length > 20) {
+      return str.substring(0, 20) + '...';
     }
     return str;
   }
@@ -32,9 +32,9 @@ export default function StoryPoemCard({ data, isStory }) {
         className="w-full h-260px md:h-570px lg:h-260px xl:h-280px 2xl:h-370px border-4 border-black relative hover:border-footerBtn transition-all duration-700"
         onMouseEnter={handleMouseEnter}
       >
-        {data?.featured_image || true ? (
+        {data?.featured_image ? (
           <Image
-            src={data?.featured_image || '/assets/img/story-card.png'}
+            src={data?.featured_image}
             alt=""
             layout="fill"
             objectFit="cover"
@@ -46,32 +46,19 @@ export default function StoryPoemCard({ data, isStory }) {
         )}
       </div>
       <div className="font-new-extra-bold text-36px rtl md:text-76px lg:text-50px mt-3">
-        {truncateString(data?.title) || 'صندوقچه بی بی'}
+        {truncateString(data?.title)}
       </div>
-      <div className="font-common-thin text-8px md:text-18px lg:text-17px mt-3 text-right">
-        <div
-          dangerouslySetInnerHTML={{
-            __html: data?.content_array[0] || '<div>Hello</div>',
-          }}
-        ></div>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: data?.content_array[1] || '<div>Hello</div>',
-          }}
-        ></div>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: data?.content_array[2] || '<div>Hello</div>',
-          }}
-        ></div>
-      </div>
+      <div
+        className="font-common-thin text-8px md:text-18px lg:text-17px mt-3 text-right"
+        dangerouslySetInnerHTML={{ __html: data?.excerpt }}
+      ></div>
       <div className="w-full flex items-center justify-between mt-3 text-xs">
         <div className="rtl flex items-center text-right">
           <b className="font-common-bold text-8px md:text-18px lg:text-12px ml-1">
             زمان:
           </b>
           <p className="font-common-thin md:mt-1 text-8px md:text-18px lg:text-12px">
-            {data?.time || '12'}
+            {data?.duration}
           </p>
           <p className="font-common-thin md:mt-1 text-8px md:text-18px lg:text-12px">
             دقیقه
@@ -82,7 +69,7 @@ export default function StoryPoemCard({ data, isStory }) {
             تاریخ:
           </b>
           <p className="font-common-thin md:mt-1 text-8px md:text-18px lg:text-12px">
-            {data?.shamsi_date || '12/2/1403'}
+            {data?.date}
           </p>
         </div>
         <div className="rtl flex items-center text-right">
@@ -90,24 +77,23 @@ export default function StoryPoemCard({ data, isStory }) {
             نویسنده:
           </b>
           <p className="font-common-thin md:mt-1 text-8px md:text-18px lg:text-12px">
-            {data?.author.name || 'باسط یزدانی'}
+            {data?.author}
           </p>
         </div>
       </div>
       <div className="w-full flex justify-end gap-2 mt-3">
-        {/* {data?.categories.map((category, index) => (
+        {data?.categories.map((category, index) => (
           <Genre
-            title={category || 'ترسناک'}
+            title={category.name}
             key={index}
           />
-        ))} */}
-        <Genre title="ترسناک" />
-        <Genre title="ترسناک" />
-        <Genre title="ترسناک" />
+        ))}
       </div>
       <div className="w-full mt-3">
         <Link
-          href={`/literarywritings/poems/${data?.slug}`}
+          href={`/literarywritings/${
+            isStory ? 'story/episode' : 'poems/collection'
+          }/${data?.slug}`}
           className="w-full py-2 font-common-heavy text-20px md:text-43px lg:text-28px border-2 border-black flex justify-center items-center
                 bg-black text-white hover:bg-white hover:text-black transition-all duration-700"
         >

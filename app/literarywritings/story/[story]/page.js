@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 import { useRef, useState, useEffect } from 'react';
 
-// import axios from '@/utils/api';
+import axios from '@/utils/api';
 
 import { use } from 'react';
 import Genre from '@/components/Genre/Genre';
@@ -16,6 +16,7 @@ import SimilarPoems from '@/components/SimilarPoems/SimilarPoems';
 import FullAd from '@/components/FullAd/FullAd';
 import SmallAd from '@/components/SmallAd/SmallAd';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
+import SimilarStories from '@/components/SimilarStories/SimilarStories';
 
 export default function StorySinglePage({ params }) {
   // fetch data
@@ -24,17 +25,18 @@ export default function StorySinglePage({ params }) {
 
   const param = use(params);
 
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       try {
-  //         const response = await axios.get(`v1/poem/${param.poems}`);
-  //         setData(response.data);
-  //       } catch (err) {
-  //         setError(err.response?.data?.message || err.message);
-  //       }
-  //     };
-  //     fetchData();
-  //   }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`/v1/episodes/${param.story}`);
+        setData(response.data);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+    fetchData();
+  }, []);
+  console.log(data);
 
   return (
     // the main container of the page
@@ -46,10 +48,19 @@ export default function StorySinglePage({ params }) {
           {/*  the title section of the story  */}
           <div className="mt-14 flex flex-col items-end">
             <div className="w-full font-new-black text-50px md:text-60px lg:text-94px rtl">
-              {data?.title || 'صندوقچه بی بی'}
+              {data?.title}
             </div>
-            <div className="w-full rtl font-common-heavy text-10px md:text-16px lg:text-25px xl:mt-14">
-              از مجموعه مترسگ متحرک
+            <div className="w-full rtl font-common-heavy text-10px md:text-16px lg:text-25px xl:mt-14 flex">
+              <div className="ml-1">از مجموعه</div>
+              {data?.collection.map((coll, index) => (
+                <Link
+                  href={`/literarywritings/story/collection/${coll.slug}`}
+                  key={index}
+                  className="ml-3"
+                >
+                  {coll.name}
+                </Link>
+              ))}
             </div>
             <div className="w-full grid grid-cols-6 xl:grid-cols-9 items-center gap">
               {/* time */}
@@ -59,7 +70,7 @@ export default function StorySinglePage({ params }) {
                     زمان:
                   </b>
                   <p className="font-common-thin mt-10px md:mt-1 text-6px md:text-7px lg:text-12px">
-                    {data?.time || 12}
+                    {data?.time}
                   </p>
                   <p className="font-common-thin mt-10px md:mt-1 text-6px md:text-7px lg:text-12px">
                     دقیقه
@@ -70,34 +81,20 @@ export default function StorySinglePage({ params }) {
                     تاریخ:
                   </b>
                   <p className="font-common-thin mt-10px md:mt-1 text-6px md:text-7px lg:text-12px">
-                    {data?.shamsi_date || '2/5/1403'}
+                    {data?.date}
                   </p>
                 </div>
               </div>
               {/* genre */}
               <div className="col-span-7 grid grid-cols-6">
-                {/* {data?.categories.map((category, index) => (
-                 
-                ))} */}
-
-                <div className="cols-span-1">
-                  <Genre title="ترسناک" />
-                </div>
-                <div className="cols-span-1">
-                  <Genre title="ترسناک" />
-                </div>
-                <div className="cols-span-1">
-                  <Genre title="ترسناک" />
-                </div>
-                <div className="cols-span-1">
-                  <Genre title="ترسناک" />
-                </div>
-                <div className="cols-span-1">
-                  <Genre title="ترسناک" />
-                </div>
-                <div className="cols-span-1">
-                  <Genre title="ترسناک" />
-                </div>
+                {data?.categories.map((category, index) => (
+                  <div
+                    className="cols-span-1"
+                    key={index}
+                  >
+                    <Genre title={category?.name} />
+                  </div>
+                ))}
               </div>
             </div>
             {/* the links of the episodes */}
@@ -105,7 +102,7 @@ export default function StorySinglePage({ params }) {
               {/*  it has 3 columns  */}
               <div className="flex flex-row-reverse justify-between items-center">
                 <div className="font-common-heavy text-8px md:text-20px lg:text-25px">
-                  قسمت اول
+                  قسمت {data?.episode_title}{' '}
                 </div>
                 <div className="w-[60%] justify-between items-center hidden md:flex flex-row-reverse">
                   <button
@@ -128,20 +125,25 @@ export default function StorySinglePage({ params }) {
                   </button>
                 </div>
                 <div className="">
-                  <ArrowLink title="همه قسمت ها" />
+                  <ArrowLink
+                    title="همه قسمت ها"
+                    path={`/literarywritings/story/episode/${data?.story_slug}`}
+                  />
                 </div>
               </div>
               <div className="w-full flex flex-row-reverse mt-7 justify-between md:hidden">
-                <button
+                <Link
+                  href={`/literarywritings/story/${data?.previous_episode}`}
                   className="flex flex-row-reverse justify-around items-center font-common-heavy text-lg border-2 border-black
-                            hover:bg-black hover:text-white transition-all duration-700 px-2"
+                           hover:bg-black hover:text-white transition-all duration-700 px-2"
                 >
                   <IoIosArrowBack className="text-white text-10px md:text-20px lg:text-25px" />
                   <p className="mt-1 text-8px md:text-12px lg:text-17px">
                     قسمت قبلی
                   </p>
-                </button>
-                <button
+                </Link>
+                <Link
+                  href={`/literarywritings/story/${data?.next_episode}`}
                   className="flex flex-row-reverse justify-around items-center font-common-heavy text-lg border-2 border-black
                             hover:bg-black hover:text-white transition-all duration-700 px-2"
                 >
@@ -149,20 +151,21 @@ export default function StorySinglePage({ params }) {
                     قسمت بعدی
                   </p>
                   <IoIosArrowForward className="text-white text-10px md:text-20px lg:text-25px" />
-                </button>
+                </Link>
               </div>
             </div>
           </div>
           {/*  the story text  */}
           <div
             dangerouslySetInnerHTML={{
-              __html: data?.content || '<div>Hello</div>',
+              __html: data?.content,
             }}
             className="font-common-lg text-10px md:text-18px rtl mt-7"
           ></div>
           {/* the episode section button */}
           <div className="flex flex-row-reverse justify-between mt-7">
-            <button
+            <Link
+              href={`/literarywritings/story/${data?.previous_episode}`}
               className="flex flex-row-reverse justify-around items-center font-common-heavy text-2xl border-2 border-black
                     hover:bg-black hover:text-white transition-all duration-700 px-3"
             >
@@ -170,8 +173,9 @@ export default function StorySinglePage({ params }) {
               <p className="mt-1 text-10px md:text-25px lg:text-30px">
                 قسمت قبلی
               </p>
-            </button>
-            <button
+            </Link>
+            <Link
+              href={`/literarywritings/story/${data?.next_episode}`}
               className="flex flex-row-reverse justify-around items-center font-common-heavy text-2xl border-2 border-black
                             hover:bg-black hover:text-white transition-all duration-700 px-3"
             >
@@ -179,7 +183,7 @@ export default function StorySinglePage({ params }) {
                 قسمت بعدی
               </p>
               <IoIosArrowForward className="text-white text-10px md:text-20px lg:text-25px" />
-            </button>
+            </Link>
           </div>
         </div>
         {/* the author section */}
@@ -282,7 +286,7 @@ export default function StorySinglePage({ params }) {
       {/*  the similar stories  */}
       <div className="w-full flex justify-end">
         <div className="w-full">
-          <SimilarPoems slug={param.poems} />
+          <SimilarStories slug={param.story} />
         </div>
       </div>
       {/* full ad */}

@@ -3,16 +3,20 @@ import Link from 'next/link';
 import React from 'react';
 import Genre from '../Genre/Genre';
 
-export default function SimilarHorizontalCard({ data, isArticle, isStory }) {
+export default function SimilarHorizontalStoryCard({
+  data,
+  isArticle,
+  isStory,
+}) {
   return (
     <Link
-      href={`/${isArticle ? 'articles' : 'reviewsandopinions'}/${data?.slug}`}
+      href={`/literarywritings/story/${data?.slug}`}
       className="col-span-6 xl:col-span-12 grid grid-cols-6 xl:grid-cols-9 gap border-b-4 py-20px border-black"
     >
       <div className="relative col-span-2 h-95px md:h-200px xl:h-210px 2xl:h-270px">
-        {data?.image ? (
+        {data?.featured_image ? (
           <Image
-            src={data?.image}
+            src={data?.featured_image}
             alt="story image"
             layout="fill"
             objectFit="cover"
@@ -20,7 +24,7 @@ export default function SimilarHorizontalCard({ data, isArticle, isStory }) {
           />
         ) : (
           <div className="w-full h-full flex justify-center items-center">
-            the article image not found
+            the image not found
           </div>
         )}
       </div>
@@ -50,7 +54,7 @@ export default function SimilarHorizontalCard({ data, isArticle, isStory }) {
                   تاریخ:
                 </p>
                 <p className="font-common-thin text-8px xl:text-14px">
-                  {data?.date_shamsi}
+                  {data?.date}
                 </p>
               </div>
             </div>
@@ -60,7 +64,7 @@ export default function SimilarHorizontalCard({ data, isArticle, isStory }) {
                   زمان:
                 </p>
                 <p className="font-common-thin text-8px xl:text-14px">
-                  {data?.time}
+                  {data?.duration}
                 </p>
                 <p className="font-common-thin text-8px xl:text-14px">دقیقه</p>
               </div>
