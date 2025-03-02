@@ -1,28 +1,33 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Filter from '../Filter/Filter';
 import LetterCard from '../LetterCard/LetterCard';
 import Heading1 from '../Heading1/Heading1';
 import FullAd from '../FullAd/FullAd';
+import Pagination from '../Pagination/Pagination';
+import axios from '@/utils/api';
 
 export default function ArchivedLettersSection() {
-  const letters = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
-
+  const [data, setData] = useState(null);
+  const [Error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 4;
+  const [totalPage, setTotalPage] = useState(0);
 
-  // Calculate the total number of pages
-  const totalPages = Math.ceil(letters.length / itemsPerPage);
-
-  // Calculate the index range of cards to display
-  const indexOfLastCard = currentPage * itemsPerPage;
-  const indexOfFirstCard = indexOfLastCard - itemsPerPage;
-  const currentCards = letters.slice(indexOfFirstCard, indexOfLastCard);
-
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `/v1/letters/?type=archive&per_page=3&page=${currentPage}`
+        );
+        setData(response.data.data);
+        setTotalPage(response.data.meta.pages);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+    fetchData();
+  }, [currentPage]);
 
   return (
     <div className="flex flex-col items-center">
@@ -44,48 +49,20 @@ export default function ArchivedLettersSection() {
       </div>
       {/*  pagination section  */}
       <div className="main-container mt-7">
-        {/* {
-                    currentCards.map((item , index) => (
-                        <LetterCard key={index} item={item}/>
-                    ))
-                } */}
-        <LetterCard />
-        <LetterCard />
-        <LetterCard />
-        {/* full ad */}
-        <FullAd />
-        <LetterCard />
-        <LetterCard />
-        <LetterCard />
-        {/* full ad */}
-        <FullAd />
-        <LetterCard />
-        <LetterCard />
-        <LetterCard />
-        {/* full ad */}
-        <FullAd />
-        <LetterCard />
-        <LetterCard />
-        <LetterCard />
-        {/* full ad */}
-        <FullAd />
+        {data?.map((data, index) => (
+          <LetterCard
+            key={index}
+            data={data}
+          />
+        ))}
       </div>
       {/* Pagination controls */}
       <div className="flex justify-center mt-5">
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button
-            key={index + 1}
-            onClick={() => handlePageChange(index + 1)}
-            className={`w-20 h-20 mr-1 pt-3 flex justify-center items-center border-2 border-black font-common-heavy text-3xl
-                                ${
-                                  currentPage === index + 1
-                                    ? 'bg-black text-white'
-                                    : ''
-                                }`}
-          >
-            {index + 1}
-          </button>
-        ))}
+        <Pagination
+          totalPages={totalPage}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
       </div>
     </div>
   );

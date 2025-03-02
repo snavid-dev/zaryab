@@ -20,7 +20,6 @@ export default function Podcasts() {
     };
     fetchData();
   }, []);
-  console.log(data);
 
   return (
     <div className="main-container mt-50px">

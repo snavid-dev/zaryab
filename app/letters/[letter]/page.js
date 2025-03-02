@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useRef, useState } from 'react';
+import { use, useEffect, useRef, useState } from 'react';
 
 import { LuChevronRight } from 'react-icons/lu';
 import { LuChevronLeft } from 'react-icons/lu';
@@ -12,53 +12,36 @@ import Podcasts from '@/components/Podcasts/Podcasts';
 import LetterSliderPagesCard from '@/components/LetterSliderPagesCard/LetterSliderPagesCard';
 import SmallAd from '@/components/SmallAd/SmallAd';
 import FullAd from '@/components/FullAd/FullAd';
+import axios from '@/utils/api';
 
-export default function LetterSinglePage() {
-  const images = [
-    'paper.png',
-    'paper.png',
-    'paper.png',
-    'paper.png',
-    'paper.png',
-    'paper.png',
-    'paper.png',
-    'paper.png',
-    'paper.png',
-    'paper.png',
-    'paper.png',
-    'paper.png',
-    'paper.png',
-    'paper.png',
-    'paper.png',
-    'paper.png',
-    'paper.png',
-    'paper.png',
-    'paper.png',
-    'paper.png',
-    'paper.png',
-    'paper.png',
-    'paper.png',
-    'paper.png',
-    'paper.png',
-    'paper.png',
-    'paper.png',
-    'paper.png',
-    'paper.png',
-    'paper.png',
-    'paper.png',
-    'paper.png',
-  ];
-
+export default function LetterSinglePage({ params }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [modal, setModal] = useState(false);
+  const [data, setData] = useState(null);
+  const [Error, setError] = useState(null);
+
+  const param = use(params);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`/v1/letters/${param.letter}`);
+        setData(response.data);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+    fetchData();
+  }, []);
+  console.log(data, 'data');
 
   const handleForward = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % data?.images.length);
   };
 
   const handleBackward = () => {
     setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + images.length) % images.length
+      (prevIndex) => (prevIndex - 1 + images.length) % data?.images.length
     );
   };
 
@@ -68,13 +51,13 @@ export default function LetterSinglePage() {
       {/*  the number  */}
       <div className="main-container mt-14">
         <div className="col-span-6 xl:col-span-12 rtl">
-          <Heading1 title="1" />
+          <Heading1 title={data?.number} />
         </div>
       </div>
       {/*  title of the letter  */}
       <div className="main-container mt-7">
         <div className="col-span-6 xl:col-span-12 rtl">
-          <Heading1 title="به یاد نادیه انجمن" />
+          <Heading1 title={data?.title} />
         </div>
       </div>
       {/* border */}
@@ -82,7 +65,7 @@ export default function LetterSinglePage() {
       {/*  the letter pictures  */}
 
       <div className="main-container">
-        {images.map((letter, index) => (
+        {data?.images.map((letter, index) => (
           <div
             className="col-span-6 md:col-span-3 xl:col-span-3 flex flex-col items-center mt-7 cursor-pointer"
             onClick={() => setModal(true)}
@@ -91,7 +74,7 @@ export default function LetterSinglePage() {
             <div className="w-full flex justify-center items-center p-3 border-4 border-black">
               <div className="w-full h-380px md:h-390px xl:h-290px 2xl:h-390px m-3 relative">
                 <Image
-                  src={`/assets/img/${letter}`}
+                  src={letter?.image}
                   alt="letter page"
                   layout="fill"
                   objectFit="cover"
@@ -100,7 +83,7 @@ export default function LetterSinglePage() {
               </div>
             </div>
             <div className="text-30px border-4 border-black px-6 py-2 mt-3">
-              {index + 1}
+              {letter?.number}
             </div>
           </div>
         ))}
@@ -133,9 +116,9 @@ export default function LetterSinglePage() {
         <div className="relative w-full h-full py-5 overflow-hidden flex items-center justify-center">
           {/* Images */}
           <div className="w-full h-full relative">
-            {images.map((image, index) => (
+            {data?.images.map((image, index) => (
               <LetterSliderPagesCard
-                image={image}
+                image={image?.image}
                 index={index}
                 currentIndex={currentIndex}
                 key={index}

@@ -16,7 +16,7 @@ export default function LetterSliderPagesCard({ image, index, currentIndex }) {
     >
       <div className="w-full md:w-[80%] h-full relative">
         <Image
-          src={`/assets/img/${image}`}
+          src={image}
           alt={`Slide ${index}`}
           fill
           className="absolute object-contain"
