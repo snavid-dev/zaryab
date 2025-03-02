@@ -1,3 +1,4 @@
+'use client';
 import Authors from '@/components/Authors/Authors';
 import AuthorWeek from '@/components/AuthorWeek/AuthorWeek';
 import BookDesk from '@/components/BookDesk/BookDesk';
@@ -9,39 +10,58 @@ import Podcasts from '@/components/Podcasts/Podcasts';
 import SmallAd from '@/components/SmallAd/SmallAd';
 import StoryMail from '@/components/StoryMailDesk/StoryMail';
 import StoryOfDay from '@/components/StoryOfDay/StoryOfDay';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Home() {
   return (
-    <main className="w-full flex flex-col items-center mt-70px xl:mt-0">
+    <main className="w-full flex flex-col items-center mt-70px xl:mt-0 pb-50px">
       {/* story of the day */}
-      <StoryOfDay />
+      <div>
+        {' '}
+        <StoryOfDay />
+      </div>
       {/* ad */}
-      <FullAd />
+      {/* <FullAd /> */}
       {/* letters and  mailes for desktop*/}
-      <StoryMail />
+      <div>
+        <StoryMail />
+      </div>
       {/* ad */}
-      <SmallAd />
+      {/* <SmallAd /> */}
       {/* desktop book section and moblie tablet*/}
+
       <div className="w-full hidden xl:flex flex-col items-center">
         <BookDesk />
       </div>
+
       <div className="w-full flex flex-col items-center xl:hidden">
         <BookMailMobile />
       </div>
+
       {/* ad */}
-      <FullAd />
+      {/* <FullAd /> */}
       {/* author of the week */}
-      <AuthorWeek />
+
+      <div>
+        <AuthorWeek />
+      </div>
+
       {/* ad */}
-      <SmallAd />
+      {/* <SmallAd /> */}
       {/* authors */}
-      <Authors />
+
+      <div>
+        <Authors />
+      </div>
+
       {/* harizontal line */}
       <HarizontalLine />
       {/* podcasts */}
-      <Podcasts />
+      <div>
+        <Podcasts />
+      </div>
       {/* ad */}
-      <SmallAd />
+      {/* <SmallAd /> */}
       <ChampionPopUp />
     </main>
   );
