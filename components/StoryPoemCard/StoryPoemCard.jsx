@@ -81,19 +81,32 @@ export default function StoryPoemCard({ data, isStory }) {
           </p>
         </div>
       </div>
-      <div className="w-full flex justify-end gap-2 mt-3">
-        {data?.categories.map((category, index) => (
-          <Genre
-            title={category.name}
-            key={index}
-          />
-        ))}
-      </div>
+      {isStory ? (
+        <div className="w-full flex justify-end gap-2 mt-3">
+          {data?.categories.map((category, index) => (
+            <Genre
+              title={category.name}
+              key={index}
+            />
+          ))}
+        </div>
+      ) : (
+        data?.poem_type && (
+          <div className="w-full flex justify-end gap-2 mt-3">
+            {data?.poem_type.map((poem, index) => (
+              <Genre
+                title={poem.name}
+                key={index}
+              />
+            ))}
+          </div>
+        )
+      )}
       <div className="w-full mt-3">
         <Link
-          href={`/literarywritings/${
-            isStory ? 'story/episode' : 'poems/collection'
-          }/${data?.slug}`}
+          href={`/literarywritings/${isStory ? 'story/episode' : 'poems'}/${
+            data?.slug
+          }`}
           className="w-full py-2 font-common-heavy text-20px md:text-43px lg:text-28px border-2 border-black flex justify-center items-center
                 bg-black text-white hover:bg-white hover:text-black transition-all duration-700"
         >

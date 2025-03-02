@@ -10,12 +10,12 @@ import { use } from 'react';
 import Genre from '@/components/Genre/Genre';
 import Heading1 from '@/components/Heading1/Heading1';
 import ArrowLink from '@/components/ArrowLink/ArrowLink';
-import StoryPoemCard from '@/components/StoryPoemCard/StoryPoemCard';
 import Authors from '@/components/Authors/Authors';
 import FullAd from '@/components/FullAd/FullAd';
 import SmallAd from '@/components/SmallAd/SmallAd';
 import axios from '@/utils/api';
 import SimilarArticle from '@/components/SimilarArticle/SimilarArticle';
+import StoriesPoemSection from '@/components/StoriesPoemSection/StoriesPoemSection';
 
 export default function ArticleSinglePage({ params }) {
   // fetch data
@@ -217,14 +217,13 @@ export default function ArticleSinglePage({ params }) {
             <Heading1 title="اشعار" />
           </div>
           <div className="col-span-6 xl-col-span-6 flex justify-start md:justify-end">
-            <ArrowLink title="همه اشعار" />
+            <ArrowLink
+              title="همه اشعار"
+              path="/literarywritings"
+            />
           </div>
         </div>
-        <div className="main-container mt-7">
-          <StoryPoemCard isStory={true} />
-          <StoryPoemCard isStory={true} />
-          <StoryPoemCard isStory={true} />
-        </div>
+        <StoriesPoemSection />
       </div>
       {/* small ad */}
       <SmallAd />

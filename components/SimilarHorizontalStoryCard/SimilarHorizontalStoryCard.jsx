@@ -10,7 +10,7 @@ export default function SimilarHorizontalStoryCard({
 }) {
   return (
     <Link
-      href={`/literarywritings/story/${data?.slug}`}
+      href={`/literarywritings/${isStory ? 'story' : 'poems'}/${data?.slug}`}
       className="col-span-6 xl:col-span-12 grid grid-cols-6 xl:grid-cols-9 gap border-b-4 py-20px border-black"
     >
       <div className="relative col-span-2 h-95px md:h-200px xl:h-210px 2xl:h-270px">
@@ -71,19 +71,35 @@ export default function SimilarHorizontalStoryCard({
             </div>
           </div>
           <div className="col-span-1 h-5 hidden xl:block"></div>
-          <div className="col-span-2 xl:grid grid-cols-3 gap hidden">
-            {data?.categories.map(
-              (category, index) =>
-                index + 1 < 4 && (
-                  <div
-                    className="col-span-1"
-                    key={index}
-                  >
-                    <Genre title={category.name} />
-                  </div>
-                )
-            )}
-          </div>
+          {isStory ? (
+            <div className="col-span-2 xl:grid grid-cols-3 gap hidden">
+              {data?.categories.map(
+                (category, index) =>
+                  index + 1 < 4 && (
+                    <div
+                      className="col-span-1"
+                      key={index}
+                    >
+                      <Genre title={category.name} />
+                    </div>
+                  )
+              )}
+            </div>
+          ) : (
+            <div className="col-span-2 xl:grid grid-cols-3 gap hidden">
+              {data?.poem_type.map(
+                (category, index) =>
+                  index + 1 < 4 && (
+                    <div
+                      className="col-span-1"
+                      key={index}
+                    >
+                      <Genre title={category.name} />
+                    </div>
+                  )
+              )}
+            </div>
+          )}
         </div>
       </div>
     </Link>

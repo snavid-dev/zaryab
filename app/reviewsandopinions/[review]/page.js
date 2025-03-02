@@ -15,6 +15,7 @@ import Authors from '@/components/Authors/Authors';
 import FullAd from '@/components/FullAd/FullAd';
 import SmallAd from '@/components/SmallAd/SmallAd';
 import SimilarReviews from '@/components/SimilarReviews/SimilarReviews';
+import PoemsStorySection from '@/components/PoemsStorySection/PoemsStorySection';
 
 export default function ReviewsAndOpinionsSinglePage({ params }) {
   // fetch data
@@ -213,17 +214,16 @@ export default function ReviewsAndOpinionsSinglePage({ params }) {
       <div>
         <div className="main-container mt-14 rtl">
           <div className="col-span-6 xl:col-span-6">
-            <Heading1 title="اشعار" />
+            <Heading1 title="داستان ها" />
           </div>
           <div className="col-span-6 xl-col-span-6 flex justify-start md:justify-end">
-            <ArrowLink title="همه اشعار" />
+            <ArrowLink
+              title="همه داستان ها"
+              path="/literarywritings"
+            />
           </div>
         </div>
-        <div className="main-container mt-7">
-          <StoryPoemCard isStory={true} />
-          <StoryPoemCard isStory={true} />
-          <StoryPoemCard isStory={true} />
-        </div>
+        <PoemsStorySection />
       </div>
       {/* small ad */}
       <SmallAd />

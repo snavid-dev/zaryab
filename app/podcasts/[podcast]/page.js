@@ -291,7 +291,7 @@ export default function PodcastSinglePage({ params }) {
             <Heading1 title="نشست ها" />
             <ArrowLink
               title="همه نشست ها"
-              path="#"
+              path="/podcasts"
             />
           </div>
           <div className="main-container mt-7">

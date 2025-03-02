@@ -17,6 +17,7 @@ import FullAd from '@/components/FullAd/FullAd';
 import SmallAd from '@/components/SmallAd/SmallAd';
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import SimilarStories from '@/components/SimilarStories/SimilarStories';
+import StoriesPoemSection from '@/components/StoriesPoemSection/StoriesPoemSection';
 
 export default function StorySinglePage({ params }) {
   // fetch data
@@ -36,7 +37,6 @@ export default function StorySinglePage({ params }) {
     };
     fetchData();
   }, []);
-  console.log(data);
 
   return (
     // the main container of the page
@@ -191,11 +191,9 @@ export default function StorySinglePage({ params }) {
           {/*  it has 7 rows  */}
           <div className="w-1/2 xl:w-full border-2 border-black p-3 md:p-7">
             <div className="w-full h-150px md:h-310px xl:h-220px 2xl:h-300px relative">
-              {data?.author.featured_image || true ? (
+              {data?.author.featured_image ? (
                 <Image
-                  src={
-                    data?.author.featured_image || '/assets/img/authorPic.png'
-                  }
+                  src={data?.author.featured_image}
                   alt=""
                   layout="fill"
                   objectFit="cover"
@@ -208,16 +206,14 @@ export default function StorySinglePage({ params }) {
           </div>
           <div className="w-full flex flex-col mr-7 xl:mr-0 rtl">
             <div className="font-common-heavy text-25px md:text-50px rtl mt-7 md:mt-0 xl:mt-7 text-black">
-              <Link href={`/authors/${data?.author.slug}`}>
-                {data?.author.name || 'باسط یزدانی'}
-              </Link>
+              {data?.author.name}
             </div>
             <div className="flex rtl md:mt-7 text-black">
               <div className="font-common-heavy text-10px md:text-18px ml-1">
                 موقعیت:
               </div>
               <div className="font-common-regular text-10px md:text-18px">
-                {data?.author.location || 'هرات'}
+                {data?.author.location}
               </div>
             </div>
             <div className="flex rtl mt-3 text-black">
@@ -225,7 +221,7 @@ export default function StorySinglePage({ params }) {
                 وظیفه:
               </div>
               <div className="font-common-regular text-10px md:text-18px">
-                {data?.author.job || 'نویسنده'}
+                {data?.author.job}
               </div>
             </div>
             <div className="flex rtl mt-3 text-black">
@@ -233,7 +229,7 @@ export default function StorySinglePage({ params }) {
                 تعداد نوشته ها:
               </div>
               <div className="font-common-regular text-10px md:text-18px">
-                3000
+                {data?.author.total_letters}
               </div>
             </div>
             <div className="flex rtl mt-3 text-black">
@@ -241,7 +237,7 @@ export default function StorySinglePage({ params }) {
                 سن:
               </div>
               <div className="font-common-regular text-10px md:text-18px">
-                {data?.author.age || '23'}
+                {data?.author.age}
               </div>
             </div>
             <div className="flex md:mt-3">
@@ -301,11 +297,7 @@ export default function StorySinglePage({ params }) {
             <ArrowLink title="همه اشعار" />
           </div>
         </div>
-        <div className="main-container mt-7">
-          <StoryPoemCard />
-          <StoryPoemCard />
-          <StoryPoemCard />
-        </div>
+        <StoriesPoemSection />
       </div>
       {/* small ad */}
       <SmallAd />

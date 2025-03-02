@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 import { useRef, useState, useEffect } from 'react';
 
-// import axios from '@/utils/api';
+import axios from '@/utils/api';
 
 import { use } from 'react';
 import Genre from '@/components/Genre/Genre';
@@ -15,25 +15,27 @@ import Authors from '@/components/Authors/Authors';
 import SimilarPoems from '@/components/SimilarPoems/SimilarPoems';
 import FullAd from '@/components/FullAd/FullAd';
 import SmallAd from '@/components/SmallAd/SmallAd';
+import PoemsStorySection from '@/components/PoemsStorySection/PoemsStorySection';
 
 export default function PoemsSinglePage({ params }) {
+  // fetch data
   // fetch data
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
   const param = use(params);
 
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       try {
-  //         const response = await axios.get(`v1/poem/${param.poems}`);
-  //         setData(response.data);
-  //       } catch (err) {
-  //         setError(err.response?.data?.message || err.message);
-  //       }
-  //     };
-  //     fetchData();
-  //   }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`/v1/poems/${param.poem}`);
+        setData(response.data);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     // the main container of the page
@@ -45,10 +47,19 @@ export default function PoemsSinglePage({ params }) {
           {/*  the title section of the story  */}
           <div className="mt-14 flex flex-col items-end">
             <div className="w-full font-new-black text-50px md:text-60px lg:text-94px rtl">
-              {data?.title || 'صندوقچه بی بی'}
+              {data?.title}
             </div>
-            <div className="w-full rtl font-common-heavy text-10px md:text-16px lg:text-25px xl:mt-14">
-              از مجموعه مترسگ متحرک
+            <div className="w-full rtl font-common-heavy text-10px md:text-16px lg:text-25px xl:mt-14 flex">
+              <div className="ml-1">از مجموعه</div>
+              {data?.poem_collection.map((coll, index) => (
+                <Link
+                  className="ml-3"
+                  href={`/literarywritings/poems/collection/${coll.slug}`}
+                  key={index}
+                >
+                  {coll.name}
+                </Link>
+              ))}
             </div>
             <div className="w-full grid grid-cols-6 xl:grid-cols-9 items-center gap">
               {/* time */}
@@ -58,7 +69,7 @@ export default function PoemsSinglePage({ params }) {
                     زمان:
                   </b>
                   <p className="font-common-thin mt-10px md:mt-1 text-6px md:text-7px lg:text-12px">
-                    {data?.time || 12}
+                    {data?.time}
                   </p>
                   <p className="font-common-thin mt-10px md:mt-1 text-6px md:text-7px lg:text-12px">
                     دقیقه
@@ -69,41 +80,27 @@ export default function PoemsSinglePage({ params }) {
                     تاریخ:
                   </b>
                   <p className="font-common-thin mt-10px md:mt-1 text-6px md:text-7px lg:text-12px">
-                    {data?.shamsi_date || '2/5/1403'}
+                    {data?.date}
                   </p>
                 </div>
               </div>
               {/* genre */}
               <div className="col-span-7 grid grid-cols-6">
-                {/* {data?.categories.map((category, index) => (
-                 
-                ))} */}
-
-                <div className="cols-span-1">
-                  <Genre title="ترسناک" />
-                </div>
-                <div className="cols-span-1">
-                  <Genre title="ترسناک" />
-                </div>
-                <div className="cols-span-1">
-                  <Genre title="ترسناک" />
-                </div>
-                <div className="cols-span-1">
-                  <Genre title="ترسناک" />
-                </div>
-                <div className="cols-span-1">
-                  <Genre title="ترسناک" />
-                </div>
-                <div className="cols-span-1">
-                  <Genre title="ترسناک" />
-                </div>
+                {data?.poem_type.map((poem, index) => (
+                  <div
+                    className="cols-span-1"
+                    key={index}
+                  >
+                    <Genre title={poem.name} />
+                  </div>
+                ))}
               </div>
             </div>
           </div>
           {/*  the story text  */}
           <div
             dangerouslySetInnerHTML={{
-              __html: data?.content || '<div>Hello</div>',
+              __html: data?.content,
             }}
             className="font-common-lg text-10px md:text-18px rtl mt-7"
           ></div>
@@ -113,11 +110,9 @@ export default function PoemsSinglePage({ params }) {
           {/*  it has 7 rows  */}
           <div className="w-1/2 xl:w-full border-2 border-black p-3 md:p-7">
             <div className="w-full h-150px md:h-310px xl:h-220px 2xl:h-300px relative">
-              {data?.author.featured_image || true ? (
+              {data?.author.featured_image ? (
                 <Image
-                  src={
-                    data?.author.featured_image || '/assets/img/authorPic.png'
-                  }
+                  src={data?.author.featured_image}
                   alt=""
                   layout="fill"
                   objectFit="cover"
@@ -130,16 +125,14 @@ export default function PoemsSinglePage({ params }) {
           </div>
           <div className="w-full flex flex-col mr-7 xl:mr-0 rtl">
             <div className="font-common-heavy text-25px md:text-50px rtl mt-7 md:mt-0 xl:mt-7 text-black">
-              <Link href={`/authors/${data?.author.slug}`}>
-                {data?.author.name || 'باسط یزدانی'}
-              </Link>
+              {data?.author.name}
             </div>
             <div className="flex rtl md:mt-7 text-black">
               <div className="font-common-heavy text-10px md:text-18px ml-1">
                 موقعیت:
               </div>
               <div className="font-common-regular text-10px md:text-18px">
-                {data?.author.location || 'هرات'}
+                {data?.author.location}
               </div>
             </div>
             <div className="flex rtl mt-3 text-black">
@@ -147,7 +140,7 @@ export default function PoemsSinglePage({ params }) {
                 وظیفه:
               </div>
               <div className="font-common-regular text-10px md:text-18px">
-                {data?.author.job || 'نویسنده'}
+                {data?.author.job}
               </div>
             </div>
             <div className="flex rtl mt-3 text-black">
@@ -155,7 +148,7 @@ export default function PoemsSinglePage({ params }) {
                 تعداد نوشته ها:
               </div>
               <div className="font-common-regular text-10px md:text-18px">
-                3000
+                {data?.author.total_letters}
               </div>
             </div>
             <div className="flex rtl mt-3 text-black">
@@ -163,7 +156,7 @@ export default function PoemsSinglePage({ params }) {
                 سن:
               </div>
               <div className="font-common-regular text-10px md:text-18px">
-                {data?.author.age || '23'}
+                {data?.author.age}
               </div>
             </div>
             <div className="flex md:mt-3">
@@ -208,7 +201,7 @@ export default function PoemsSinglePage({ params }) {
       {/*  the similar stories  */}
       <div className="w-full flex justify-end">
         <div className="w-full">
-          <SimilarPoems slug={param.poems} />
+          <SimilarPoems slug={param.poem} />
         </div>
       </div>
       {/* full ad */}
@@ -223,11 +216,7 @@ export default function PoemsSinglePage({ params }) {
             <ArrowLink title="همه داستان ها" />
           </div>
         </div>
-        <div className="main-container mt-7">
-          <StoryPoemCard isStory={true} />
-          <StoryPoemCard isStory={true} />
-          <StoryPoemCard isStory={true} />
-        </div>
+        <PoemsStorySection />
       </div>
       {/* small ad */}
       <SmallAd />

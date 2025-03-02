@@ -37,6 +37,7 @@ export default function SimilarArticle({ slug }) {
           <SimilarHorizontalCard
             key={index}
             data={data}
+            isArticle={true}
           />
         ))}
       </div>

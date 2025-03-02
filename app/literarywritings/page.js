@@ -10,7 +10,7 @@ export default function LiteraryWritingsPage() {
     <div className="flex flex-col items-center">
       <StorySection />
       {/* full ad */}
-      <FullAd />
+      {/* <FullAd /> */}
       <PoemSection />
 
       <div>
@@ -18,7 +18,7 @@ export default function LiteraryWritingsPage() {
       </div>
 
       {/* small ad */}
-      <SmallAd />
+      {/* <SmallAd /> */}
     </div>
   );
 }

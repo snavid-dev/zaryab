@@ -52,13 +52,13 @@ export default function Authors() {
 
   return (
     <div
-      className="w-full"
+      className="w-full mt-50px"
       ref={ref}
     >
       {isVisible && (
         <div className="main-container">
           {/* it have two rows */}
-          <div className="col-span-6 xl:col-span-12 flex flex-col items-end md:flex-row-reverse md:justify-between">
+          <div className="col-span-6 xl:col-span-12 flex flex-col items-end md:flex-row-reverse md:justify-between items-center">
             <Heading1 title="نویسنده ها و شاعران آوای زریاب" />
             <ArrowLink
               title="همه نویسنده و شاعران"
