@@ -16,16 +16,15 @@ export default function Home() {
   return (
     <main className="w-full flex flex-col items-center mt-70px xl:mt-0 pb-50px">
       {/* story of the day */}
-      <div>
-        {' '}
-        <StoryOfDay />
-      </div>
+
+      <StoryOfDay />
+
       {/* ad */}
       {/* <FullAd /> */}
       {/* letters and  mailes for desktop*/}
-      <div>
-        <StoryMail />
-      </div>
+
+      <StoryMail />
+
       {/* ad */}
       {/* <SmallAd /> */}
       {/* desktop book section and moblie tablet*/}
@@ -42,9 +41,7 @@ export default function Home() {
       {/* <FullAd /> */}
       {/* author of the week */}
 
-      <div>
-        <AuthorWeek />
-      </div>
+      <AuthorWeek />
 
       {/* ad */}
       {/* <SmallAd /> */}
@@ -57,9 +54,9 @@ export default function Home() {
       {/* harizontal line */}
       <HarizontalLine />
       {/* podcasts */}
-      <div>
-        <Podcasts />
-      </div>
+
+      <Podcasts />
+
       {/* ad */}
       {/* <SmallAd /> */}
       <ChampionPopUp />

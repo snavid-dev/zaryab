@@ -13,7 +13,9 @@ export default function LiteraryWritingsPage() {
       <FullAd />
       <PoemSection />
 
-      <Authors />
+      <div>
+        <Authors />
+      </div>
 
       {/* small ad */}
       <SmallAd />
