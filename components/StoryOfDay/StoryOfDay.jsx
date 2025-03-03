@@ -55,7 +55,7 @@ export default function StoryOfDay() {
               <div className="col-span-1 hidden xl:block"></div>
               <div className="col-span-1 xl:mt-6">
                 <div className="rtl flex justify-center text-right">
-                  <p className="font-common-thin ml-1 text-12px md:text-25px xl:text-18px">
+                  <p className="font-common-thin ml-1 text-12px md:text-25px xl:text-18px font-bold">
                     نویسنده:
                   </p>
                   <p className="font-common-thin text-12px md:text-25px xl:text-18px">
@@ -65,7 +65,7 @@ export default function StoryOfDay() {
               </div>
               <div className="col-span-1 xl:mt-6">
                 <div className="rtl flex justify-center text-right">
-                  <p className="font-common-thin ml-1 text-12px md:text-25px xl:text-18px">
+                  <p className="font-common-thin ml-1 text-12px md:text-25px xl:text-18px font-bold">
                     تاریخ:
                   </p>
                   <p className="font-common-thin text-12px md:text-25px xl:text-18px">
@@ -75,7 +75,7 @@ export default function StoryOfDay() {
               </div>
               <div className="col-span-1 xl:mt-6">
                 <div className="rtl flex justify-center text-right">
-                  <p className="font-common-thin ml-1 text-12px md:text-25px xl:text-18px">
+                  <p className="font-common-thin ml-1 text-12px md:text-25px xl:text-18px font-bold">
                     زمان:
                   </p>
                   <p className="font-common-thin text-12px md:text-25px xl:text-18px">
