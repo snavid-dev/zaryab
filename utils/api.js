@@ -15,7 +15,7 @@ const axiosInstance = axios.create({
 // Request interceptor to check cache before making an API call
 axiosInstance.interceptors.request.use((config) => {
   try {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && config.method === 'get') {
       // Ensure this runs only on the client side
       const cacheKey = `${CACHE_PREFIX}${config.url}`;
       const cachedData = localStorage.getItem(cacheKey);
@@ -52,7 +52,7 @@ axiosInstance.interceptors.request.use((config) => {
 axiosInstance.interceptors.response.use(
   (response) => {
     try {
-      if (typeof window !== 'undefined') {
+      if (typeof window !== 'undefined' && config.method === 'get') {
         // Store response in localStorage only on the client
         const cacheKey = `${CACHE_PREFIX}${response.config.url}`;
         localStorage.setItem(cacheKey, JSON.stringify(response.data));
@@ -68,15 +68,26 @@ axiosInstance.interceptors.response.use(
     let errorMessage = 'Unknown API error';
 
     if (error.response) {
-      errorMessage = error.response.data?.message || 'Server error';
+      if (error.response.status === 400 || error.response.status === 409) {
+        // Use the message from the response data if available
+        errorMessage = error.response.data?.message || 'An error occurred';
+      } else {
+        errorMessage = error.response.data?.message || 'Server error';
+      }
     } else if (error.request) {
       errorMessage = 'No response from server';
     } else {
       errorMessage = error.message;
     }
 
-    console.error('API Error:', errorMessage);
-    return Promise.reject(errorMessage);
+    // console.error('API Error:', errorMessage);
+    return Promise.resolve({
+      data: {},
+      status: error.response ? error.response.status : 500, // Use the status from the error response
+      statusText: errorMessage,
+      headers: {},
+      config: error.config,
+    });
   }
 );
 
