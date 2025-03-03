@@ -1,31 +1,35 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Heading1 from '../Heading1/Heading1';
 import OurAuthorCard from '../OurAuthorCard/OurAuthorCard';
 import AuthorWeekCard from '../AuthorWeekCard/AuthorWeekCard';
 import SmallAd from '../SmallAd/SmallAd';
+import axios from '@/utils/api';
+import Pagination from '../Pagination/Pagination';
 
 export default function ArchiveAuthorsSection() {
-  const authors = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-    22, 23, 24,
-  ];
-
+  const [data, setData] = useState(null);
+  const [Error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
+  const [totalPage, setTotalPage] = useState(0);
 
-  // Calculate the total number of pages
-  const totalPages = Math.ceil(authors.length / itemsPerPage);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `/v1/authors-archive?per_page=6&page=${currentPage}`
+        );
 
-  // Calculate the index range of cards to display
-  const indexOfLastCard = currentPage * itemsPerPage;
-  const indexOfFirstCard = indexOfLastCard - itemsPerPage;
-  const currentCards = authors.slice(indexOfFirstCard, indexOfLastCard);
+        setData(response.data.data);
+        setTotalPage(response.data.meta.pages);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+    fetchData();
+  }, [currentPage]);
 
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
   return (
     <div className="flex flex-col items-center">
       {/*  the title of the section  */}
@@ -37,31 +41,22 @@ export default function ArchiveAuthorsSection() {
 
       {/*  the pagination section  */}
       <div className="main-container">
-        {currentCards.map((item, index) => (
+        {data?.map((data, index) => (
           <AuthorWeekCard
             key={index}
-            item={item}
+            data={data}
           />
         ))}
       </div>
       {/* small ad */}
-      <SmallAd />
+      {/* <SmallAd /> */}
       {/* Pagination controls */}
       <div className="flex justify-center mt-5">
-        {Array.from({ length: totalPages }, (_, index) => (
-          <button
-            key={index + 1}
-            onClick={() => handlePageChange(index + 1)}
-            className={`w-20 h-20 mr-1 pt-3 flex justify-center items-center border-2 border-black font-common-heavy text-3xl
-                                ${
-                                  currentPage === index + 1
-                                    ? 'bg-black text-white'
-                                    : ''
-                                }`}
-          >
-            {index + 1}
-          </button>
-        ))}
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPage}
+          setCurrentPage={setCurrentPage}
+        />
       </div>
     </div>
   );

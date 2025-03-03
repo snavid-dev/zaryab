@@ -1,9 +1,27 @@
-import React from 'react';
+'use client';
+import React, { useEffect, useState } from 'react';
 import Heading1 from '../Heading1/Heading1';
 import Genre from '../Genre/Genre';
 import Image from 'next/image';
+import axios from '@/utils/api';
+import Link from 'next/link';
 
 export default function StoryOfDay() {
+  const [data, setData] = useState(null);
+  const [Error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/v1/featured-story');
+        setData(response.data);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <section className="flex justify-center w-full mt-50px">
       <div className="main-container">
@@ -18,18 +36,15 @@ export default function StoryOfDay() {
           {/* title of the story */}
           <div className="col-span-6 xl:col-span-4">
             <h1 className="flex flex-row xl:flex-col text-50px md:text-94px font-new-black leading-67%">
-              <p>صندوقچه</p>
-              <p>بی بی</p>
+              <Link href={`/literarywritings/story/${data?.slug}`}>
+                {data?.title}
+              </Link>
             </h1>
           </div>
           <div className="hidden xl:col-span-1"></div>
           <div className="col-span-6 xl:col-span-7 mt-20px xl:mt-0">
             <p className="font-common rtl text-12px md:text-18px">
-              یادم می‌آید که روز ختم ما کنارش می‌نشستیم و انتظار می‌کشیدم تا
-              قرائت خود را تمام کند و نخود و کشمش دَم‌کرده برای ما بدهد. سوالی
-              که همیشه در ذهن داشتم این بود که چرا این نخود و کشمش‌ها از خلاصی
-              نیستند. او چنان در تقسیم مهارت داشت که حتی یک نخود و یک کشمش از
-              کسی زیاد و کم نبود.
+              {data?.excerpt}
             </p>
           </div>
           <div className="col-span-6 xl:col-span-12 main-container">
@@ -44,7 +59,7 @@ export default function StoryOfDay() {
                     نویسنده:
                   </p>
                   <p className="font-common-thin text-12px md:text-25px xl:text-18px">
-                    باسط یزدانی
+                    {data?.author}
                   </p>
                 </div>
               </div>
@@ -54,7 +69,7 @@ export default function StoryOfDay() {
                     تاریخ:
                   </p>
                   <p className="font-common-thin text-12px md:text-25px xl:text-18px">
-                    1403/12/05
+                    {data?.date}
                   </p>
                 </div>
               </div>
@@ -64,7 +79,7 @@ export default function StoryOfDay() {
                     زمان:
                   </p>
                   <p className="font-common-thin text-12px md:text-25px xl:text-18px">
-                    12{' '}
+                    {data?.duration}{' '}
                   </p>
                   <p className="font-common-thin text-12px md:text-25px xl:text-18px">
                     دقیقه
@@ -73,18 +88,17 @@ export default function StoryOfDay() {
               </div>
             </div>
             <div className="col-span-6 xl:col-span-2 grid grid-cols-4 xl:grid-cols-2 gap">
-              <div className="col-span-1 flex justify-center">
-                <Genre title="علمی تخیلی" />
-              </div>
-              <div className="col-span-1 flex justify-center">
-                <Genre title="داستان کوتاه" />
-              </div>
-              <div className="col-span-1 flex justify-center">
-                <Genre title="علمی تخیلی" />
-              </div>
-              <div className="col-span-1 flex justify-center">
-                <Genre title="داستان کوتاه" />
-              </div>
+              {data?.categories.map(
+                (category, index) =>
+                  index + 1 < 5 && (
+                    <div
+                      className="col-span-1 flex justify-center"
+                      key={index}
+                    >
+                      <Genre title={category.name} />
+                    </div>
+                  )
+              )}
             </div>
           </div>
           <div className="col-span-6 xl:col-span-12 mt-10px md:mt-0">
@@ -92,13 +106,19 @@ export default function StoryOfDay() {
               id="photo"
               className="w-full h-170px md:h-370px xl:h-580px 2xl:h-750px relative"
             >
-              <Image
-                src="/assets/img/mainPic.png"
-                alt="story of the day image"
-                layout="fill"
-                objectFit="cover"
-                className="absolute"
-              />
+              {data?.featured_image ? (
+                <Image
+                  src={data?.featured_image}
+                  alt="story of the day image"
+                  layout="fill"
+                  objectFit="cover"
+                  className="absolute"
+                />
+              ) : (
+                <div className="w-full h-full flex justify-center items-center">
+                  image not found
+                </div>
+              )}
             </div>
           </div>
         </div>
