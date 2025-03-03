@@ -33,6 +33,151 @@ export default function Footer() {
     fetchData();
   }, []);
 
+  // literary writings
+  const [literary, setLiterary] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [storyRes, poemRes] = await Promise.all([
+          axios.get('/v1/story_type'),
+          axios.get('/v1/poem_type'),
+        ]);
+
+        const stories = storyRes.data; // لیست داستان‌ها
+        const poems = poemRes.data; // لیست شعرها
+
+        const totalLength = Math.ceil((stories.length + poems.length) / 6) * 6;
+        let result = new Array(totalLength).fill(null);
+
+        let storyIndex = 0;
+        let poemIndex = 0;
+
+        for (let i = 0; i < totalLength; i++) {
+          if ((i % 6 === 0 || i % 6 === 1) && storyIndex < stories.length) {
+            result[i] = stories[storyIndex++];
+          } else if (poemIndex < poems.length) {
+            result[i] = poems[poemIndex++];
+          }
+        }
+
+        setLiterary(result);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // articles
+
+  const [articles, setArticles] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/v1/article_type');
+        let data = response.data;
+
+        // محاسبه نزدیک‌ترین مضرب 6 بزرگتر از طول آرایه
+        const nextMultipleOfSix = Math.ceil(data.length / 6) * 6;
+
+        // اضافه کردن استرینگ خالی تا رسیدن به مضرب 6
+        while (data.length < nextMultipleOfSix) {
+          data.push({ name: '', slug: '#' });
+        }
+
+        setArticles(data);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // reviews
+
+  const [review, setReview] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/v1/review_type');
+        let data = response.data;
+
+        // محاسبه نزدیک‌ترین مضرب 6 بزرگتر از طول آرایه
+        const nextMultipleOfSix = Math.ceil(data.length / 6) * 6;
+
+        // اضافه کردن استرینگ خالی تا رسیدن به مضرب 6
+        while (data.length < nextMultipleOfSix) {
+          data.push({ name: '', slug: '#' });
+        }
+
+        setReview(data);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // podcasts
+
+  const [podcast, setPodcast] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/v1/podcast_type');
+        let data = response.data;
+
+        // محاسبه نزدیک‌ترین مضرب 6 بزرگتر از طول آرایه
+        const nextMultipleOfSix = Math.ceil(data.length / 6) * 6;
+
+        // اضافه کردن استرینگ خالی تا رسیدن به مضرب 6
+        while (data.length < nextMultipleOfSix) {
+          data.push({ name: '', slug: '#' });
+        }
+
+        setPodcast(data);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // letters
+
+  const [letter, setLetter] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/v1/letter_type');
+        let data = response.data;
+
+        // محاسبه نزدیک‌ترین مضرب 6 بزرگتر از طول آرایه
+        const nextMultipleOfSix = Math.ceil(data.length / 6) * 6;
+
+        // اضافه کردن استرینگ خالی تا رسیدن به مضرب 6
+        while (data.length < nextMultipleOfSix) {
+          data.push({ name: '', slug: '#' });
+        }
+
+        setLetter(data);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <footer className="bg-footer">
       {/*main div of footer*/}
@@ -169,7 +314,7 @@ export default function Footer() {
         <div className="main-container mt-100px border-t-4 border-b-4 border-footerBorder py-10px rtl">
           <div className="col-span-1 xl:col-span-2">
             <Link2
-              link="#"
+              link="/"
               title="کلبه"
               head={true}
             />
@@ -183,7 +328,7 @@ export default function Footer() {
         <div className="main-container mt-10px border-t-4 border-b-4 border-footerBorder py-10px">
           <div className="col-span-1 xl:col-span-2">
             <Link2
-              link="#"
+              link="/literarywritings"
               title="نوشته های ادبی"
               head={true}
             />
@@ -196,14 +341,14 @@ export default function Footer() {
 
           <div className="col-span-1 xl:col-span-2">
             <Link2
-              link="#"
+              link="/literarywritings"
               title="داستان"
             />
           </div>
           <div className="col-span-1 xl:col-span-2"></div>
           <div className="col-span-1 xl:col-span-2">
             <Link2
-              link="#"
+              link="/literarywritings"
               title="شعر"
             />
           </div>
@@ -211,153 +356,23 @@ export default function Footer() {
           <div className="col-span-1 xl:col-span-2"></div>
           <div className="col-span-1 xl:col-span-2"></div>
 
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="داستانک"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="قصه"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="قصیده"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="دوبیتی"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="ترکیب‌ بند"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="نیمایی"
-            />
-          </div>
-
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="داستان کوتاه"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="رمان"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="غزل"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="مثنوی"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="مستزاد"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="سپید"
-            />
-          </div>
-
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="داستان بلند"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="نمایش‌نامه"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="قطع"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="مسمط"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="چهار پاره"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="موج نو"
-            />
-          </div>
-
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="رمان کوتاه"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="فیلم‌نامه"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="رباعی"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="ترجیح‌بند"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="بهر طویل"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2"></div>
+          {literary?.map((data, index) => (
+            <div
+              className="col-span-1 xl:col-span-2"
+              key={index}
+            >
+              <Link2
+                link={`${data?.slug}`}
+                title={data?.name}
+              />
+            </div>
+          ))}
         </div>
+
         <div className="main-container mt-10px border-t-4 border-b-4 border-footerBorder py-10px">
           <div className="col-span-1 xl:col-span-2">
             <Link2
-              link="#"
+              link="/articles"
               title="مقاله‌ها"
               head={true}
             />
@@ -368,32 +383,22 @@ export default function Footer() {
           <div className="col-span-1 xl:col-span-2"></div>
           <div className="col-span-1 xl:col-span-2"></div>
 
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="علمی"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="تحقیقی"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="خبری"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2"></div>
-          <div className="col-span-1 xl:col-span-2"></div>
-          <div className="col-span-1 xl:col-span-2"></div>
+          {articles?.map((data, index) => (
+            <div
+              className="col-span-1 xl:col-span-2"
+              key={index}
+            >
+              <Link2
+                link={`${data?.slug}`}
+                title={data?.name}
+              />
+            </div>
+          ))}
         </div>
         <div className="main-container mt-10px border-t-4 border-b-4 border-footerBorder py-10px">
           <div className="col-span-1 xl:col-span-2">
             <Link2
-              link="#"
+              link="/reviewsandopinions"
               title="نقد و نظر‌ها"
               head={true}
             />
@@ -404,31 +409,24 @@ export default function Footer() {
           <div className="col-span-1 xl:col-span-2"></div>
           <div className="col-span-1 xl:col-span-2"></div>
 
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="کتاب ها"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="مقاله ها"
-            />
-          </div>
-          <div className="col-span-2 xl:col-span-4">
-            <Link2
-              link="#"
-              title="نوشته های نویسنده گان مان"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2"></div>
-          <div className="col-span-1 xl:col-span-2"></div>
+          {review?.map((data, index) => (
+            <div
+              key={index}
+              className={`col-span-1 xl:col-span-2 ${
+                index + 1 === 3 ? ' col-span-2 xl:col-span-4' : ''
+              }`}
+            >
+              <Link2
+                link={`${data?.slug}`}
+                title={data?.name}
+              />
+            </div>
+          ))}
         </div>
         <div className="main-container mt-10px border-t-4 border-b-4 border-footerBorder py-10px">
-          <div className="col-span-1 xl:col-span-2">
+          <div className={`col-span-1 xl:col-span-2`}>
             <Link2
-              link="#"
+              link="/podcasts"
               title="نشست ها"
               head={true}
             />
@@ -439,32 +437,22 @@ export default function Footer() {
           <div className="col-span-1 xl:col-span-2"></div>
           <div className="col-span-1 xl:col-span-2"></div>
 
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="ادبی "
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="خودمانی"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="آموزشی"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2"></div>
-          <div className="col-span-1 xl:col-span-2"></div>
-          <div className="col-span-1 xl:col-span-2"></div>
+          {podcast?.map((data, index) => (
+            <div
+              className="col-span-1 xl:col-span-2"
+              key={index}
+            >
+              <Link2
+                link={data?.slug}
+                title={data?.name}
+              />
+            </div>
+          ))}
         </div>
         <div className="main-container mt-10px border-t-4 border-b-4 border-footerBorder py-10px">
           <div className="col-span-1 xl:col-span-2">
             <Link2
-              link="#"
+              link="/letters"
               title="نامه‌ها"
               head={true}
             />
@@ -475,27 +463,17 @@ export default function Footer() {
           <div className="col-span-1 xl:col-span-2"></div>
           <div className="col-span-1 xl:col-span-2"></div>
 
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="جدید"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="پر‌‌‌‌‌‌ بازدید ترین ها"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2">
-            <Link2
-              link="#"
-              title="آرشیو"
-            />
-          </div>
-          <div className="col-span-1 xl:col-span-2"></div>
-          <div className="col-span-1 xl:col-span-2"></div>
-          <div className="col-span-1 xl:col-span-2"></div>
+          {letter?.map((data, index) => (
+            <div
+              className="col-span-1 xl:col-span-2"
+              key={index}
+            >
+              <Link2
+                link={`${data?.slug}`}
+                title={data?.name}
+              />
+            </div>
+          ))}
         </div>
         <div className="main-container mt-10px border-t-4 border-b-4 border-footerBorder py-10px">
           <div className="col-span-1 xl:col-span-2">

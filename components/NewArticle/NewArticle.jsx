@@ -23,6 +23,7 @@ export default function NewArticle({ data }) {
             (category, index) =>
               index + 1 < 3 && (
                 <p
+                  key={index}
                   className={`font-smallText ${index + 1 === 2 ? 'mr-1' : ''}`}
                 >
                   {category.name}
