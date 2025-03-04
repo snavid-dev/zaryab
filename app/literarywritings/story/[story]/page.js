@@ -176,8 +176,10 @@ export default function StorySinglePage({ params }) {
           <div className="flex flex-row-reverse justify-between mt-7">
             <Link
               href={`/literarywritings/story/${data?.previous_episode}`}
-              className="flex flex-row-reverse justify-around items-center font-common-heavy text-2xl border-2 border-black
-                    hover:bg-black hover:text-white transition-all duration-700 px-3"
+              className={`flex flex-row-reverse justify-around items-center font-common-heavy text-2xl border-2 border-black ${
+                data?.previous_episode ? '' : 'opacity-0 cursor-default'
+              }
+                    hover:bg-black hover:text-white transition-all duration-700 px-3`}
             >
               <IoIosArrowBack className="text-white text-10px md:text-20px lg:text-25px" />
               <p className="mt-1 text-10px md:text-25px lg:text-30px">
@@ -186,8 +188,10 @@ export default function StorySinglePage({ params }) {
             </Link>
             <Link
               href={`/literarywritings/story/${data?.next_episode}`}
-              className="flex flex-row-reverse justify-around items-center font-common-heavy text-2xl border-2 border-black
-                            hover:bg-black hover:text-white transition-all duration-700 px-3"
+              className={`flex flex-row-reverse justify-around items-center font-common-heavy text-2xl border-2 border-black ${
+                data?.next_episode ? '' : 'opacity-0 cursor-default'
+              }
+                            hover:bg-black hover:text-white transition-all duration-700 px-3`}
             >
               <p className="mt-1 text-10px md:text-25px lg:text-30px">
                 قسمت بعدی
