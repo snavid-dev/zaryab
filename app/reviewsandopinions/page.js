@@ -39,9 +39,8 @@ export default function ReviewsAndOpinionsPage() {
       <div className="main-container">
         <div className="col-span-6 xl:col-span-12">
           <Filter
-            items={['کتاب ها', 'مقاله ها', 'نوشته های نویسنده گان مان']}
             title="انواع نقد و نظر"
-            genre={[]}
+            type="review"
           />
         </div>
       </div>
@@ -73,14 +72,14 @@ export default function ReviewsAndOpinionsPage() {
       </div>
 
       {/* full ad */}
-      <FullAd />
+      {/* <FullAd /> */}
 
       {/*  the authors section  */}
       <div className="main-container mt-14 mb-7">
         <Authors />
       </div>
       {/* small ad */}
-      <SmallAd />
+      {/* <SmallAd /> */}
     </div>
   );
 }

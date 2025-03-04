@@ -39,9 +39,8 @@ export default function ArticlesPage() {
       <div className="main-container">
         <div className="col-span-6 xl:col-span-12">
           <Filter
-            items={['علمی', 'تحقیقی', 'خبری']}
             title="انواع مقاله ها"
-            genre={[]}
+            type="article"
           />
         </div>
       </div>
@@ -72,15 +71,15 @@ export default function ArticlesPage() {
         />
       </div>
 
-      {/* full ad */}
-      <FullAd />
+      {/* full ad
+      <FullAd /> */}
 
       {/*  the authors section  */}
       <div className="main-container mt-14 mb-7">
         <Authors />
       </div>
-      {/* small ad */}
-      <SmallAd />
+      {/* small ad
+      <SmallAd /> */}
     </div>
   );
 }

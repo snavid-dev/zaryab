@@ -41,9 +41,8 @@ export default function ArchivedLettersSection() {
       <div className="main-container mt-5">
         <div className="col-span-6 xl:col-span-12">
           <Filter
-            items={['جدید', 'پر بازدید ترین ها', 'آرشیو']}
+            type="letter"
             title="انواع نامه ها"
-            genre={[]}
           />
         </div>
       </div>

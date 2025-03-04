@@ -16,6 +16,7 @@ export default function StorySection() {
   const [data, setData] = useState(null);
   const [alldata, setAllData] = useState(null);
   const [Error, setError] = useState(null);
+  const [storyType, setStoryType] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,18 +51,8 @@ export default function StorySection() {
 
       <div className="col-span-6 xl:col-span-12">
         <Filter
-          items={[
-            'داستانک',
-            'داستان کوتاه',
-            'داستان بلند',
-            'رمان کوتاه',
-            'قصه',
-            'رمان',
-            'نمایش نامه',
-            'فیلم نامه',
-          ]}
           title="انواع داستان ها"
-          genre={[]}
+          type="story"
         />
       </div>
 

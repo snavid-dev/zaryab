@@ -68,18 +68,18 @@ export default function AuthorPage() {
         <div className="xl:col-span-4"></div>
       </div>
       {/* small ad */}
-      <SmallAd />
+      {/* <SmallAd /> */}
       {/*  book section  */}
       <div className="mt-14">
         <BookDesk />
       </div>
       {/* fullad */}
-      <FullAd />
+      {/* <FullAd /> */}
       <div className="mt-14 mb-14">
         <AuthorWeek />
       </div>
       {/* small ad */}
-      <SmallAd />
+      {/* <SmallAd /> */}
     </div>
   );
 }

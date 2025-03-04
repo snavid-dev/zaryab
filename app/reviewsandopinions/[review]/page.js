@@ -201,7 +201,7 @@ export default function ReviewsAndOpinionsSinglePage({ params }) {
         </div>
       </div>
       {/* full ad */}
-      <FullAd />
+      {/* <FullAd /> */}
       {/*  the similar stories  */}
       <div className="w-full flex justify-end">
         <div className="w-full">
@@ -209,7 +209,7 @@ export default function ReviewsAndOpinionsSinglePage({ params }) {
         </div>
       </div>
       {/* full ad */}
-      <FullAd />
+      {/* <FullAd /> */}
       {/* the story section of the page */}
       <div>
         <div className="main-container mt-14 rtl">
@@ -226,13 +226,13 @@ export default function ReviewsAndOpinionsSinglePage({ params }) {
         <PoemsStorySection />
       </div>
       {/* small ad */}
-      <SmallAd />
+      {/* <SmallAd /> */}
       {/*  the author section  */}
       <div className="mt-14 mb-14">
         <Authors />
       </div>
       {/* full ad */}
-      <FullAd />
+      {/* <FullAd /> */}
     </div>
   );
 }

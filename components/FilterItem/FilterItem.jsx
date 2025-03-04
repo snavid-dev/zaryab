@@ -36,7 +36,7 @@ export default function FilterItem({ title, isLow }) {
         </svg>
       </div>
       <div
-        className={`font-common-regular text-12px md:text-15px lg:text-20px xl:text-25px mr-1 xl:mr-3 ${
+        className={`font-common-regular text-12px md:text-15px lg:text-20px xl:text-25px mr-1 xl:mr-3 rtl ${
           title.length === 0 ? 'opacity-0' : 'opacity-100'
         }`}
       >

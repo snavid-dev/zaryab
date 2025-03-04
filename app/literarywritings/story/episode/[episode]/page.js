@@ -35,18 +35,8 @@ export default function EposidesPage({ params }) {
       <div className="main-container">
         <div className="col-span-6 xl:col-span-12">
           <Filter
-            items={[
-              'داستانک',
-              'داستان کوتاه',
-              'داستان بلند',
-              'رمان کوتاه',
-              'قصه',
-              'رمان',
-              'نمایش نامه',
-              'فیلم نامه',
-            ]}
+            type="story"
             title="انواع داستان ها"
-            genre={[]}
           />
         </div>
       </div>

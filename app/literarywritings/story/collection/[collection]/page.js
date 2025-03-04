@@ -34,18 +34,8 @@ export default function StoryCollectionPage({ params }) {
       <div className="main-container">
         <div className="col-span-6 xl:col-span-12">
           <Filter
-            items={[
-              'داستانک',
-              'داستان کوتاه',
-              'داستان بلند',
-              'رمان کوتاه',
-              'قصه',
-              'رمان',
-              'نمایش نامه',
-              'فیلم نامه',
-            ]}
+            type="story"
             title="انواع داستان ها"
-            genre={[]}
           />
         </div>
       </div>
@@ -71,8 +61,8 @@ export default function StoryCollectionPage({ params }) {
       <div>
         <Authors />
       </div>
-      {/* small ad */}
-      <SmallAd />
+      {/* small ad
+      <SmallAd /> */}
     </div>
   );
 }

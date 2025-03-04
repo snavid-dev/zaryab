@@ -3,13 +3,14 @@ import { useEffect, useState } from 'react';
 import FilterItem from '../FilterItem/FilterItem';
 import axios from '@/utils/api';
 
-export default function Filter({ items, genre, title }) {
+export default function Filter({ title, type }) {
   const [showFilterBody, setShowFilterBody] = useState(false);
   const [categories, setCategories] = useState(null);
   const [Error, setError] = useState(null);
+  const [categoryType, setCategoryType] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchCategories = async () => {
       try {
         const response = await axios.get('/v1/categories');
         let data = response.data;
@@ -28,16 +29,40 @@ export default function Filter({ items, genre, title }) {
       }
     };
 
-    fetchData();
-  }, []);
+    const fetchCategoryType = async () => {
+      const urlMap = {
+        story: '/v1/story_type',
+        poem: '/v1/poem_type',
+        article: '/v1/article_type',
+        review: '/v1/review_type',
+        letter: '/v1/letter_type',
+        podcast: '/v1/podcast_type',
+      };
 
-  const itemsfilled =
-    items.length > 16
-      ? [...items, ...Array(30 - items.length).fill('')]
-      : [...items, ...Array(15 - items.length).fill('')];
-  if (genre.length !== 0) {
-    const itemsfilled2 = [...genre, ...Array(30 - genre.length).fill('')];
-  }
+      const url = urlMap[type];
+      if (!url) return;
+
+      try {
+        const response = await axios.get(url);
+        let data = response.data;
+
+        // محاسبه نزدیک‌ترین مضرب 6 بزرگتر از طول آرایه
+        const nextMultipleOfSix = Math.ceil(data.length / 6) * 6;
+
+        // اضافه کردن استرینگ خالی تا رسیدن به مضرب 6
+        while (data.length < nextMultipleOfSix) {
+          data.push({ name: '', slug: '#' });
+        }
+        setCategoryType(data);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+
+    fetchCategories();
+    fetchCategoryType();
+  }, [type]); // حالا هر بار `type` تغییر کند، دیتا آپدیت می‌شود
+
   return (
     // the filter main container
     <div>
@@ -88,11 +113,10 @@ export default function Filter({ items, genre, title }) {
             {title}
           </div>
           <div className="flex flex-col h-[200px] flex-wrap rtl">
-            {itemsfilled?.map((item, index) => (
+            {categoryType?.map((data, index) => (
               <FilterItem
                 key={index}
-                title={item}
-                isLow={items.length < 16}
+                title={data.name}
               />
             ))}
           </div>

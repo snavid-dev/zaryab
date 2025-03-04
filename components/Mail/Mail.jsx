@@ -39,22 +39,43 @@ export default function Mail() {
     fetchData();
   }, []);
 
+  const [newLetter, setNewLetter] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `/v1/letters/?type=non-archive&per_page=1`
+        );
+        setNewLetter(response.data.data[0]);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <div className="w-full rtl">
       {/* it has three rows */}
       <div className="w-full flex flex-col items-start">
         <Heading2 title="نامه جدید" />
-        <p className="mt-5 md:mt-0">1403/06/07</p>
+        <p className="mt-5 md:mt-0">{newLetter?.release_date}</p>
         <div className="relative w-full xl:h-400px 2xl:h-500px mt-5 md:mt-0">
-          <Image
-            src="/assets/img/mail.png"
-            alt=""
-            fill
-            className="absolute object-cover"
-          />
+          {newLetter?.featured_image ? (
+            <Image
+              src={newLetter?.featured_image}
+              alt=""
+              fill
+              className="absolute object-cover"
+            />
+          ) : (
+            <div className="h-full w-full flex justify-center items-center">
+              image not found
+            </div>
+          )}
         </div>
         <Link
-          href="#"
+          href={`/letters/${newLetter?.slug}`}
           className="w-full h-10 flex justify-center items-center border border-black font-common-lg text-27px text-black bg-white lg:text-white lg:bg-black
           lg:hover:bg-white lg:hover:text-black transition-all duration-300"
         >

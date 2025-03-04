@@ -89,7 +89,7 @@ export default function LetterSinglePage({ params }) {
         ))}
       </div>
       {/* full ad */}
-      <FullAd />
+      {/* <FullAd /> */}
 
       <div className="main-container h-1 bg-black mt-14"></div>
 
@@ -98,14 +98,14 @@ export default function LetterSinglePage({ params }) {
         <ArchivedLettersSection />
       </div>
 
-      <div className="w-full h-1 bg-black mt-14"></div>
+      <div className="main-container h-1 bg-black mt-14"></div>
       {/*  podcast section  */}
 
       <div className="mt-14 mb-14">
         <Podcasts />
       </div>
       {/* small ad */}
-      <SmallAd />
+      {/* <SmallAd /> */}
 
       {/*  the image slider section  */}
       <div

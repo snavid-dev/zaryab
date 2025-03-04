@@ -142,7 +142,7 @@ export default function AuthorPage({ params }) {
         ></div>
       </div>
       {/* full ad */}
-      <FullAd />
+      {/* <FullAd /> */}
       {/* authors section */}
       <div className="mt-7">
         <div className="flex flex-col">
@@ -165,7 +165,7 @@ export default function AuthorPage({ params }) {
         </div>
       </div>
       {/* small ad */}
-      <SmallAd />
+      {/* <SmallAd /> */}
     </div>
   );
 }

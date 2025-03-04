@@ -50,24 +50,7 @@ export default function PoemSection() {
 
       <div className="col-span-6 xl:col-span-12">
         <Filter
-          items={[
-            'قصیده',
-            'غزل',
-            'قطعه',
-            'رباعی',
-            'دوبیتی',
-            'مثنوی',
-            'مسمط',
-            'ترجیح بند',
-            'ترکیب بند',
-            'مستزاد',
-            'چهار پاره',
-            'بهر طویل',
-            'نیمایی',
-            'سفید',
-            'موج نو',
-          ]}
-          genre={[]}
+          type="poem"
           title="انواع شعر"
         />
       </div>

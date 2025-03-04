@@ -178,6 +178,23 @@ export default function Footer() {
     fetchData();
   }, []);
 
+  // mail section
+  const [newLetter, setNewLetter] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `/v1/letters/?type=non-archive&per_page=1`
+        );
+        setNewLetter(response.data.data[0]);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+    fetchData();
+  }, []);
+  console.log(newLetter, 'new');
+
   return (
     <footer className="bg-footer">
       {/*main div of footer*/}
@@ -208,18 +225,24 @@ export default function Footer() {
             <div className="hidden md:block md:col-span-1 xl:hidden"></div>
             <div className="col-span-6 md:col-span-3">
               <div className="relative w-full h-450px lg:h-430px mt-20px">
-                <Image
-                  src="/assets/img/mail.png"
-                  alt=""
-                  layout="fill"
-                  objectFit="cover"
-                  className="absolute"
-                />
+                {newLetter?.featured_image ? (
+                  <Image
+                    src={newLetter?.featured_image}
+                    alt=""
+                    layout="fill"
+                    objectFit="cover"
+                    className="absolute"
+                  />
+                ) : (
+                  <div className="w-full h-full flex justify-center items-center">
+                    image not found
+                  </div>
+                )}
               </div>
               <Link
-                href="#"
+                href={`/letters/${newLetter?.slug}`}
                 className="w-full h-10 mt-3 flex justify-center items-center font-common-heavy text-white
-                   bg-footerBtn hover:bg-footer transition-alborder-2 border-footerBtn text-27px md:text-28px
+                   bg-footerBtn hover:bg-footer transition-all border-2 border-footerBtn text-27px md:text-28px
                    "
               >
                 خواندن نامه

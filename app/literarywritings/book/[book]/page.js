@@ -10,6 +10,7 @@ import axios from '@/utils/api';
 import Link from 'next/link';
 
 import { use, useEffect, useState } from 'react';
+import StoriesPoemSection from '@/components/StoriesPoemSection/StoriesPoemSection';
 
 export default function BookSinglePage({ params }) {
   const param = use(params);
@@ -222,9 +223,7 @@ export default function BookSinglePage({ params }) {
           </div>
         </div>
         <div className="main-container mt-7">
-          <StoryPoemCard isStory={true} />
-          <StoryPoemCard isStory={true} />
-          <StoryPoemCard isStory={true} />
+          <StoriesPoemSection />
         </div>
       </div>
       {/*  the author section  */}

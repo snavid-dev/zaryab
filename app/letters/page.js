@@ -27,7 +27,7 @@ export default function LettersPage() {
         <Authors />
       </div>
       {/* small ad */}
-      <SmallAd />
+      {/* <SmallAd /> */}
     </div>
   );
 }

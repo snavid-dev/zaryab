@@ -268,7 +268,7 @@ export default function PodcastSinglePage({ params }) {
         <div className="hidden md:block md:col-span-1 xl:col-span-3"></div>
       </div>
       {/* full ad */}
-      <FullAd />
+      {/* <FullAd /> */}
       {/*  podcast text  */}
       <div className="main-container mt-14">
         <div className="col-span-6 xl:col-span-12 rtl mb-7">
@@ -284,7 +284,7 @@ export default function PodcastSinglePage({ params }) {
           ></div>
         </div>
         {/* small ad */}
-        <SmallAd />
+        {/* <SmallAd /> */}
         <div className="mt-14 mb-14 col-span-6 xl:col-span-12">
           {/*  it has two rows  */}
           <div className="flex flex-row-reverse justify-between">
