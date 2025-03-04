@@ -219,7 +219,10 @@ export default function BookSinglePage({ params }) {
             <Heading1 title="اشعار" />
           </div>
           <div className="col-span-6 md:col-span-3 xl:col-span-6 flex md:justify-end">
-            <ArrowLink title="همه اشعار" />
+            <ArrowLink
+              title="همه اشعار"
+              path="/literarywritings"
+            />
           </div>
         </div>
         <div className="main-container mt-7">

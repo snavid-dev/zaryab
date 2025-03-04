@@ -26,7 +26,10 @@ export default function Podcasts() {
       {/*  it has two rows  */}
       <div className="col-span-6 xl:col-span-12 flex flex-row-reverse justify-between">
         <Heading1 title="نشست ها" />
-        <ArrowLink title="همه نشست ها" />
+        <ArrowLink
+          title="همه نشست ها"
+          path="/podcasts"
+        />
       </div>
       <div className="main-container">
         {data?.map((data, index) => (

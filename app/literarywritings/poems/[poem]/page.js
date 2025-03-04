@@ -197,7 +197,7 @@ export default function PoemsSinglePage({ params }) {
         </div>
       </div>
       {/* full ad */}
-      <FullAd />
+      {/* <FullAd /> */}
       {/*  the similar stories  */}
       <div className="w-full flex justify-end">
         <div className="w-full">
@@ -205,7 +205,7 @@ export default function PoemsSinglePage({ params }) {
         </div>
       </div>
       {/* full ad */}
-      <FullAd />
+      {/* <FullAd /> */}
       {/* the story section of the page */}
       <div>
         <div className="main-container mt-14 rtl">
@@ -213,19 +213,22 @@ export default function PoemsSinglePage({ params }) {
             <Heading1 title="داستان ها" />
           </div>
           <div className="col-span-6 xl-col-span-6 flex justify-start md:justify-end">
-            <ArrowLink title="همه داستان ها" />
+            <ArrowLink
+              title="همه داستان ها"
+              path="/literarywritings"
+            />
           </div>
         </div>
         <PoemsStorySection />
       </div>
       {/* small ad */}
-      <SmallAd />
+      {/* <SmallAd /> */}
       {/*  the author section  */}
       <div className="mt-14 mb-14">
         <Authors />
       </div>
       {/* full ad */}
-      <FullAd />
+      {/* <FullAd /> */}
     </div>
   );
 }

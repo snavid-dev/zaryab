@@ -62,7 +62,7 @@ export default function StoryCollectionPage({ params }) {
         <Authors />
       </div>
       {/* small ad */}
-      <SmallAd />
+      {/* <SmallAd /> */}
     </div>
   );
 }

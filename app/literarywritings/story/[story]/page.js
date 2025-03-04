@@ -105,24 +105,30 @@ export default function StorySinglePage({ params }) {
                   قسمت {data?.episode_title}{' '}
                 </div>
                 <div className="w-[60%] justify-between items-center hidden md:flex flex-row-reverse">
-                  <button
-                    className="flex flex-row-reverse justify-around items-center font-common-heavy text-lg border-2 border-black
-                            hover:bg-black hover:text-white transition-all duration-700 px-2"
+                  <Link
+                    href={`/literarywritings/story/${data?.previous_episode}`}
+                    className={`flex flex-row-reverse justify-around items-center font-common-heavy text-lg border-2 border-black ${
+                      data?.previous_episode ? '' : 'opacity-0 cursor-default'
+                    }
+                            hover:bg-black hover:text-white transition-all duration-700 px-2`}
                   >
                     <IoIosArrowBack className="text-white text-10px md:text-20px lg:text-25px" />
                     <p className="mt-1 text-8px md:text-12px lg:text-17px">
                       قسمت قبلی
                     </p>
-                  </button>
-                  <button
-                    className="flex flex-row-reverse justify-around items-center font-common-heavy text-lg border-2 border-black
-                            hover:bg-black hover:text-white transition-all duration-700 px-2"
+                  </Link>
+                  <Link
+                    href={`/literarywritings/story/${data?.next_episode}`}
+                    className={`flex flex-row-reverse justify-around items-center font-common-heavy text-lg border-2 border-black ${
+                      data?.next_episode ? '' : 'opacity-0 cursor-default'
+                    }
+                            hover:bg-black hover:text-white transition-all duration-700 px-2`}
                   >
                     <p className="mt-1 text-8px md:text-12px lg:text-17px">
                       قسمت بعدی
                     </p>
                     <IoIosArrowForward className="text-white text-10px md:text-20px lg:text-25px" />
-                  </button>
+                  </Link>
                 </div>
                 <div className="">
                   <ArrowLink
@@ -134,8 +140,10 @@ export default function StorySinglePage({ params }) {
               <div className="w-full flex flex-row-reverse mt-7 justify-between md:hidden">
                 <Link
                   href={`/literarywritings/story/${data?.previous_episode}`}
-                  className="flex flex-row-reverse justify-around items-center font-common-heavy text-lg border-2 border-black
-                           hover:bg-black hover:text-white transition-all duration-700 px-2"
+                  className={`flex flex-row-reverse justify-around items-center font-common-heavy text-lg border-2 border-black ${
+                    data?.previous_episode ? '' : 'opacity-0 cursor-default'
+                  }
+                           hover:bg-black hover:text-white transition-all duration-700 px-2`}
                 >
                   <IoIosArrowBack className="text-white text-10px md:text-20px lg:text-25px" />
                   <p className="mt-1 text-8px md:text-12px lg:text-17px">
@@ -144,8 +152,10 @@ export default function StorySinglePage({ params }) {
                 </Link>
                 <Link
                   href={`/literarywritings/story/${data?.next_episode}`}
-                  className="flex flex-row-reverse justify-around items-center font-common-heavy text-lg border-2 border-black
-                            hover:bg-black hover:text-white transition-all duration-700 px-2"
+                  className={`flex flex-row-reverse justify-around items-center font-common-heavy text-lg border-2 border-black ${
+                    data?.next_episode ? '' : 'opacity-0 cursor-default'
+                  }
+                            hover:bg-black hover:text-white transition-all duration-700 px-2`}
                 >
                   <p className="mt-1 text-8px md:text-12px lg:text-17px">
                     قسمت بعدی
@@ -278,7 +288,7 @@ export default function StorySinglePage({ params }) {
         </div>
       </div>
       {/* full ad */}
-      <FullAd />
+      {/* <FullAd /> */}
       {/*  the similar stories  */}
       <div className="w-full flex justify-end">
         <div className="w-full">
@@ -286,7 +296,7 @@ export default function StorySinglePage({ params }) {
         </div>
       </div>
       {/* full ad */}
-      <FullAd />
+      {/* <FullAd /> */}
       {/* the story section of the page */}
       <div>
         <div className="main-container mt-14 rtl">
@@ -300,13 +310,13 @@ export default function StorySinglePage({ params }) {
         <StoriesPoemSection />
       </div>
       {/* small ad */}
-      <SmallAd />
+      {/* <SmallAd /> */}
       {/*  the author section  */}
       <div className="mt-14 mb-14">
         <Authors />
       </div>
       {/* full ad */}
-      <FullAd />
+      {/* <FullAd /> */}
     </div>
   );
 }

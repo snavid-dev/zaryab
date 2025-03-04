@@ -49,7 +49,10 @@ export default function PodcastsPage() {
           <Heading1 title="نشست ها" />
         </div>
         <div className="col-span-6 md:col-span-3 xl:col-span-6 flex justify-end">
-          <ArrowLink title="همه نشست ها" />
+          <ArrowLink
+            title="همه نشست ها"
+            path="/podcasts"
+          />
         </div>
       </div>
       {/* the body of the page the cards sections */}

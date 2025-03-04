@@ -50,7 +50,7 @@ export default function EposidesPage({ params }) {
         <div className="col-span-6 xl:col-span-6 mt-5">
           <div className="w-full flex flex-row-reverse border-b-2 border-black">
             <input
-              type="text"
+              type="number"
               className="outline-none w-full rtl px-1 bg-white text-black"
             />
             <IoIosSearch className="text-xl text-black" />
@@ -74,7 +74,7 @@ export default function EposidesPage({ params }) {
         <Authors />
       </div>
       {/* small ad */}
-      <SmallAd />
+      {/* <SmallAd /> */}
     </div>
   );
 }
