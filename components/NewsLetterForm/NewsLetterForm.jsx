@@ -8,26 +8,46 @@ export default function NewsLetterForm() {
   const [Error, setError] = useState(null);
   const [message, setMessage] = useState('');
   const [collorMessage, setColorMessage] = useState('');
+  const [validation, setValidation] = useState(false);
 
   const handleSubmit = async () => {
     let response;
     try {
-      response = await axios.post(`/v1/newsletter?email=${email}`);
-      setEmail('');
-      setInputDisable('true');
-      setMessage(
-        response.status === 200
-          ? 'you successfully subscribe'
-          : response.status === 409
-          ? 'you already subscribe'
-          : 'your email is not valid'
-      );
-      setColorMessage(response.status === 200 ? 'green' : 'red');
+      if (validation) {
+        response = await axios.post(`/v1/newsletter?email=${email}`);
+        setEmail('');
+        setInputDisable('true');
+        setMessage(
+          response.status === 200
+            ? 'ایمیل شما موفقانه ثبت شد'
+            : response.status === 409
+            ? 'شما قبلا ثبت شده اید'
+            : 'ایمیل شما نا معتبر است'
+        );
+        setColorMessage(response.status === 200 ? 'green' : 'red');
+      }
     } catch (err) {
       setError(err.response?.data?.message || err.message);
     }
-    console.log(response.status);
   };
+
+  const emailValidation = (e) => {
+    const email = e.target.value;
+    setEmail(email);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const myValidation = emailRegex.test(email);
+
+    if (validation) {
+      setMessage('ایمیل شما معتبر است');
+      setColorMessage('green');
+      setValidation(myValidation);
+    } else {
+      setMessage('ایمیل شما نامعتبر است');
+      setColorMessage('red');
+      setValidation(myValidation);
+    }
+  };
+
   return (
     <div className="w-full">
       {inputDisable ? (
@@ -47,7 +67,7 @@ export default function NewsLetterForm() {
       ) : (
         <div className="w-full relative">
           <input
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={emailValidation}
             value={email}
             type="text"
             className="w-full p-1 md:p-3 border-4 border-footerBtn
@@ -76,9 +96,9 @@ export default function NewsLetterForm() {
       )}
       {message && (
         <div
-          className={`mt-2 font-12px ${
+          className={`mt-4 font-12px ${
             collorMessage === 'green' ? 'text-green-500' : 'text-red-600'
-          }`}
+          } font-common-regular`}
         >
           {message}
         </div>

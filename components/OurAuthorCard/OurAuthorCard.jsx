@@ -33,21 +33,21 @@ export default function OurAuthorCard({ data }) {
               {data?.name}
             </h3>
           </div>
-          <div className="flex flex-row-reverse justify-between w-full">
-            <p className="font-common-thin text-6px md:text-16px xl:text-12px">
-              <b className="font-common-med text-6px  md:text-16px xl:text-12px">
+          <div className="flex flex-row-reverse justify-between w-full mt-2">
+            <p className="font-common-thin text-6px md:text-16px xl:text-16px">
+              <b className="font-common-med text-6px  md:text-16px xl:text-16px">
                 وظیفه:{' '}
               </b>
               {data?.job}
             </p>
-            <p className="font-common-thin text-6px  md:text-16px xl:text-12px">
-              <b className="font-common-med text-6px  md:text-16px xl:text-12px">
+            <p className="font-common-thin text-6px  md:text-16px xl:text-16px">
+              <b className="font-common-med text-6px  md:text-16px xl:text-16px">
                 شهر:{' '}
               </b>
               {data?.location}
             </p>
-            <p className="font-common-thin text-6px  md:text-16px xl:text-12px">
-              <b className="font-common-med text-6px  md:text-16px xl:text-12px">
+            <p className="font-common-thin text-6px  md:text-16px xl:text-16px">
+              <b className="font-common-med text-6px  md:text-16px xl:text-16px">
                 تعداد نوشته ها:{' '}
               </b>
               {data?.total_letters}
