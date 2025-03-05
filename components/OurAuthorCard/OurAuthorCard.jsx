@@ -2,11 +2,35 @@
 import Image from 'next/image';
 import { useRef } from 'react';
 import Link from 'next/link';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 
-export default function OurAuthorCard({ data }) {
+gsap.registerPlugin(ScrollTrigger);
+
+export default function OurAuthorCard({ data, isVisible }) {
   const ref = useRef(null);
+
+  useGSAP(() => {
+    if (isVisible && data) {
+      gsap.to(ref.current, {
+        y: 0,
+        opacity: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: ref.current,
+          start: 'top 70%',
+          end: 'top 30%',
+          toggleActions: 'play none none none',
+        },
+      });
+    }
+  }, [isVisible, data]);
   return (
-    <div className="col-span-6 xl:col-span-6  p-4 border-4 border-black">
+    <div
+      ref={ref}
+      className="col-span-6 xl:col-span-6  p-4 border-4 border-black translate-y-200px opacity-0"
+    >
       <Link
         href={`/authors/${data?.slug}`}
         className="w-full h-full flex flex-row-reverse md:justify-between"

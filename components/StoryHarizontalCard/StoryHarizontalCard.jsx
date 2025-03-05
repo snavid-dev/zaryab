@@ -1,12 +1,36 @@
+'use client';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useRef } from 'react';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 
-export default function StoryHarizontalCard({ data }) {
+gsap.registerPlugin(ScrollTrigger);
+
+export default function StoryHarizontalCard({ data, isVisible }) {
+  const storyCardRef = useRef(null);
+
+  useGSAP(() => {
+    if (isVisible && data) {
+      gsap.to(storyCardRef.current, {
+        y: 0,
+        opacity: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: storyCardRef.current,
+          start: 'top 90%',
+          end: 'top 50%',
+          toggleActions: 'play none none none',
+        },
+      });
+    }
+  }, [isVisible, data]);
   return (
     <Link
       href={`/literarywritings/story/${data?.slug}`}
-      className="grid grid-cols-6 xl:grid-cols-9 gap border-b-4 py-20px border-black"
+      className="grid grid-cols-6 xl:grid-cols-9 gap border-b-4 py-20px border-black translate-y-200px opacity-0"
+      ref={storyCardRef}
     >
       <div className="relative col-span-2 h-95px md:h-200px xl:h-155px 2xl:h-200px">
         {data?.featured_image ? (

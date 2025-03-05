@@ -2,13 +2,34 @@
 import Image from 'next/image';
 import { useRef } from 'react';
 import Link from 'next/link';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 
-export default function PodcastCard({ data }) {
+export default function PodcastCard({ data, isVisible }) {
   const ref = useRef(null);
+
+  useGSAP(() => {
+    if (isVisible && data) {
+      gsap.to(ref.current, {
+        y: 0,
+        opacity: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: ref.current,
+          start: 'top 70%',
+          end: 'top 30%',
+          toggleActions: 'play none none none',
+        },
+      });
+    }
+  }, [isVisible, data]);
 
   return (
     // it has two rows
-    <div className="col-span-6 md:col-span-3 xl:col-span-4 mt-7 md:mt-0 border-2 border-black p-5">
+    <div
+      className="col-span-6 md:col-span-3 xl:col-span-4 mt-7 md:mt-0 border-2 border-black p-5 translate-y-200px opacity-0"
+      ref={ref}
+    >
       {/*  it has two rows  */}
       <Link
         className="w-full"

@@ -6,7 +6,7 @@ export default function Heading1({ title }) {
       <p className={`font-common-lg inline text-26px md:28px xl:text-60px`}>
         {title}
       </p>
-      <div className="w-full bg-heading1 h-50% absolute bottom-0 -z-10"></div>
+      {/* <div className="w-full bg-heading1 h-50% absolute bottom-0 -z-10"></div> */}
     </div>
   );
 }
