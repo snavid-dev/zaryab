@@ -14,7 +14,7 @@ import { useEffect, useRef, useState } from 'react';
 
 export default function Home() {
   return (
-    <main className="w-full flex flex-col items-center mt-70px xl:mt-0 pb-50px">
+    <main className="w-full flex flex-col items-center pb-50px">
       {/* story of the day */}
 
       <StoryOfDay />

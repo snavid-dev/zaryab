@@ -34,7 +34,7 @@ export default function AuthorPage({ params }) {
 
   return (
     // the main container of the page
-    <div className="flex flex-col items-center mt-150px">
+    <div className="flex flex-col items-center mt-130px xl:mt-50px mb-50px">
       {/* the author section */}
       <div className="main-container mt-7 rtl">
         {/*  it has 7 rows  */}

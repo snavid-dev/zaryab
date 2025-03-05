@@ -31,7 +31,7 @@ export default function BookSinglePage({ params }) {
 
   return (
     // the main container of the page
-    <div className="flex flex-col items-center mt-150px xl:mt-50px">
+    <div className="flex flex-col items-center mt-100px xl:mt-50px mb-50px">
       {/*  the title section of the article  */}
       <div className="main-container rtl">
         {/*  the story section */}
@@ -230,7 +230,7 @@ export default function BookSinglePage({ params }) {
         </div>
       </div>
       {/*  the author section  */}
-      <div className="mt-14 mb-14">
+      <div>
         <Authors />
       </div>
     </div>

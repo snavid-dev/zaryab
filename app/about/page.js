@@ -20,7 +20,7 @@ export default function AboutPage() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center bg-aboutPagePic bg-no-repeat bg-bottom min-h-1500px mt-150px xl:mt-50px">
+    <div className="flex flex-col items-center bg-aboutPagePic bg-no-repeat bg-bottom min-h-1500px mt-130px xl:mt-50px">
       <div className="main-container">
         {data?.map((data, index) => (
           <AboutCord

@@ -7,9 +7,9 @@ import SmallAd from '@/components/SmallAd/SmallAd';
 export default function LettersPage() {
   return (
     // it has 5 sections
-    <div className="flex flex-col items-center mt-150px xl:mt-50px">
+    <div className="flex flex-col items-center mt-130px xl:mt-50px mb-50px">
       {/*  letters section  */}
-      <div className="mt-7">
+      <div>
         <LettersSection />
       </div>
       {/*  archive letters section */}
@@ -23,7 +23,7 @@ export default function LettersPage() {
       </div>
 
       {/*  the authors section  */}
-      <div className="main-container mt-28 mb-14">
+      <div className="main-container">
         <Authors />
       </div>
       {/* small ad */}

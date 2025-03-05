@@ -34,7 +34,7 @@ export default function AuthorPage() {
 
   return (
     // the main container of the page
-    <div className="flex flex-col items-center mt-150px">
+    <div className="flex flex-col items-center mt-130px xl:mt-50px mb-50px">
       {/*  the title of the page  */}
       <div className="main-container rtl">
         <div className="md:col-span-4 col-span-6 xl:col-span-8">
@@ -75,7 +75,7 @@ export default function AuthorPage() {
       </div>
       {/* fullad */}
       {/* <FullAd /> */}
-      <div className="mt-14 mb-14">
+      <div>
         <AuthorWeek />
       </div>
       {/* small ad */}

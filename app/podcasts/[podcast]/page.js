@@ -111,7 +111,7 @@ export default function PodcastSinglePage({ params }) {
 
   return (
     // the main container of the page
-    <div className="flex flex-col items-center mt-150px">
+    <div className="flex flex-col items-center mt-130px xl:mt-50px mb-50px">
       {/*  podcast section  */}
       <div className="main-container">
         {/*  it has 5 rows  */}
@@ -285,7 +285,7 @@ export default function PodcastSinglePage({ params }) {
         </div>
         {/* small ad */}
         {/* <SmallAd /> */}
-        <div className="mt-14 mb-14 col-span-6 xl:col-span-12">
+        <div className="mt-14 col-span-6 xl:col-span-12">
           {/*  it has two rows  */}
           <div className="flex flex-row-reverse justify-between">
             <Heading1 title="نشست ها" />

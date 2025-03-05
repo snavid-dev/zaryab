@@ -29,7 +29,7 @@ export default function StoryCollectionPage({ params }) {
 
   return (
     // the main container of the page
-    <div className="flex flex-col items-center mt-150px xl:mt-50px mb-150px">
+    <div className="flex flex-col items-center mt-100px xl:mt-0 mb-50px">
       {/*  filter of the page  */}
       <div className="main-container">
         <div className="col-span-6 xl:col-span-12">

@@ -36,7 +36,10 @@ export default function StoryOfDay() {
           {/* title of the story */}
           <div className="col-span-6 xl:col-span-4">
             <h1 className="flex flex-row xl:flex-col text-50px md:text-94px font-new-black leading-67%">
-              <Link href={`/literarywritings/story/${data?.slug}`}>
+              <Link
+                href={`/literarywritings/story/${data?.slug}`}
+                className="xl:leading-90%"
+              >
                 {data?.title}
               </Link>
             </h1>

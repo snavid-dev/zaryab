@@ -27,7 +27,7 @@ export default function SimilarStories({ slug }) {
 
   return (
     // the main container of the section
-    <div className="mt-14 flex flex-col items-center">
+    <div className="flex flex-col items-center mt-50px">
       <div className="main-container">
         <div className="col-span-6 xl:col-span-12 rtl">
           <Heading1 title="داستان های مشابه" />

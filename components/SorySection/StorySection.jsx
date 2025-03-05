@@ -46,7 +46,7 @@ export default function StorySection() {
   }, [currentPage]);
 
   return (
-    <div className="main-container mt-150px xl:mt-50px mb-100px">
+    <div className="main-container">
       {/*  the filter of this section  */}
 
       <div className="col-span-6 xl:col-span-12">

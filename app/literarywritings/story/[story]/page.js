@@ -40,7 +40,7 @@ export default function StorySinglePage({ params }) {
 
   return (
     // the main container of the page
-    <div className="flex flex-col items-center mt-150px xl:mt-50px">
+    <div className="flex flex-col items-center mt-100px xl:mt-0 mb-50px">
       {/*  it has two columns  */}
       <div className="main-container rtl">
         {/*  the story section */}
@@ -303,7 +303,7 @@ export default function StorySinglePage({ params }) {
       {/* <FullAd /> */}
       {/* the story section of the page */}
       <div>
-        <div className="main-container mt-14 rtl">
+        <div className="main-container mt-50px rtl">
           <div className="col-span-6 xl:col-span-6">
             <Heading1 title="اشعار" />
           </div>
@@ -316,7 +316,7 @@ export default function StorySinglePage({ params }) {
       {/* small ad */}
       {/* <SmallAd /> */}
       {/*  the author section  */}
-      <div className="mt-14 mb-14">
+      <div>
         <Authors />
       </div>
       {/* full ad */}

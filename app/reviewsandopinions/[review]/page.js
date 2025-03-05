@@ -37,7 +37,7 @@ export default function ReviewsAndOpinionsSinglePage({ params }) {
 
   return (
     // the main container of the page
-    <div className="flex flex-col items-center mt-150px xl:mt-50px">
+    <div className="flex flex-col items-center mt-130px xl:mt-50px mb-50px">
       {/* article picture */}
       <div className="main-container">
         <div className="col-span-6 xl:col-span-12 relative h-190px md:h-410px xl:h-650px 2xl:h-840px">
@@ -228,7 +228,7 @@ export default function ReviewsAndOpinionsSinglePage({ params }) {
       {/* small ad */}
       {/* <SmallAd /> */}
       {/*  the author section  */}
-      <div className="mt-14 mb-14">
+      <div>
         <Authors />
       </div>
       {/* full ad */}

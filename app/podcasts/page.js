@@ -32,23 +32,15 @@ export default function PodcastsPage() {
     fetchData();
   }, [currentPage]);
 
-  console.log(data, 'podcasts');
-
-  const handlePageChange = (pageNumber) => {
-    if (pageNumber > 0 && pageNumber <= totalPages) {
-      setCurrentPage(pageNumber);
-    }
-  };
-
   return (
     // the main container of the page
-    <div className="flex flex-col items-center mb-5">
+    <div className="flex flex-col items-center mt-100px xl:mt-0 mb-50px">
       {/*  the title of the page  */}
       <div className="main-container mt-7 rtl">
         <div className="col-span-6 md:col-span-3 xl:col-span-6">
           <Heading1 title="نشست ها" />
         </div>
-        <div className="col-span-6 md:col-span-3 xl:col-span-6 flex justify-end">
+        <div className="col-span-6 md:col-span-3 xl:col-span-6 flex justify-start md:justify-end">
           <ArrowLink
             title="همه نشست ها"
             path="/podcasts"

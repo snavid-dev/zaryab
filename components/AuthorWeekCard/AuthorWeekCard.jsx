@@ -20,7 +20,7 @@ export default function AuthorWeekCard({ data }) {
         )}
       </div>
       <div>
-        <h3 className="font-common-lg mt-5 text-28px md:text-30px lg:text-59px">
+        <h3 className="font-common-lg mt-5 text-28px md:text-20px lg:text-59px rtl">
           {data?.title}
         </h3>
       </div>

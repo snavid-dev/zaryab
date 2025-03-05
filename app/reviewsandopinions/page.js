@@ -34,7 +34,7 @@ export default function ReviewsAndOpinionsPage() {
 
   return (
     // main container of the page
-    <div className="flex flex-col items-center mt-150px xl:mt-50px">
+    <div className="flex flex-col items-center mt-100px xl:mt-0 mb-50px">
       {/*  the filter of the page  */}
       <div className="main-container">
         <div className="col-span-6 xl:col-span-12">
@@ -75,7 +75,7 @@ export default function ReviewsAndOpinionsPage() {
       {/* <FullAd /> */}
 
       {/*  the authors section  */}
-      <div className="main-container mt-14 mb-7">
+      <div className="main-container">
         <Authors />
       </div>
       {/* small ad */}

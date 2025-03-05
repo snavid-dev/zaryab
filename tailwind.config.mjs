@@ -65,6 +65,7 @@ export default {
 
       lineHeight: {
         '67%': '67%',
+        '90%': '90%',
       },
       spacing: {
         '1px': '1px',
