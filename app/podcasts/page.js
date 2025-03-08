@@ -15,55 +15,79 @@ export default function PodcastsPage() {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const [hasFetched, setHasFetched] = useState(false);
+  const ref = useRef(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `/v1/podcasts?per_page=15&page=${currentPage}`
-        );
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !hasFetched) {
+          fetchData();
+          setHasFetched(true);
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 } // Trigger when 10% of the component is visible
+    );
 
-        setData(response.data.data);
-        setTotalPages(response.data.meta.pages); // Assuming the API provides total pages
-      } catch (err) {
-        setError(err.response?.data?.message || err.message);
-      }
-    };
-    fetchData();
-  }, [currentPage]);
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [currentPage, hasFetched]);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `/v1/podcasts?per_page=15&page=${currentPage}`
+      );
+
+      setData(response.data.data);
+      setTotalPages(response.data.meta.pages); // Assuming the API provides total pages
+    } catch (err) {
+      setError(err.response?.data?.message || err.message);
+    }
+  };
 
   return (
     // the main container of the page
-    <div className="flex flex-col items-center mt-100px xl:mt-0 mb-50px">
-      {/*  the title of the page  */}
-      <div className="main-container mt-7 rtl">
-        <div className="col-span-6 md:col-span-3 xl:col-span-6">
-          <Heading1 title="نشست ها" />
+    <div
+      className="w-full flex justify-center min-h-100vh"
+      ref={ref}
+    >
+      {isVisible && (
+        <div className="flex flex-col items-center mt-100px xl:mt-0 mb-50px">
+          {/*  the title of the page  */}
+          <div className="main-container mt-7 rtl">
+            <div className="col-span-6 md:col-span-3 xl:col-span-6">
+              <Heading1 title="نشست ها" />
+            </div>
+            <div className="col-span-6 md:col-span-3 xl:col-span-6 flex justify-start md:justify-end">
+              <ArrowLink
+                title="همه نشست ها"
+                path="/podcasts"
+              />
+            </div>
+          </div>
+          {/* the body of the page the cards sections */}
+          <div className="main-container mt-7">
+            {data?.map((data, index) => (
+              <PodcastCard
+                isVisible={isVisible}
+                data={data}
+                key={index}
+              />
+            ))}
+          </div>
+          {/* Pagination controls */}
+          <div className="flex justify-center mt-5">
+            <Pagination
+              totalPages={totalPages}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
+          </div>
         </div>
-        <div className="col-span-6 md:col-span-3 xl:col-span-6 flex justify-start md:justify-end">
-          <ArrowLink
-            title="همه نشست ها"
-            path="/podcasts"
-          />
-        </div>
-      </div>
-      {/* the body of the page the cards sections */}
-      <div className="main-container mt-7">
-        {data?.map((data, index) => (
-          <PodcastCard
-            data={data}
-            key={index}
-          />
-        ))}
-      </div>
-      {/* Pagination controls */}
-      <div className="flex justify-center mt-5">
-        <Pagination
-          totalPages={totalPages}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-        />
-      </div>
+      )}
     </div>
   );
 }
