@@ -240,7 +240,7 @@ export default function Footer() {
                 )}
               </div>
               <Link
-                href={`/letters/${newLetter?.slug}`}
+                href={`/magazines/${newLetter?.slug}`}
                 className="w-full h-10 mt-3 flex justify-center items-center font-common-heavy text-white
                    bg-footerBtn hover:bg-footer transition-all border-2 border-footerBtn text-27px md:text-28px
                    "
@@ -435,8 +435,8 @@ export default function Footer() {
         <div className="main-container mt-10px border-t-4 border-b-4 border-footerBorder py-10px">
           <div className="col-span-1 xl:col-span-2">
             <Link2
-              link="/letters"
-              title="نامه‌ها"
+              link="/magazines"
+              title="مجله ها"
               head={true}
             />
           </div>
@@ -488,15 +488,15 @@ export default function Footer() {
         </div>
       </div>
       {/* copyrighting policy */}
-      <div className="bg-footerBorder hidden xl:flex flex-col items-center">
-        <div className="main-container py-7">
-          <div className="col-span-6">
-            <p className="font-common-heavy text-25px 2xl:text-30px ltr">
+      <div className="bg-footerBorder flex flex-col items-center">
+        <div className="main-container py-2 md:py-4 xl:py-7">
+          <div className="col-span-3 xl:col-span-6">
+            <p className="font-common-heavy text-7px md:text-14px xl:text-25px ltr">
               Design and development of the website by Cyborg Tech
             </p>
           </div>
-          <div className="col-span-6">
-            <p className="font-common-heavy text-25px 2xl:text-30px rtl">
+          <div className="col-span-3 xl:col-span-6">
+            <p className="font-common-heavy text-7px md:text-14px xl:text-25px rtl">
               دیزاین و ساخت وبسایت توست سایبُرگ تِک
             </p>
           </div>

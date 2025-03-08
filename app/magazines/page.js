@@ -13,9 +13,9 @@ export default function LettersPage() {
         <LettersSection />
       </div>
       {/*  archive letters section */}
-      <div className="mt-28">
+      {/* <div className="mt-28">
         <ArchivedLettersSection />
-      </div>
+      </div> */}
 
       {/*  archive of authors and poets  */}
       <div className="mt-28">

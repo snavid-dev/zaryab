@@ -113,8 +113,8 @@ export default function Header() {
                   link={'/podcasts'}
                 />
                 <Links
-                  title="نامه ها"
-                  link={'/letters'}
+                  title="مجله ها"
+                  link={'/magazines'}
                 />
                 <Links
                   title="درباره ما"
@@ -237,8 +237,8 @@ export default function Header() {
                 onClick={() => setMenu(!menu)}
               />
               <Links
-                title="نامه ها"
-                link={'/letters'}
+                title="مجله ها"
+                link={'/magazines'}
                 onClick={() => setMenu(!menu)}
               />
               <Links

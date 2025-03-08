@@ -25,7 +25,7 @@ export default function LetterSinglePage({ params }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`/v1/letters/${param.letter}`);
+        const response = await axios.get(`/v1/letters/${param.magazine}`);
         setData(response.data);
       } catch (err) {
         setError(err.response?.data?.message || err.message);

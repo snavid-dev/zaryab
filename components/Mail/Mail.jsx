@@ -75,7 +75,7 @@ export default function Mail() {
           )}
         </div>
         <Link
-          href={`/letters/${newLetter?.slug}`}
+          href={`/magazines/${newLetter?.slug}`}
           className="w-full h-10 flex justify-center items-center border border-black font-common-lg text-27px text-black bg-white lg:text-white lg:bg-black
           lg:hover:bg-white lg:hover:text-black transition-all duration-300"
         >

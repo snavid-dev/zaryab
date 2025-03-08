@@ -74,7 +74,7 @@ export default function LetterCard({ data }) {
           دانلود
         </Link>
         <Link
-          href={`/letters/${data?.slug}`}
+          href={`/magazines/${data?.slug}`}
           className="w-[47%] py-1 text-white flex justify-center items-center bg-black font-common-lg text-28px
                 border-2 border-black hover:bg-white hover:text-black transition-all duration-700"
         >

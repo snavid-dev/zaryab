@@ -33,11 +33,11 @@ export default function LettersSection() {
       {/* the heading of the section */}
       <div className="main-container">
         <div className="col-span-6 xl:col-span-12 rtl">
-          <Heading1 title="نامه ها" />
+          <Heading1 title="مجله های ادبی" />
         </div>
       </div>
       {/* the cards section */}
-      <div className="main-container">
+      <div className="main-container rtl">
         {data?.map((data, index) => (
           <LetterCard
             data={data}
