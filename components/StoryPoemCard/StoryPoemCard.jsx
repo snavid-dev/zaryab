@@ -4,9 +4,15 @@ import { useRef, useState } from 'react';
 
 import Link from 'next/link';
 import Genre from '../Genre/Genre';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 
-export default function StoryPoemCard({ data, isStory }) {
+gsap.registerPlugin(ScrollTrigger);
+
+export default function StoryPoemCard({ data, isStory, isVisible }) {
   const [isHovered, setIsHovered] = useState(false);
+  const cardRef = useRef(null);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -24,9 +30,30 @@ export default function StoryPoemCard({ data, isStory }) {
     return str;
   }
 
+  // animation
+
+  useGSAP(() => {
+    if ((isVisible, data)) {
+      gsap.to(cardRef.current, {
+        y: 0,
+        opacity: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: cardRef.current,
+          start: 'topo 80%',
+          end: 'top 20%',
+          toggleActions: 'play none none none',
+        },
+      });
+    }
+  }, [isVisible, data]);
+
   return (
     //     main container of the card
-    <div className="col-span-6 lg:col-span-3 xl:col-span-4 p-5 md:p-10 lg:p-7 border-4 border-black flex flex-col items-end justify-between mt-5">
+    <div
+      className="col-span-6 lg:col-span-3 xl:col-span-4 p-5 md:p-10 lg:p-7 border-4 border-black flex flex-col items-end justify-between mt-5 translate-y-200px opacity-0"
+      ref={cardRef}
+    >
       {/*  it has 6 rows  */}
       <div
         className="w-full h-260px md:h-570px lg:h-260px xl:h-280px 2xl:h-370px border-4 border-black relative hover:border-footerBtn transition-all duration-700"

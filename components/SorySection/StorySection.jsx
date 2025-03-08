@@ -8,6 +8,8 @@ import StoryPoemCard from '../StoryPoemCard/StoryPoemCard';
 import FullAd from '../FullAd/FullAd';
 import axios from '@/utils/api';
 import Pagination from '../Pagination/Pagination';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 
 export default function StorySection() {
   const [showPagination, setShowPagination] = useState(false);
@@ -16,22 +18,38 @@ export default function StorySection() {
   const [data, setData] = useState(null);
   const [alldata, setAllData] = useState(null);
   const [Error, setError] = useState(null);
-  const [storyType, setStoryType] = useState(null);
+  const [isVisble, setIsVisible] = useState(false);
+  const [hasFetched, setHasFetched] = useState(false);
+
+  const ref1 = useRef(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('/v1/stories?per_page=9');
-        setData(response.data.data);
-      } catch (err) {
-        setError(err.response?.data?.message || err.message);
-      }
-    };
-    fetchData();
-  }, []);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !hasFetched) {
+          fetchData1();
+          setHasFetched(true);
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 } // Trigger when 10% of the component is visible
+    );
+
+    if (ref1.current) observer.observe(ref1.current);
+    return () => observer.disconnect();
+  }, [hasFetched]);
+
+  const fetchData1 = async () => {
+    try {
+      const response = await axios.get('/v1/stories?per_page=9');
+      setData(response.data.data);
+    } catch (err) {
+      setError(err.response?.data?.message || err.message);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData2 = async () => {
       try {
         const response = await axios.get(
           `/v1/stories?per_page=9&page=${currentPage}`
@@ -42,40 +60,73 @@ export default function StorySection() {
         setError(err.response?.data?.message || err.message);
       }
     };
-    fetchData();
+    fetchData2();
   }, [currentPage]);
 
+  // animations
+
+  useGSAP(() => {
+    if (isVisble) {
+      gsap.to('#filter', {
+        y: 0,
+        opacity: 1,
+        ease: 'power2.out',
+      });
+
+      gsap.to('#title', {
+        y: 0,
+        opacity: 1,
+        delay: 0.5,
+        ease: 'power2.out',
+      });
+    }
+  }, [isVisble]);
+
   return (
-    <div className="main-container">
+    <div className="main-container min-h-100vh">
       {/*  the filter of this section  */}
 
-      <div className="col-span-6 xl:col-span-12">
-        <Filter
-          title="انواع داستان ها"
-          type="story"
-        />
+      <div
+        className="col-span-6 xl:col-span-12 translate-y-200px opacity-0"
+        id="filter"
+      >
+        {isVisble && (
+          <Filter
+            title="انواع داستان ها"
+            type="story"
+          />
+        )}
       </div>
 
       {/*  title of the section  */}
-      <div className="mt-5 col-span-6 xl:col-span-12 rtl">
-        <Heading1 title="داستان ها" />
+      <div
+        className="mt-5 col-span-6 xl:col-span-12 rtl translate-y-200px opacity-0"
+        id="title"
+      >
+        {isVisble && <Heading1 title="داستان ها" />}
       </div>
 
       {/*  section body  */}
       <div>
-        <div className={`w-full ${showPagination ? 'hidden' : 'block'}`}>
-          <div className={`main-container mt-5`}>
-            {data?.map((data, index) => {
-              return (
-                <StoryPoemCard
-                  isStory={true}
-                  data={data}
-                  key={index}
-                />
-              );
-            })}
-          </div>
+        <div ref={ref1}>
+          {isVisble && (
+            <div className={`w-full ${showPagination ? 'hidden' : 'block'}`}>
+              <div className={`main-container mt-5`}>
+                {data?.map((data, index) => {
+                  return (
+                    <StoryPoemCard
+                      isStory={true}
+                      data={data}
+                      key={index}
+                      isVisble={isVisble}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          )}
         </div>
+
         <div className={`w-full ${showPagination ? 'block' : 'hidden'}`}>
           <div
             id="story"
@@ -86,6 +137,7 @@ export default function StorySection() {
                 isStory={true}
                 data={data}
                 key={index}
+                isVisible={isVisble}
               />
             ))}
           </div>
@@ -101,17 +153,19 @@ export default function StorySection() {
           </div>
         </div>
       </div>
-      <div
-        className={`col-span-6 xl:col-span-12 rtl mt-5 ${
-          showPagination ? 'hidden' : 'flex'
-        }`}
-        onClick={() => setShowPagination(true)}
-      >
-        <ArrowLink
-          title="همه داستان ها"
-          path="#story"
-        />
-      </div>
+      {isVisble && (
+        <div
+          className={`col-span-6 xl:col-span-12 rtl mt-5 ${
+            showPagination ? 'hidden' : 'flex'
+          }`}
+          onClick={() => setShowPagination(true)}
+        >
+          <ArrowLink
+            title="همه داستان ها"
+            path="#story"
+          />
+        </div>
+      )}
     </div>
   );
 }
