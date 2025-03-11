@@ -3,9 +3,15 @@ import Image from 'next/image';
 import { useRef, useState } from 'react';
 
 import Link from 'next/link';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 
-export default function Episode({ data }) {
+gsap.registerPlugin(ScrollTrigger);
+
+export default function Episode({ data, isVisible }) {
   const [isHovered, setIsHovered] = useState(false);
+  const cardRef = useRef(null);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -14,9 +20,28 @@ export default function Episode({ data }) {
       setIsHovered(false);
     }, 500);
   };
+
+  useGSAP(() => {
+    if (isVisible && data) {
+      gsap.to(cardRef.current, {
+        y: 0,
+        opacity: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: cardRef.current,
+          start: 'top 80%',
+          end: 'top 40%',
+          toggleActions: 'play none none none',
+        },
+      });
+    }
+  }, []);
   return (
     //     main container of the card
-    <div className="col-span-6 lg:col-span-3 xl:col-span-4 p-5 md:p-10 lg:p-7 border-4 border-black flex flex-col items-end mt-5">
+    <div
+      className="col-span-6 lg:col-span-3 xl:col-span-4 p-5 md:p-10 lg:p-7 border-4 border-black flex flex-col items-end mt-5 tranlsate-y-200px opacity-0"
+      ref={cardRef}
+    >
       {/*  it has 6 rows  */}
       <div
         className="w-full h-260px md:h-570px lg:h-260px xl:h-270px 2xl:h-370px border-4 border-black relative hover:border-footerBtn transition-all duration-700"

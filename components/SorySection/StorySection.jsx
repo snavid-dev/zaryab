@@ -20,10 +20,24 @@ export default function StorySection() {
   const [Error, setError] = useState(null);
   const [isVisble, setIsVisible] = useState(false);
   const [hasFetched, setHasFetched] = useState(false);
+  const [typeFilter, setTypeFilter] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('');
 
   const ref1 = useRef(null);
 
   useEffect(() => {
+    const fetchData1 = async () => {
+      try {
+        const response = await axios.get(
+          `/v1/stories?per_page=9&story_type=${typeFilter}&categories=${categoryFilter}`
+        );
+        setData(response.data.data);
+        setHasFetched(false);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && !hasFetched) {
@@ -36,17 +50,9 @@ export default function StorySection() {
     );
 
     if (ref1.current) observer.observe(ref1.current);
-    return () => observer.disconnect();
-  }, [hasFetched]);
 
-  const fetchData1 = async () => {
-    try {
-      const response = await axios.get('/v1/stories?per_page=9');
-      setData(response.data.data);
-    } catch (err) {
-      setError(err.response?.data?.message || err.message);
-    }
-  };
+    return () => observer.disconnect();
+  }, [typeFilter, categoryFilter, hasFetched]);
 
   useEffect(() => {
     const fetchData2 = async () => {
@@ -82,6 +88,9 @@ export default function StorySection() {
     }
   }, [isVisble]);
 
+  console.log(typeFilter, 'filter');
+  console.log(categoryFilter, 'filter');
+
   return (
     <div className="main-container min-h-100vh">
       {/*  the filter of this section  */}
@@ -94,6 +103,8 @@ export default function StorySection() {
           <Filter
             title="انواع داستان ها"
             type="story"
+            setFilter={setTypeFilter}
+            setCategoryFilter={setCategoryFilter}
           />
         )}
       </div>
@@ -111,7 +122,7 @@ export default function StorySection() {
         <div ref={ref1}>
           {isVisble && (
             <div className={`w-full ${showPagination ? 'hidden' : 'block'}`}>
-              <div className={`main-container mt-5`}>
+              <div className={`main-container mt-5 rtl`}>
                 {data?.map((data, index) => {
                   return (
                     <StoryPoemCard
@@ -130,7 +141,7 @@ export default function StorySection() {
         <div className={`w-full ${showPagination ? 'block' : 'hidden'}`}>
           <div
             id="story"
-            className="main-container mt-5"
+            className="main-container mt-5 rtl"
           >
             {alldata?.map((data, index) => (
               <StoryPoemCard

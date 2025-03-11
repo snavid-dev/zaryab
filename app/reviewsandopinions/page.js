@@ -6,7 +6,7 @@ import FullAd from '@/components/FullAd/FullAd';
 import Heading1 from '@/components/Heading1/Heading1';
 import SimilarHorizontalCard from '@/components/SimilarHorizontalCard/SimilarHorizontalCard';
 import SmallAd from '@/components/SmallAd/SmallAd';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from '@/utils/api';
 import Pagination from '@/components/Pagination/Pagination';
 
@@ -16,12 +16,14 @@ export default function ReviewsAndOpinionsPage() {
 
   const [data, setData] = useState(null);
   const [Error, setError] = useState(null);
+  const [typeFilter, setTypeFilter] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `/v1/author-reviews?per_page=8&page=${currentPage}`
+          `/v1/author-reviews?per_page=8&page=${currentPage}&review_type=${typeFilter}&categories=${categoryFilter}`
         );
         setData(response.data.data);
         setTotalPages(response.data.meta.pages);
@@ -30,7 +32,7 @@ export default function ReviewsAndOpinionsPage() {
       }
     };
     fetchData();
-  }, [currentPage]);
+  }, [currentPage, typeFilter, categoryFilter]);
 
   return (
     // main container of the page
@@ -41,6 +43,8 @@ export default function ReviewsAndOpinionsPage() {
           <Filter
             title="انواع نقد و نظر"
             type="review"
+            setFilter={setTypeFilter}
+            setCategoryFilter={setCategoryFilter}
           />
         </div>
       </div>

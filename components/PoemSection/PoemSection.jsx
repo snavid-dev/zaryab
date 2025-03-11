@@ -23,12 +23,26 @@ export default function PoemSection() {
   const [Error, setError] = useState(null);
   const [isVisble, setIsVisible] = useState(false);
   const [hasFetched, setHasFetched] = useState(false);
+  const [typeFilter, setTypeFilter] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('');
   const ref = useRef(null);
   const filterRef = useRef(null);
   const ref1 = useRef(null);
   const titleRef = useRef(null);
 
   useEffect(() => {
+    const fetchData1 = async () => {
+      try {
+        const response = await axios.get(
+          `/v1/poems?per_page=9&poem_type=${typeFilter}&categories=${categoryFilter}`
+        );
+        setData(response.data.data);
+        setHasFetched(false);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && !hasFetched) {
@@ -42,16 +56,7 @@ export default function PoemSection() {
 
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
-  }, [hasFetched]);
-
-  const fetchData1 = async () => {
-    try {
-      const response = await axios.get('/v1/poems?per_page=9');
-      setData(response.data.data);
-    } catch (err) {
-      setError(err.response?.data?.message || err.message);
-    }
-  };
+  }, [typeFilter, categoryFilter, hasFetched]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -115,6 +120,8 @@ export default function PoemSection() {
             <Filter
               type="poem"
               title="انواع شعر"
+              setFilter={setTypeFilter}
+              setCategoryFilter={setCategoryFilter}
             />
           </div>
 
@@ -133,7 +140,7 @@ export default function PoemSection() {
                 <div
                   className={`w-full ${showPagination ? 'hidden' : 'block'}`}
                 >
-                  <div className={`main-container mt-5`}>
+                  <div className={`main-container mt-5 rtl`}>
                     {data?.map((data, index) => {
                       return (
                         <StoryPoemCard
@@ -151,7 +158,7 @@ export default function PoemSection() {
             <div className={`w-full ${showPagination ? 'block' : 'hidden'}`}>
               <div
                 id="poem"
-                className="main-container mt-5"
+                className="main-container mt-5 rtl"
               >
                 {alldata?.map((data, index) => (
                   <StoryPoemCard

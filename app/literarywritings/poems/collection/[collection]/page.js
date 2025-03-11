@@ -12,12 +12,14 @@ export default function StoryCollectionPage({ params }) {
   const [data, setData] = useState(null);
   const [Error, setError] = useState(null);
   const param = use(params);
+  const [typeFilter, setTypeFilter] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `/v1/poems/collection/${param.collection}`
+          `/v1/poems/collection/${param.collection}/?poem_type=${typeFilter}&categories=${categoryFilter}`
         );
         setData(response.data.data);
       } catch (err) {
@@ -25,7 +27,7 @@ export default function StoryCollectionPage({ params }) {
       }
     };
     fetchData();
-  }, []);
+  }, [typeFilter, categoryFilter]);
 
   return (
     // the main container of the page
@@ -36,6 +38,8 @@ export default function StoryCollectionPage({ params }) {
           <Filter
             type="poem"
             title="انواع شعر"
+            setFilter={setTypeFilter}
+            setCategoryFilter={setCategoryFilter}
           />
         </div>
       </div>
@@ -47,7 +51,7 @@ export default function StoryCollectionPage({ params }) {
         </div>
       </div>
 
-      <div className="main-container mt-7 pb-14">
+      <div className="main-container mt-7 pb-14 rtl">
         {data?.map((data, index) => (
           <StoryPoemCard
             isStory={false}

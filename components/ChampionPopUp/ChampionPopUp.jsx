@@ -84,14 +84,14 @@ export default function ChampionPopUp() {
               )}
             </div>
             <div className="w-full font-new-black text-30px rtl mt-1">
-              {data?.story.title}
+              {data?.story?.title}
             </div>
             <div className="w-full font-common-heavy text-16px text-footerBtn rtl mt-1 flex">
               <div>نویسنده:</div>
               <div className="mr-1">{data?.author?.name}</div>
             </div>
             <div className="w-full rtl font-common-regular text-10px md:text-14px mt-1">
-              {data?.story.excerpt}
+              {data?.story?.excerpt}
             </div>
             <div className="w-full flex flex-row-reverse justify-between mt-3 mb-3">
               <Link

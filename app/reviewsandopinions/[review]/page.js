@@ -114,9 +114,9 @@ export default function ReviewsAndOpinionsSinglePage({ params }) {
           {/*  it has 7 rows  */}
           <div className="w-1/2 xl:w-full border-2 border-black p-3 md:p-7">
             <div className="w-full h-150px md:h-310px xl:h-220px 2xl:h-300px relative">
-              {data?.author.featured_image ? (
+              {data?.author?.featured_image ? (
                 <Image
-                  src={data?.author.featured_image}
+                  src={data?.author?.featured_image}
                   alt=""
                   layout="fill"
                   objectFit="cover"
@@ -129,14 +129,14 @@ export default function ReviewsAndOpinionsSinglePage({ params }) {
           </div>
           <div className="w-full flex flex-col mr-7 xl:mr-0 rtl">
             <div className="font-common-heavy text-25px md:text-50px rtl mt-7 md:mt-0 xl:mt-7 text-black">
-              {data?.author.name}
+              {data?.author?.name}
             </div>
             <div className="flex rtl md:mt-7 text-black">
               <div className="font-common-heavy text-10px md:text-18px ml-1">
                 موقعیت:
               </div>
               <div className="font-common-regular text-10px md:text-18px">
-                {data?.author.location}
+                {data?.author?.location}
               </div>
             </div>
             <div className="flex rtl mt-3 text-black">
@@ -144,7 +144,7 @@ export default function ReviewsAndOpinionsSinglePage({ params }) {
                 وظیفه:
               </div>
               <div className="font-common-regular text-10px md:text-18px">
-                {data?.author.job}
+                {data?.author?.job}
               </div>
             </div>
             <div className="flex rtl mt-3 text-black">
@@ -152,7 +152,7 @@ export default function ReviewsAndOpinionsSinglePage({ params }) {
                 تعداد نوشته ها:
               </div>
               <div className="font-common-regular text-10px md:text-18px">
-                {data?.author.total_letters}
+                {data?.author?.total_letters}
               </div>
             </div>
             <div className="flex rtl mt-3 text-black">
@@ -160,11 +160,11 @@ export default function ReviewsAndOpinionsSinglePage({ params }) {
                 سن:
               </div>
               <div className="font-common-regular text-10px md:text-18px">
-                {data?.author.age}
+                {data?.author?.age}
               </div>
             </div>
             <div className="flex md:mt-3">
-              <Link href={data?.author.facebook || '#'}>
+              <Link href={data?.author?.facebook || '#'}>
                 <Image
                   src="/assets/svg/facebook.svg"
                   alt="facebook logo"
@@ -172,7 +172,7 @@ export default function ReviewsAndOpinionsSinglePage({ params }) {
                   height={20}
                 />
               </Link>
-              <Link href={data?.author.instagram || '#'}>
+              <Link href={data?.author?.instagram || '#'}>
                 <Image
                   src="/assets/svg/instagram.svg"
                   alt="instagram logo"
@@ -180,7 +180,7 @@ export default function ReviewsAndOpinionsSinglePage({ params }) {
                   height={20}
                 />
               </Link>
-              <Link href={data?.author.telegram || '#'}>
+              <Link href={data?.author?.telegram || '#'}>
                 <Image
                   src="/assets/svg/telegram.svg"
                   alt="telegram logo"
@@ -188,7 +188,7 @@ export default function ReviewsAndOpinionsSinglePage({ params }) {
                   height={20}
                 />
               </Link>
-              <Link href={data?.author.youtube || '#'}>
+              <Link href={data?.author?.youtube || '#'}>
                 <Image
                   src="/assets/svg/youtube.svg"
                   alt="youtube logo"

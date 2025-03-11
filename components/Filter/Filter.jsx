@@ -3,11 +3,13 @@ import { useEffect, useState } from 'react';
 import FilterItem from '../FilterItem/FilterItem';
 import axios from '@/utils/api';
 
-export default function Filter({ title, type }) {
+export default function Filter({ title, type, setFilter, setCategoryFilter }) {
   const [showFilterBody, setShowFilterBody] = useState(false);
   const [categories, setCategories] = useState(null);
   const [Error, setError] = useState(null);
   const [categoryType, setCategoryType] = useState(null);
+  const [filteredItems, setFilteredItems] = useState([]);
+  const [categoryItems, setCategoryItems] = useState([]);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -63,6 +65,18 @@ export default function Filter({ title, type }) {
     fetchCategoryType();
   }, [type]); // حالا هر بار `type` تغییر کند، دیتا آپدیت می‌شود
 
+  const filterDone = () => {
+    setFilter(filteredItems.join(','));
+    setCategoryFilter(categoryItems.join(','));
+  };
+
+  const filterClear = () => {
+    setFilteredItems([]);
+    setCategoryItems([]);
+    setFilter([]);
+    setCategoryFilter([]);
+  };
+
   return (
     // the filter main container
     <div>
@@ -113,10 +127,12 @@ export default function Filter({ title, type }) {
             {title}
           </div>
           <div className="flex flex-col h-[200px] flex-wrap rtl">
-            {categoryType?.map((data, index) => (
+            {categoryType?.map((category, index) => (
               <FilterItem
                 key={index}
-                title={data.name}
+                data={category}
+                filteredItems={filteredItems}
+                setFilteredItems={setFilteredItems}
               />
             ))}
           </div>
@@ -131,7 +147,9 @@ export default function Filter({ title, type }) {
                 data?.name && (
                   <FilterItem
                     key={index}
-                    title={data.name}
+                    data={data}
+                    filteredItems={categoryItems}
+                    setFilteredItems={setCategoryItems}
                   />
                 )
             )}
@@ -139,12 +157,14 @@ export default function Filter({ title, type }) {
         </div>
         <div className="flex flex-row-reverse justify-between w-2/3 mt-3">
           <button
+            onClick={filterDone}
             className="flex justify-center items-center font-common-heavy text-10px md:text-20px xl:text-28px w-1/3 text-white bg-footerBtn py-2
                     border-2 border-footerBtn hover:bg-white transition-all duration-700 hover:text-footerBtn"
           >
             اجرای فیلتر
           </button>
           <button
+            onClick={filterClear}
             className="flex justify-center items-center font-common-heavy text-10px md:text-20px xl:text-28px w-1/2 text-white bg-black py-2
                     border-2 border-black hover:bg-white transition-all duration-700 hover:text-black"
           >

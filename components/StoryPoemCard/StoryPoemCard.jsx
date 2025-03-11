@@ -72,7 +72,7 @@ export default function StoryPoemCard({ data, isStory, isVisible }) {
           <div>failed to display image!!!</div>
         )}
       </div>
-      <div className="font-new-extra-bold text-36px rtl md:text-76px lg:text-50px mt-3">
+      <div className="font-new-extra-bold text-36px w-full rtl md:text-76px lg:text-50px mt-3">
         {truncateString(data?.title)}
       </div>
       <div
@@ -109,7 +109,7 @@ export default function StoryPoemCard({ data, isStory, isVisible }) {
         </div>
       </div>
       {isStory ? (
-        <div className="w-full flex justify-end gap-2 mt-3">
+        <div className="w-full flex gap-2 mt-3 rtl">
           {data?.categories.map((category, index) => (
             <Genre
               title={category.name}
@@ -119,7 +119,7 @@ export default function StoryPoemCard({ data, isStory, isVisible }) {
         </div>
       ) : (
         data?.poem_type && (
-          <div className="w-full flex justify-end gap-2 mt-3">
+          <div className="w-full flex gap-2 mt-3 rtl">
             {data?.poem_type.map((poem, index) => (
               <Genre
                 title={poem.name}

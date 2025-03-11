@@ -12,12 +12,14 @@ export default function StoryCollectionPage({ params }) {
   const param = use(params);
   const [data, setData] = useState(null);
   const [Error, setError] = useState(null);
+  const [typeFilter, setTypeFilter] = useState('');
+  const [categoryFilter, setCategoryFilter] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `/v1/stories/collection/${param.collection}`
+          `/v1/stories/collection/${param.collection}/?story_type=${typeFilter}&categories=${categoryFilter}`
         );
         setData(response.data.data);
       } catch (err) {
@@ -25,7 +27,7 @@ export default function StoryCollectionPage({ params }) {
       }
     };
     fetchData();
-  }, []);
+  }, [typeFilter, categoryFilter]);
 
   return (
     // the main container of the page
@@ -36,6 +38,8 @@ export default function StoryCollectionPage({ params }) {
           <Filter
             type="story"
             title="انواع داستان ها"
+            setFilter={setTypeFilter}
+            setCategoryFilter={setCategoryFilter}
           />
         </div>
       </div>
@@ -43,11 +47,11 @@ export default function StoryCollectionPage({ params }) {
       {/* the title of the story collection */}
       <div className="main-container mt-7">
         <div className="col-span-6 xl:col-span-12 rtl">
-          <Heading1 title="مجموعه داستان هری پاتر" />
+          <Heading1 title={param.collection} />
         </div>
       </div>
 
-      <div className="main-container mt-7 pb-14">
+      <div className="main-container mt-7 pb-14 rtl">
         {data?.map((data, index) => (
           <StoryPoemCard
             data={data}

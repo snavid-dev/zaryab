@@ -15,18 +15,6 @@ export default function Authors() {
   const [hasFetched, setHasFetched] = useState(false);
   const ref = useRef(null);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get('/v1/authors?per_page=8');
-  //       setData(response.data.data);
-  //     } catch (err) {
-  //       setError(err.response?.data?.message || err.message);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -89,7 +77,7 @@ export default function Authors() {
               path="/authors"
             />
           </div>
-          <div className="main-container mt-7">
+          <div className="main-container mt-7 rtl">
             {data?.map((data, index) => (
               <OurAuthorCard
                 key={index}
