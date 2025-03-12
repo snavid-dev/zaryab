@@ -345,7 +345,7 @@ export default function Footer() {
               key={index}
             >
               <Link2
-                link={`${data?.slug}`}
+                link={`/literarywritings/?type=${data?.slug}`}
                 title={data?.name}
               />
             </div>
@@ -372,7 +372,7 @@ export default function Footer() {
               key={index}
             >
               <Link2
-                link={`${data?.slug}`}
+                link={`/articles/?article_type=${data?.slug}`}
                 title={data?.name}
               />
             </div>
@@ -400,7 +400,7 @@ export default function Footer() {
               }`}
             >
               <Link2
-                link={`${data?.slug}`}
+                link={`/reviewsandopinions/?review_type=${data?.slug}`}
                 title={data?.name}
               />
             </div>
@@ -426,7 +426,7 @@ export default function Footer() {
               key={index}
             >
               <Link2
-                link={data?.slug}
+                link={`/podcasts/?podcast_type=${data?.slug}`}
                 title={data?.name}
               />
             </div>
@@ -452,7 +452,7 @@ export default function Footer() {
               key={index}
             >
               <Link2
-                link={`${data?.slug}`}
+                link={`/magazines/?magazine_type=${data?.slug}`}
                 title={data?.name}
               />
             </div>

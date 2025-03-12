@@ -9,6 +9,7 @@ import SmallAd from '@/components/SmallAd/SmallAd';
 import { useEffect, useState } from 'react';
 import axios from '@/utils/api';
 import Pagination from '@/components/Pagination/Pagination';
+import { useSearchParams } from 'next/navigation';
 
 export default function ReviewsAndOpinionsPage() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -16,23 +17,32 @@ export default function ReviewsAndOpinionsPage() {
 
   const [data, setData] = useState(null);
   const [Error, setError] = useState(null);
+  const [filterDone, setFilterDone] = useState(false);
   const [typeFilter, setTypeFilter] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
+
+  const searchParam = useSearchParams();
+  const reviewType = searchParam.get('review_type');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `/v1/author-reviews?per_page=8&page=${currentPage}&review_type=${typeFilter}&categories=${categoryFilter}`
+          `/v1/author-reviews?per_page=8&page=${currentPage}&review_type=${
+            typeFilter ? typeFilter : reviewType ? reviewType : ''
+          }&categories=${categoryFilter}`
         );
         setData(response.data.data);
         setTotalPages(response.data.meta.pages);
+        if (reviewType) {
+          setFilterDone(true);
+        }
       } catch (err) {
         setError(err.response?.data?.message || err.message);
       }
     };
     fetchData();
-  }, [currentPage, typeFilter, categoryFilter]);
+  }, [currentPage, typeFilter, categoryFilter, reviewType]);
 
   return (
     // main container of the page
@@ -45,6 +55,7 @@ export default function ReviewsAndOpinionsPage() {
             type="review"
             setFilter={setTypeFilter}
             setCategoryFilter={setCategoryFilter}
+            setFilterDone={setFilterDone}
           />
         </div>
       </div>
@@ -58,13 +69,19 @@ export default function ReviewsAndOpinionsPage() {
 
       {/*  the body of the page  */}
       <div className="main-container rtl">
-        {data?.map((data, index) => (
-          <SimilarHorizontalCard
-            data={data}
-            isArticle={false}
-            key={index}
-          />
-        ))}
+        {filterDone && data.length === 0 ? (
+          <div className="col-span-6 xl:col-span-12 flex justify-center items-center font-common-regular text-20px h-300px">
+            هیچ موردی یافت نشد
+          </div>
+        ) : (
+          data?.map((data, index) => (
+            <SimilarHorizontalCard
+              data={data}
+              isArticle={false}
+              key={index}
+            />
+          ))
+        )}
       </div>
       {/* Pagination controls */}
       <div className="flex justify-center mt-5">

@@ -12,6 +12,7 @@ export default function StoryCollectionPage({ params }) {
   const param = use(params);
   const [data, setData] = useState(null);
   const [Error, setError] = useState(null);
+  const [filterDone, setFilterDone] = useState(false);
   const [typeFilter, setTypeFilter] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
 
@@ -40,6 +41,7 @@ export default function StoryCollectionPage({ params }) {
             title="انواع داستان ها"
             setFilter={setTypeFilter}
             setCategoryFilter={setCategoryFilter}
+            setFilterDone={setFilterDone}
           />
         </div>
       </div>
@@ -52,13 +54,19 @@ export default function StoryCollectionPage({ params }) {
       </div>
 
       <div className="main-container mt-7 pb-14 rtl">
-        {data?.map((data, index) => (
-          <StoryPoemCard
-            data={data}
-            isStory={true}
-            key={index}
-          />
-        ))}
+        {filterDone && data.length === 0 ? (
+          <div className="col-span-6 xl:col-span-12 flex justify-center items-center font-common-regular text-20px h-300px">
+            هیچ موردی یافت نشد
+          </div>
+        ) : (
+          data?.map((data, index) => (
+            <StoryPoemCard
+              data={data}
+              isStory={true}
+              key={index}
+            />
+          ))
+        )}
       </div>
 
       {/* autors section */}

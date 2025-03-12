@@ -6,6 +6,7 @@ import FullAd from '@/components/FullAd/FullAd';
 import Heading1 from '@/components/Heading1/Heading1';
 import Pagination from '@/components/Pagination/Pagination';
 import SmallAd from '@/components/SmallAd/SmallAd';
+import { IoClose } from 'react-icons/io5';
 import axios from '@/utils/api';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
@@ -24,6 +25,7 @@ export default function EposidesPage({ params }) {
   const [categoryFilter, setCategoryFilter] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [filterDone, setFilterDone] = useState(false);
   const [searchItem, setSearchItem] = useState('');
   const [searchTitle, setSearchTitle] = useState('');
   const [searchNumber, setSearchNumber] = useState('');
@@ -94,6 +96,14 @@ export default function EposidesPage({ params }) {
     } else {
       setSearchNumber(searchItem);
     }
+    setFilterDone(true);
+  };
+
+  const searchRemove = () => {
+    setSearchTitle('');
+    setSearchNumber('');
+    setSearchItem('');
+    setFilterDone(false);
   };
 
   return (
@@ -116,6 +126,7 @@ export default function EposidesPage({ params }) {
                 title="انواع داستان ها"
                 setFilter={setTypeFilter}
                 setCategoryFilter={setCategoryFilter}
+                setFilterDone={setFilterDone}
               />
             </div>
           </div>
@@ -134,14 +145,18 @@ export default function EposidesPage({ params }) {
                 className="w-full flex flex-row-reverse border-b-2 border-black translate-y-200px opacity-0"
                 id="search"
               >
+                <IoClose
+                  className="text-xl text-black cursor-pointer mt-2px"
+                  onClick={searchRemove}
+                />
                 <input
                   type="text"
                   value={searchItem}
                   onChange={(e) => setSearchItem(e.target.value)}
-                  className="outline-none w-full rtl px-1 bg-white text-black"
+                  className="outline-none w-full font-common-regular rtl px-1 bg-white text-black"
                 />
                 <IoIosSearch
-                  className="text-xl text-black cursor-pointer"
+                  className="text-xl text-black cursor-pointer mt-1"
                   onClick={handleSearch}
                 />
               </div>
@@ -150,13 +165,19 @@ export default function EposidesPage({ params }) {
 
           {/*  list of the   episodes*/}
           <div className="mt-7 main-container rtl">
-            {data?.data.map((data, index) => (
-              <Episode
-                data={data}
-                key={index}
-                isVisible={isVisible}
-              />
-            ))}
+            {filterDone && data?.data.length === 0 ? (
+              <div className="col-span-6 xl:col-span-12 flex justify-center items-center font-common-regular text-20px h-300px">
+                هیچ موردی یافت نشد
+              </div>
+            ) : (
+              data?.data.map((data, index) => (
+                <Episode
+                  data={data}
+                  key={index}
+                  isVisible={isVisible}
+                />
+              ))
+            )}
           </div>
 
           <div className="mt-7 w-full">

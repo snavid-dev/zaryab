@@ -29,7 +29,7 @@ export default function OurAuthorCard({ data, isVisible }) {
   return (
     <div
       ref={ref}
-      className="col-span-6 xl:col-span-6  p-4 border-4 border-black translate-y-200px opacity-0"
+      className="col-span-6 xl:col-span-6  p-4 border-4 border-black translate-y-200px opacity-0 ltr"
     >
       <Link
         href={`/authors/${data?.slug}`}
@@ -40,15 +40,13 @@ export default function OurAuthorCard({ data, isVisible }) {
           {data?.image ? (
             <Image
               src={data?.image || '/assets/img/authorPic.png'}
-              alt="author image"
+              alt={data?.name}
               layout="fill"
               objectFit="cover"
               className="absolute hover:scale-110 transition-all duration-300"
             />
           ) : (
-            <div className="w-full h-full flex justify-center items-center">
-              the image of the author not found !!!
-            </div>
+            <div className="w-full h-full flex justify-center items-center"></div>
           )}
         </div>
         <div className="flex flex-col items-end justify-center w-2/3 lg:w-3/4 pr-4">

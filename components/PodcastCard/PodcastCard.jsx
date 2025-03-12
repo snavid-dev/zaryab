@@ -41,20 +41,18 @@ export default function PodcastCard({ data, isVisible }) {
             {data?.image ? (
               <Image
                 src={data?.image}
-                alt=""
+                alt={data?.name}
                 layout="fill"
                 objectFit="cover"
                 className="absolute
                     hover:scale-110 transition-all duration-300"
               />
             ) : (
-              <div className="h-full w-full flex justify-center items-center">
-                the podcast image not found
-              </div>
+              <div className="h-full w-full flex justify-center items-center"></div>
             )}
           </div>
-          <div>
-            <h3 className="font-common-heavy rtl text-30px md:text-36px mt-3">
+          <div className="w-full">
+            <h3 className="font-common-heavy rtl text-30px md:text-36px mt-3 w-full rtl">
               {data?.name}
             </h3>
           </div>

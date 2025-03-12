@@ -154,14 +154,12 @@ export default function BookDesk() {
                 {data?.featured_image ? (
                   <Image
                     src={data?.featured_image}
-                    alt=""
+                    alt={data?.title}
                     fill
                     className="absolute object-cover"
                   />
                 ) : (
-                  <div className="w-full h-full flex justify-center items-center">
-                    image of the book not found
-                  </div>
+                  <div className="w-full h-full flex justify-center items-center"></div>
                 )}
               </div>
             </div>

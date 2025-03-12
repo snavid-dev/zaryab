@@ -9,6 +9,7 @@ import SmallAd from '@/components/SmallAd/SmallAd';
 import { useEffect, useRef, useState } from 'react';
 import axios from '@/utils/api';
 import Pagination from '@/components/Pagination/Pagination';
+import { useSearchParams } from 'next/navigation';
 
 export default function ArticlesPage() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -16,14 +17,20 @@ export default function ArticlesPage() {
 
   const [data, setData] = useState(null);
   const [Error, setError] = useState(null);
+  const [filterDone, setFilterDone] = useState(false);
   const [typeFilter, setTypeFilter] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
+
+  const searchParam = useSearchParams();
+  const articleType = searchParam.get('article_type');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `/v1/articles?per_page=8&page=${currentPage}&review_type=${typeFilter}&categories=${categoryFilter}`
+          `/v1/articles?per_page=8&page=${currentPage}&article_type=${
+            typeFilter ? typeFilter : articleType ? articleType : ''
+          }&categories=${categoryFilter}`
         );
         setData(response.data.data);
         setTotalPages(response.data.meta.pages);
@@ -32,7 +39,7 @@ export default function ArticlesPage() {
       }
     };
     fetchData();
-  }, [currentPage, typeFilter, categoryFilter]);
+  }, [currentPage, typeFilter, categoryFilter, articleType]);
 
   return (
     // main container of the page
@@ -45,6 +52,7 @@ export default function ArticlesPage() {
             type="article"
             setFilter={setTypeFilter}
             setCategoryFilter={setCategoryFilter}
+            setFilterDone={setFilterDone}
           />
         </div>
       </div>
@@ -58,13 +66,19 @@ export default function ArticlesPage() {
 
       {/*  the body of the page  */}
       <div className="main-container rtl">
-        {data?.map((data, index) => (
-          <SimilarHorizontalCard
-            data={data}
-            isArticle={true}
-            key={index}
-          />
-        ))}
+        {filterDone && data.length === 0 ? (
+          <div className="col-span-6 xl:col-span-12 flex justify-center items-center font-common-regular text-20px h-300px">
+            هیچ موردی یافت نشد
+          </div>
+        ) : (
+          data?.map((data, index) => (
+            <SimilarHorizontalCard
+              data={data}
+              isArticle={true}
+              key={index}
+            />
+          ))
+        )}
       </div>
       {/* Pagination controls */}
       <div className="flex justify-center mt-5">

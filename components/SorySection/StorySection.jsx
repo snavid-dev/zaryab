@@ -11,7 +11,7 @@ import Pagination from '../Pagination/Pagination';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 
-export default function StorySection() {
+export default function StorySection({ type }) {
   const [showPagination, setShowPagination] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
@@ -20,6 +20,7 @@ export default function StorySection() {
   const [Error, setError] = useState(null);
   const [isVisble, setIsVisible] = useState(false);
   const [hasFetched, setHasFetched] = useState(false);
+  const [filterDone, setFilterDone] = useState(false);
   const [typeFilter, setTypeFilter] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
 
@@ -29,10 +30,15 @@ export default function StorySection() {
     const fetchData1 = async () => {
       try {
         const response = await axios.get(
-          `/v1/stories?per_page=9&story_type=${typeFilter}&categories=${categoryFilter}`
+          `/v1/stories?per_page=9&story_type=${
+            typeFilter ? typeFilter : type ? type : ''
+          }&categories=${categoryFilter}`
         );
         setData(response.data.data);
         setHasFetched(false);
+        if (type) {
+          setFilterDone(true);
+        }
       } catch (err) {
         setError(err.response?.data?.message || err.message);
       }
@@ -52,7 +58,7 @@ export default function StorySection() {
     if (ref1.current) observer.observe(ref1.current);
 
     return () => observer.disconnect();
-  }, [typeFilter, categoryFilter, hasFetched]);
+  }, [typeFilter, categoryFilter, hasFetched, type]);
 
   useEffect(() => {
     const fetchData2 = async () => {
@@ -88,8 +94,7 @@ export default function StorySection() {
     }
   }, [isVisble]);
 
-  console.log(typeFilter, 'filter');
-  console.log(categoryFilter, 'filter');
+  console.log(data, 'filterdata');
 
   return (
     <div className="main-container min-h-100vh">
@@ -105,6 +110,7 @@ export default function StorySection() {
             type="story"
             setFilter={setTypeFilter}
             setCategoryFilter={setCategoryFilter}
+            setFilterDone={setFilterDone}
           />
         )}
       </div>
@@ -123,16 +129,22 @@ export default function StorySection() {
           {isVisble && (
             <div className={`w-full ${showPagination ? 'hidden' : 'block'}`}>
               <div className={`main-container mt-5 rtl`}>
-                {data?.map((data, index) => {
-                  return (
-                    <StoryPoemCard
-                      isStory={true}
-                      data={data}
-                      key={index}
-                      isVisble={isVisble}
-                    />
-                  );
-                })}
+                {filterDone && data.length === 0 ? (
+                  <div className="col-span-6 xl:col-span-12 flex justify-center items-center font-common-regular text-20px h-300px">
+                    هیچ موردی یافت نشد
+                  </div>
+                ) : (
+                  data?.map((data, index) => {
+                    return (
+                      <StoryPoemCard
+                        isStory={true}
+                        data={data}
+                        key={index}
+                        isVisble={isVisble}
+                      />
+                    );
+                  })
+                )}
               </div>
             </div>
           )}

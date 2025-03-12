@@ -58,20 +58,18 @@ export default function Mail() {
     <div className="w-full rtl">
       {/* it has three rows */}
       <div className="w-full flex flex-col items-start">
-        <Heading2 title="نامه جدید" />
+        <Heading2 title="مجله جدید" />
         <p className="mt-5 md:mt-0">{newLetter?.release_date}</p>
         <div className="relative w-full xl:h-400px 2xl:h-500px mt-5 md:mt-0">
           {newLetter?.featured_image ? (
             <Image
               src={newLetter?.featured_image}
-              alt=""
+              alt="new magazine"
               fill
               className="absolute object-cover"
             />
           ) : (
-            <div className="h-full w-full flex justify-center items-center">
-              image not found
-            </div>
+            <div className="h-full w-full flex justify-center items-center"></div>
           )}
         </div>
         <Link
@@ -83,7 +81,7 @@ export default function Mail() {
         </Link>
       </div>
       <div className="w-full hidden md:flex flex-col items-start mt-7">
-        <Heading2 title="نامه های قدیم" />
+        <Heading2 title="مجله های قدیم" />
         {data?.map((data, index) => (
           <OldMails
             data={data}

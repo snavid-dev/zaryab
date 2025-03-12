@@ -51,15 +51,13 @@ export default function BookMobile() {
             {data?.featured_image ? (
               <Image
                 src={data?.featured_image}
-                alt=""
+                alt={data?.title}
                 layout="fill"
                 objectFit="cover"
                 className="absolute"
               />
             ) : (
-              <div className="h-full w-full flex justify-center items-center">
-                the image of the book is not found
-              </div>
+              <div className="h-full w-full flex justify-center items-center"></div>
             )}
           </div>
           <div className="flex justify-between mt-7 md:mt-9">

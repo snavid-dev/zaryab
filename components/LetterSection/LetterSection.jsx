@@ -6,18 +6,23 @@ import FullAd from '../FullAd/FullAd';
 import { useEffect, useState } from 'react';
 import axios from '@/utils/api';
 import Pagination from '../Pagination/Pagination';
+import { useSearchParams } from 'next/navigation';
 
 export default function LettersSection() {
   const [data, setData] = useState(null);
   const [Error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
+  const searchParam = useSearchParams();
+  const letterType = searchParam.get('magazine_type');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `/v1/letters/?type=non-archive&per_page=9&page=${currentPage}`
+          `/v1/letters/?type=non-archive&per_page=9&page=${currentPage}&letter_type=${
+            letterType ? letterType : ''
+          }`
         );
         setData(response.data.data);
         setTotalPage(response.data.meta.pages);
@@ -26,7 +31,7 @@ export default function LettersSection() {
       }
     };
     fetchData();
-  }, [currentPage]);
+  }, [currentPage, letterType]);
 
   return (
     <div className="flex flex-col items-center">
@@ -38,12 +43,18 @@ export default function LettersSection() {
       </div>
       {/* the cards section */}
       <div className="main-container rtl">
-        {data?.map((data, index) => (
-          <LetterCard
-            data={data}
-            key={index}
-          />
-        ))}
+        {data && data.length === 0 ? (
+          <div className="col-span-6 xl:col-span-12 flex justify-center items-center font-common-regular text-20px h-300px">
+            هیچ موردی یافت نشد
+          </div>
+        ) : (
+          data?.map((data, index) => (
+            <LetterCard
+              data={data}
+              key={index}
+            />
+          ))
+        )}
       </div>
       <div className="flex mt-10">
         {' '}

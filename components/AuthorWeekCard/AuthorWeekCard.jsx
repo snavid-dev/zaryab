@@ -35,7 +35,7 @@ export default function AuthorWeekCard({ data, isVisible }) {
         {data?.featured_image ? (
           <Image
             src={data?.featured_image}
-            alt=""
+            alt={data?.title}
             fill
             className="absolute object-cover hover:scale-110 transition-all duration-300"
           />

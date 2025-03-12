@@ -8,6 +8,7 @@ import { useRef, useState, useEffect } from 'react';
 
 import axios from '@/utils/api';
 import Pagination from '@/components/Pagination/Pagination';
+import { useSearchParams } from 'next/navigation';
 
 export default function PodcastsPage() {
   // get data
@@ -19,7 +20,25 @@ export default function PodcastsPage() {
   const [hasFetched, setHasFetched] = useState(false);
   const ref = useRef(null);
 
+  const searchParam = useSearchParams();
+  const podcastType = searchParam.get('podcast_type');
+
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `/v1/podcasts?per_page=15&page=${currentPage}&podcast_type=${
+            podcastType ? podcastType : ''
+          }`
+        );
+
+        setData(response.data.data);
+        setTotalPages(response.data.meta.pages); // Assuming the API provides total pages
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && !hasFetched) {
@@ -33,12 +52,14 @@ export default function PodcastsPage() {
 
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
-  }, [currentPage, hasFetched]);
+  }, [currentPage, hasFetched, podcastType]);
 
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `/v1/podcasts?per_page=15&page=${currentPage}`
+        `/v1/podcasts?per_page=15&page=${currentPage}&podcast_type=${
+          podcastType ? podcastType : ''
+        }`
       );
 
       setData(response.data.data);
@@ -69,7 +90,7 @@ export default function PodcastsPage() {
             </div>
           </div>
           {/* the body of the page the cards sections */}
-          <div className="main-container mt-7">
+          <div className="main-container mt-7 rtl">
             {data?.map((data, index) => (
               <PodcastCard
                 isVisible={isVisible}

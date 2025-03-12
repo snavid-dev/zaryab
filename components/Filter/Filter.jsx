@@ -3,7 +3,13 @@ import { useEffect, useState } from 'react';
 import FilterItem from '../FilterItem/FilterItem';
 import axios from '@/utils/api';
 
-export default function Filter({ title, type, setFilter, setCategoryFilter }) {
+export default function Filter({
+  title,
+  type,
+  setFilter,
+  setCategoryFilter,
+  setFilterDone,
+}) {
   const [showFilterBody, setShowFilterBody] = useState(false);
   const [categories, setCategories] = useState(null);
   const [Error, setError] = useState(null);
@@ -68,6 +74,7 @@ export default function Filter({ title, type, setFilter, setCategoryFilter }) {
   const filterDone = () => {
     setFilter(filteredItems.join(','));
     setCategoryFilter(categoryItems.join(','));
+    setFilterDone(true);
   };
 
   const filterClear = () => {
@@ -75,6 +82,7 @@ export default function Filter({ title, type, setFilter, setCategoryFilter }) {
     setCategoryItems([]);
     setFilter([]);
     setCategoryFilter([]);
+    setFilterDone(false);
   };
 
   return (

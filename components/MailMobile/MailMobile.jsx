@@ -31,15 +31,13 @@ export default function MailMobile() {
           {newLetter?.featured_image ? (
             <Image
               src={newLetter?.featured_image}
-              alt=""
+              alt="new magazine"
               layout="fill"
               objectFit="cover"
               className="absolute"
             />
           ) : (
-            <div className="h-full w-full flex justify-center items-center">
-              image not found
-            </div>
+            <div className="h-full w-full flex justify-center items-center"></div>
           )}
         </div>
         <Link

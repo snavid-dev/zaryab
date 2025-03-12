@@ -14,17 +14,18 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function PoemSection() {
+export default function PoemSection({ type }) {
   const [showPagination, setShowPagination] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
   const [alldata, setAllData] = useState(null);
   const [Error, setError] = useState(null);
   const [isVisble, setIsVisible] = useState(false);
   const [hasFetched, setHasFetched] = useState(false);
   const [typeFilter, setTypeFilter] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
+  const [filterDone, setFilterDone] = useState(false);
   const ref = useRef(null);
   const filterRef = useRef(null);
   const ref1 = useRef(null);
@@ -34,10 +35,15 @@ export default function PoemSection() {
     const fetchData1 = async () => {
       try {
         const response = await axios.get(
-          `/v1/poems?per_page=9&poem_type=${typeFilter}&categories=${categoryFilter}`
+          `/v1/poems?per_page=9&poem_type=${
+            typeFilter ? typeFilter : type ? type : ''
+          }&categories=${categoryFilter}`
         );
         setData(response.data.data);
         setHasFetched(false);
+        if (type) {
+          setFilterDone(true);
+        }
       } catch (err) {
         setError(err.response?.data?.message || err.message);
       }
@@ -104,6 +110,8 @@ export default function PoemSection() {
     }
   }, [isVisble]);
 
+  console.log(data, 'poem data');
+
   return (
     <div
       className="w-full flex justify-center"
@@ -122,6 +130,7 @@ export default function PoemSection() {
               title="انواع شعر"
               setFilter={setTypeFilter}
               setCategoryFilter={setCategoryFilter}
+              setFilterDone={setFilterDone}
             />
           </div>
 
@@ -141,16 +150,22 @@ export default function PoemSection() {
                   className={`w-full ${showPagination ? 'hidden' : 'block'}`}
                 >
                   <div className={`main-container mt-5 rtl`}>
-                    {data?.map((data, index) => {
-                      return (
-                        <StoryPoemCard
-                          isStory={false}
-                          data={data}
-                          key={index}
-                          isVisible={isVisble}
-                        />
-                      );
-                    })}
+                    {filterDone && data.length === 0 ? (
+                      <div className="col-span-6 xl:col-span-12 flex justify-center items-center font-common-regular text-20px h-300px">
+                        هیچ موردی یافت نشد
+                      </div>
+                    ) : (
+                      data?.map((data, index) => {
+                        return (
+                          <StoryPoemCard
+                            isStory={false}
+                            data={data}
+                            key={index}
+                            isVisible={isVisble}
+                          />
+                        );
+                      })
+                    )}
                   </div>
                 </div>
               )}

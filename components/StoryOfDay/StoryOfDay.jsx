@@ -110,7 +110,7 @@ export default function StoryOfDay() {
                 className="col-span-6 xl:col-span-4 translate-y-200px opacity-0"
                 id="storyTitle"
               >
-                <h1 className="flex flex-row xl:flex-col text-50px md:text-94px font-new-black leading-67%">
+                <h1 className="flex flex-row xl:flex-col text-50px md:text-94px 2xl:text-[120px] font-new-black leading-67%">
                   <Link
                     href={`/literarywritings/story/${data?.slug}`}
                     className="xl:leading-90%"
@@ -199,15 +199,13 @@ export default function StoryOfDay() {
                   {data?.featured_image ? (
                     <Image
                       src={data?.featured_image}
-                      alt="story of the day image"
+                      alt={data?.title}
                       layout="fill"
                       objectFit="cover"
                       className="absolute"
                     />
                   ) : (
-                    <div className="w-full h-full flex justify-center items-center">
-                      image not found
-                    </div>
+                    <div className="w-full h-full flex justify-center items-center"></div>
                   )}
                 </div>
               </div>
