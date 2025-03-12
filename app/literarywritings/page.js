@@ -4,13 +4,11 @@ import FullAd from '@/components/FullAd/FullAd';
 import PoemSection from '@/components/PoemSection/PoemSection';
 import SmallAd from '@/components/SmallAd/SmallAd';
 import StorySection from '@/components/SorySection/StorySection';
-import { useSearchParams } from 'next/navigation';
-import React from 'react';
+import React, { use } from 'react';
 
-export default function LiteraryWritingsPage() {
-  const searchParam = useSearchParams();
-  const type = searchParam.get('type');
-  console.log(type, 'type');
+export default function LiteraryWritingsPage({ searchParams }) {
+  const params = use(searchParams);
+  const type = params?.type || '';
 
   return (
     <div className="flex flex-col items-center pt-100px xl:pt-0 pb-50px">

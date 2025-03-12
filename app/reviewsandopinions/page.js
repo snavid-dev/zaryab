@@ -6,12 +6,11 @@ import FullAd from '@/components/FullAd/FullAd';
 import Heading1 from '@/components/Heading1/Heading1';
 import SimilarHorizontalCard from '@/components/SimilarHorizontalCard/SimilarHorizontalCard';
 import SmallAd from '@/components/SmallAd/SmallAd';
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import axios from '@/utils/api';
 import Pagination from '@/components/Pagination/Pagination';
-import { useSearchParams } from 'next/navigation';
 
-export default function ReviewsAndOpinionsPage() {
+export default function ReviewsAndOpinionsPage({ searchParams }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 
@@ -21,8 +20,8 @@ export default function ReviewsAndOpinionsPage() {
   const [typeFilter, setTypeFilter] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
 
-  const searchParam = useSearchParams();
-  const reviewType = searchParam.get('review_type');
+  const params = use(searchParams);
+  const reviewType = params?.review_type || '';
 
   useEffect(() => {
     const fetchData = async () => {

@@ -4,13 +4,12 @@ import ArrowLink from '@/components/ArrowLink/ArrowLink';
 import FullAd from '@/components/FullAd/FullAd';
 import Heading1 from '@/components/Heading1/Heading1';
 import PodcastCard from '@/components/PodcastCard/PodcastCard';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, use } from 'react';
 
 import axios from '@/utils/api';
 import Pagination from '@/components/Pagination/Pagination';
-import { useSearchParams } from 'next/navigation';
 
-export default function PodcastsPage() {
+export default function PodcastsPage({ searchParams }) {
   // get data
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
@@ -20,8 +19,8 @@ export default function PodcastsPage() {
   const [hasFetched, setHasFetched] = useState(false);
   const ref = useRef(null);
 
-  const searchParam = useSearchParams();
-  const podcastType = searchParam.get('podcast_type');
+  const params = use(searchParams);
+  const podcastType = params?.podcast_type || '';
 
   useEffect(() => {
     const fetchData = async () => {

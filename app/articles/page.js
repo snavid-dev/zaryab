@@ -5,12 +5,11 @@ import FullAd from '@/components/FullAd/FullAd';
 import Heading1 from '@/components/Heading1/Heading1';
 import SimilarHorizontalCard from '@/components/SimilarHorizontalCard/SimilarHorizontalCard';
 import SmallAd from '@/components/SmallAd/SmallAd';
-import { useEffect, useRef, useState } from 'react';
+import { use, useEffect, useRef, useState } from 'react';
 import axios from '@/utils/api';
 import Pagination from '@/components/Pagination/Pagination';
-import { useSearchParams } from 'next/navigation';
 
-export default function ArticlesPage() {
+export default function ArticlesPage({ searchParams }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 
@@ -20,8 +19,8 @@ export default function ArticlesPage() {
   const [typeFilter, setTypeFilter] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
 
-  const searchParam = useSearchParams();
-  const articleType = searchParam.get('article_type');
+  const params = use(searchParams);
+  const articleType = params?.article_type || '';
 
   useEffect(() => {
     const fetchData = async () => {

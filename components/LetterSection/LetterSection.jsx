@@ -6,15 +6,14 @@ import FullAd from '../FullAd/FullAd';
 import { useEffect, useState } from 'react';
 import axios from '@/utils/api';
 import Pagination from '../Pagination/Pagination';
-import { useSearchParams } from 'next/navigation';
 
-export default function LettersSection() {
+export default function LettersSection({ params }) {
   const [data, setData] = useState(null);
   const [Error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
-  const searchParam = useSearchParams();
-  const letterType = searchParam.get('magazine_type');
+
+  const letterType = params?.magazine_type || '';
 
   useEffect(() => {
     const fetchData = async () => {

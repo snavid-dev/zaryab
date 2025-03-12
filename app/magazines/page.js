@@ -3,14 +3,16 @@ import ArchivedLettersSection from '@/components/ArchiveLettersSection/ArchiveLe
 import Authors from '@/components/Authors/Authors';
 import LettersSection from '@/components/LetterSection/LetterSection';
 import SmallAd from '@/components/SmallAd/SmallAd';
+import { use } from 'react';
 
-export default function LettersPage() {
+export default function LettersPage({ searchParams }) {
+  const params = use(searchParams);
   return (
     // it has 5 sections
     <div className="flex flex-col items-center mt-130px xl:mt-50px mb-50px">
       {/*  letters section  */}
       <div>
-        <LettersSection />
+        <LettersSection params={params} />
       </div>
       {/*  archive letters section */}
       {/* <div className="mt-28">
