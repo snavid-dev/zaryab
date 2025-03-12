@@ -109,7 +109,7 @@ export default function Header() {
                   link={'/reviewsandopinions'}
                 />
                 <Links
-                  title="نشست ها"
+                  title="کتاب صوتی"
                   link={'/podcasts'}
                 />
                 <Links
@@ -232,7 +232,7 @@ export default function Header() {
                 onClick={() => setMenu(!menu)}
               />
               <Links
-                title="نشست ها"
+                title="کتاب صوتی"
                 link={'/podcasts'}
                 onClick={() => setMenu(!menu)}
               />

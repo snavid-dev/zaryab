@@ -410,7 +410,7 @@ export default function Footer() {
           <div className={`col-span-1 xl:col-span-2`}>
             <Link2
               link="/podcasts"
-              title="نشست ها"
+              title="کتاب صوتی"
               head={true}
             />
           </div>

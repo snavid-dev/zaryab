@@ -61,13 +61,17 @@ export default function PodcastCard({ data, isVisible }) {
           {/*  it has tow rows  */}
           <div className="mt-3">
             <div className="rtl flex">
-              <p className="font-common-heavy text-xl text-20px ">میزبان:</p>
+              <p className="font-common-heavy text-xl text-20px ml-1">
+                گوینده:
+              </p>
               <p className="font-common-regular text-xl text-20px ">
                 {data?.host}
               </p>
             </div>
             <div className="rtl flex">
-              <p className="font-common-heavy text-xl text-20px ">مهمان:</p>
+              <p className="font-common-heavy text-xl text-20px ml-1">
+                نویسنده/شاعر:
+              </p>
               <p className="font-common-regular text-xl text-20px ">
                 {data?.guest}
               </p>
@@ -75,13 +79,17 @@ export default function PodcastCard({ data, isVisible }) {
           </div>
           <div className="rtl flex mt-3">
             <div className="flex ml-4">
-              <p className="font-common-heavy text-12px md:text-18px">تاریخ:</p>
+              <p className="font-common-heavy text-12px md:text-18px ml-1">
+                تاریخ:
+              </p>
               <p className="font-common-regular text-12px md:text-18px">
                 {data?.date}
               </p>
             </div>
             <div className="flex">
-              <p className="font-common-heavy text-12px md:text-18px">طول:</p>
+              <p className="font-common-heavy text-12px md:text-18px ml-1">
+                مدت زمان:
+              </p>
               <p className="font-common-regular text-12px md:text-18px">
                 <span className="font-common-heavy text-12px md:text-18px">
                   {data?.duration}

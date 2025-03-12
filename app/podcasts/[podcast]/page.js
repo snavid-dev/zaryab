@@ -140,18 +140,20 @@ export default function PodcastSinglePage({ params }) {
         </div>
         {/* the host and guest section */}
         <div className="hidden md:block md:col-span-1 xl:col-span-3"></div>
-        <div className="col-span-6 md:col-span-4 xl:col-span-6 flex justify-center items-center mt-5">
+        <div className="col-span-6 md:col-span-4 xl:col-span-6 flex justify-center items-center mt-5 rtl">
           <div className="flex justify-start items-center rtl w-1/2">
-            <div className="font-common-lg text-16px xl:text-20px">
-              مهمان دار:
+            <div className="font-common-lg text-12px md:text-16px xl:text-20px ml-1">
+              گوینده:
             </div>
-            <div className="font-common-regular text-16px xl:text-20px">
+            <div className="font-common-regular text-12px md:text-16px xl:text-20px">
               {podcast?.host}
             </div>
           </div>
           <div className="flex justify-start items-center rtl w-1/2">
-            <div className="font-common-lg text-16px xl:text-20px">مهمان:</div>
-            <div className="font-common-regular text-16px xl:text-20px">
+            <div className="font-common-lg text-12px md:text-16px xl:text-20px ml-1">
+              نویسنده/شاعر:
+            </div>
+            <div className="font-common-regular text-12px md:text-16px xl:text-20px">
               {podcast?.guest}
             </div>
           </div>
@@ -159,7 +161,7 @@ export default function PodcastSinglePage({ params }) {
         <div className="hidden md:block md:col-span-1 xl:col-span-3"></div>
         {/* player */}
         <div className="hidden md:block md:col-span-1 xl:col-span-3"></div>
-        <div className="w-full mt-14 col-span-6 md:col-span-4 xl:col-span-6 flex flex-col items-center">
+        <div className="w-full xl:mt-14 col-span-6 md:col-span-4 xl:col-span-6 flex flex-col items-center">
           <audio
             ref={audioRef}
             src={podcast?.mp3_file}
@@ -272,7 +274,7 @@ export default function PodcastSinglePage({ params }) {
       {/*  podcast text  */}
       <div className="main-container mt-14">
         <div className="col-span-6 xl:col-span-12 rtl mb-7">
-          <Heading1 title="نوشتار نشست" />
+          <Heading1 title="نوشتار کتاب صوتی" />
         </div>
         <div className="col-span-6 xl:col-span-12">
           <div
@@ -288,9 +290,9 @@ export default function PodcastSinglePage({ params }) {
         <div className="mt-14 col-span-6 xl:col-span-12">
           {/*  it has two rows  */}
           <div className="flex flex-row-reverse justify-between">
-            <Heading1 title="نشست ها" />
+            <Heading1 title="کتاب های صوتی" />
             <ArrowLink
-              title="همه نشست ها"
+              title="همه کتاب های صوتی"
               path="/podcasts"
             />
           </div>

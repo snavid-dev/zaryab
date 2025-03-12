@@ -69,9 +69,9 @@ export default function Podcasts() {
             className="col-span-6 xl:col-span-12 flex flex-row-reverse justify-between translate-y-200px opacity-0"
             ref={titleRef}
           >
-            <Heading1 title="نشست ها" />
+            <Heading1 title="کتاب های صوتی" />
             <ArrowLink
-              title="همه نشست ها"
+              title="همه کتاب های صوتی"
               path="/podcasts"
             />
           </div>

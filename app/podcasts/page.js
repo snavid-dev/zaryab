@@ -80,11 +80,11 @@ export default function PodcastsPage() {
           {/*  the title of the page  */}
           <div className="main-container mt-7 rtl">
             <div className="col-span-6 md:col-span-3 xl:col-span-6">
-              <Heading1 title="نشست ها" />
+              <Heading1 title="کتاب های صوتی" />
             </div>
             <div className="col-span-6 md:col-span-3 xl:col-span-6 flex justify-start md:justify-end">
               <ArrowLink
-                title="همه نشست ها"
+                title="همه کتاب های صوتی"
                 path="/podcasts"
               />
             </div>
