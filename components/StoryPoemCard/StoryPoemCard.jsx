@@ -75,10 +75,24 @@ export default function StoryPoemCard({ data, isStory, isVisible }) {
       <div className="font-new-extra-bold text-36px w-full rtl md:text-76px lg:text-50px mt-3">
         {truncateString(data?.title)}
       </div>
-      <div
-        className="font-common-thin text-8px md:text-18px lg:text-17px mt-3 text-right"
-        dangerouslySetInnerHTML={{ __html: data?.excerpt }}
-      ></div>
+      {isStory ? (
+        <div
+          className="font-common-thin text-8px md:text-18px lg:text-17px mt-3 text-right"
+          dangerouslySetInnerHTML={{ __html: data?.excerpt }}
+        ></div>
+      ) : (
+        <div className="font-common-thin text-8px md:text-18px lg:text-17px mt-3 text-right">
+          <div
+            dangerouslySetInnerHTML={{ __html: data?.excerpt.split('\n')[0] }}
+          ></div>
+          <div
+            dangerouslySetInnerHTML={{ __html: data?.excerpt.split('\n')[1] }}
+          ></div>
+          <div
+            dangerouslySetInnerHTML={{ __html: data?.excerpt.split('\n')[2] }}
+          ></div>
+        </div>
+      )}
       <div className="w-full flex items-center justify-between mt-3 text-xs">
         <div className="rtl flex items-center text-right">
           <b className="font-common-bold text-8px md:text-18px lg:text-12px ml-1">

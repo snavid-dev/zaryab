@@ -17,25 +17,37 @@ export default function SimilarHorizontalStoryCard({
         {data?.featured_image ? (
           <Image
             src={data?.featured_image}
-            alt="story image"
+            alt={data?.title}
             layout="fill"
             objectFit="cover"
             className="absolute"
           />
         ) : (
-          <div className="w-full h-full flex justify-center items-center">
-            the image not found
-          </div>
+          <div className="w-full h-full flex justify-center items-center"></div>
         )}
       </div>
       <div className="col-span-4 xl:col-span-7 gap relative">
         <div className="col-span-4 text-16px md:text-30px xl:text-43px font-new-extra-black">
           {data?.title}
         </div>
-        <div
-          className="col-span-4 text-6px md:text-12px xl:text-14px 2xl:text-20px font-smallText"
-          dangerouslySetInnerHTML={{ __html: data?.excerpt }}
-        ></div>
+        {isStory ? (
+          <div
+            className="col-span-4 text-6px md:text-12px xl:text-14px 2xl:text-20px font-smallText"
+            dangerouslySetInnerHTML={{ __html: data?.excerpt }}
+          ></div>
+        ) : (
+          <div className="font-common-thin text-8px md:text-18px lg:text-17px mt-3 text-right">
+            <div
+              dangerouslySetInnerHTML={{ __html: data?.excerpt.split('\n')[0] }}
+            ></div>
+            <div
+              dangerouslySetInnerHTML={{ __html: data?.excerpt.split('\n')[1] }}
+            ></div>
+            <div
+              dangerouslySetInnerHTML={{ __html: data?.excerpt.split('\n')[2] }}
+            ></div>
+          </div>
+        )}
         <div className="w-full xl:col-span-7 xl:grid xl:grid-cols-7 xl:gap absolute bottom-0">
           <div className="w-full flex xl:col-span-3 xl:grid xl:grid-cols-3 gap">
             <div className="xl:col-span-1">
@@ -72,7 +84,7 @@ export default function SimilarHorizontalStoryCard({
           </div>
           <div className="col-span-1 h-5 hidden xl:block"></div>
           {isStory ? (
-            <div className="col-span-2 xl:grid grid-cols-3 gap hidden">
+            <div className="col-span-3 xl:grid grid-cols-3 gap hidden">
               {data?.categories.map(
                 (category, index) =>
                   index + 1 < 4 && (
