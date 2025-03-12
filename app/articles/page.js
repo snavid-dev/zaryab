@@ -1,5 +1,4 @@
 'use client';
-
 import Authors from '@/components/Authors/Authors';
 import Filter from '@/components/Filter/Filter';
 import FullAd from '@/components/FullAd/FullAd';
