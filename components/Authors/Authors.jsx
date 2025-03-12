@@ -68,7 +68,7 @@ export default function Authors() {
         <div className="main-container ">
           {/* it have two rows */}
           <div
-            className="col-span-6 xl:col-span-12 flex flex-col items-end md:flex-row-reverse md:justify-between translate-y-200px opacity-0"
+            className="col-span-6 xl:col-span-12 flex flex-col items-end md:flex-row-reverse md:justify-between md:items-center translate-y-200px opacity-0"
             ref={titleRef}
           >
             <Heading1 title="نویسنده ها و شاعران آوای زریاب" />
