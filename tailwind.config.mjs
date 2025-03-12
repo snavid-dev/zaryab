@@ -30,6 +30,7 @@ export default {
       '28px': '28px',
       '30px': '30px',
       '36px': '36px',
+      '40px': '40px',
       '43px': '43px',
       '46px': '46px',
       '50px': '50px',

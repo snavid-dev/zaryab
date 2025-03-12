@@ -46,7 +46,7 @@ export default function StoryHarizontalCard({ data, isVisible }) {
         )}
       </div>
       <div className="col-span-4 xl:col-span-7 gap relative">
-        <div className="col-span-4 text-27px md:text-59px font-new-extra-black">
+        <div className="col-span-4 text-20px md:text-40px font-new-extra-black">
           {data?.title}
         </div>
         <div className="col-span-4 text-6px md:text-12px font-smallText">
