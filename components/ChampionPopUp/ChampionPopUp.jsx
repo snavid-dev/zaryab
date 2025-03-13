@@ -7,14 +7,14 @@ import { IoClose } from 'react-icons/io5';
 
 export default function ChampionPopUp() {
   const [showPopUp, setShowPopUp] = useState(false);
-  const [data, setData] = useState(null);
+  const [data, setData] = useState({});
   const [Error, setError] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
   const [hasFetched, setHasFetched] = useState(false);
   const ref = useRef(null);
 
   useEffect(() => {
-    if (isVisible && data) {
+    if (isVisible && !(Object.entries(data).length === 0)) {
       const timer = setTimeout(() => {
         setShowPopUp(true);
       }, 7000);
