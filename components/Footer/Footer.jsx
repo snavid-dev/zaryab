@@ -479,7 +479,7 @@ export default function Footer() {
             >
               {data?.name && (
                 <Link2
-                  link={data.slug}
+                  link={`/search/?category=${data.slug}`}
                   title={data.name}
                 />
               )}

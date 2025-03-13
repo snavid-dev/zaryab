@@ -130,39 +130,43 @@ export default function Filter({
               showFilterBody ? 'h-full block' : 'h-0 hidden'
             } transition-all duration-700`}
       >
-        <div className="w-full border-t-2 border-b-2 border-black mt-1">
-          <div className="w-full flex justify-end font-common-heavy text-20px md:text-30px my-5">
-            {title}
+        {!(type == 'search') && (
+          <div className="w-full border-t-2 border-b-2 border-black mt-1">
+            <div className="w-full flex justify-end font-common-heavy text-20px md:text-30px my-5">
+              {title}
+            </div>
+            <div className="flex flex-col h-[200px] flex-wrap rtl">
+              {categoryType?.map((category, index) => (
+                <FilterItem
+                  key={index}
+                  data={category}
+                  filteredItems={filteredItems}
+                  setFilteredItems={setFilteredItems}
+                />
+              ))}
+            </div>
           </div>
-          <div className="flex flex-col h-[200px] flex-wrap rtl">
-            {categoryType?.map((category, index) => (
-              <FilterItem
-                key={index}
-                data={category}
-                filteredItems={filteredItems}
-                setFilteredItems={setFilteredItems}
-              />
-            ))}
+        )}
+        {!(type === 'letter') && (
+          <div className="w-full border-t-2 border-b-2 border-black mt-1">
+            <div className="w-full flex justify-end font-common-heavy text-20px md:text-30px my-5">
+              جانر ها
+            </div>
+            <div className="flex flex-col h-[200px] flex-wrap rtl">
+              {categories?.map(
+                (data, index) =>
+                  data?.name && (
+                    <FilterItem
+                      key={index}
+                      data={data}
+                      filteredItems={categoryItems}
+                      setFilteredItems={setCategoryItems}
+                    />
+                  )
+              )}
+            </div>
           </div>
-        </div>
-        <div className="w-full border-t-2 border-b-2 border-black mt-1">
-          <div className="w-full flex justify-end font-common-heavy text-20px md:text-30px my-5">
-            جانر ها
-          </div>
-          <div className="flex flex-col h-[200px] flex-wrap rtl">
-            {categories?.map(
-              (data, index) =>
-                data?.name && (
-                  <FilterItem
-                    key={index}
-                    data={data}
-                    filteredItems={categoryItems}
-                    setFilteredItems={setCategoryItems}
-                  />
-                )
-            )}
-          </div>
-        </div>
+        )}
         <div className="flex flex-row-reverse justify-between w-2/3 mt-3">
           <button
             onClick={filterDone}

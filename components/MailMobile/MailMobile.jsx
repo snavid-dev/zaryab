@@ -7,6 +7,7 @@ import axios from '@/utils/api';
 
 export default function MailMobile() {
   const [newLetter, setNewLetter] = useState(null);
+  const [Error, setError] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
