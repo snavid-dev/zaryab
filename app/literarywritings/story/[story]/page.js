@@ -121,7 +121,7 @@ export default function StorySinglePage({ params }) {
                 </div>
                 <div className="w-full grid grid-cols-6 xl:grid-cols-9 items-center gap">
                   {/* time */}
-                  <div className="col-span-2 pl-3 items-end grid grid-cols-2 gap translate-y-200px opacity-0">
+                  <div className="col-span-2 pl-3 items-end grid grid-cols-2 gap">
                     <div className="rtl col-span-1 flex text-right">
                       <b className="font-common-bold text-6px md:text-7px lg:text-12px mt-2 md:mt-1 ml-1 lg:mt-0">
                         زمان:
