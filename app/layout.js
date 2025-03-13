@@ -73,9 +73,7 @@ export const metadata = {
       url: 'https://portfolio-poorya.vercel.app/',
     },
   ],
-  icons: {
-    icon: '/assets/svg/favicon.svg',
-  },
+
   manifest: '/site.webmanifest',
 };
 
