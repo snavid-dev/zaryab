@@ -8,7 +8,7 @@ export const metadata = {
   description: 'وبسایت ادبی آوای زریاب',
   openGraph: {
     title: 'آوای زریاب',
-    description: 'مقاله های علمی پزشکی و دندان پزشکی',
+    description: 'وبسایت ادبی آوای زریاب',
     url: 'https://zaryb3.vercel.app',
     siteName: 'وبسایت ادبی آوای زریاب',
     images: [
