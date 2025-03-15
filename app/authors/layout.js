@@ -4,8 +4,8 @@ export const metadata = {
   title: 'نویسنده ها',
   description: 'نویسنده های آوای زریاب',
   openGraph: {
-    title: 'در باره ما',
-    description: 'در باره تیم آوای زریاب',
+    title: 'نویسنده ها',
+    description: 'نویسنده های آوای زریاب',
     url: 'https://zaryb3.vercel.app',
     siteName: 'وبسایت ادبی آوای زریاب',
     images: [
@@ -13,7 +13,7 @@ export const metadata = {
         url: 'https://images.pexels.com/photos/1831744/pexels-photo-1831744.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
         width: 1129,
         height: 750,
-        alt: 'در باره ما',
+        alt: 'نویسنده های آوای زریاب',
       },
     ],
     locale: 'fa_IR',
@@ -22,8 +22,8 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     site: '@your_twitter_handle',
-    title: 'درباره ما',
-    description: 'در باره تیم آوای زریاب',
+    title: 'نویسنده ها',
+    description: 'نویسنده های آوای زریاب',
     images: [
       'https://images.pexels.com/photos/1831744/pexels-photo-1831744.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     ],
