@@ -93,7 +93,7 @@ export default function Header() {
             <nav className="w-full">
               <ul className="grid grid-cols-8 font-common-med rtl gap-30px">
                 <Links
-                  title="کلبه"
+                  title="خانه"
                   link={'/'}
                 />
                 <Links
@@ -212,7 +212,7 @@ export default function Header() {
           <nav className="w-full">
             <ul className="w-full font-common-med rtl">
               <Links
-                title="کلبه"
+                title="خانه"
                 link={'/'}
                 onClick={() => setMenu(!menu)}
               />

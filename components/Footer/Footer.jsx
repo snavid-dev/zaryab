@@ -298,7 +298,7 @@ export default function Footer() {
           <div className="col-span-1 xl:col-span-2">
             <Link2
               link="/"
-              title="کلبه"
+              title="خانه"
               head={true}
             />
           </div>

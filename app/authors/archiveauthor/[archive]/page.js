@@ -60,23 +60,23 @@ export default function AuthorPage({ params }) {
             {data?.title}
           </div>
           <div className="flex rtl mt-7 text-black">
-            <div className="font-common-heavy text-20px">موقعیت:</div>
+            <div className="font-common-heavy text-20px ml-1">موقعیت:</div>
             <div className="font-common-regular text-20px">
               {data?.location}
             </div>
           </div>
           <div className="flex rtl mt-3 text-black">
-            <div className="font-common-heavy text-20px">وظیفه:</div>
+            <div className="font-common-heavy text-20px ml-1">وظیفه:</div>
             <div className="font-common-regular text-20px">{data?.job}</div>
           </div>
           <div className="flex rtl mt-3 text-black">
-            <div className="font-common-heavy text-20px">تعداد نوشته ها:</div>
+            <div className="font-common-heavy text-20px ml-1"> تعداد آثار:</div>
             <div className="font-common-regular text-20px">
               {data?.total_letters}
             </div>
           </div>
           <div className="flex rtl mt-3 text-black">
-            <div className="font-common-heavy text-20px">سن:</div>
+            <div className="font-common-heavy text-20px ml-1">سن:</div>
             <div className="font-common-regular text-20px">{data?.age}</div>
           </div>
         </div>
