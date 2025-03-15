@@ -82,8 +82,6 @@ export async function generateMetadata({ params }) {
           url: 'https://portfolio-poorya.vercel.app/',
         },
       ],
-
-      manifest: '/site.webmanifest',
     };
   } catch (error) {
     console.error('Metadata fetch error:', error);
@@ -94,6 +92,7 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default function EposidesPage({ params }) {
-  return <EpisodePage params={params} />;
+export default async function EposidesPage({ params }) {
+  const param = await params.episode;
+  return <EpisodePage param={param} />;
 }

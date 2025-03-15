@@ -10,11 +10,10 @@ import { IoClose } from 'react-icons/io5';
 import axios from '@/utils/api';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
-import { use, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { IoIosSearch } from 'react-icons/io';
 
-export default function EposidesPage({ params }) {
-  const param = use(params);
+export default function EposidesPage({ param }) {
   const [data, setData] = useState(null);
   const [Error, setError] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -34,7 +33,7 @@ export default function EposidesPage({ params }) {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `/v1/stories/${param.episode}/?per_page=8&page=${currentPage}&story_type=${typeFilter}&categories=${categoryFilter}&episode_number=${searchNumber}&episode_title=${searchTitle}`
+          `/v1/stories/${param}/?per_page=8&page=${currentPage}&story_type=${typeFilter}&categories=${categoryFilter}&episode_number=${searchNumber}&episode_title=${searchTitle}`
         );
 
         setData(response.data);
