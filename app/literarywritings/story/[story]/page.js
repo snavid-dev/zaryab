@@ -11,11 +11,11 @@ export async function generateMetadata({ params }) {
     const data = await response.json();
 
     return {
-      title: data?.title,
-      description: `داستان ${data?.title}`,
+      title: `${data?.title} قسمت ${data?.episode_title}`,
+      description: `داستان ${data?.title} قسمت ${data?.episode_title}`,
       openGraph: {
-        title: data?.title,
-        description: `داستان ${data?.title}`,
+        title: `${data?.title} قسمت ${data?.episode_title}`,
+        description: `داستان ${data?.title} قسمت ${data?.episode_title}`,
         url: 'https://zaryb3.vercel.app',
         siteName: 'وبسایت ادبی آوای زریاب',
         images: [
@@ -32,8 +32,8 @@ export async function generateMetadata({ params }) {
       twitter: {
         card: 'summary_large_image',
         site: '@your_twitter_handle',
-        title: data?.title,
-        description: `داستان ${data?.title}`,
+        title: `${data?.title} قسمت ${data?.episode_title}`,
+        description: `داستان ${data?.title} قسمت ${data?.episode_title}`,
         images: [data?.featured_image],
       },
       viewport: 'width=device-width, initial-scale=1.0',
