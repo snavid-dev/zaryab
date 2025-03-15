@@ -34,9 +34,7 @@ export async function generateMetadata({ params }) {
         site: '@your_twitter_handle',
         title: data?.story_title,
         description: `داستان ${data?.story_title}`,
-        images: [
-          'https://images.pexels.com/photos/1831744/pexels-photo-1831744.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-        ],
+        images: [data?.data[0]?.featured_image],
       },
       viewport: 'width=device-width, initial-scale=1.0',
       robots: {
