@@ -1,11 +1,11 @@
 import React from 'react';
 
 export const metadata = {
-  title: 'مقاله ها',
-  description: 'مقاله های ادبی آوای زریاب',
+  title: 'نقد و نظر ها',
+  description: 'نقد و نظر کتاب ها ، اشعار و غیره آثار ادبی',
   openGraph: {
-    title: 'مقاله ها',
-    description: 'مقاله های ادبی آوای زریاب',
+    title: 'نقد و نظر ها',
+    description: 'نقد و نظر کتاب ها ، اشعار و غیره آثار ادبی',
     url: 'https://zaryb3.vercel.app',
     siteName: 'وبسایت ادبی آوای زریاب',
     images: [
@@ -13,7 +13,7 @@ export const metadata = {
         url: 'https://images.pexels.com/photos/1831744/pexels-photo-1831744.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
         width: 1129,
         height: 750,
-        alt: 'مقاله ها',
+        alt: 'نقد و نظر ها',
       },
     ],
     locale: 'fa_IR',
@@ -22,8 +22,8 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     site: '@your_twitter_handle',
-    title: 'مقاله ها',
-    description: 'مقاله های ادبی آوای زریاب',
+    title: 'نقد و نظر ها',
+    description: 'نقد و نظر کتاب ها ، اشعار و غیره آثار ادبی',
     images: [
       'https://images.pexels.com/photos/1831744/pexels-photo-1831744.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     ],
@@ -62,7 +62,6 @@ export const metadata = {
     'نقل‌قول‌های ادبی',
     'متن‌های عاشقانه',
     'متن‌های انگیزشی',
-    'مقاله های ادبی',
     'نقد و نظر آثار ادبی',
   ],
 
@@ -76,6 +75,6 @@ export const metadata = {
   manifest: '/site.webmanifest',
 };
 
-export default function ArticlePageLayout({ children }) {
+export default function ReviewPageLayout({ children }) {
   return <div>{children}</div>;
 }
