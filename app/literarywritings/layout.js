@@ -74,6 +74,6 @@ export const metadata = {
   manifest: '/site.webmanifest',
 };
 
-export default function AboutPageLayout({ children }) {
+export default function LiteraryWritingsPageLayout({ children }) {
   return <div>{children}</div>;
 }
