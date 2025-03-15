@@ -45,6 +45,13 @@ export default function LetterSinglePage({ params }) {
     );
   };
 
+  const modalHandle = (index) => {
+    setModal(true);
+    console.log(index);
+
+    setCurrentIndex(index);
+  };
+
   return (
     // main container of the page
     <div className="flex flex-col items-center">
@@ -68,7 +75,7 @@ export default function LetterSinglePage({ params }) {
         {data?.images.map((letter, index) => (
           <div
             className="col-span-6 md:col-span-3 xl:col-span-3 flex flex-col items-center mt-7 cursor-pointer"
-            onClick={() => setModal(true)}
+            onClick={() => modalHandle(index)}
             key={index}
           >
             <div className="w-full flex justify-center items-center p-3 border-4 border-black">
