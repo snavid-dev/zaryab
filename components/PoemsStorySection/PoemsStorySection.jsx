@@ -19,10 +19,8 @@ export default function PoemsStorySection() {
     fetchData();
   }, []);
 
-  console.log(data, 'poorya');
-
   return (
-    <div className="main-container mt-7">
+    <div className="main-container mt-7 rtl">
       {data?.map((data, index) => (
         <StoryPoemCard
           data={data}

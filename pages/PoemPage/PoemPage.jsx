@@ -6,7 +6,6 @@ import { useRef, useState, useEffect } from 'react';
 
 import axios from '@/utils/api';
 
-import { use } from 'react';
 import Genre from '@/components/Genre/Genre';
 import Heading1 from '@/components/Heading1/Heading1';
 import ArrowLink from '@/components/ArrowLink/ArrowLink';
@@ -199,7 +198,7 @@ export default function PoemPage({ param }) {
       {/*  the similar stories  */}
       <div className="w-full flex justify-end">
         <div className="w-full">
-          <SimilarPoems slug={param.poem} />
+          <SimilarPoems slug={param} />
         </div>
       </div>
       {/* full ad */}
