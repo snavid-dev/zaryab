@@ -22,7 +22,7 @@ export default function StoryCollectionPage({ params }) {
         const response = await axios.get(
           `/v1/poems/collection/${param.collection}/?poem_type=${typeFilter}&categories=${categoryFilter}`
         );
-        setData(response.data.data);
+        setData(response.data);
       } catch (err) {
         setError(err.response?.data?.message || err.message);
       }
@@ -49,17 +49,17 @@ export default function StoryCollectionPage({ params }) {
       {/* the title of the story collection */}
       <div className="main-container mt-7">
         <div className="col-span-6 xl:col-span-12 rtl">
-          <Heading1 title={param.collection} />
+          <Heading1 title={data?.collection_name} />
         </div>
       </div>
 
       <div className="main-container mt-7 pb-14 rtl">
-        {filterDone && data.length === 0 ? (
+        {filterDone && data?.data?.length === 0 ? (
           <div className="col-span-6 xl:col-span-12 flex justify-center items-center font-common-regular text-20px h-300px">
             هیچ موردی یافت نشد
           </div>
         ) : (
-          data?.map((data, index) => (
+          data?.data?.map((data, index) => (
             <StoryPoemCard
               isStory={false}
               key={index}

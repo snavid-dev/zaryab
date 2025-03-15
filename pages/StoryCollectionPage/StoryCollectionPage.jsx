@@ -21,13 +21,15 @@ export default function StoryCollectionPage({ param }) {
         const response = await axios.get(
           `/v1/stories/collection/${param}/?story_type=${typeFilter}&categories=${categoryFilter}`
         );
-        setData(response.data.data);
+        setData(response.data);
       } catch (err) {
         setError(err.response?.data?.message || err.message);
       }
     };
     fetchData();
   }, [typeFilter, categoryFilter]);
+
+  console.log(data, 'data');
 
   return (
     // the main container of the page
@@ -48,17 +50,17 @@ export default function StoryCollectionPage({ param }) {
       {/* the title of the story collection */}
       <div className="main-container mt-7">
         <div className="col-span-6 xl:col-span-12 rtl">
-          <Heading1 title={param} />
+          <Heading1 title={data?.collection_name} />
         </div>
       </div>
 
       <div className="main-container mt-7 pb-14 rtl">
-        {filterDone && data.length === 0 ? (
+        {filterDone && data?.data?.length === 0 ? (
           <div className="col-span-6 xl:col-span-12 flex justify-center items-center font-common-regular text-20px h-300px">
             هیچ موردی یافت نشد
           </div>
         ) : (
-          data?.map((data, index) => (
+          data?.data?.map((data, index) => (
             <StoryPoemCard
               data={data}
               isStory={true}

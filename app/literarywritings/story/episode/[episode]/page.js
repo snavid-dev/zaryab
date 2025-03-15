@@ -20,7 +20,7 @@ export async function generateMetadata({ params }) {
         siteName: 'وبسایت ادبی آوای زریاب',
         images: [
           {
-            url: data?.data[0]?.featured_image,
+            url: data?.story_image,
             width: 1129,
             height: 750,
             alt: data?.story_title,
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }) {
         site: '@your_twitter_handle',
         title: data?.story_title,
         description: `داستان ${data?.story_title}`,
-        images: [data?.data[0]?.featured_image],
+        images: [data?.story_image],
       },
       viewport: 'width=device-width, initial-scale=1.0',
       robots: {

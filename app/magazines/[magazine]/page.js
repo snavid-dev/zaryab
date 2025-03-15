@@ -45,12 +45,10 @@ export default function LetterSinglePage({ params }) {
     );
   };
 
-  const modalHandle = (index) => {
+  function modalHandle(index) {
     setModal(true);
-    console.log(index);
-
     setCurrentIndex(index);
-  };
+  }
 
   return (
     // main container of the page
