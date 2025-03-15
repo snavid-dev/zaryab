@@ -6,6 +6,9 @@ import Footer from '@/components/Footer/Footer';
 export const metadata = {
   title: 'آوای زریاب',
   description: 'وبسایت ادبی آوای زریاب',
+  icons: {
+    icon: '/assets/svg/favicon.svg',
+  },
   openGraph: {
     title: 'آوای زریاب',
     description: 'وبسایت ادبی آوای زریاب',
