@@ -224,11 +224,11 @@ export default function Footer() {
             </div>
             <div className="hidden md:block md:col-span-1 xl:hidden"></div>
             <div className="col-span-6 md:col-span-3">
-              <div className="relative w-full h-450px lg:h-430px mt-20px">
+              <div className="relative w-full h-490px md:h-510px xl:h-390px 2xl:h-510px mt-20px">
                 {newLetter?.featured_image ? (
                   <Image
                     src={newLetter?.featured_image}
-                    alt=""
+                    alt="new magazine"
                     layout="fill"
                     objectFit="cover"
                     className="absolute"
@@ -245,7 +245,7 @@ export default function Footer() {
                    bg-footerBtn hover:bg-footer transition-all border-2 border-footerBtn text-27px md:text-28px
                    "
               >
-                خواندن نامه
+                خواندن مجله
               </Link>
             </div>
           </div>

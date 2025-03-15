@@ -23,7 +23,6 @@ export default function SimilarStories({ slug }) {
     };
     fetchData();
   }, []);
-  console.log(data, 'similar');
 
   return (
     // the main container of the section

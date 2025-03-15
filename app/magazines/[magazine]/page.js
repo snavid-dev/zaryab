@@ -41,7 +41,7 @@ export default function LetterSinglePage({ params }) {
 
   const handleBackward = () => {
     setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + images.length) % data?.images.length
+      (prevIndex) => (prevIndex - 1 + data?.images.length) % data?.images.length
     );
   };
 
