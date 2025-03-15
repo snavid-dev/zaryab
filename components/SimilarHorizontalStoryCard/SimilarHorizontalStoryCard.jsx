@@ -51,7 +51,7 @@ export default function SimilarHorizontalStoryCard({
           </div>
         )}
         <div className="w-full xl:col-span-7 xl:grid xl:grid-cols-7 xl:gap absolute bottom-0">
-          <div className="w-full flex xl:col-span-3 xl:grid xl:grid-cols-3 gap">
+          <div className="w-full flex xl:col-span-4 xl:grid xl:grid-cols-3 gap">
             <div className="xl:col-span-1">
               <div className="rtl flex text-right">
                 <p className="font-common-thin ml-1 text-8px xl:text-14px">
@@ -84,7 +84,7 @@ export default function SimilarHorizontalStoryCard({
               </div>
             </div>
           </div>
-          <div className="col-span-1 h-5 hidden xl:block"></div>
+
           {isStory ? (
             <div className="col-span-3 xl:grid grid-cols-3 gap hidden">
               {data?.categories.map(
@@ -100,7 +100,7 @@ export default function SimilarHorizontalStoryCard({
               )}
             </div>
           ) : (
-            <div className="col-span-2 xl:grid grid-cols-3 gap hidden">
+            <div className="col-span-2 xl:grid grid-cols-3 gap hidden bg-blue-500">
               {data?.poem_type.map(
                 (category, index) =>
                   index + 1 < 4 && (
