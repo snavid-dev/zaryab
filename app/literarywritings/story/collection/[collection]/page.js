@@ -1,80 +1,96 @@
-'use client';
-import Authors from '@/components/Authors/Authors';
-import Filter from '@/components/Filter/Filter';
-import FullAd from '@/components/FullAd/FullAd';
-import Heading1 from '@/components/Heading1/Heading1';
-import SmallAd from '@/components/SmallAd/SmallAd';
-import StoryPoemCard from '@/components/StoryPoemCard/StoryPoemCard';
-import { use, useEffect, useState } from 'react';
-import axios from '@/utils/api';
+import StoryCollectionPage from '@/pages/StoryCollectionPage/StoryCollectionPage';
 
-export default function StoryCollectionPage({ params }) {
-  const param = use(params);
-  const [data, setData] = useState(null);
-  const [Error, setError] = useState(null);
-  const [filterDone, setFilterDone] = useState(false);
-  const [typeFilter, setTypeFilter] = useState('');
-  const [categoryFilter, setCategoryFilter] = useState('');
+export async function generateMetadata({ params }) {
+  try {
+    const collection = await params.collection;
+    const response = await fetch(
+      `https://zariab.cyborgtech.co/wp-json/v1/stories/collection/${collection}`
+    );
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `/v1/stories/collection/${param.collection}/?story_type=${typeFilter}&categories=${categoryFilter}`
-        );
-        setData(response.data.data);
-      } catch (err) {
-        setError(err.response?.data?.message || err.message);
-      }
+    if (!response.ok) throw new Error('Failed to fetch metadata');
+    const data = await response.json();
+
+    return {
+      title: collection, // it is temporary
+      description: `مجموعه داستان های ${collection}`, // it is temporary
+      openGraph: {
+        title: collection, // it is temporary
+        description: `مجموعه داستان های ${collection}`, // it is temporary
+        url: 'https://zaryb3.vercel.app',
+        siteName: 'وبسایت ادبی آوای زریاب',
+        images: [
+          {
+            url: data?.data[0]?.featured_image,
+            width: 1129,
+            height: 750,
+            alt: data?.story_title,
+          },
+        ],
+        locale: 'fa_IR',
+        type: 'website',
+      },
+      twitter: {
+        card: 'summary_large_image',
+        site: '@your_twitter_handle',
+        title: collection,
+        description: `مجموعه داستان های ${collection}`, // it is temporary
+        images: [data?.data[0]?.featured_image],
+      },
+      viewport: 'width=device-width, initial-scale=1.0',
+      robots: {
+        index: true,
+        follow: true,
+      },
+
+      alternates: {
+        canonical: 'https://zaryb3.vercel.app',
+      },
+
+      keywords: [
+        'ادبیات',
+        'شعر',
+        'داستان',
+        'رمان',
+        'نثر',
+        'نقد ادبی',
+        'سبک نوشتاری',
+        'متن ادبی',
+        'شعر معاصر',
+        'ادبیات کلاسیک',
+        'نویسندگی خلاق',
+        'تحلیل داستان',
+        'روایت‌پردازی',
+        'سبک‌های ادبی',
+        'کتاب‌خوانی',
+        'معرفی کتاب',
+        'بهترین کتاب‌های ادبی',
+        'آموزش نویسندگی',
+        'الهام برای نویسندگی',
+        'جملات زیبا',
+        'نقل‌قول‌های ادبی',
+        'متن‌های عاشقانه',
+        'متن‌های انگیزشی',
+        'مقاله های ادبی',
+        'نقد و نظر آثار ادبی',
+      ],
+
+      authors: [
+        {
+          name: 'Cyborg Tech Creative Agency',
+          url: 'https://portfolio-poorya.vercel.app/',
+        },
+      ],
     };
-    fetchData();
-  }, [typeFilter, categoryFilter]);
+  } catch (error) {
+    console.error('Metadata fetch error:', error);
+    return {
+      title: 'خطا در بارگذاری کالکشن',
+      description: 'کالکشن یافت نشد یا مشکلی در سرور وجود دارد.',
+    };
+  }
+}
 
-  return (
-    // the main container of the page
-    <div className="flex flex-col items-center mt-100px xl:mt-0 mb-50px">
-      {/*  filter of the page  */}
-      <div className="main-container">
-        <div className="col-span-6 xl:col-span-12">
-          <Filter
-            type="story"
-            title="انواع داستان ها"
-            setFilter={setTypeFilter}
-            setCategoryFilter={setCategoryFilter}
-            setFilterDone={setFilterDone}
-          />
-        </div>
-      </div>
-
-      {/* the title of the story collection */}
-      <div className="main-container mt-7">
-        <div className="col-span-6 xl:col-span-12 rtl">
-          <Heading1 title={param.collection} />
-        </div>
-      </div>
-
-      <div className="main-container mt-7 pb-14 rtl">
-        {filterDone && data.length === 0 ? (
-          <div className="col-span-6 xl:col-span-12 flex justify-center items-center font-common-regular text-20px h-300px">
-            هیچ موردی یافت نشد
-          </div>
-        ) : (
-          data?.map((data, index) => (
-            <StoryPoemCard
-              data={data}
-              isStory={true}
-              key={index}
-            />
-          ))
-        )}
-      </div>
-
-      {/* autors section */}
-      <div>
-        <Authors />
-      </div>
-      {/* small ad
-      <SmallAd /> */}
-    </div>
-  );
+export default async function StoryCollectionPage1({ params }) {
+  const param = await params.collection;
+  return <StoryCollectionPage param={param} />;
 }

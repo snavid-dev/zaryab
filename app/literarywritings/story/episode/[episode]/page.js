@@ -90,7 +90,7 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default async function EposidesPage({ params }) {
+export default async function EposidesPage1({ params }) {
   const param = await params.episode;
   return <EpisodePage param={param} />;
 }
