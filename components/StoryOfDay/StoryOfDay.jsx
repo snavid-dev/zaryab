@@ -107,21 +107,20 @@ export default function StoryOfDay() {
             <div className="col-span-6 xl:col-span-12 main-container rtl mt-50px">
               {/* title of the story */}
               <div
-                className="col-span-6 xl:col-span-4 translate-y-200px opacity-0"
+                className="col-span-6 xl:col-span-5 translate-y-200px opacity-0"
                 id="storyTitle"
               >
                 <h1 className="flex flex-row xl:flex-col text-50px md:text-94px 2xl:text-[120px] font-new-black leading-67%">
                   <Link
                     href={`/literarywritings/story/${data?.slug}`}
-                    className="xl:leading-90%"
+                    className="xl:leading-100% w-[80%]"
                   >
                     {data?.title}
                   </Link>
                 </h1>
               </div>
-              <div className="hidden xl:col-span-1"></div>
               <div
-                className="col-span-6 xl:col-span-7 mt-20px xl:mt-0 translate-y-200px opacity-0"
+                className="col-span-6 xl:col-span-7 mt-20px xl:mt-0 placeholder:translate-y-200px opacity-0"
                 id="storyExcerpt"
               >
                 <p className="font-common rtl text-12px md:text-18px">
