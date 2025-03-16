@@ -12,10 +12,10 @@ export async function generateMetadata({ params }) {
 
     return {
       title: data?.title,
-      description: `${data?.title} معرفی نامه`,
+      description: `معرفی نامه ${data?.title}`,
       openGraph: {
         title: data?.title,
-        description: `${data?.title} معرفی نامه`,
+        description: `معرفی نامه ${data?.title}`,
         url: 'https://zaryb3.vercel.app',
         siteName: 'وبسایت ادبی آوای زریاب',
         images: [
@@ -33,7 +33,7 @@ export async function generateMetadata({ params }) {
         card: 'summary_large_image',
         site: '@your_twitter_handle',
         title: data?.title,
-        description: `${data?.title} معرفی نامه`,
+        description: `معرفی نامه ${data?.title}`,
         images: [data?.featured_image],
       },
       viewport: 'width=device-width, initial-scale=1.0',
