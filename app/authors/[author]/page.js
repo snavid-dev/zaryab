@@ -9,7 +9,6 @@ export async function generateMetadata({ params }) {
 
     if (!response.ok) throw new Error('Failed to fetch metadata');
     const data = await response.json();
-    console.log(data, 'data');
 
     return {
       title: data?.name,
