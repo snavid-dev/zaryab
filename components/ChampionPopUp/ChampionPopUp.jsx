@@ -43,7 +43,7 @@ export default function ChampionPopUp() {
               بوده نمی‌تواند.
             </div>
             <div className="mt-2 font-new-light font-bold">
-              - شاه غازی امان الله خان
+              شاه غازی امان الله خان
             </div>
           </div>
         </div>
