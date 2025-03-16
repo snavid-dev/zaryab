@@ -5,6 +5,13 @@ import { usePathname } from 'next/navigation';
 import React, { useState } from 'react';
 import { IoIosSearch } from 'react-icons/io';
 import Links from '../Links/Links';
+import {
+  FaTelegram,
+  FaFacebook,
+  FaInstagram,
+  FaWhatsapp,
+  FaXTwitter,
+} from 'react-icons/fa6';
 
 export default function Header() {
   const [menu, setMenu] = useState(true);
@@ -54,7 +61,7 @@ export default function Header() {
           {/* user and search */}
           <div className="w-full grid grid-cols-10 gap-30px">
             <div className="col-span-1 ml-40px">
-              <Link
+              {/* <Link
                 href={'#'}
                 className="cursor-pointer"
               >
@@ -68,7 +75,7 @@ export default function Header() {
                   width={25}
                   height={25}
                 />
-              </Link>
+              </Link> */}
             </div>
             <div className="col-span-3"></div>
             <div className="col-span-6">
@@ -121,65 +128,55 @@ export default function Header() {
                   link={'/about'}
                 />
                 {/* social media links */}
-                <div className="col-span-1 grid grid-cols-4 mt-1">
+                <div className="col-span-1 grid grid-cols-5 mt-2">
                   <Link
-                    href="#"
+                    href="https://www.facebook.com/profile.php?id=61553957567902&mibextid=LQQJ4d&rdid=MGyfNFI3DjL04kdP&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1DvMH6kW9F%2F%3Fmibextid%3DLQQJ4d#"
                     className="col-span-1"
                   >
-                    <Image
-                      src={`${
-                        pathname === '/about'
-                          ? '/assets/svg/facebook-white.svg'
-                          : '/assets/svg/facebook.svg'
+                    <FaFacebook
+                      className={`text-20px ${
+                        pathname === '/about' ? 'text-white' : 'text-black'
                       }`}
-                      alt="facebook logo"
-                      width={20}
-                      height={20}
                     />
                   </Link>
                   <Link
-                    href="#"
+                    href="https://www.instagram.com/avaye_zaryab?igsh=a2tnamZxNTdrdWlz&utm_source=qr"
                     className="col-span-1"
                   >
-                    <Image
-                      src={`${
-                        pathname === '/about'
-                          ? '/assets/svg/instagram-white.svg'
-                          : '/assets/svg/instagram.svg'
+                    <FaInstagram
+                      className={`text-20px ${
+                        pathname === '/about' ? 'text-white' : 'text-black'
                       }`}
-                      alt="instagram logo"
-                      width={20}
-                      height={20}
                     />
                   </Link>
                   <Link
-                    href="#"
+                    href="https://t.me/avaye_zaryab_admin"
                     className="col-span-1"
                   >
-                    <Image
-                      src={`${
-                        pathname === '/about'
-                          ? '/assets/svg/telegram-white.svg'
-                          : '/assets/svg/telegram.svg'
+                    <FaTelegram
+                      className={`text-20px ${
+                        pathname === '/about' ? 'text-white' : 'text-black'
                       }`}
-                      alt="telegram logo"
-                      width={20}
-                      height={20}
                     />
                   </Link>
                   <Link
-                    href="#"
+                    href="https://wa.me/+905357849662"
                     className="col-span-1"
                   >
-                    <Image
-                      src={`${
-                        pathname === '/about'
-                          ? '/assets/svg/youtube-white.svg'
-                          : '/assets/svg/youtube.svg'
+                    <FaWhatsapp
+                      className={`text-20px ${
+                        pathname === '/about' ? 'text-white' : 'text-black'
                       }`}
-                      alt="youtube logo"
-                      width={20}
-                      height={20}
+                    />
+                  </Link>
+                  <Link
+                    href="https://x.com/avayezaryab?s=21"
+                    className="col-span-1"
+                  >
+                    <FaXTwitter
+                      className={`text-20px ${
+                        pathname === '/about' ? 'text-white' : 'text-black'
+                      }`}
                     />
                   </Link>
                 </div>
@@ -247,65 +244,55 @@ export default function Header() {
                 onClick={() => setMenu(!menu)}
               />
               {/* social media links */}
-              <div className="col-span-6 w-20% grid grid-cols-4 text-center">
+              <div className="col-span-6 w-40% grid grid-cols-5 text-center mt-4">
                 <Link
-                  href="#"
+                  href="https://www.facebook.com/profile.php?id=61553957567902&mibextid=LQQJ4d&rdid=MGyfNFI3DjL04kdP&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1DvMH6kW9F%2F%3Fmibextid%3DLQQJ4d#"
                   className="col-span-1"
                 >
-                  <Image
-                    src={`${
-                      pathname === '/about'
-                        ? '/assets/svg/facebook-white.svg'
-                        : '/assets/svg/facebook.svg'
+                  <FaFacebook
+                    className={`text-20px ${
+                      pathname === '/about' ? 'text-white' : 'text-black'
                     }`}
-                    alt="facebook logo"
-                    width={20}
-                    height={20}
                   />
                 </Link>
                 <Link
-                  href="#"
+                  href="https://www.instagram.com/avaye_zaryab?igsh=a2tnamZxNTdrdWlz&utm_source=qr"
                   className="col-span-1"
                 >
-                  <Image
-                    src={`${
-                      pathname === '/about'
-                        ? '/assets/svg/instagram-white.svg'
-                        : '/assets/svg/instagram.svg'
+                  <FaInstagram
+                    className={`text-20px ${
+                      pathname === '/about' ? 'text-white' : 'text-black'
                     }`}
-                    alt="instagram logo"
-                    width={20}
-                    height={20}
                   />
                 </Link>
                 <Link
-                  href="#"
+                  href="https://t.me/avaye_zaryab_admin"
                   className="col-span-1"
                 >
-                  <Image
-                    src={`${
-                      pathname === '/about'
-                        ? '/assets/svg/telegram-white.svg'
-                        : '/assets/svg/telegram.svg'
+                  <FaTelegram
+                    className={`text-20px ${
+                      pathname === '/about' ? 'text-white' : 'text-black'
                     }`}
-                    alt="telegram logo"
-                    width={20}
-                    height={20}
                   />
                 </Link>
                 <Link
-                  href="#"
+                  href="https://wa.me/+905357849662"
                   className="col-span-1"
                 >
-                  <Image
-                    src={`${
-                      pathname === '/about'
-                        ? '/assets/svg/youtube-white.svg'
-                        : '/assets/svg/youtube.svg'
+                  <FaWhatsapp
+                    className={`text-20px ${
+                      pathname === '/about' ? 'text-white' : 'text-black'
                     }`}
-                    alt="youtube logo"
-                    width={20}
-                    height={20}
+                  />
+                </Link>
+                <Link
+                  href="https://x.com/avayezaryab?s=21"
+                  className="col-span-1"
+                >
+                  <FaXTwitter
+                    className={`text-20px ${
+                      pathname === '/about' ? 'text-white' : 'text-black'
+                    }`}
                   />
                 </Link>
               </div>
