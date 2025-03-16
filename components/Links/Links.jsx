@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-export default function Links({ link, title, onClick }) {
+export default function Links({ link, title, onClick, big }) {
   const pathname = usePathname();
   const active = pathname.startsWith(link);
   return (

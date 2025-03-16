@@ -91,7 +91,7 @@ export default function Header() {
           {/* links */}
           <div className="w-full mt-20px">
             <nav className="w-full">
-              <ul className="grid grid-cols-8 font-common-med rtl gap-30px">
+              <ul className="grid grid-cols-8 font-common-med rtl gap-10px">
                 <Links
                   title="خانه"
                   link={'/'}
