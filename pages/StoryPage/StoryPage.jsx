@@ -60,6 +60,11 @@ export default function StorySinglePage({ param }) {
 
   const collRef = useRef(null);
   const dateRef = useRef(null);
+  const genreRef = useRef(null);
+  const linkRef = useRef(null);
+  const textRef = useRef(null);
+  const secondLinkRef = useRef(null);
+  const authorRef = useRef(null);
 
   useGSAP(() => {
     if (isVisible && data) {
@@ -72,11 +77,88 @@ export default function StorySinglePage({ param }) {
       gsap.to(collRef.current, {
         y: 0,
         opacity: 1,
+        delay: 0.5,
         ease: 'power2.out',
         scrollTrigger: {
           trigger: collRef.current,
           start: 'top 90%',
           end: 'top 70%',
+          toggleActions: 'play none none none',
+        },
+      });
+
+      gsap.to(dateRef.current, {
+        y: 0,
+        opacity: 1,
+        ease: 'power2.out',
+        delay: 1,
+        scrollTrigger: {
+          trigger: dateRef.current,
+          start: 'top 90%',
+          end: '70%',
+          toggleActions: 'play none none none',
+        },
+      });
+
+      gsap.to(genreRef.current, {
+        y: 0,
+        opacity: 1,
+        ease: 'power2.out',
+        delay: 1.5,
+        scrollTrigger: {
+          trigger: genreRef.current,
+          start: 'top 90%',
+          end: '70%',
+          toggleActions: 'play none none none',
+        },
+      });
+
+      gsap.to(linkRef.current, {
+        y: 0,
+        opacity: 1,
+        ease: 'power2.out',
+        delay: 2,
+        scrollTrigger: {
+          trigger: linkRef.current,
+          start: 'top 90%',
+          end: '70%',
+          toggleActions: 'play none none none',
+        },
+      });
+
+      gsap.to(textRef.current, {
+        y: 0,
+        opacity: 1,
+        ease: 'power2.out',
+        delay: 2.5,
+        scrollTrigger: {
+          trigger: textRef.current,
+          start: 'top 90%',
+          end: '70%',
+          toggleActions: 'play none none none',
+        },
+      });
+
+      gsap.to(secondLinkRef.current, {
+        y: 0,
+        opacity: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: secondLinkRef.current,
+          start: 'top 90%',
+          end: '70%',
+          toggleActions: 'play none none none',
+        },
+      });
+
+      gsap.to(authorRef.current, {
+        y: 0,
+        opacity: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: authorRef.current,
+          start: 'top 90%',
+          end: '70%',
           toggleActions: 'play none none none',
         },
       });
@@ -87,78 +169,124 @@ export default function StorySinglePage({ param }) {
       className="min-h-100vh"
       ref={ref}
     >
-      {isVisible && ( // the main container of the page
-        <div className="flex flex-col items-center mt-100px xl:mt-0 mb-50px">
-          {/*  it has two columns  */}
-          <div className="main-container rtl">
-            {/*  the story section */}
-            <div className="col-span-6 xl:col-span-9 pl-5">
-              {/*  the title section of the story  */}
-              <div className="mt-14 flex flex-col items-end">
-                <div
-                  className="w-full font-new-black text-50px md:text-60px lg:text-94px rtl translate-y-200px opacity-0"
-                  id="title"
-                >
-                  {data?.title}
-                </div>
-                <div
-                  className="w-full rtl font-common-heavy text-10px md:text-16px lg:text-25px xl:mt-14 flex translate-y-200px opacity-0"
-                  ref={collRef}
-                >
-                  <div className="ml-1">از مجموعه</div>
-                  {data?.collection.map((coll, index) => (
-                    <Link
-                      href={`/literarywritings/story/collection/${coll.slug}`}
-                      key={index}
-                      className="ml-3"
-                    >
-                      {coll.name}
-                    </Link>
-                  ))}
-                </div>
-                <div className="w-full grid grid-cols-6 xl:grid-cols-9 items-center gap">
-                  {/* time */}
-                  <div className="col-span-2 pl-3 items-end grid grid-cols-2 gap">
-                    <div className="rtl col-span-1 flex text-right">
-                      <b className="font-common-bold text-6px md:text-7px lg:text-12px mt-2 md:mt-1 ml-1 lg:mt-0">
-                        زمان:
-                      </b>
-                      <p className="font-common-thin mt-10px md:mt-1 text-6px md:text-7px lg:text-12px">
-                        {data?.time}
-                      </p>
-                      <p className="font-common-thin mt-10px md:mt-1 text-6px md:text-7px lg:text-12px">
-                        دقیقه
-                      </p>
-                    </div>
-                    <div className="rtl col-span-1 flex text-right">
-                      <b className="font-common-bold text-6px md:text-7px lg:text-12px mt-2 md:mt-1 ml-1 lg:mt-0">
-                        تاریخ:
-                      </b>
-                      <p className="font-common-thin mt-10px md:mt-1 text-6px md:text-7px lg:text-12px">
-                        {data?.date}
-                      </p>
-                    </div>
+      {/* // the main container of the page */}
+      <div className="flex flex-col items-center mt-100px xl:mt-0 mb-50px">
+        {/*  it has two columns  */}
+        <div className="w-full flex justify-center">
+          {isVisible && (
+            <div className="main-container rtl">
+              {/*  the story section */}
+              <div className="col-span-6 xl:col-span-9 pl-5">
+                {/*  the title section of the story  */}
+                <div className="mt-14 flex flex-col items-end">
+                  <div
+                    className="w-full font-new-black text-50px md:text-60px lg:text-94px rtl translate-y-200px opacity-0"
+                    id="title"
+                  >
+                    {data?.title}
                   </div>
-                  {/* genre */}
-                  <div className="col-span-7 grid grid-cols-6">
-                    {data?.categories.map((category, index) => (
-                      <div
-                        className="cols-span-1"
+                  <div
+                    className="w-full rtl font-common-heavy text-10px md:text-16px lg:text-25px xl:mt-14 flex translate-y-200px opacity-0"
+                    ref={collRef}
+                  >
+                    <div className="ml-1">از مجموعه</div>
+                    {data?.collection.map((coll, index) => (
+                      <Link
+                        href={`/literarywritings/story/collection/${coll.slug}`}
                         key={index}
+                        className="ml-3"
                       >
-                        <Genre title={category?.name} />
-                      </div>
+                        {coll.name}
+                      </Link>
                     ))}
                   </div>
-                </div>
-                {/* the links of the episodes */}
-                <div className="w-full mt-7 md:mt-14 flex flex-col">
-                  {/*  it has 3 columns  */}
-                  <div className="flex flex-row-reverse justify-between items-center">
-                    <div className="font-common-heavy text-8px md:text-20px lg:text-25px">
-                      قسمت {data?.episode_title}{' '}
+                  <div className="w-full grid grid-cols-6 xl:grid-cols-9 items-center gap">
+                    {/* time */}
+                    <div
+                      className="col-span-2 pl-3 items-end grid grid-cols-2 gap translate-y-200px opacity-0"
+                      ref={dateRef}
+                    >
+                      <div className="rtl col-span-1 flex text-right">
+                        <b className="font-common-bold text-6px md:text-7px lg:text-12px mt-2 md:mt-1 ml-1 lg:mt-0">
+                          زمان:
+                        </b>
+                        <p className="font-common-thin mt-10px md:mt-1 text-6px md:text-7px lg:text-12px">
+                          {data?.time}
+                        </p>
+                        <p className="font-common-thin mt-10px md:mt-1 text-6px md:text-7px lg:text-12px">
+                          دقیقه
+                        </p>
+                      </div>
+                      <div className="rtl col-span-1 flex text-right">
+                        <b className="font-common-bold text-6px md:text-7px lg:text-12px mt-2 md:mt-1 ml-1 lg:mt-0">
+                          تاریخ:
+                        </b>
+                        <p className="font-common-thin mt-10px md:mt-1 text-6px md:text-7px lg:text-12px">
+                          {data?.date}
+                        </p>
+                      </div>
                     </div>
-                    <div className="w-[60%] justify-between items-center hidden md:flex flex-row-reverse">
+                    {/* genre */}
+                    <div
+                      className="col-span-7 grid grid-cols-6 translate-y-200px opacity-0"
+                      ref={genreRef}
+                    >
+                      {data?.categories.map((category, index) => (
+                        <div
+                          className="cols-span-1"
+                          key={index}
+                        >
+                          <Genre title={category?.name} />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  {/* the links of the episodes */}
+                  <div
+                    className="w-full mt-7 md:mt-14 flex flex-col translate-y-200px opacity-0"
+                    ref={linkRef}
+                  >
+                    {/*  it has 3 columns  */}
+                    <div className="flex flex-row-reverse justify-between items-center">
+                      <div className="font-common-heavy text-8px md:text-20px lg:text-25px">
+                        قسمت {data?.episode_title}{' '}
+                      </div>
+                      <div className="w-[60%] justify-between items-center hidden md:flex flex-row-reverse">
+                        <Link
+                          href={`/literarywritings/story/${data?.previous_episode}`}
+                          className={`flex flex-row-reverse justify-around items-center font-common-heavy text-lg border-2 border-black ${
+                            data?.previous_episode
+                              ? ''
+                              : 'opacity-0 cursor-default'
+                          }
+                            hover:bg-black hover:text-white transition-all duration-700 px-2`}
+                        >
+                          <IoIosArrowBack className="text-white text-10px md:text-20px lg:text-25px" />
+                          <p className="mt-1 text-8px md:text-12px lg:text-17px">
+                            قسمت قبلی
+                          </p>
+                        </Link>
+                        <Link
+                          href={`/literarywritings/story/${data?.next_episode}`}
+                          className={`flex flex-row-reverse justify-around items-center font-common-heavy text-lg border-2 border-black ${
+                            data?.next_episode ? '' : 'opacity-0 cursor-default'
+                          }
+                            hover:bg-black hover:text-white transition-all duration-700 px-2`}
+                        >
+                          <p className="mt-1 text-8px md:text-12px lg:text-17px">
+                            قسمت بعدی
+                          </p>
+                          <IoIosArrowForward className="text-white text-10px md:text-20px lg:text-25px" />
+                        </Link>
+                      </div>
+                      <div className="">
+                        <ArrowLink
+                          title="همه قسمت ها"
+                          path={`/literarywritings/story/episode/${data?.story_slug}`}
+                        />
+                      </div>
+                    </div>
+                    <div className="w-full flex flex-row-reverse mt-7 justify-between md:hidden">
                       <Link
                         href={`/literarywritings/story/${data?.previous_episode}`}
                         className={`flex flex-row-reverse justify-around items-center font-common-heavy text-lg border-2 border-black ${
@@ -166,7 +294,7 @@ export default function StorySinglePage({ param }) {
                             ? ''
                             : 'opacity-0 cursor-default'
                         }
-                            hover:bg-black hover:text-white transition-all duration-700 px-2`}
+                           hover:bg-black hover:text-white transition-all duration-700 px-2`}
                       >
                         <IoIosArrowBack className="text-white text-10px md:text-20px lg:text-25px" />
                         <p className="mt-1 text-8px md:text-12px lg:text-17px">
@@ -186,199 +314,166 @@ export default function StorySinglePage({ param }) {
                         <IoIosArrowForward className="text-white text-10px md:text-20px lg:text-25px" />
                       </Link>
                     </div>
-                    <div className="">
-                      <ArrowLink
-                        title="همه قسمت ها"
-                        path={`/literarywritings/story/episode/${data?.story_slug}`}
+                  </div>
+                </div>
+                {/*  the story text  */}
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: data?.content,
+                  }}
+                  ref={textRef}
+                  className="font-common-lg text-10px md:text-18px rtl mt-7 translate-y-200px opacity-0"
+                ></div>
+                {/* the episode section button */}
+                <div
+                  className="flex flex-row-reverse justify-between mt-7 translate-y-200px opacity-0"
+                  ref={secondLinkRef}
+                >
+                  <Link
+                    href={`/literarywritings/story/${data?.previous_episode}`}
+                    className={`flex flex-row-reverse justify-around items-center font-common-heavy text-2xl border-2 border-black ${
+                      data?.previous_episode ? '' : 'opacity-0 cursor-default'
+                    }
+                    hover:bg-black hover:text-white transition-all duration-700 px-3`}
+                  >
+                    <IoIosArrowBack className="text-white text-10px md:text-20px lg:text-25px" />
+                    <p className="mt-1 text-10px md:text-25px lg:text-30px">
+                      قسمت قبلی
+                    </p>
+                  </Link>
+                  <Link
+                    href={`/literarywritings/story/${data?.next_episode}`}
+                    className={`flex flex-row-reverse justify-around items-center font-common-heavy text-2xl border-2 border-black ${
+                      data?.next_episode ? '' : 'opacity-0 cursor-default'
+                    }
+                            hover:bg-black hover:text-white transition-all duration-700 px-3`}
+                  >
+                    <p className="mt-1 text-10px md:text-25px lg:text-30px">
+                      قسمت بعدی
+                    </p>
+                    <IoIosArrowForward className="text-white text-10px md:text-20px lg:text-25px" />
+                  </Link>
+                </div>
+              </div>
+              {/* the author section */}
+              <div
+                className="col-span-6 xl:col-span-3 mt-14 xl:mt-64 md:items-center xl:flex-col items-end translate-y-200px opacity-0"
+                ref={authorRef}
+              >
+                {/*  it has 7 rows  */}
+                <div className="w-1/2 xl:w-full border-2 border-black p-3 md:p-7">
+                  <div className="w-full h-150px md:h-310px xl:h-220px 2xl:h-300px relative">
+                    {data?.author?.featured_image ? (
+                      <Image
+                        src={data?.author?.featured_image}
+                        alt=""
+                        layout="fill"
+                        objectFit="cover"
+                        className="absolute"
                       />
+                    ) : (
+                      <div>failed to dispaly image</div>
+                    )}
+                  </div>
+                </div>
+                <div className="w-full flex flex-col mr-7 xl:mr-0 rtl">
+                  <div className="font-common-heavy text-25px md:text-50px rtl mt-7 md:mt-0 xl:mt-7 text-black">
+                    {data?.author?.name}
+                  </div>
+                  <div className="flex rtl md:mt-7 text-black">
+                    <div className="font-common-heavy text-10px md:text-18px ml-1">
+                      موقعیت:
+                    </div>
+                    <div className="font-common-regular text-10px md:text-18px">
+                      {data?.author?.location}
                     </div>
                   </div>
-                  <div className="w-full flex flex-row-reverse mt-7 justify-between md:hidden">
-                    <Link
-                      href={`/literarywritings/story/${data?.previous_episode}`}
-                      className={`flex flex-row-reverse justify-around items-center font-common-heavy text-lg border-2 border-black ${
-                        data?.previous_episode ? '' : 'opacity-0 cursor-default'
-                      }
-                           hover:bg-black hover:text-white transition-all duration-700 px-2`}
-                    >
-                      <IoIosArrowBack className="text-white text-10px md:text-20px lg:text-25px" />
-                      <p className="mt-1 text-8px md:text-12px lg:text-17px">
-                        قسمت قبلی
-                      </p>
+                  <div className="flex rtl mt-3 text-black">
+                    <div className="font-common-heavy text-10px md:text-18px ml-1">
+                      وظیفه:
+                    </div>
+                    <div className="font-common-regular text-10px md:text-18px">
+                      {data?.author?.job}
+                    </div>
+                  </div>
+                  <div className="flex rtl mt-3 text-black">
+                    <div className="font-common-heavy text-10px md:text-18px ml-1">
+                      تعداد نوشته ها:
+                    </div>
+                    <div className="font-common-regular text-10px md:text-18px">
+                      {data?.author?.total_letters}
+                    </div>
+                  </div>
+                  <div className="flex rtl mt-3 text-black">
+                    <div className="font-common-heavy text-10px md:text-18px ml-1">
+                      سن:
+                    </div>
+                    <div className="font-common-regular text-10px md:text-18px">
+                      {data?.author?.age}
+                    </div>
+                  </div>
+                  <div className="flex md:mt-3">
+                    <Link href={data?.author?.facebook_link || '#'}>
+                      <Image
+                        src="/assets/svg/facebook.svg"
+                        alt="facebook logo"
+                        width={20}
+                        height={20}
+                      />
                     </Link>
-                    <Link
-                      href={`/literarywritings/story/${data?.next_episode}`}
-                      className={`flex flex-row-reverse justify-around items-center font-common-heavy text-lg border-2 border-black ${
-                        data?.next_episode ? '' : 'opacity-0 cursor-default'
-                      }
-                            hover:bg-black hover:text-white transition-all duration-700 px-2`}
-                    >
-                      <p className="mt-1 text-8px md:text-12px lg:text-17px">
-                        قسمت بعدی
-                      </p>
-                      <IoIosArrowForward className="text-white text-10px md:text-20px lg:text-25px" />
+                    <Link href={data?.author?.instagram_link || '#'}>
+                      <Image
+                        src="/assets/svg/instagram.svg"
+                        alt="instagram logo"
+                        width={20}
+                        height={20}
+                      />
+                    </Link>
+                    <Link href={data?.author?.telegram_link || '#'}>
+                      <Image
+                        src="/assets/svg/telegram.svg"
+                        alt="telegram logo"
+                        width={20}
+                        height={20}
+                      />
+                    </Link>
+                    <Link href={data?.author?.youtube_link || '#'}>
+                      <Image
+                        src="/assets/svg/youtube.svg"
+                        alt="youtube logo"
+                        width={20}
+                        height={20}
+                      />
                     </Link>
                   </div>
                 </div>
               </div>
-              {/*  the story text  */}
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: data?.content,
-                }}
-                className="font-common-lg text-10px md:text-18px rtl mt-7"
-              ></div>
-              {/* the episode section button */}
-              <div className="flex flex-row-reverse justify-between mt-7">
-                <Link
-                  href={`/literarywritings/story/${data?.previous_episode}`}
-                  className={`flex flex-row-reverse justify-around items-center font-common-heavy text-2xl border-2 border-black ${
-                    data?.previous_episode ? '' : 'opacity-0 cursor-default'
-                  }
-                    hover:bg-black hover:text-white transition-all duration-700 px-3`}
-                >
-                  <IoIosArrowBack className="text-white text-10px md:text-20px lg:text-25px" />
-                  <p className="mt-1 text-10px md:text-25px lg:text-30px">
-                    قسمت قبلی
-                  </p>
-                </Link>
-                <Link
-                  href={`/literarywritings/story/${data?.next_episode}`}
-                  className={`flex flex-row-reverse justify-around items-center font-common-heavy text-2xl border-2 border-black ${
-                    data?.next_episode ? '' : 'opacity-0 cursor-default'
-                  }
-                            hover:bg-black hover:text-white transition-all duration-700 px-3`}
-                >
-                  <p className="mt-1 text-10px md:text-25px lg:text-30px">
-                    قسمت بعدی
-                  </p>
-                  <IoIosArrowForward className="text-white text-10px md:text-20px lg:text-25px" />
-                </Link>
-              </div>
             </div>
-            {/* the author section */}
-            <div className="col-span-6 xl:col-span-3 mt-14 xl:mt-64 md:items-center xl:flex-col items-end">
-              {/*  it has 7 rows  */}
-              <div className="w-1/2 xl:w-full border-2 border-black p-3 md:p-7">
-                <div className="w-full h-150px md:h-310px xl:h-220px 2xl:h-300px relative">
-                  {data?.author?.featured_image ? (
-                    <Image
-                      src={data?.author?.featured_image}
-                      alt=""
-                      layout="fill"
-                      objectFit="cover"
-                      className="absolute"
-                    />
-                  ) : (
-                    <div>failed to dispaly image</div>
-                  )}
-                </div>
-              </div>
-              <div className="w-full flex flex-col mr-7 xl:mr-0 rtl">
-                <div className="font-common-heavy text-25px md:text-50px rtl mt-7 md:mt-0 xl:mt-7 text-black">
-                  {data?.author?.name}
-                </div>
-                <div className="flex rtl md:mt-7 text-black">
-                  <div className="font-common-heavy text-10px md:text-18px ml-1">
-                    موقعیت:
-                  </div>
-                  <div className="font-common-regular text-10px md:text-18px">
-                    {data?.author?.location}
-                  </div>
-                </div>
-                <div className="flex rtl mt-3 text-black">
-                  <div className="font-common-heavy text-10px md:text-18px ml-1">
-                    وظیفه:
-                  </div>
-                  <div className="font-common-regular text-10px md:text-18px">
-                    {data?.author?.job}
-                  </div>
-                </div>
-                <div className="flex rtl mt-3 text-black">
-                  <div className="font-common-heavy text-10px md:text-18px ml-1">
-                    تعداد نوشته ها:
-                  </div>
-                  <div className="font-common-regular text-10px md:text-18px">
-                    {data?.author?.total_letters}
-                  </div>
-                </div>
-                <div className="flex rtl mt-3 text-black">
-                  <div className="font-common-heavy text-10px md:text-18px ml-1">
-                    سن:
-                  </div>
-                  <div className="font-common-regular text-10px md:text-18px">
-                    {data?.author?.age}
-                  </div>
-                </div>
-                <div className="flex md:mt-3">
-                  <Link href={data?.author?.facebook_link || '#'}>
-                    <Image
-                      src="/assets/svg/facebook.svg"
-                      alt="facebook logo"
-                      width={20}
-                      height={20}
-                    />
-                  </Link>
-                  <Link href={data?.author?.instagram_link || '#'}>
-                    <Image
-                      src="/assets/svg/instagram.svg"
-                      alt="instagram logo"
-                      width={20}
-                      height={20}
-                    />
-                  </Link>
-                  <Link href={data?.author?.telegram_link || '#'}>
-                    <Image
-                      src="/assets/svg/telegram.svg"
-                      alt="telegram logo"
-                      width={20}
-                      height={20}
-                    />
-                  </Link>
-                  <Link href={data?.author?.youtube_link || '#'}>
-                    <Image
-                      src="/assets/svg/youtube.svg"
-                      alt="youtube logo"
-                      width={20}
-                      height={20}
-                    />
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* full ad */}
-          {/* <FullAd /> */}
-          {/*  the similar stories  */}
-          <div className="w-full flex justify-end">
-            <div className="w-full">
-              <SimilarStories slug={param} />
-            </div>
-          </div>
-          {/* full ad */}
-          {/* <FullAd /> */}
-          {/* the story section of the page */}
-          <div>
-            <div className="main-container mt-50px rtl">
-              <div className="col-span-6 xl:col-span-6">
-                <Heading1 title="اشعار" />
-              </div>
-              <div className="col-span-6 xl-col-span-6 flex justify-start md:justify-end">
-                <ArrowLink title="همه اشعار" />
-              </div>
-            </div>
-            <StoriesPoemSection />
-          </div>
-          {/* small ad */}
-          {/* <SmallAd /> */}
-          {/*  the author section  */}
-          <div>
-            <Authors />
-          </div>
-          {/* full ad */}
-          {/* <FullAd /> */}
+          )}
         </div>
-      )}
+        {/* full ad */}
+        {/* <FullAd /> */}
+        {/*  the similar stories  */}
+        <div className="w-full flex justify-end">
+          <div className="w-full">
+            <SimilarStories slug={param} />
+          </div>
+        </div>
+        {/* full ad */}
+        {/* <FullAd /> */}
+        {/* the story section of the page */}
+        <div>
+          <StoriesPoemSection />
+        </div>
+        {/* small ad */}
+        {/* <SmallAd /> */}
+        {/*  the author section  */}
+        <div>
+          <Authors />
+        </div>
+        {/* full ad */}
+        {/* <FullAd /> */}
+      </div>
     </div>
   );
 }
