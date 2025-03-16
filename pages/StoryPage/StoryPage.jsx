@@ -352,7 +352,7 @@ export default function StorySinglePage({ param }) {
           {/*  the similar stories  */}
           <div className="w-full flex justify-end">
             <div className="w-full">
-              <SimilarStories slug={param.story} />
+              <SimilarStories slug={param} />
             </div>
           </div>
           {/* full ad */}
