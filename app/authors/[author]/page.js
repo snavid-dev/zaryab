@@ -13,10 +13,10 @@ export async function generateMetadata({ params }) {
 
     return {
       title: data?.name,
-      description: `یکی از شاعران و نویسنده های آوای زریاب  ${data?.name}`,
+      description: `${data?.name} یکی از شاعران و نویسنده های آوای زریاب`,
       openGraph: {
         title: data?.name,
-        description: `یکی از شاعران و نویسنده های آوای زریاب  ${data?.name}`,
+        description: `${data?.name} یکی از شاعران و نویسنده های آوای زریاب`,
         url: 'https://zaryb3.vercel.app',
         siteName: 'وبسایت ادبی آوای زریاب',
         images: [
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }) {
         card: 'summary_large_image',
         site: '@your_twitter_handle',
         title: data?.name,
-        description: `یکی از شاعران و نویسنده های آوای زریاب  ${data?.name}`,
+        description: `${data?.name} یکی از شاعران و نویسنده های آوای زریاب`,
         images: [data?.featured_image],
       },
       viewport: 'width=device-width, initial-scale=1.0',
