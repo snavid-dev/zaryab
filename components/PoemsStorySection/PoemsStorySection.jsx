@@ -1,11 +1,21 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import axios from '@/utils/api';
 import StoryPoemCard from '../StoryPoemCard/StoryPoemCard';
+import Heading1 from '../Heading1/Heading1';
+import ArrowLink from '../ArrowLink/ArrowLink';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function PoemsStorySection() {
   const [data, setData] = useState(null);
   const [Error, setError] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [hasFetched, setHasFetched] = useState(false);
+  const ref = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,18 +26,74 @@ export default function PoemsStorySection() {
         setError(err.response?.data?.message || err.message);
       }
     };
-    fetchData();
-  }, []);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !hasFetched) {
+          fetchData();
+          setIsVisible(true);
+          setHasFetched(true);
+        }
+      },
+      { threshold: 0.1 } // Trigger when 10% of the component is visible
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [hasFetched]);
+
+  // animation
+
+  const titleRef = useRef(null);
+
+  useGSAP(() => {
+    if (isVisible && data) {
+      gsap.to(titleRef.current, {
+        y: 0,
+        opacity: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: 'top 90%',
+          end: 'top 70%',
+          toggleActions: 'play none none none',
+        },
+      });
+    }
+  }, [data, isVisible]);
 
   return (
-    <div className="main-container mt-7 rtl">
-      {data?.map((data, index) => (
-        <StoryPoemCard
-          data={data}
-          key={index}
-          isStory={true}
-        />
-      ))}
+    <div
+      className="w-full"
+      ref={ref}
+    >
+      {isVisible && (
+        <div className="w-full flex flex-col items-center">
+          <div className="main-container mt-14 rtl">
+            <div
+              className="col-span-6 xl:col-span-6 translate-y-200px opacity-0"
+              ref={titleRef}
+            >
+              <Heading1 title="داستان ها" />
+            </div>
+            <div className="col-span-6 xl-col-span-6 flex justify-start md:justify-end">
+              <ArrowLink
+                title="همه داستان ها"
+                path="/literarywritings"
+              />
+            </div>
+          </div>
+          <div className="main-container mt-7 rtl">
+            {data?.map((data, index) => (
+              <StoryPoemCard
+                data={data}
+                key={index}
+                isStory={true}
+                isVisible={isVisible}
+              />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

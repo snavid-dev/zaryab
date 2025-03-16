@@ -137,7 +137,7 @@ export default function SimilarHorizontalStoryCard({
                 )}
               </div>
             ) : (
-              <div className="col-span-2 xl:grid grid-cols-3 gap hidden bg-blue-500">
+              <div className="col-span-3 xl:grid grid-cols-3 gap hidden">
                 {data?.poem_type.map(
                   (category, index) =>
                     index + 1 < 4 && (
