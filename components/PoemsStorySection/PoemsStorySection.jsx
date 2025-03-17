@@ -68,11 +68,11 @@ export default function PoemsStorySection() {
     >
       {isVisible && (
         <div className="w-full flex flex-col items-center">
-          <div className="main-container mt-14 rtl">
-            <div
-              className="col-span-6 xl:col-span-6 translate-y-200px opacity-0"
-              ref={titleRef}
-            >
+          <div
+            className="main-container mt-14 rtl translate-y-200px opacity-0"
+            ref={titleRef}
+          >
+            <div className="col-span-6 xl:col-span-6">
               <Heading1 title="داستان ها" />
             </div>
             <div className="col-span-6 xl-col-span-6 flex justify-start md:justify-end">
