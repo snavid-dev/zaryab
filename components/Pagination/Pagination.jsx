@@ -5,11 +5,13 @@ export default function Pagination({
   totalPages,
   currentPage,
   setCurrentPage,
+  setHasFetched,
 }) {
   // const totalPages = totalPages; // or dynamic total pages
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
+    setHasFetched(false);
   };
 
   const getVisiblePages = () => {
