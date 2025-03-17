@@ -1,27 +1,57 @@
+'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useRef } from 'react';
 import Genre from '../Genre/Genre';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 
-export default function SimilarHorizontalCard({ data, isArticle, isStory }) {
+gsap.registerPlugin(ScrollTrigger);
+
+export default function SimilarHorizontalCard({
+  data,
+  isArticle,
+  isStory,
+  isVisible,
+}) {
+  // animation
+
+  const cardRef = useRef(null);
+
+  useGSAP(() => {
+    if ((isVisible, data)) {
+      gsap.to(cardRef.current, {
+        y: 0,
+        opacity: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: cardRef.current,
+          start: 'top 90%',
+          end: 'top 70%',
+          toggleActions: 'play none none none',
+        },
+      });
+    }
+  }, [isVisible, data]);
+
   return (
     <Link
       href={`/${isArticle ? 'articles' : 'reviewsandopinions'}/${data?.slug}`}
-      className="col-span-6 xl:col-span-12 grid grid-cols-6 xl:grid-cols-9 gap border-b-4 py-20px border-black"
+      className="col-span-6 xl:col-span-12 grid grid-cols-6 xl:grid-cols-9 gap border-b-4 py-20px border-black translate-y-200px opacity-0"
+      ref={cardRef}
     >
       <div className="relative col-span-2 h-95px md:h-200px xl:h-210px 2xl:h-270px">
         {data?.image ? (
           <Image
             src={data?.image}
-            alt="story image"
+            alt={data?.title}
             layout="fill"
             objectFit="cover"
             className="absolute"
           />
         ) : (
-          <div className="w-full h-full flex justify-center items-center">
-            the article image not found
-          </div>
+          <div className="w-full h-full flex justify-center items-center"></div>
         )}
       </div>
       <div className="col-span-4 xl:col-span-7 gap relative">

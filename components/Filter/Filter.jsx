@@ -9,6 +9,7 @@ export default function Filter({
   setFilter,
   setCategoryFilter,
   setFilterDone,
+  setHasFetched,
 }) {
   const [showFilterBody, setShowFilterBody] = useState(false);
   const [categories, setCategories] = useState(null);
@@ -75,6 +76,9 @@ export default function Filter({
     setFilter(filteredItems.join(','));
     setCategoryFilter(categoryItems.join(','));
     setFilterDone(true);
+    if (setHasFetched) {
+      setHasFetched(false);
+    }
   };
 
   const filterClear = () => {
@@ -83,6 +87,9 @@ export default function Filter({
     setFilter([]);
     setCategoryFilter([]);
     setFilterDone(false);
+    if (setHasFetched) {
+      setHasFetched(false);
+    }
   };
 
   return (
