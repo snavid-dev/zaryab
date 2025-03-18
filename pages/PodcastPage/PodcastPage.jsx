@@ -78,7 +78,6 @@ export default function PodcastSinglePage({ param }) {
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, [hasFetched1]);
-  console.log(podcast);
 
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);

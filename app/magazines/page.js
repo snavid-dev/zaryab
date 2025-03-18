@@ -9,7 +9,7 @@ export default function LettersPage({ searchParams }) {
   const params = use(searchParams);
   return (
     // it has 5 sections
-    <div className="flex flex-col items-center mt-130px xl:mt-50px mb-50px">
+    <div className="flex flex-col items-center mt-130px xl:mt-50px mb-50px min-h-100vh">
       {/*  letters section  */}
       <div>
         <LettersSection params={params} />

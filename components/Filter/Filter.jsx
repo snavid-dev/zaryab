@@ -73,8 +73,12 @@ export default function Filter({
   }, [type]); // حالا هر بار `type` تغییر کند، دیتا آپدیت می‌شود
 
   const filterDone = () => {
-    setFilter(filteredItems.join(','));
-    setCategoryFilter(categoryItems.join(','));
+    if (filteredItems) {
+      setFilter(filteredItems.join(','));
+    }
+    if (setCategoryFilter) {
+      setCategoryFilter(categoryItems.join(','));
+    }
     setFilterDone(true);
     if (setHasFetched) {
       setHasFetched(false);
@@ -82,8 +86,12 @@ export default function Filter({
   };
 
   const filterClear = () => {
-    setFilteredItems([]);
-    setCategoryItems([]);
+    if (setFilteredItems) {
+      setFilteredItems([]);
+    }
+    if (setCategoryItems) {
+      setCategoryItems([]);
+    }
     setFilter([]);
     setCategoryFilter([]);
     setFilterDone(false);

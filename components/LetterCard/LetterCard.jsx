@@ -1,11 +1,14 @@
 'use client';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRef } from 'react';
+import ScrollTrigger from 'gsap/ScrollTrigger';
 
-export default function LetterCard({ data }) {
-  console.log(data);
+gsap.registerPlugin(ScrollTrigger);
 
+export default function LetterCard({ data, isVisible }) {
   const handleDownload = () => {
     const fileUrl = data?.pdf;
 
@@ -19,9 +22,30 @@ export default function LetterCard({ data }) {
     document.body.removeChild(link); // Clean up by removing the link
   };
 
+  // animation
+  const cardRef = useRef(null);
+
+  useGSAP(() => {
+    if (isVisible && data) {
+      gsap.to(cardRef.current, {
+        y: 0,
+        opacity: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: cardRef.current,
+          start: 'top 90%',
+          end: 'top 70%',
+          toggleActions: 'play none none none',
+        },
+      });
+    }
+  }, [isVisible, data]);
   return (
     // the letter cord main container
-    <div className="flex flex-col col-span-6 md:col-span-3 xl:col-span-4 mt-7">
+    <div
+      className="flex flex-col col-span-6 md:col-span-3 xl:col-span-4 mt-7 translate-y-200px opacity-0"
+      ref={cardRef}
+    >
       {/*  it has 3 rows  */}
       <div className="relative w-full h-490px md:h-500px xl:h-530px 2xl:h-680px">
         {data?.featured_image ? (
