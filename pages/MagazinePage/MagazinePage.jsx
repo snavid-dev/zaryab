@@ -13,12 +13,21 @@ import LetterSliderPagesCard from '@/components/LetterSliderPagesCard/LetterSlid
 import SmallAd from '@/components/SmallAd/SmallAd';
 import FullAd from '@/components/FullAd/FullAd';
 import axios from '@/utils/api';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+import MagazinePageCard from '@/components/MagazinePageCard/MagazinePageCard';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function LetterSinglePage({ param }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [modal, setModal] = useState(false);
   const [data, setData] = useState(null);
   const [Error, setError] = useState(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [hasFetched, setHasFetched] = useState(false);
+  const ref = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,7 +38,19 @@ export default function LetterSinglePage({ param }) {
         setError(err.response?.data?.message || err.message);
       }
     };
-    fetchData();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !hasFetched) {
+          fetchData();
+          setHasFetched(true);
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 } // Trigger when 10% of the component is visible
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
   }, []);
 
   const handleForward = () => {
@@ -47,108 +68,178 @@ export default function LetterSinglePage({ param }) {
     setCurrentIndex(index);
   }
 
+  // animation
+  const numberRef = useRef(null);
+  const titleRef = useRef(null);
+  const firstLineRef = useRef(null);
+  const secondLineRef = useRef(null);
+  const cardRef = useRef(null);
+
+  useGSAP(() => {
+    if (isVisible && data) {
+      gsap.to(numberRef.current, {
+        y: 0,
+        opacity: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: numberRef.current,
+          start: 'top 90%',
+          end: 'top 70%',
+          toggleActions: 'play none none none',
+        },
+      });
+
+      gsap.to(titleRef.current, {
+        y: 0,
+        opacity: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: 'top 90%',
+          end: 'top 70%',
+          toggleActions: 'play none none none',
+        },
+      });
+
+      gsap.to(firstLineRef.current, {
+        y: 0,
+        opacity: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: firstLineRef.current,
+          start: 'top 90%',
+          end: 'top 70%',
+          toggleActions: 'play none none none',
+        },
+      });
+
+      gsap.to(secondLineRef.current, {
+        y: 0,
+        opacity: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: secondLineRef.current,
+          start: 'top 90%',
+          end: 'top 70%',
+          toggleActions: 'play none none none',
+        },
+      });
+    }
+  }, [isVisible, data]);
+
+  console.log(isVisible, 'isvisible');
+
   return (
     // main container of the page
-    <div className="flex flex-col items-center">
-      {/*  the number  */}
-      <div className="main-container mt-14">
-        <div className="col-span-6 xl:col-span-12 rtl">
-          <Heading1 title={data?.number} />
-        </div>
-      </div>
-      {/*  title of the letter  */}
-      <div className="main-container mt-7">
-        <div className="col-span-6 xl:col-span-12 rtl">
-          <Heading1 title={data?.title} />
-        </div>
-      </div>
-      {/* border */}
-      <div className="main-container h-1 bg-black mt-7"></div>
-      {/*  the letter pictures  */}
-
-      <div className="main-container">
-        {data?.images.map((letter, index) => (
-          <div
-            className="col-span-6 md:col-span-3 xl:col-span-3 flex flex-col items-center mt-7 cursor-pointer"
-            onClick={() => modalHandle(index)}
-            key={index}
-          >
-            <div className="w-full flex justify-center items-center p-3 border-4 border-black">
-              <div className="w-full h-380px md:h-390px xl:h-290px 2xl:h-390px m-3 relative">
-                <Image
-                  src={letter?.image}
-                  alt="letter page"
-                  layout="fill"
-                  objectFit="cover"
-                  className="absolute"
-                />
-              </div>
-            </div>
-            <div className="text-30px border-4 border-black px-6 py-2 mt-3">
-              {letter?.number}
+    <div
+      className="w-full min-h-100vh"
+      ref={ref}
+    >
+      {isVisible && (
+        <div className="flex flex-col items-center">
+          {/*  the number  */}
+          <div className="main-container mt-14">
+            <div
+              className="col-span-6 xl:col-span-12 rtl translate-y-200px opacity-0"
+              ref={numberRef}
+            >
+              <Heading1 title={data?.number} />
             </div>
           </div>
-        ))}
-      </div>
-      {/* full ad */}
-      {/* <FullAd /> */}
+          {/*  title of the letter  */}
+          <div className="main-container mt-7">
+            <div
+              className="col-span-6 xl:col-span-12 rtl translate-y-200px opacity-0"
+              ref={titleRef}
+            >
+              <Heading1 title={data?.title} />
+            </div>
+          </div>
+          {/* border */}
+          <div
+            className="main-container h-1 bg-black mt-7 translate-y-200px opacity-0"
+            ref={firstLineRef}
+          ></div>
+          {/*  the letter pictures  */}
 
-      <div className="main-container h-1 bg-black mt-14"></div>
+          <div className="main-container">
+            {data?.images.map((letter, index) => (
+              <div
+                className="col-span-6 md:col-span-3 xl:col-span-3"
+                key={index}
+                onClick={() => modalHandle(index)}
+              >
+                <MagazinePageCard
+                  letter={letter}
+                  isVisible={isVisible}
+                />
+              </div>
+            ))}
+          </div>
+          {/* full ad */}
+          {/* <FullAd /> */}
 
-      {/*  the letter archive  */}
-      <div className="mt-14">
+          <div
+            className="main-container h-1 bg-black mt-14 translate-y-200px opacity-0"
+            ref={secondLineRef}
+          ></div>
+
+          {/*  the letter archive  */}
+          {/* <div className="mt-14">
         <ArchivedLettersSection />
       </div>
 
-      <div className="main-container h-1 bg-black mt-14"></div>
-      {/*  podcast section  */}
+      <div className="main-container h-1 bg-black mt-14"></div> */}
+          {/*  podcast section  */}
 
-      <div className="mt-14 mb-14">
-        <Podcasts />
-      </div>
-      {/* small ad */}
-      {/* <SmallAd /> */}
-
-      {/*  the image slider section  */}
-      <div
-        className={`fixed top-0 bottom-0 left-0 right-0 bg-modal flex flex-row z-50 ${
-          modal ? 'block' : 'hidden'
-        }`}
-      >
-        <div className="relative w-full h-full py-5 overflow-hidden flex items-center justify-center">
-          {/* Images */}
-          <div className="w-full h-full relative">
-            {data?.images.map((image, index) => (
-              <LetterSliderPagesCard
-                image={image?.image}
-                index={index}
-                currentIndex={currentIndex}
-                key={index}
-              />
-            ))}
+          <div className="mt-14 mb-14">
+            <Podcasts />
           </div>
+          {/* small ad */}
+          {/* <SmallAd /> */}
 
-          {/* Navigation Buttons */}
-          <button
-            onClick={handleBackward}
-            className="absolute text-60px left-4 bottom-0 md:top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
+          {/*  the image slider section  */}
+          <div
+            className={`fixed top-0 bottom-0 left-0 right-0 bg-modal flex flex-row z-50 ${
+              modal ? 'block' : 'hidden'
+            }`}
           >
-            <LuChevronLeft />
-          </button>
-          <button
-            onClick={handleForward}
-            className="absolute text-60px right-4 bottom-0 md:top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
-          >
-            <LuChevronRight />
-          </button>
+            <div className="relative w-full h-full py-5 overflow-hidden flex items-center justify-center">
+              {/* Images */}
+              <div className="w-full h-full relative">
+                {data?.images.map((image, index) => (
+                  <LetterSliderPagesCard
+                    image={image?.image}
+                    index={index}
+                    currentIndex={currentIndex}
+                    key={index}
+                  />
+                ))}
+              </div>
+
+              {/* Navigation Buttons */}
+              <button
+                onClick={handleBackward}
+                className="absolute text-60px left-4 bottom-0 md:top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
+              >
+                <LuChevronLeft />
+              </button>
+              <button
+                onClick={handleForward}
+                className="absolute text-60px right-4 bottom-0 md:top-1/2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full"
+              >
+                <LuChevronRight />
+              </button>
+            </div>
+            <div
+              className="fixed top-2 text-30px text-white right-2 cursor-pointer"
+              onClick={() => setModal(false)}
+            >
+              <IoCloseOutline />
+            </div>
+          </div>
         </div>
-        <div
-          className="fixed top-2 text-30px text-white right-2 cursor-pointer"
-          onClick={() => setModal(false)}
-        >
-          <IoCloseOutline />
-        </div>
-      </div>
+      )}
     </div>
   );
 }
