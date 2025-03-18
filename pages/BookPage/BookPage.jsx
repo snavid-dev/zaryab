@@ -167,7 +167,7 @@ export default function BookSinglePage({ param }) {
                 <div className="w-full h-150px md:h-310px xl:h-370px 2xl:h-500px relative">
                   {data?.featured_image ? (
                     <Image
-                      src="/assets/img/bookPic.png"
+                      src={data?.featured_image}
                       alt="book image"
                       layout="fill"
                       objectFit="cover"
@@ -188,7 +188,7 @@ export default function BookSinglePage({ param }) {
                     <p
                       className={`font-new-black inline text-26px md:text-52px lg:text-60px `}
                     >
-                      خلاصه هری پاتر و سنگ فلاسفر
+                      {data?.title || 'خلاصه هری پاتر و سنگ فلاسفر'}
                     </p>
                   </div>
                 </div>

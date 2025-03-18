@@ -66,6 +66,7 @@ export default function SearchPage({ searchParams }) {
             setCategoryFilter={setCategoryFilter}
             setFilterDone={setFilterDone}
             setFilter={setFilter}
+            setHasFetched={false}
           />
         </div>
       </div>
@@ -75,7 +76,7 @@ export default function SearchPage({ searchParams }) {
             type="text"
             value={searchItem}
             onChange={(e) => setSearchItem(e.target.value)}
-            className="w-full rtl text-20px font-common-regular px-2 py-3 outline-none"
+            className="w-full rtl text-20px font-common-regular px-2 py-3 outline-none bg-white"
           />
           <IoIosSearch
             className="text-50px cursor-pointer"

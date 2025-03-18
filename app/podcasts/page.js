@@ -8,6 +8,11 @@ import { useRef, useState, useEffect, use } from 'react';
 
 import axios from '@/utils/api';
 import Pagination from '@/components/Pagination/Pagination';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function PodcastsPage({ searchParams }) {
   // get data
@@ -53,20 +58,37 @@ export default function PodcastsPage({ searchParams }) {
     return () => observer.disconnect();
   }, [currentPage, hasFetched, podcastType]);
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(
-        `/v1/podcasts?per_page=15&page=${currentPage}&podcast_type=${
-          podcastType ? podcastType : ''
-        }`
-      );
+  // animaiton
+  const titleRef = useRef(null);
+  const paginationRef = useRef(null);
 
-      setData(response.data.data);
-      setTotalPages(response.data.meta.pages); // Assuming the API provides total pages
-    } catch (err) {
-      setError(err.response?.data?.message || err.message);
+  useGSAP(() => {
+    if (isVisible && data) {
+      gsap.to(titleRef.current, {
+        y: 0,
+        opacity: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: 'top 90%',
+          end: 'top 70%',
+          toggleActions: 'play none none none',
+        },
+      });
+
+      gsap.to(paginationRef.current, {
+        y: 0,
+        opacity: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: paginationRef.current,
+          start: 'top 90%',
+          end: 'top 70%',
+          toggleActions: 'play none none none',
+        },
+      });
     }
-  };
+  }, [isVisible, data]);
 
   return (
     // the main container of the page
@@ -77,7 +99,10 @@ export default function PodcastsPage({ searchParams }) {
       {isVisible && (
         <div className="flex flex-col items-center mt-100px xl:mt-0 mb-50px">
           {/*  the title of the page  */}
-          <div className="main-container mt-7 rtl">
+          <div
+            className="main-container mt-7 rtl translate-y-200px opacity-0"
+            ref={titleRef}
+          >
             <div className="col-span-6 md:col-span-3 xl:col-span-6">
               <Heading1 title="کتاب های صوتی" />
             </div>
@@ -99,7 +124,10 @@ export default function PodcastsPage({ searchParams }) {
             ))}
           </div>
           {/* Pagination controls */}
-          <div className="flex justify-center mt-5">
+          <div
+            className="flex justify-center mt-5 translate-y-200px opacity-0"
+            ref={paginationRef}
+          >
             <Pagination
               totalPages={totalPages}
               currentPage={currentPage}
