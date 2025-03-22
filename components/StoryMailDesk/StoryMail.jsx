@@ -102,7 +102,7 @@ export default function StoryMail() {
               ref={linkRef}
             >
               <ArrowLink
-                title="همه نوشته ها"
+                title="همه آثار"
                 path="/literarywritings"
               />
             </div>

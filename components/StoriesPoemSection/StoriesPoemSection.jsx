@@ -82,7 +82,7 @@ export default function StoriesPoemSection() {
             <div className="col-span-6 md:col-span-3 xl:col-span-6">
               <Heading1 title="اشعار" />
             </div>
-            <div className="col-span-6 md:col-span-3 xl-col-span-6 flex justify-start md:justify-end">
+            <div className="col-span-6 md:col-span-3 xl:col-span-6 flex justify-start md:justify-end">
               <ArrowLink title="همه اشعار" />
             </div>
           </div>
