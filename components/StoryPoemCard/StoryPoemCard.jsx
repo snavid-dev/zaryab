@@ -77,11 +77,11 @@ export default function StoryPoemCard({ data, isStory, isVisible }) {
         {truncateString1(data?.title)}
       </div>
       {isStory ? (
-        <div className="font-common-thin text-8px md:text-18px lg:text-17px mt-3 text-right">
+        <div className="font-common-thin text-8px md:text-18px lg:text-17px mt-3 text-right font-bold">
           {truncateString(data?.excerpt, 300)}
         </div>
       ) : (
-        <div className="font-common-thin text-8px md:text-18px lg:text-17px mt-3 text-right">
+        <div className="font-common-thin text-8px md:text-18px lg:text-17px mt-3 text-right font-bold">
           <div
             dangerouslySetInnerHTML={{ __html: data?.excerpt.split('\n')[0] }}
           ></div>
