@@ -16,7 +16,7 @@ export const metadata = {
     siteName: 'وبسایت ادبی آوای زریاب',
     images: [
       {
-        url: 'https://images.pexels.com/photos/1831744/pexels-photo-1831744.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        url: 'https://zariab.cyborgtech.co/wp-content/uploads/2025/03/homepage-300x143.png',
         width: 1129,
         height: 750,
         alt: 'آوای زریاب',
@@ -31,7 +31,7 @@ export const metadata = {
     title: 'آوای زریاب',
     description: 'وبسایت ادبی آوای زریاب',
     images: [
-      'https://images.pexels.com/photos/1831744/pexels-photo-1831744.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      'https://zariab.cyborgtech.co/wp-content/uploads/2025/03/homepage-300x143.png',
     ],
   },
   viewport: 'width=device-width, initial-scale=1.0',
