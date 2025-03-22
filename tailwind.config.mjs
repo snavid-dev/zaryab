@@ -39,6 +39,7 @@ export default {
       '60px': '60px',
       '65px': '65px',
       '76px': '76px',
+      '80px': '80px',
       '92px': '92px',
       '94px': '94px',
       '97px': '97px',
@@ -72,6 +73,7 @@ export default {
       spacing: {
         '1px': '1px',
         '2px': '2px',
+        '6px': '6px',
         '10px': '10px',
         '20px': '20px',
         '21px': '21px',

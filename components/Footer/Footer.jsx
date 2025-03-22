@@ -202,7 +202,7 @@ export default function Footer() {
         {/* text logo and others things */}
         <div className="main-container">
           <div className="col-span-6 xl:col-span-3 grid grid-cols-6 xl:grid-cols-3 gap">
-            <div className="col-span-6 md:col-span-2 xl:col-span-3">
+            <div className="col-span-6 md:col-span-2 xl:col-span-3 xl:mt-100px">
               <div className="w-full h-[180px] relative md:hidden xl:block">
                 <Image
                   src="/assets/svg/footerLogo.svg"
@@ -223,8 +223,8 @@ export default function Footer() {
               </div>
             </div>
             <div className="hidden md:block md:col-span-1 xl:hidden"></div>
-            <div className="col-span-6 md:col-span-3">
-              <div className="relative w-full h-490px md:h-510px xl:h-390px 2xl:h-510px mt-20px">
+            <div className="col-span-6 md:col-span-3 xl:col-span-3">
+              <div className="relative w-full h-490px md:h-510px xl:h-390px 2xl:h-510px mt-20px xl:mt-0">
                 {newLetter?.featured_image ? (
                   <Image
                     src={newLetter?.featured_image}
@@ -251,36 +251,96 @@ export default function Footer() {
           </div>
           <div className="hidden xl:block xl:col-span-1"></div>
           <div className="col-span-6 xl:col-span-8 rtl text-white mt-50px xl:mt-100px">
-            <div className="w-full font-common-heavy text-26px md:text-36px">
-              ارسال نوشته ها
+            <div className="w-full font-common-heavy text-20px md:text-36px">
+              قوانین ارسال آثار ادبی در آوای زریاب
             </div>
-            <div className="w-full rtl font-common-thin text-12 md:text-17 mt-7">
-              <p className="rtl">
-                نوشته های ادبی خود را جهت پخش با توجه به نکات ذیل به ایمیل
-                farsiwritings@avayezaryab.com ارسال نمایید.
-              </p>
-              <p className="rtl">
-                ۱. نوشته های تان باید در فورمت های docx. , .doc و txt. باشند.
-              </p>
-              <p className="rtl">
-                ۲. ایمیل ارسالی باید با موضوع (درخواست نشر) شروع شود.
-              </p>
-              <p className="rtl">۴. نوشته باید با ذکر کتگوری (ها) باشد.</p>
+            <ul className="w-full rtl font-common-thin text-10 md:text-17 mt-7">
+              <li>
+                ۱. اثر فرستاده شده نباید در مغایر با ارزش‌های افغانستان باشد.
+              </li>
+              <li>
+                ۲. اثر باید از نظر زبانی و دستوری روان و بدون غلط‌های املایی
+                باشد.
+              </li>
+              <li>۳. اثر باید دارای ساختار مشخص باشد.</li>
+              <li>۴. صاحب اثر باید قالب اثر را در ابتدای اثر مشخص کند.</li>
+              <li>۵. اثر باید، باید به‌صورت یکپارچه و منظم ارسال شود.</li>
+              <li>
+                ۶. آثار ادبی به تمامی زبان‌های رایج در افغانستان (دری، پشتو،
+                ازبیکی و ...) پذیرفته می‌شود.
+              </li>
+              <li>
+                ۷. نویسنده / شاعر باید مالک اثر باشد و ارسال اثر به معنی تأیید
+                این موضوع است.
+              </li>
+              <li>
+                ۸. تیم آوای زریاب می‌تواند آثار را برای اصلاحات نگارشی و زبانی
+                ویرایش کند.
+              </li>
+              <li>
+                ۹. پس از انتشار، آثار در آرشیو سایت باقی می‌ماند و حذف آن فقط با
+                دلایل معقول امکان‌پذیر است.
+              </li>
+              <li>۱۰. آثار باید در قالب فایل متنی (Word ) ارسال شوند.</li>
+              <li>
+                ۱۱. صاحب اثر باید نام کامل، سن، محل زندگی، عکس ، آدرس ایمیل و در
+                صورت تمایل یک بیوگرافی کوتاه از خود ارائه دهد.
+              </li>
+              <li></li>
+            </ul>
+            <div className="w-full font-common-heavy text-20px md:text-36px rtl mt-50px">
+              قوانین ارسال مقاله و نقد و نظر در آوای زریاب
             </div>
-            <div className="w-full font-common-heavy text-26px md:text-36px rtl mt-50px">
-              ارسال مقاله
+            <ul className="w-full rtl font-common-thin text-10 md:text-17 mt-7">
+              <li className="rtl">
+                ۱. مقاله‌ها باید در حوزه ادبیات باشند (نقد ادبی، معرفی کتاب و
+                نویسندگان و موضوعات مرتبط).
+              </li>
+              <li className="rtl">
+                ۲. محتوای مقاله نباید مغایر با ارزش‌های افغانستان باشد.
+              </li>
+              <li className="rtl">
+                ۳. مقالات باید به‌صورت روان و بدون غلط‌های املایی و نگارشی
+                باشند.
+              </li>
+              <li className="rtl">
+                ۴. مقاله باید حداقل 500 و حداکثر 2000 کلمه باشد. ( آوای زریاب از
+                نشر مقاله‌های طولانی خودداری می‌کند).
+              </li>
+              <li className="rtl">
+                ۵. مقاله به تمامی زبان‌های رایج در افغانستان (فارسی، پشتو،
+                ازبیکی و ...) پذیرفته می‌شود.
+              </li>
+              <li className="rtl">
+                ۶. نویسنده با ارسال مقاله تأیید می‌کند که مالک اثر بوده یا اجازه
+                انتشار آن را دارد.
+              </li>
+              <li className="rtl">
+                ۷. پس از تأیید و انتشار، مقاله در آرشیو آوای زریاب باقی می‌ماند
+                و حذف آن تنها با ارائه دلایل معقول امکان‌پذیر است.
+              </li>
+              <li className="rtl">
+                ۸. تیم تحریریه آوای زریاب حق ویرایش جزئی مقاله‌ها (برای اصلاح
+                نگارشی و بهبود خوانایی) را دارد.
+              </li>
+              <li className="rtl">
+                ۹. در صورت نیاز به تغییرات اساسی، مقاله برای اصلاح به نویسنده
+                بازگردانده می‌شود.
+              </li>
+              <li className="rtl">
+                ۱۰. مقاله‌ها باید در قالب فایل متنی (Word ) ارسال شوند.
+              </li>
+              <li className="rtl">
+                ۱۱. نویسنده باید نام کامل، سن، محل زندگی، عکس ، آدرس ایمیل و در
+                صورت تمایل یک بیوگرافی کوتاه از خود ارائه دهد.
+              </li>
+            </ul>
+            <div className="w-full font-common-heavy text-20px md:text-36px mt-30px">
+              برای فرستادن آثار خویش ایمیل کنید:
             </div>
-            <div className="w-full rtl font-common-thin text-12 md:text-17 mt-7">
-              <p>
-                نوشته های ادبی خود را جهت پخش با توجه به نکات ذیل به ایمیل
-                farsiwritings@avayezaryab.com ارسال نمایید.
-              </p>
-              <p>
-                ۱. نوشته های تان باید در فورمت های docx. , .doc و txt. باشند.
-              </p>
-              <p>۲. ایمیل ارسالی باید با موضوع (درخواست نشر) شروع شود.</p>
-              <p>۴. نوشته باید با ذکر کتگوری (ها) باشد.</p>
-            </div>
+            <ul className="w-full rtl font-common-thin text-10 md:text-17 mt-7">
+              <li>zaryabshortstory@gmail.com</li>
+            </ul>
             <div className="font-common-heavy text-26px md:text-36px mt-50px">
               عضویت در خبرنامه مان
             </div>
@@ -492,12 +552,14 @@ export default function Footer() {
         <div className="main-container py-2 md:py-4 xl:py-7">
           <div className="col-span-3 xl:col-span-6">
             <p className="font-common-heavy text-7px md:text-14px xl:text-25px ltr">
-              Design and development of the website by Cyborg Tech
+              Design and development of the website by{' '}
+              <Link href="https://cyborgtech.co">Cyborg Tech</Link>
             </p>
           </div>
           <div className="col-span-3 xl:col-span-6">
             <p className="font-common-heavy text-7px md:text-14px xl:text-25px rtl">
-              دیزاین و ساخت وبسایت توست سایبُرگ تِک
+              دیزاین و ساخت وبسایت توست{' '}
+              <Link href="https://cyborgtech.co">سایبُرگ تِک</Link>
             </p>
           </div>
         </div>

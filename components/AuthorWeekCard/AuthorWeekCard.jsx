@@ -44,7 +44,7 @@ export default function AuthorWeekCard({ data, isVisible }) {
           <div></div>
         )}
       </div>
-      <div>
+      <div className="w-full">
         <h3 className="font-common-lg mt-5 text-28px md:text-20px lg:text-59px rtl">
           {data?.title}
         </h3>
