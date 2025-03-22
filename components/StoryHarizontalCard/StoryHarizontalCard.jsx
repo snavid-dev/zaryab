@@ -6,6 +6,7 @@ import Link from 'next/link';
 import React, { useRef } from 'react';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { truncateString } from '@/utils/GeneralFuncions/GeneralFunctions';
+import Genre from '../Genre/Genre';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -53,8 +54,8 @@ export default function StoryHarizontalCard({ data, isVisible }) {
         <div className="col-span-4 text-6px md:text-12px font-bold font-smallText">
           {truncateString(data?.excerpt, 500)}
         </div>
-        <div className="col-span-4 grid grid-cols-3 gap absolute bottom-0">
-          <div className="col-span-1">
+        <div className="col-span-4 xl:col-span-7 w-full grid grid-cols-3 xl:grid-cols-10 gap absolute bottom-0">
+          <div className="col-span-1 xl:col-span-2">
             <div className="rtl flex text-right">
               <p className="font-common-thin ml-1 text-6px md:text-12px xl:text-14px font-bold">
                 نویسنده:
@@ -64,7 +65,7 @@ export default function StoryHarizontalCard({ data, isVisible }) {
               </p>
             </div>
           </div>
-          <div className="col-span-1">
+          <div className="col-span-1 xl:col-span-2">
             <div className="rtl flex text-right">
               <p className="font-common-thin ml-1 text-6px md:text-12px xl:text-14px font-bold">
                 تاریخ:
@@ -74,7 +75,7 @@ export default function StoryHarizontalCard({ data, isVisible }) {
               </p>
             </div>
           </div>
-          <div className="col-span-1">
+          <div className="col-span-1 xl:col-span-2">
             <div className="rtl flex text-right">
               <p className="font-common-thin ml-1 text-6px md:text-12px xl:text-14px font-bold">
                 زمان:
@@ -86,6 +87,18 @@ export default function StoryHarizontalCard({ data, isVisible }) {
                 دقیقه
               </p>
             </div>
+          </div>
+          <div className="xl:col-span-4 h-5 hidden xl:block">
+            {data?.categories.map((cate, index) => {
+              if (index < 5) {
+                return (
+                  <Genre
+                    title={cate?.name}
+                    key={index}
+                  />
+                );
+              }
+            })}
           </div>
         </div>
       </div>

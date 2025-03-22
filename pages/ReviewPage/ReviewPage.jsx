@@ -253,7 +253,7 @@ export default function ReviewsAndOpinionsSinglePage({ param }) {
                   )}
                 </div>
               </div>
-              <div className="w-1/2 xlw-full flex flex-col mr-7 xl:mr-0 rtl">
+              <div className="w-1/2 xl:w-full flex flex-col mr-7 xl:mr-0 rtl">
                 <div className="font-common-heavy text-25px md:text-50px rtl mt-7 md:mt-0 xl:mt-7 text-black">
                   {data?.author?.name}
                 </div>
@@ -275,7 +275,7 @@ export default function ReviewsAndOpinionsSinglePage({ param }) {
                 </div>
                 <div className="flex rtl mt-3 text-black">
                   <div className="font-common-heavy text-10px md:text-18px ml-1">
-                    تعداد نوشته ها:
+                    تعداد آثار:
                   </div>
                   <div className="font-common-regular text-10px md:text-18px">
                     {data?.author?.total_letters}

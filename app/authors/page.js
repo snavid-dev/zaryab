@@ -108,14 +108,14 @@ export default function AuthorPage() {
             ref={titleRef}
           >
             <div className="md:col-span-4 col-span-6 xl:col-span-8">
-              <Heading1 title="نویسنده ها و شاعران آوای زریاب" />
+              <Heading1 title="نویسندگان و شاعران آوای زریاب" />
             </div>
             <div
               className="md:col-span-2 col-span-6 xl:col-span-4 xl:mt-10px flex md:justify-end"
               onClick={allAuthorHandler}
             >
               <ArrowLink
-                title="همه نویسنده ها و شاعران"
+                title="همه نویسندگان و شاعران"
                 path="/authors"
               />
             </div>

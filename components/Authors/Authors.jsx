@@ -71,9 +71,9 @@ export default function Authors() {
             className="col-span-6 xl:col-span-12 flex flex-col items-end md:flex-row-reverse md:justify-between md:items-center translate-y-200px opacity-0"
             ref={titleRef}
           >
-            <Heading1 title="نویسنده ها و شاعران آوای زریاب" />
+            <Heading1 title="نویسندگان و شاعران آوای زریاب" />
             <ArrowLink
-              title="همه نویسنده ها و شاعران"
+              title="همه نویسندگان و شاعران"
               path="/authors"
             />
           </div>

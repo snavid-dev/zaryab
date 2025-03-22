@@ -282,7 +282,7 @@ export default function BookSinglePage({ param }) {
                   <div className="font-common-heavy text-10px md:text-18px">
                     موقعیت:
                   </div>
-                  <div className="font-common-regular text-10px md:text-18px">
+                  <div className="font-common-regular text-10px md:text-18px mr-1">
                     {data?.author?.location}
                   </div>
                 </div>
@@ -290,15 +290,15 @@ export default function BookSinglePage({ param }) {
                   <div className="font-common-heavy text-10px md:text-18px">
                     وظیفه:
                   </div>
-                  <div className="font-common-regular text-10px md:text-18px">
+                  <div className="font-common-regular text-10px md:text-18px mr-1">
                     {data?.author?.job}
                   </div>
                 </div>
                 <div className="flex rtl mt-3 lg:mt-5 xl:mt-3 text-black">
                   <div className="font-common-heavy text-10px md:text-18px">
-                    تعداد نوشته ها:
+                    تعداد آثار:
                   </div>
-                  <div className="font-common-regular text-10px md:text-18px">
+                  <div className="font-common-regular text-10px md:text-18px mr-1">
                     {data?.author?.total_letters}
                   </div>
                 </div>
@@ -306,7 +306,7 @@ export default function BookSinglePage({ param }) {
                   <div className="font-common-heavy text-10px md:text-18px">
                     سن:
                   </div>
-                  <div className="font-common-regular text-10px md:text-18px">
+                  <div className="font-common-regular text-10px md:text-18px mr-1">
                     {data?.author?.age}
                   </div>
                 </div>

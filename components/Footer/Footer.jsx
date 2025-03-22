@@ -347,8 +347,8 @@ export default function Footer() {
             <NewsLetterForm />
             <div className="w-full">
               <p className="mt-3 rtl font-common-thin text-12 md:text-17">
-                با وارد کردن ایمیل تان در این جا شما به دریافت ایمل خبری در مورد
-                آوای زریاب و موضوعات دیگر رضایت میدهید.
+                با وارد کردن ایمیل تان در این جا شما به دریافت ایمیل خبری در
+                مورد آوای زریاب و موضوعات دیگر رضایت میدهید.
               </p>
             </div>
           </div>
@@ -372,7 +372,7 @@ export default function Footer() {
           <div className="col-span-1 xl:col-span-2">
             <Link2
               link="/literarywritings"
-              title="نوشته های ادبی"
+              title="آثار ادبی"
               head={true}
             />
           </div>

@@ -104,7 +104,7 @@ export default function Header() {
                   link={'/'}
                 />
                 <Links
-                  title="نوشته های ادبی"
+                  title="آثار ادبی"
                   link={'/literarywritings'}
                 />
                 <Links
@@ -214,7 +214,7 @@ export default function Header() {
                 onClick={() => setMenu(!menu)}
               />
               <Links
-                title="نوشته های ادبی"
+                title="آثار ادبی"
                 link={'/literarywritings'}
                 onClick={() => setMenu(!menu)}
               />

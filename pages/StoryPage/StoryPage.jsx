@@ -398,7 +398,7 @@ export default function StorySinglePage({ param }) {
                   </div>
                   <div className="flex rtl mt-3 text-black">
                     <div className="font-common-heavy text-10px md:text-18px ml-1">
-                      تعداد نوشته ها:
+                      تعداد آثار:
                     </div>
                     <div className="font-common-regular text-10px md:text-18px">
                       {data?.author?.total_letters}
