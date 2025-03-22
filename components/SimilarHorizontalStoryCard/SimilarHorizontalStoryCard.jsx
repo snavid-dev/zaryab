@@ -5,6 +5,7 @@ import Genre from '../Genre/Genre';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import { truncateString } from '@/utils/GeneralFuncions/GeneralFunctions';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -62,10 +63,9 @@ export default function SimilarHorizontalStoryCard({
             {data?.title}
           </div>
           {isStory ? (
-            <div
-              className="col-span-4 text-6px md:text-12px xl:text-14px 2xl:text-20px font-smallText"
-              dangerouslySetInnerHTML={{ __html: data?.excerpt }}
-            ></div>
+            <div className="col-span-4 text-6px md:text-12px font-bold xl:text-14px 2xl:text-20px font-smallText">
+              {truncateString(data?.excerpt, 400)}
+            </div>
           ) : (
             <div className="font-common-thin text-8px md:text-18px lg:text-17px mt-3 text-right">
               <div
@@ -86,36 +86,36 @@ export default function SimilarHorizontalStoryCard({
             </div>
           )}
           <div className="w-full xl:col-span-7 xl:grid xl:grid-cols-7 xl:gap absolute bottom-0">
-            <div className="w-full flex xl:col-span-4 xl:grid xl:grid-cols-3 gap">
+            <div className="w-full flex xl:col-span-4 xl:grid xl:grid-cols-3 gap font-bold">
               <div className="xl:col-span-1">
                 <div className="rtl flex text-right">
-                  <p className="font-common-thin ml-1 text-8px xl:text-14px">
+                  <p className="font-common-thin ml-1 text-8px md:text-12px xl:text-14px">
                     نویسنده:
                   </p>
-                  <p className="font-common-thin text-8px xl:text-14px">
+                  <p className="font-common-thin text-8px md:text-12px xl:text-14px">
                     {data?.author}
                   </p>
                 </div>
               </div>
               <div className="xl:col-span-1">
                 <div className="rtl flex text-right">
-                  <p className="font-common-thin ml-1 text-8px xl:text-14px">
+                  <p className="font-common-thin ml-1 text-8px md:text-12px xl:text-14px">
                     تاریخ:
                   </p>
-                  <p className="font-common-thin text-8px xl:text-14px">
+                  <p className="font-common-thin text-8px md:text-12px xl:text-14px">
                     {data?.date}
                   </p>
                 </div>
               </div>
               <div className="xl:col-span-1">
                 <div className="rtl flex text-right">
-                  <p className="font-common-thin ml-1 text-8px xl:text-14px">
+                  <p className="font-common-thin ml-1 text-8px md:text-12px xl:text-14px">
                     زمان:
                   </p>
-                  <p className="font-common-thin text-8px xl:text-14px">
+                  <p className="font-common-thin text-8px md:text-12px xl:text-14px">
                     {data?.duration}
                   </p>
-                  <p className="font-common-thin text-8px xl:text-14px">
+                  <p className="font-common-thin text-8px md:text-12px xl:text-14px">
                     دقیقه
                   </p>
                 </div>
@@ -123,10 +123,10 @@ export default function SimilarHorizontalStoryCard({
             </div>
 
             {isStory ? (
-              <div className="col-span-3 xl:grid grid-cols-3 gap hidden">
+              <div className="col-span-3 xl:grid grid-cols-3 gap hidden md:block md:mt-2">
                 {data?.categories.map(
                   (category, index) =>
-                    index + 1 < 4 && (
+                    index + 1 < 5 && (
                       <div
                         className="col-span-1"
                         key={index}
@@ -137,10 +137,10 @@ export default function SimilarHorizontalStoryCard({
                 )}
               </div>
             ) : (
-              <div className="col-span-3 xl:grid grid-cols-3 gap hidden">
+              <div className="col-span-3 xl:grid grid-cols-3 gap hidden md:block">
                 {data?.poem_type.map(
                   (category, index) =>
-                    index + 1 < 4 && (
+                    index + 1 < 5 && (
                       <div
                         className="col-span-1"
                         key={index}

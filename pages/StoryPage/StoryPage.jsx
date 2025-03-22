@@ -228,7 +228,7 @@ export default function StorySinglePage({ param }) {
                     </div>
                     {/* genre */}
                     <div
-                      className="col-span-7 grid grid-cols-6 translate-y-200px opacity-0"
+                      className="col-span-7 grid grid-cols-4 md:grid-cols-6 translate-y-200px opacity-0"
                       ref={genreRef}
                     >
                       {data?.categories.map((category, index) => (
@@ -357,7 +357,7 @@ export default function StorySinglePage({ param }) {
               </div>
               {/* the author section */}
               <div
-                className="col-span-6 xl:col-span-3 mt-14 xl:mt-64 md:items-center xl:flex-col items-end translate-y-200px opacity-0"
+                className="col-span-6 xl:col-span-3 mt-14 xl:mt-64 md:items-center flex xl:flex-col items-end translate-y-200px opacity-0"
                 ref={authorRef}
               >
                 {/*  it has 7 rows  */}
@@ -376,7 +376,7 @@ export default function StorySinglePage({ param }) {
                     )}
                   </div>
                 </div>
-                <div className="w-full flex flex-col mr-7 xl:mr-0 rtl">
+                <div className="w-1/2 xl:w-full flex flex-col mr-7 xl:mr-0 rtl">
                   <div className="font-common-heavy text-25px md:text-50px rtl mt-7 md:mt-0 xl:mt-7 text-black">
                     {data?.author?.name}
                   </div>

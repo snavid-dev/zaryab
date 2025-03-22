@@ -180,25 +180,25 @@ export default function ReviewsAndOpinionsSinglePage({ param }) {
                 <div className="w-full grid grid-cols-6 xl:grid-cols-9 items-center gap">
                   {/* time */}
                   <div
-                    className="col-span-2 pl-3 items-end grid grid-cols-2 gap translate-y-200px opacity-0"
+                    className="col-span-6 xl:col-span-2 pl-3 items-end grid grid-cols-2 gap translate-y-200px opacity-0"
                     ref={dateRef}
                   >
                     <div className="rtl col-span-1 flex text-right">
-                      <b className="font-common-bold text-6px md:text-7px lg:text-12px mt-2 md:mt-1 ml-1 lg:mt-0">
+                      <b className="font-common-bold text-12px md:text-7px lg:text-12px mt-2 md:mt-1 ml-1 lg:mt-0">
                         زمان:
                       </b>
-                      <p className="font-common-thin mt-10px md:mt-1 text-6px md:text-7px lg:text-12px">
+                      <p className="font-common-thin mt-10px md:mt-1 text-12px md:text-7px lg:text-12px">
                         {data?.time}
                       </p>
-                      <p className="font-common-thin mt-10px md:mt-1 text-6px md:text-7px lg:text-12px">
+                      <p className="font-common-thin mt-10px md:mt-1 text-12px md:text-7px lg:text-12px">
                         دقیقه
                       </p>
                     </div>
                     <div className="rtl col-span-1 flex text-right">
-                      <b className="font-common-bold text-6px md:text-7px lg:text-12px mt-2 md:mt-1 ml-1 lg:mt-0">
+                      <b className="font-common-bold text-12px md:text-7px lg:text-12px mt-2 md:mt-1 ml-1 lg:mt-0">
                         تاریخ:
                       </b>
-                      <p className="font-common-thin mt-10px md:mt-1 text-6px md:text-7px lg:text-12px">
+                      <p className="font-common-thin mt-10px md:mt-1 text-12px md:text-7px lg:text-12px">
                         {data?.date_shamsi}
                       </p>
                     </div>
@@ -208,14 +208,18 @@ export default function ReviewsAndOpinionsSinglePage({ param }) {
                     className="col-span-7 grid grid-cols-6 translate-y-200px opacity-0"
                     ref={genreRef}
                   >
-                    {data?.categories.map((category, index) => (
-                      <div
-                        className="cols-span-1"
-                        key={index}
-                      >
-                        <Genre title={category.name} />
-                      </div>
-                    ))}
+                    {data?.categories.map((category, index) => {
+                      if (index < 6) {
+                        return (
+                          <div
+                            className="cols-span-1"
+                            key={index}
+                          >
+                            <Genre title={category.name} />
+                          </div>
+                        );
+                      }
+                    })}
                   </div>
                 </div>
               </div>
@@ -230,7 +234,7 @@ export default function ReviewsAndOpinionsSinglePage({ param }) {
             </div>
             {/* the author section */}
             <div
-              className="col-span-6 xl:col-span-3 mt-14 xl:mt-52 md:items-center xl:flex-col items-end translate-y-200px opacity-0"
+              className="col-span-6 xl:col-span-3 mt-14 xl:mt-52 md:items-center flex xl:flex-col items-end translate-y-200px opacity-0"
               ref={authorRef}
             >
               {/*  it has 7 rows  */}
@@ -239,17 +243,17 @@ export default function ReviewsAndOpinionsSinglePage({ param }) {
                   {data?.author?.featured_image ? (
                     <Image
                       src={data?.author?.featured_image}
-                      alt=""
+                      alt={data?.author?.name}
                       layout="fill"
                       objectFit="cover"
                       className="absolute"
                     />
                   ) : (
-                    <div>failed to dispaly image</div>
+                    <div></div>
                   )}
                 </div>
               </div>
-              <div className="w-full flex flex-col mr-7 xl:mr-0 rtl">
+              <div className="w-1/2 xlw-full flex flex-col mr-7 xl:mr-0 rtl">
                 <div className="font-common-heavy text-25px md:text-50px rtl mt-7 md:mt-0 xl:mt-7 text-black">
                   {data?.author?.name}
                 </div>

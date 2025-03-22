@@ -30,7 +30,7 @@ export default function ChampionPopUp() {
         <div className="w-full px-5 flex flex-col items-center">
           <div className="w-full relative h-280px md:h-400px mt-1">
             <Image
-              src="/assets/img/amanullah-khan.jpg"
+              src="/assets/img/amanullah-khan.JPG"
               alt=""
               layout="fill"
               objectFit="cover"

@@ -73,7 +73,7 @@ export default function Authors() {
           >
             <Heading1 title="نویسنده ها و شاعران آوای زریاب" />
             <ArrowLink
-              title="همه نویسنده و شاعران"
+              title="همه نویسنده ها و شاعران"
               path="/authors"
             />
           </div>

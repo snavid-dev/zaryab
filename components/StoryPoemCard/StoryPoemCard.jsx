@@ -7,6 +7,7 @@ import Genre from '../Genre/Genre';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import { truncateString } from '@/utils/GeneralFuncions/GeneralFunctions';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,7 +24,7 @@ export default function StoryPoemCard({ data, isStory, isVisible }) {
   };
 
   // handle the length of the string
-  function truncateString(str) {
+  function truncateString1(str) {
     if (str?.length > 20) {
       return str.substring(0, 20) + '...';
     }
@@ -62,24 +63,23 @@ export default function StoryPoemCard({ data, isStory, isVisible }) {
         {data?.featured_image ? (
           <Image
             src={data?.featured_image}
-            alt=""
+            alt={data?.title}
             layout="fill"
             objectFit="cover"
             className={`absolute transition-all duration-700
                     ${isHovered ? 'opacity-50' : 'opacity-100'}`}
           />
         ) : (
-          <div>failed to display image!!!</div>
+          <div></div>
         )}
       </div>
       <div className="font-new-extra-bold text-36px w-full rtl md:text-76px lg:text-50px mt-3">
-        {truncateString(data?.title)}
+        {truncateString1(data?.title)}
       </div>
       {isStory ? (
-        <div
-          className="font-common-thin text-8px md:text-18px lg:text-17px mt-3 text-right"
-          dangerouslySetInnerHTML={{ __html: data?.excerpt }}
-        ></div>
+        <div className="font-common-thin text-8px md:text-18px lg:text-17px mt-3 text-right">
+          {truncateString(data?.excerpt, 300)}
+        </div>
       ) : (
         <div className="font-common-thin text-8px md:text-18px lg:text-17px mt-3 text-right">
           <div
@@ -124,22 +124,30 @@ export default function StoryPoemCard({ data, isStory, isVisible }) {
       </div>
       {isStory ? (
         <div className="w-full flex gap-2 mt-3 rtl">
-          {data?.categories.map((category, index) => (
-            <Genre
-              title={category.name}
-              key={index}
-            />
-          ))}
+          {data?.categories.map((category, index) => {
+            if (index < 4) {
+              return (
+                <Genre
+                  title={category.name}
+                  key={index}
+                />
+              );
+            }
+          })}
         </div>
       ) : (
         data?.poem_type && (
           <div className="w-full flex gap-2 mt-3 rtl">
-            {data?.poem_type.map((poem, index) => (
-              <Genre
-                title={poem.name}
-                key={index}
-              />
-            ))}
+            {data?.poem_type.map((poem, index) => {
+              if (index < 4) {
+                return (
+                  <Genre
+                    title={poem.name}
+                    key={index}
+                  />
+                );
+              }
+            })}
           </div>
         )
       )}

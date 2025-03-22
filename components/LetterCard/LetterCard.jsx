@@ -51,15 +51,13 @@ export default function LetterCard({ data, isVisible }) {
         {data?.featured_image ? (
           <Image
             src={data?.featured_image}
-            alt="letter"
+            alt={data?.title}
             layout="fill"
             objectFit="cover"
             className="absolute"
           />
         ) : (
-          <div className="h-full w-full flex justify-center items-center">
-            the letter image not found
-          </div>
+          <div className="h-full w-full flex justify-center items-center"></div>
         )}
       </div>
       <div className="mt-5">

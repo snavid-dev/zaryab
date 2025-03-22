@@ -186,57 +186,61 @@ export default function BookSinglePage({ param }) {
                     ref={titleRef}
                   >
                     <p
-                      className={`font-new-black inline text-26px md:text-52px lg:text-60px `}
+                      className={`font-new-black inline text-26px md:text-52px lg:text-60px`}
                     >
                       {data?.title || 'خلاصه هری پاتر و سنگ فلاسفر'}
                     </p>
                   </div>
                 </div>
                 <div
-                  className="w-full flex flex-row-reverse justify-end rtl font-common-heavy text-10px md:text-16px lg:text-25px mt-7 translate-y-200px opacity-0"
+                  className="w-full flex flex-row-reverse justify-end rtl font-common-heavy text-10px md:text-16px lg:text-25px translate-y-200px opacity-0"
                   ref={collRef}
                 >
                   {data?.collection}
                 </div>
-                <div className="w-full grid grid-cols-9 gap items-center mt-14">
+                <div className="w-full grid grid-cols-9 gap-20px md:gap-30px items-center">
                   {/* time */}
                   <div
-                    className="col-span-2 grid grid-cols-2 gap justify-between pl-3 items-end translate-y-200px opacity-0"
+                    className="col-span-9 md:col-span-2 grid grid-cols-2 gap justify-between pl-3 items-end translate-y-200px opacity-0"
                     ref={dateRef}
                   >
                     <div className="col-span-1 rtl flex items-center text-right">
-                      <b className="font-common-bold text-6px md:text-7px lg:text-12px ml-1">
+                      <b className="font-common-bold text-12px md:text-7px lg:text-12px ml-1">
                         زمان:
                       </b>
-                      <p className="font-common-thin mt-1 md:mt-2 text-6px md:text-7px lg:text-12px">
+                      <p className="font-common-thin mt-1 md:mt-2 text-12px md:text-7px lg:text-12px">
                         {data?.time}
                       </p>
-                      <p className="font-common-thin mt-1 md:mt-2 text-6px md:text-7px lg:text-12px">
+                      <p className="font-common-thin mt-1 md:mt-2 text-12px md:text-7px lg:text-12px">
                         دقیقه
                       </p>
                     </div>
                     <div className="col-span-1 rtl flex text-right items-center">
-                      <b className="font-common-bold text-6px md:text-7px lg:text-12px ml-1">
+                      <b className="font-common-bold text-12px md:text-7px lg:text-12px ml-1">
                         تاریخ:
                       </b>
-                      <p className="font-common-thin mt-1 md:mt-2 text-6px md:text-7px lg:text-12px">
+                      <p className="font-common-thin mt-1 md:mt-2 text-12px md:text-7px lg:text-12px">
                         {data?.date_shamsi}
                       </p>
                     </div>
                   </div>
                   {/* genre */}
                   <div
-                    className="col-span-7 grid grid-cols-6 gap items-center mt-2 translate-y-200px opacity-0"
+                    className="col-span-9 md:col-span-7 grid grid-cols-6 gap items-center mt-2 translate-y-200px opacity-0"
                     ref={genreRef}
                   >
-                    {data?.categories.map((category, index) => (
-                      <div
-                        className="col-span-1"
-                        key={index}
-                      >
-                        <Genre title={category.name} />
-                      </div>
-                    ))}
+                    {data?.categories.map((category, index) => {
+                      if (index < 7) {
+                        return (
+                          <div
+                            className="col-span-1"
+                            key={index}
+                          >
+                            <Genre title={category.name} />
+                          </div>
+                        );
+                      }
+                    })}
                   </div>
                 </div>
               </div>

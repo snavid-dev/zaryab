@@ -5,6 +5,7 @@ import ArrowLink from '../ArrowLink/ArrowLink';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import { truncateString } from '@/utils/GeneralFuncions/GeneralFunctions';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -50,7 +51,7 @@ export default function AuthorWeekCard({ data, isVisible }) {
       </div>
       <div>
         <p className="rtl mt-4 font-common text-10px md:text-12px lg:text-17px">
-          {data?.excerpt}
+          {truncateString(data?.excerpt, 300)}
         </p>
       </div>
       <div className="w-full flex justify-center items-center mt-7">

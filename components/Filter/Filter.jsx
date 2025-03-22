@@ -56,7 +56,7 @@ export default function Filter({
         let data = response.data;
 
         // محاسبه نزدیک‌ترین مضرب 6 بزرگتر از طول آرایه
-        const nextMultipleOfSix = Math.ceil(data.length / 6) * 6;
+        const nextMultipleOfSix = Math.ceil(data.length / 5) * 5;
 
         // اضافه کردن استرینگ خالی تا رسیدن به مضرب 6
         while (data.length < nextMultipleOfSix) {
@@ -150,7 +150,7 @@ export default function Filter({
             <div className="w-full flex justify-end font-common-heavy text-20px md:text-30px my-5">
               {title}
             </div>
-            <div className="flex flex-col h-[200px] flex-wrap rtl">
+            <div className="flex flex-col h-100px md:h-150px xl:h-200px flex-wrap rtl">
               {categoryType?.map((category, index) => (
                 <FilterItem
                   key={index}

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useRef } from 'react';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import { truncateString } from '@/utils/GeneralFuncions/GeneralFunctions';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -49,39 +50,41 @@ export default function StoryHarizontalCard({ data, isVisible }) {
         <div className="col-span-4 text-20px md:text-40px font-new-extra-black">
           {data?.title}
         </div>
-        <div className="col-span-4 text-6px md:text-12px font-smallText">
-          {data?.excerpt}
+        <div className="col-span-4 text-6px md:text-12px font-bold font-smallText">
+          {truncateString(data?.excerpt, 500)}
         </div>
         <div className="col-span-4 grid grid-cols-3 gap absolute bottom-0">
           <div className="col-span-1">
             <div className="rtl flex text-right">
-              <p className="font-common-thin ml-1 text-8px xl:text-14px font-bold">
+              <p className="font-common-thin ml-1 text-6px md:text-12px xl:text-14px font-bold">
                 نویسنده:
               </p>
-              <p className="font-common-thin text-8px xl:text-14px">
+              <p className="font-common-thin text-6px md:text-12px xl:text-14px">
                 {data?.author}
               </p>
             </div>
           </div>
           <div className="col-span-1">
             <div className="rtl flex text-right">
-              <p className="font-common-thin ml-1 text-8px xl:text-14px font-bold">
+              <p className="font-common-thin ml-1 text-6px md:text-12px xl:text-14px font-bold">
                 تاریخ:
               </p>
-              <p className="font-common-thin text-8px xl:text-14px">
+              <p className="font-common-thin text-6px md:text-12px xl:text-14px">
                 {data?.date}
               </p>
             </div>
           </div>
           <div className="col-span-1">
             <div className="rtl flex text-right">
-              <p className="font-common-thin ml-1 text-8px xl:text-14px font-bold">
+              <p className="font-common-thin ml-1 text-6px md:text-12px xl:text-14px font-bold">
                 زمان:
               </p>
-              <p className="font-common-thin text-8px xl:text-14px">
+              <p className="font-common-thin text-6px md:text-12px xl:text-14px">
                 {data?.duration}
               </p>
-              <p className="font-common-thin text-8px xl:text-14px">دقیقه</p>
+              <p className="font-common-thin text-6px md:text-12px xl:text-14px">
+                دقیقه
+              </p>
             </div>
           </div>
         </div>

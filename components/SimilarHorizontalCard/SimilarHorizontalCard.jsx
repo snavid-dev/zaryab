@@ -6,6 +6,7 @@ import Genre from '../Genre/Genre';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import { truncateString } from '@/utils/GeneralFuncions/GeneralFunctions';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -58,46 +59,47 @@ export default function SimilarHorizontalCard({
         <div className="col-span-4 text-16px md:text-30px xl:text-43px font-new-extra-black">
           {data?.title}
         </div>
-        <div
-          className="col-span-4 text-6px md:text-12px xl:text-14px 2xl:text-20px font-smallText"
-          dangerouslySetInnerHTML={{ __html: data?.excerpt }}
-        ></div>
+        <div className="col-span-4 text-6px md:text-12px xl:text-14px 2xl:text-20px font-smallText font-bold">
+          {truncateString(data?.excerpt, 500)}
+        </div>
         <div className="w-full xl:col-span-7 xl:grid xl:grid-cols-7 xl:gap absolute bottom-0">
-          <div className="w-full flex xl:col-span-3 xl:grid xl:grid-cols-3 gap">
+          <div className="w-full flex xl:col-span-3 xl:grid xl:grid-cols-3 gap font-bold">
             <div className="xl:col-span-1">
               <div className="rtl flex text-right">
-                <p className="font-common-thin ml-1 text-8px xl:text-14px">
+                <p className="font-common-thin ml-1 text-8px md:text-12px xl:text-14px">
                   نویسنده:
                 </p>
-                <p className="font-common-thin text-8px xl:text-14px">
+                <p className="font-common-thin text-8px md:text-12px xl:text-14px">
                   {data?.author}
                 </p>
               </div>
             </div>
             <div className="xl:col-span-1">
               <div className="rtl flex text-right">
-                <p className="font-common-thin ml-1 text-8px xl:text-14px">
+                <p className="font-common-thin ml-1 text-8px md:text-12px xl:text-14px">
                   تاریخ:
                 </p>
-                <p className="font-common-thin text-8px xl:text-14px">
+                <p className="font-common-thin text-8px md:text-12px xl:text-14px">
                   {data?.date_shamsi}
                 </p>
               </div>
             </div>
             <div className="xl:col-span-1">
               <div className="rtl flex text-right">
-                <p className="font-common-thin ml-1 text-8px xl:text-14px">
+                <p className="font-common-thin ml-1 text-8px md:text-12px xl:text-14px">
                   زمان:
                 </p>
-                <p className="font-common-thin text-8px xl:text-14px">
+                <p className="font-common-thin text-8px md:text-12px xl:text-14px">
                   {data?.time}
                 </p>
-                <p className="font-common-thin text-8px xl:text-14px">دقیقه</p>
+                <p className="font-common-thin text-8px md:text-12px xl:text-14px">
+                  دقیقه
+                </p>
               </div>
             </div>
           </div>
           <div className="col-span-1 h-5 hidden xl:block"></div>
-          <div className="col-span-2 xl:grid grid-cols-3 gap hidden">
+          <div className="col-span-2 md:grid xl:grid grid-cols-3 md:mt-2 xl:mt-0 gap hidden">
             {data?.categories.map(
               (category, index) =>
                 index + 1 < 4 && (

@@ -12,7 +12,7 @@ export default function FilterItem({ data, setFilteredItems, filteredItems }) {
 
   return (
     // the filter item main container
-    <div className={`flex flex-row-reverse h-1/7 md:h-1/5  ltr w-1/3 md:w-1/6`}>
+    <div className={`flex flex-row-reverse h-1/7 md:h-1/5  ltr w-1/3 md:w-1/4`}>
       <div
         className={`w-4 h-4 md:w-4 md:h-4 lg:w-5 lg:h-5 xl:w-7 xl:h-7 border-2 group flex justify-center cursor-pointer items-center transition-all duration-700
             ${

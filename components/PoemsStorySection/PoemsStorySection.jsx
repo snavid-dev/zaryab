@@ -18,9 +18,16 @@ export default function PoemsStorySection() {
   const ref = useRef(null);
 
   useEffect(() => {
+    const checkScreenWidth = () => {
+      const width = window.innerWidth;
+
+      return width > 766 && width < 1920;
+    };
     const fetchData = async () => {
       try {
-        const response = await axios.get('/v1/stories?per_page=3');
+        const response = await axios.get(
+          `/v1/stories?per_page=${checkScreenWidth() ? 4 : 3}`
+        );
         setData(response.data.data);
       } catch (err) {
         setError(err.response?.data?.message || err.message);
@@ -72,10 +79,10 @@ export default function PoemsStorySection() {
             className="main-container mt-14 rtl translate-y-200px opacity-0"
             ref={titleRef}
           >
-            <div className="col-span-6 xl:col-span-6">
+            <div className="col-span-6 md:col-span-3 xl:col-span-6">
               <Heading1 title="داستان ها" />
             </div>
-            <div className="col-span-6 xl-col-span-6 flex justify-start md:justify-end">
+            <div className="col-span-6 md:col-span-3 xl-col-span-6 flex justify-start md:justify-end">
               <ArrowLink
                 title="همه داستان ها"
                 path="/literarywritings"

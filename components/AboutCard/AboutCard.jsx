@@ -62,7 +62,7 @@ export default function AboutCord({ title, text, data, isVisible }) {
         </div>
       </div>
       <div
-        className="rtl py-7 text-white font-common-regular text-20px md:text-30px lg:text-46px"
+        className="rtl py-7 text-white font-common-regular text-20px md:text-30px xl:text-40px"
         dangerouslySetInnerHTML={{ __html: text }}
       ></div>
     </div>

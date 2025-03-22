@@ -14,7 +14,29 @@ export default function Podcasts() {
   const [hasFetched, setHasFetched] = useState(false);
   const ref = useRef(null);
 
+  // check for tablets
+  const [isTablet, setIsTablet] = useState(false);
+
   useEffect(() => {
+    // check screen width
+
+    const checkScreenWidth = () => {
+      const width = window.innerWidth;
+
+      return width > 766 && width < 1920;
+    };
+
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `/v1/podcasts?per_page=${checkScreenWidth() ? 4 : 3}`
+        );
+        setData(response.data.data);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && !hasFetched) {
@@ -29,15 +51,6 @@ export default function Podcasts() {
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, [hasFetched]);
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get('/v1/podcasts?per_page=3');
-      setData(response.data.data);
-    } catch (err) {
-      setError(err.response?.data?.message || err.message);
-    }
-  };
 
   // animation
   const titleRef = useRef(null);

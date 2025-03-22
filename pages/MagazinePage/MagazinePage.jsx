@@ -138,7 +138,7 @@ export default function LetterSinglePage({ param }) {
       {isVisible && (
         <div className="flex flex-col items-center">
           {/*  the number  */}
-          <div className="main-container mt-14">
+          <div className="main-container mt-28 xl:mt-14">
             <div
               className="col-span-6 xl:col-span-12 rtl translate-y-200px opacity-0"
               ref={numberRef}

@@ -44,6 +44,7 @@ export default function StoryMail() {
 
   // animation
   const mailRef = useRef(null);
+  const linkRef = useRef(null);
 
   useGSAP(() => {
     if (isVisible && data) {
@@ -53,6 +54,18 @@ export default function StoryMail() {
         ease: 'power2.out',
         scrollTrigger: {
           trigger: mailRef.current,
+          start: 'top 90%',
+          end: 'top 50%',
+          toggleActions: 'play none none none',
+        },
+      });
+
+      gsap.to(linkRef.current, {
+        y: 0,
+        opacity: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: linkRef.current,
           start: 'top 90%',
           end: 'top 50%',
           toggleActions: 'play none none none',
@@ -84,7 +97,10 @@ export default function StoryMail() {
             <Mail />
           </div>
           <div className="col-span-6 xl:col-span-12">
-            <div className="flex justify-start">
+            <div
+              className="flex justify-start translate-y-200px opacity-0"
+              ref={linkRef}
+            >
               <ArrowLink
                 title="همه نوشته ها"
                 path="/literarywritings"
