@@ -23,7 +23,7 @@ export default function Podcasts() {
     const checkScreenWidth = () => {
       const width = window.innerWidth;
 
-      return width > 766 && width < 1920;
+      return width > 766 && width < 1280;
     };
 
     const fetchData = async () => {

@@ -49,27 +49,27 @@ export default function OurAuthorCard({ data, isVisible }) {
             <div className="w-full h-full flex justify-center items-center"></div>
           )}
         </div>
-        <div className="flex flex-col items-end justify-center w-2/3 lg:w-3/4 pr-4">
+        <div className="flex flex-col items-end justify-center w-2/3 lg:w-3/4 xl:w-2/3 pr-4">
           <div>
             <h3 className="font-common-heavy text-25px md:text-50px xl:text-30px">
               {data?.name}
             </h3>
           </div>
           <div className="flex flex-row-reverse justify-between w-full mt-2">
-            <p className="font-common-thin text-6px md:text-16px xl:text-16px">
-              <b className="font-common-med text-6px  md:text-16px xl:text-16px ml-1">
+            <p className="font-common-thin text-6px md:text-16px xl:text-12px">
+              <b className="font-common-med text-6px  md:text-16px xl:text-12px ml-1">
                 وظیفه:
               </b>
               {data?.job}
             </p>
-            <p className="font-common-thin text-6px  md:text-16px xl:text-16px">
-              <b className="font-common-med text-6px  md:text-16px xl:text-16px ml-1">
+            <p className="font-common-thin text-6px  md:text-16px xl:text-12px">
+              <b className="font-common-med text-6px  md:text-16px xl:text-12px ml-1">
                 شهر:
               </b>
               {data?.location}
             </p>
-            <p className="font-common-thin text-6px  md:text-16px xl:text-16px">
-              <b className="font-common-med text-6px  md:text-16px xl:text-16px ml-1">
+            <p className="font-common-thin text-6px  md:text-16px xl:text-12px">
+              <b className="font-common-med text-6px  md:text-16px xl:text-12px ml-1">
                 تعداد آثار:
               </b>
               {data?.total_letters}
