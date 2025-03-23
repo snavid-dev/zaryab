@@ -181,7 +181,7 @@ export default function Winner() {
             </div>
             {/* buttons */}
             <div
-              className="w-full flex gap-30px mt-5 md:absolute bottom-0 translate-y-200px opacity-0"
+              className="w-full flex justify-between mt-5 md:absolute bottom-0 translate-y-200px opacity-0"
               ref={buttonRef}
             >
               <div>
