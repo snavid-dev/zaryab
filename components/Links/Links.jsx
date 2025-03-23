@@ -3,7 +3,8 @@ import { usePathname } from 'next/navigation';
 
 export default function Links({ link, title, onClick, big }) {
   const pathname = usePathname();
-  const active = pathname.startsWith(link);
+  let active = pathname.startsWith(link);
+
   return (
     <li
       className="h-8 cursor-pointer overflow-hidden group col-span-6 xl:col-span-1 text-right xl:text-center"
@@ -11,7 +12,15 @@ export default function Links({ link, title, onClick, big }) {
     >
       <p
         className={`hidden xl:block group-hover:-translate-y-7 transition-all duration-300 ${
-          active && link !== '/'
+          (active ||
+            (link === '/writing' &&
+              (pathname.startsWith('/episode') ||
+                pathname.startsWith('/story') ||
+                pathname.startsWith('/stories') ||
+                pathname.startsWith('/poem') ||
+                pathname.startsWith('/poems') ||
+                pathname.startsWith('/book')))) &&
+          link !== '/'
             ? 'text-footerBtn'
             : pathname === '/about'
             ? 'text-white'
@@ -22,7 +31,15 @@ export default function Links({ link, title, onClick, big }) {
       </p>
       <p
         className={`xl:group-hover:-translate-y-9 transition-all duration-300 ${
-          active && link !== '/'
+          (active ||
+            (link === '/writing' &&
+              (pathname.startsWith('/episode') ||
+                pathname.startsWith('/story') ||
+                pathname.startsWith('/stories') ||
+                pathname.startsWith('/poem') ||
+                pathname.startsWith('/poems') ||
+                pathname.startsWith('/book')))) &&
+          link !== '/'
             ? 'text-footerBtn'
             : pathname === '/about'
             ? 'text-white'

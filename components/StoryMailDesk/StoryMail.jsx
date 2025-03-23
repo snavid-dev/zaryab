@@ -103,7 +103,7 @@ export default function StoryMail() {
             >
               <ArrowLink
                 title="همه آثار"
-                path="/literarywritings"
+                path="/writing"
               />
             </div>
           </div>

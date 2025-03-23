@@ -371,7 +371,7 @@ export default function Footer() {
         <div className="main-container mt-10px border-t-4 border-b-4 border-footerBorder py-10px">
           <div className="col-span-1 xl:col-span-2">
             <Link2
-              link="/literarywritings"
+              link="/writing"
               title="آثار ادبی"
               head={true}
             />
@@ -384,14 +384,14 @@ export default function Footer() {
 
           <div className="col-span-1 xl:col-span-2">
             <Link2
-              link="/literarywritings"
+              link="/writing"
               title="داستان"
             />
           </div>
           <div className="col-span-1 xl:col-span-2"></div>
           <div className="col-span-1 xl:col-span-2">
             <Link2
-              link="/literarywritings"
+              link="/writing"
               title="شعر"
             />
           </div>
@@ -405,7 +405,7 @@ export default function Footer() {
               key={index}
             >
               <Link2
-                link={`/literarywritings/?type=${data?.slug}`}
+                link={`/writing/?type=${data?.slug}`}
                 title={data?.name}
               />
             </div>
@@ -441,7 +441,7 @@ export default function Footer() {
         <div className="main-container mt-10px border-t-4 border-b-4 border-footerBorder py-10px">
           <div className="col-span-1 xl:col-span-2">
             <Link2
-              link="/reviewsandopinions"
+              link="/review"
               title="نقد و نظر‌ها"
               head={true}
             />
@@ -460,7 +460,7 @@ export default function Footer() {
               }`}
             >
               <Link2
-                link={`/reviewsandopinions/?review_type=${data?.slug}`}
+                link={`/review/?review_type=${data?.slug}`}
                 title={data?.name}
               />
             </div>

@@ -57,7 +57,7 @@ export default function AuthorWeekCard({ data, isVisible }) {
       <div className="w-full flex justify-center items-center mt-7">
         <ArrowLink
           title="بیشتر بخوانید"
-          path={`/authors/archiveauthor/${data?.slug}`}
+          path={`/author/${data?.slug}`}
         />
       </div>
     </div>

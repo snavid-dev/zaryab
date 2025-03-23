@@ -85,7 +85,7 @@ export default function PoemsStorySection() {
             <div className="col-span-6 md:col-span-3 xl:col-span-6 flex items-center justify-start md:justify-end">
               <ArrowLink
                 title="همه داستان ها"
-                path="/literarywritings"
+                path="/writing"
               />
             </div>
           </div>

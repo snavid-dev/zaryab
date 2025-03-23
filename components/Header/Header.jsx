@@ -105,7 +105,7 @@ export default function Header() {
                 />
                 <Links
                   title="آثار ادبی"
-                  link={'/literarywritings'}
+                  link={'/writing'}
                 />
                 <Links
                   title="مقاله ها"
@@ -113,7 +113,7 @@ export default function Header() {
                 />
                 <Links
                   title="نقد و نظر ها"
-                  link={'/reviewsandopinions'}
+                  link={'/review'}
                 />
                 <Links
                   title="کتاب صوتی"
@@ -215,7 +215,7 @@ export default function Header() {
               />
               <Links
                 title="آثار ادبی"
-                link={'/literarywritings'}
+                link={'/writing'}
                 onClick={() => setMenu(!menu)}
               />
               <Links
@@ -225,7 +225,7 @@ export default function Header() {
               />
               <Links
                 title="نقد و نظر ها"
-                link={'/reviewsandopinions'}
+                link={'/review'}
                 onClick={() => setMenu(!menu)}
               />
               <Links

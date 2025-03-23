@@ -30,7 +30,7 @@ export default function StoryHarizontalCard({ data, isVisible }) {
   }, [isVisible, data]);
   return (
     <Link
-      href={`/literarywritings/story/episode/${data?.slug}`}
+      href={`/episode/${data?.slug}`}
       className="grid grid-cols-6 xl:grid-cols-9 gap border-b-4 py-20px border-black translate-y-200px opacity-0"
       ref={storyCardRef}
     >

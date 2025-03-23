@@ -40,9 +40,7 @@ export default function SimilarHorizontalStoryCard({
       ref={cardRef}
     >
       <Link
-        href={`/literarywritings/${isStory ? 'story/episode' : 'poems'}/${
-          data?.slug
-        }`}
+        href={`/${isStory ? 'episode' : 'poem'}/${data?.slug}`}
         className="w-full grid grid-cols-6 xl:grid-cols-9 gap border-b-4 py-20px border-black"
       >
         <div className="relative col-span-2 h-95px md:h-200px xl:h-210px 2xl:h-270px">

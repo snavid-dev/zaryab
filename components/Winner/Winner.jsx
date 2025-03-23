@@ -187,7 +187,7 @@ export default function Winner() {
               <div>
                 <Link
                   className="font-common-heavy px-30px py-10px md:px-30px md:py-10px xl:px-50px xl:py-20px border-black border-2 bg-black text-white xl:text-30px"
-                  href={`/literarywritings/story/episode/${data?.story?.slug}`}
+                  href={`/episode/${data?.story?.slug}`}
                 >
                   خواندن داستان
                 </Link>

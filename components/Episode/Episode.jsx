@@ -72,7 +72,7 @@ export default function Episode({ data, isVisible }) {
       </div>
       <div className="w-full mt-3">
         <Link
-          href={`/literarywritings/story/${data?.slug}`}
+          href={`/story/${data?.slug}`}
           className="w-full py-2 font-common-heavy text-20px md:text-43px lg:text-28px border-2 border-black flex justify-center items-center
                 bg-black text-white hover:bg-white hover:text-black transition-all duration-700"
         >

@@ -38,7 +38,7 @@ export default function SimilarHorizontalCard({
 
   return (
     <Link
-      href={`/${isArticle ? 'articles' : 'reviewsandopinions'}/${data?.slug}`}
+      href={`/${isArticle ? 'articles' : 'review'}/${data?.slug}`}
       className="col-span-6 xl:col-span-12 grid grid-cols-6 xl:grid-cols-9 gap border-b-4 py-20px border-black translate-y-200px opacity-0"
       ref={cardRef}
     >

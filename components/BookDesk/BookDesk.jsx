@@ -197,7 +197,7 @@ export default function BookDesk() {
             </Link>
 
             <Link
-              href={`/literarywritings/book/${data?.slug}`}
+              href={`/book/${data?.slug}`}
               className="w-full h-[50px] lg:h-[100px] bg-footerBtn flex justify-center items-center mt-7
                 font-common-heavy text-28px lg:text-59px text-white hover:text-footerBtn hover:bg-white transition-all duration-500 border-4 border-footerBtn"
             >

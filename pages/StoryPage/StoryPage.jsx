@@ -192,7 +192,7 @@ export default function StorySinglePage({ param }) {
                     <div className="ml-1">از مجموعه</div>
                     {data?.collection.map((coll, index) => (
                       <Link
-                        href={`/literarywritings/story/collection/${coll.slug}`}
+                        href={`/stories/${coll.slug}`}
                         key={index}
                         className="ml-3"
                       >

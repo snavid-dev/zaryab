@@ -108,16 +108,16 @@ export default function BookMobile() {
               </div>
               <div className="flex justify-between mt-7 md:mt-9">
                 <Link
-                  href={`/literarywritings/book/${data?.slug}`}
-                  className="w-[45%] h-10 bg-black flex justify-center font-common-lg text-28px items-center text-white"
+                  href={`/book/${data?.slug}`}
+                  className="w-[45%] h-10 border-footerBtn border-2 flex justify-center items-center
+                       font-common-lg text-28px text-footerBtn"
                 >
                   خلاصه
                 </Link>
                 <Link
                   onClick={handleDownload}
                   href="#"
-                  className="w-[45%] h-10 border-footerBtn border-2 flex justify-center items-center
-                       font-common-lg text-28px text-footerBtn"
+                  className="w-[45%] h-10 bg-black flex justify-center font-common-lg text-28px items-center text-white"
                 >
                   دانلود
                 </Link>

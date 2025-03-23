@@ -42,15 +42,15 @@ export default function SearchCard({ data, type }) {
         <Link
           href={
             type === 'story'
-              ? `/literarywritings/story/episode/${data?.slug}`
+              ? `/episode/${data?.slug}`
               : type === 'poem'
-              ? `/literarywritings/poems/${data?.slug}`
+              ? `/poem/${data?.slug}`
               : type === 'article'
               ? `/articles/${data?.slug}`
               : type === 'letter'
               ? `/magazines/${data?.slug}`
               : type === 'review'
-              ? `/reviewsandopinions/${data?.slug}`
+              ? `/review/${data?.slug}`
               : type === 'podcast'
               ? `/podcasts/${data?.slug}`
               : ''

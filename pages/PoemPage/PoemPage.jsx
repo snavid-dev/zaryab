@@ -170,7 +170,7 @@ export default function PoemPage({ param }) {
                   {data?.poem_collection.map((coll, index) => (
                     <Link
                       className="ml-3"
-                      href={`/literarywritings/poems/collection/${coll.slug}`}
+                      href={`/poems/${coll.slug}`}
                       key={index}
                     >
                       {coll.name}
