@@ -231,14 +231,20 @@ export default function StorySinglePage({ param }) {
                       className="col-span-7 grid grid-cols-4 md:grid-cols-6 translate-y-200px opacity-0"
                       ref={genreRef}
                     >
-                      {data?.categories.map((category, index) => (
-                        <div
-                          className="cols-span-1"
-                          key={index}
-                        >
-                          <Genre title={category?.name} />
-                        </div>
-                      ))}
+                      {data?.categories.map((category, index) => {
+                        if (index < 4) {
+                          return (
+                            <div
+                              className={`cols-span-1 flex justify-start ${
+                                index > 3 ? 'hidden md:block' : ''
+                              }`}
+                              key={index}
+                            >
+                              <Genre title={category?.name} />
+                            </div>
+                          );
+                        }
+                      })}
                     </div>
                   </div>
                   {/* the links of the episodes */}

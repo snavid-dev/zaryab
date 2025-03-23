@@ -63,48 +63,48 @@ export default function SimilarHorizontalCard({
           {truncateString(data?.excerpt, 500)}
         </div>
         <div className="w-full xl:col-span-7 xl:grid xl:grid-cols-7 xl:gap absolute bottom-0">
-          <div className="w-full flex xl:col-span-3 xl:grid xl:grid-cols-3 gap font-bold">
+          <div className="w-full flex md:col-span-3 md:grid md:grid-cols-3 gap-10px font-bold">
             <div className="xl:col-span-1">
               <div className="rtl flex text-right">
-                <p className="font-common-thin ml-1 text-8px md:text-12px xl:text-14px">
+                <p className="font-common-thin ml-1 text-8px md:text-12px 2xl:text-14px">
                   نویسنده:
                 </p>
-                <p className="font-common-thin text-8px md:text-12px xl:text-14px">
+                <p className="font-common-thin text-8px md:text-12px 2xl:text-14px">
                   {data?.author}
                 </p>
               </div>
             </div>
             <div className="xl:col-span-1">
               <div className="rtl flex text-right">
-                <p className="font-common-thin ml-1 text-8px md:text-12px xl:text-14px">
+                <p className="font-common-thin ml-1 text-8px md:text-12px 2xl:text-14px">
                   تاریخ:
                 </p>
-                <p className="font-common-thin text-8px md:text-12px xl:text-14px">
+                <p className="font-common-thin text-8px md:text-12px 2xl:text-14px">
                   {data?.date_shamsi}
                 </p>
               </div>
             </div>
             <div className="xl:col-span-1">
               <div className="rtl flex text-right">
-                <p className="font-common-thin ml-1 text-8px md:text-12px xl:text-14px">
+                <p className="font-common-thin ml-1 text-8px md:text-12px 2xl:text-14px">
                   زمان:
                 </p>
-                <p className="font-common-thin text-8px md:text-12px xl:text-14px">
+                <p className="font-common-thin text-8px md:text-12px 2xl:text-14px">
                   {data?.time}
                 </p>
-                <p className="font-common-thin text-8px md:text-12px xl:text-14px">
+                <p className="font-common-thin text-8px md:text-12px 2xl:text-14px">
                   دقیقه
                 </p>
               </div>
             </div>
           </div>
           <div className="col-span-1 h-5 hidden xl:block"></div>
-          <div className="col-span-2 md:grid xl:grid grid-cols-3 md:mt-2 xl:mt-0 gap hidden">
+          <div className="col-span-3 md:grid grid-cols-3 md:mt-2 xl:mt-0 gap-10px hidden">
             {data?.categories.map(
               (category, index) =>
                 index + 1 < 4 && (
                   <div
-                    className="col-span-1"
+                    className="col-span-1 flex justify-start"
                     key={index}
                   >
                     <Genre title={category.name} />

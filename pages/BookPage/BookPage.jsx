@@ -201,7 +201,7 @@ export default function BookSinglePage({ param }) {
                 <div className="w-full grid grid-cols-9 gap-20px md:gap-30px items-center">
                   {/* time */}
                   <div
-                    className="col-span-9 md:col-span-2 grid grid-cols-2 gap justify-between pl-3 items-end translate-y-200px opacity-0"
+                    className="col-span-9 md:col-span-3  grid grid-cols-2 gap justify-between pl-3 items-end translate-y-200px opacity-0"
                     ref={dateRef}
                   >
                     <div className="col-span-1 rtl flex items-center text-right">
@@ -226,14 +226,16 @@ export default function BookSinglePage({ param }) {
                   </div>
                   {/* genre */}
                   <div
-                    className="col-span-9 md:col-span-7 grid grid-cols-6 gap items-center mt-2 translate-y-200px opacity-0"
+                    className="col-span-9 md:col-span-6 grid grid-cols-4 xl:grid-cols-6 gap items-center mt-2 translate-y-200px opacity-0"
                     ref={genreRef}
                   >
                     {data?.categories.map((category, index) => {
-                      if (index < 7) {
+                      if (index < 6) {
                         return (
                           <div
-                            className="col-span-1"
+                            className={`col-span-1 flex justify-start ${
+                              index > 3 ? 'hidden xl:flex' : ''
+                            }`}
                             key={index}
                           >
                             <Genre title={category.name} />

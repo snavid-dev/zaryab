@@ -130,7 +130,7 @@ export default function StoryOfDay() {
               <div className="col-span-6 xl:col-span-12 main-container">
                 <div className="hidden xl:block xl:col-span-5"></div>
                 <div
-                  className="col-span-6  xl:col-span-5 grid grid-cols-3 gap rtl translate-y-200px opacity-0"
+                  className="col-span-6  xl:col-span-5 grid grid-cols-3 gap-10px rtl translate-y-200px opacity-0"
                   id="storyAuthor"
                 >
                   <div className="col-span-1 hidden xl:block"></div>
@@ -138,33 +138,33 @@ export default function StoryOfDay() {
                   <div className="col-span-1 hidden xl:block"></div>
                   <div className="col-span-1 xl:mt-6">
                     <div className="rtl flex justify-center text-right">
-                      <p className="font-common-thin ml-1 text-12px md:text-25px xl:text-18px font-bold">
+                      <p className="font-common-thin ml-1 text-12px md:text-18px xl:text-14px font-bold">
                         نویسنده:
                       </p>
-                      <p className="font-common-thin text-12px md:text-25px xl:text-18px">
+                      <p className="font-common-thin text-12px md:text-18px xl:text-14px">
                         {data?.author}
                       </p>
                     </div>
                   </div>
                   <div className="col-span-1 xl:mt-6">
                     <div className="rtl flex justify-center text-right">
-                      <p className="font-common-thin ml-1 text-12px md:text-25px xl:text-18px font-bold">
+                      <p className="font-common-thin ml-1 text-12px md:text-18px xl:text-14px font-bold">
                         تاریخ:
                       </p>
-                      <p className="font-common-thin text-12px md:text-25px xl:text-18px">
+                      <p className="font-common-thin text-12px md:text-18px xl:text-14px">
                         {data?.date}
                       </p>
                     </div>
                   </div>
                   <div className="col-span-1 xl:mt-6">
                     <div className="rtl flex justify-center text-right">
-                      <p className="font-common-thin ml-1 text-12px md:text-25px xl:text-18px font-bold">
+                      <p className="font-common-thin ml-1 text-12px md:text-18px xl:text-14px font-bold">
                         زمان:
                       </p>
-                      <p className="font-common-thin text-12px md:text-25px xl:text-18px">
+                      <p className="font-common-thin text-12px md:text-18px xl:text-14px">
                         {data?.duration}{' '}
                       </p>
-                      <p className="font-common-thin text-12px md:text-25px xl:text-18px">
+                      <p className="font-common-thin text-12px md:text-18px xl:text-14px">
                         دقیقه
                       </p>
                     </div>

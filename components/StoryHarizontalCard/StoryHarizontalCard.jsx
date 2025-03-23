@@ -54,48 +54,50 @@ export default function StoryHarizontalCard({ data, isVisible }) {
         <div className="col-span-4 text-6px md:text-12px font-bold font-smallText">
           {truncateString(data?.excerpt, 500)}
         </div>
-        <div className="col-span-4 xl:col-span-7 w-full grid grid-cols-3 xl:grid-cols-10 gap absolute bottom-0">
+        <div className="col-span-4 xl:col-span-7 w-full grid grid-cols-3 xl:grid-cols-10 gap-10px absolute bottom-0">
           <div className="col-span-1 xl:col-span-2">
             <div className="rtl flex text-right">
-              <p className="font-common-thin ml-1 text-6px md:text-12px xl:text-14px font-bold">
+              <p className="font-common-thin ml-1 text-6px md:text-12px 2xl:text-14px font-bold">
                 نویسنده:
               </p>
-              <p className="font-common-thin text-6px md:text-12px xl:text-14px">
+              <p className="font-common-thin text-6px md:text-12px 2xl:text-14px">
                 {data?.author}
               </p>
             </div>
           </div>
           <div className="col-span-1 xl:col-span-2">
             <div className="rtl flex text-right">
-              <p className="font-common-thin ml-1 text-6px md:text-12px xl:text-14px font-bold">
+              <p className="font-common-thin ml-1 text-6px md:text-12px 2xl:text-14px font-bold">
                 تاریخ:
               </p>
-              <p className="font-common-thin text-6px md:text-12px xl:text-14px">
+              <p className="font-common-thin text-6px md:text-12px 2xl:text-14px">
                 {data?.date}
               </p>
             </div>
           </div>
           <div className="col-span-1 xl:col-span-2">
             <div className="rtl flex text-right">
-              <p className="font-common-thin ml-1 text-6px md:text-12px xl:text-14px font-bold">
+              <p className="font-common-thin ml-1 text-6px md:text-12px 2xl:text-14px font-bold">
                 زمان:
               </p>
-              <p className="font-common-thin text-6px md:text-12px xl:text-14px">
+              <p className="font-common-thin text-6px md:text-12px 2xl:text-14px">
                 {data?.duration}
               </p>
-              <p className="font-common-thin text-6px md:text-12px xl:text-14px">
+              <p className="font-common-thin text-6px md:text-12px 2xl:text-14px">
                 دقیقه
               </p>
             </div>
           </div>
-          <div className="xl:col-span-4 h-5 hidden xl:block">
+          <div className="xl:col-span-4 xl:grid xl:grid-cols-4 hidden">
             {data?.categories.map((cate, index) => {
-              if (index < 5) {
+              if (index < 2) {
                 return (
-                  <Genre
-                    title={cate?.name}
+                  <div
+                    className="col-span-2"
                     key={index}
-                  />
+                  >
+                    <Genre title={cate?.name} />
+                  </div>
                 );
               }
             })}

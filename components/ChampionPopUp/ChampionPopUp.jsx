@@ -28,7 +28,7 @@ export default function ChampionPopUp() {
           />
         </div>
         <div className="w-full px-5 flex flex-col items-center">
-          <div className="w-full relative h-280px md:h-400px mt-1">
+          <div className="w-full relative h-280px md:h-400px xl:h-360px mt-1">
             <Image
               src="/assets/img/amanullah-khan.png"
               alt=""

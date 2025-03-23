@@ -177,10 +177,10 @@ export default function ReviewsAndOpinionsSinglePage({ param }) {
                 >
                   {data?.title}
                 </div>
-                <div className="w-full grid grid-cols-6 xl:grid-cols-9 items-center gap">
+                <div className="w-full grid grid-cols-6 md:grid-cols-9 items-center gap">
                   {/* time */}
                   <div
-                    className="col-span-6 xl:col-span-2 pl-3 items-end grid grid-cols-2 gap translate-y-200px opacity-0"
+                    className="col-span-6 md:col-span-2 pl-3 items-end grid grid-cols-2 gap translate-y-200px opacity-0"
                     ref={dateRef}
                   >
                     <div className="rtl col-span-1 flex text-right">
@@ -205,14 +205,16 @@ export default function ReviewsAndOpinionsSinglePage({ param }) {
                   </div>
                   {/* genre */}
                   <div
-                    className="col-span-7 grid grid-cols-6 translate-y-200px opacity-0"
+                    className="col-span-7 grid grid-cols-4 md:grid-cols-6 translate-y-200px opacity-0"
                     ref={genreRef}
                   >
                     {data?.categories.map((category, index) => {
                       if (index < 6) {
                         return (
                           <div
-                            className="cols-span-1"
+                            className={`cols-span-1 flex justify-start ${
+                              index > 3 ? 'hidden md:flex' : ''
+                            }`}
                             key={index}
                           >
                             <Genre title={category.name} />

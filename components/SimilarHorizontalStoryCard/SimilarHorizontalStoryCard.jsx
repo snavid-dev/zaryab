@@ -126,7 +126,7 @@ export default function SimilarHorizontalStoryCard({
               <div className="col-span-3 xl:grid grid-cols-3 gap hidden md:block md:mt-2">
                 {data?.categories.map(
                   (category, index) =>
-                    index + 1 < 5 && (
+                    index + 1 < 4 && (
                       <div
                         className="col-span-1"
                         key={index}
@@ -140,7 +140,7 @@ export default function SimilarHorizontalStoryCard({
               <div className="col-span-3 xl:grid grid-cols-3 gap hidden md:block">
                 {data?.poem_type.map(
                   (category, index) =>
-                    index + 1 < 5 && (
+                    index + 1 < 4 && (
                       <div
                         className="col-span-1"
                         key={index}

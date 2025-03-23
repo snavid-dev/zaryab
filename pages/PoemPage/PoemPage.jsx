@@ -208,14 +208,20 @@ export default function PoemPage({ param }) {
                     className="col-span-7 grid grid-cols-4 md:grid-cols-6 translate-y-200px opacity-0"
                     ref={genreRef}
                   >
-                    {data?.poem_type.map((poem, index) => (
-                      <div
-                        className="cols-span-1"
-                        key={index}
-                      >
-                        <Genre title={poem.name} />
-                      </div>
-                    ))}
+                    {data?.poem_type.map((poem, index) => {
+                      if (index < 6) {
+                        return (
+                          <div
+                            className={`col-span-1 flex justify-start ${
+                              index > 3 ? 'hidden md:flex' : ''
+                            }`}
+                            key={index}
+                          >
+                            <Genre title={poem.name} />
+                          </div>
+                        );
+                      }
+                    })}
                   </div>
                 </div>
               </div>

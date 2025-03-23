@@ -123,9 +123,9 @@ export default function StoryPoemCard({ data, isStory, isVisible }) {
         </div>
       </div>
       {isStory ? (
-        <div className="w-full flex gap-2 mt-3 rtl">
+        <div className="w-full flex justify-between gap-2 mt-3 rtl">
           {data?.categories.map((category, index) => {
-            if (index < 4) {
+            if (index < 3) {
               return (
                 <Genre
                   title={category.name}
