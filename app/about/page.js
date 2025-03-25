@@ -41,15 +41,16 @@ export default function AboutPage() {
     >
       {isVisible && (
         <div className="main-container">
-          {data?.map((data, index) => (
-            <AboutCord
-              key={index}
-              title={data.question}
-              text={data.answer}
-              data={data}
-              isVisible={isVisible}
-            />
-          ))}
+          {Array.isArray(data) &&
+            data?.map((data, index) => (
+              <AboutCord
+                key={index}
+                title={data?.question ? data?.question : ''}
+                text={data?.answer ? data?.answer : ''}
+                data={data}
+                isVisible={isVisible}
+              />
+            ))}
         </div>
       )}
     </div>

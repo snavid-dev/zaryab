@@ -81,13 +81,14 @@ export default function SimilarPoems({ slug }) {
             </div>
           </div>
           <div className="main-container rtl">
-            {data?.map((data, index) => (
-              <SimilarHorizontalStoryCard
-                key={index}
-                data={data}
-                isVisible={isVisible}
-              />
-            ))}
+            {Array.isArray(data) &&
+              data?.map((data, index) => (
+                <SimilarHorizontalStoryCard
+                  key={index}
+                  data={data}
+                  isVisible={isVisible}
+                />
+              ))}
           </div>
         </div>
       )}

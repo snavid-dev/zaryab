@@ -11,19 +11,19 @@ export async function generateMetadata({ params }) {
     const data = await response.json();
 
     return {
-      title: data?.title,
-      description: `مجله ${data?.title}`,
+      title: data?.title && data?.title,
+      description: `مجله ${data?.title && data?.title}`,
       openGraph: {
-        title: data?.title,
-        description: `مجله ${data?.title}`,
+        title: data?.title && data?.title,
+        description: `مجله ${data?.title && data?.title}`,
         url: 'https://zaryb3.vercel.app',
         siteName: 'وبسایت ادبی آوای زریاب',
         images: [
           {
-            url: data?.featured_image,
+            url: data?.featured_image && data?.featured_image,
             width: 1129,
             height: 750,
-            alt: data?.title,
+            alt: data?.title && data?.title,
           },
         ],
         locale: 'fa_IR',
@@ -32,9 +32,9 @@ export async function generateMetadata({ params }) {
       twitter: {
         card: 'summary_large_image',
         site: '@your_twitter_handle',
-        title: data?.title,
-        description: `مجله ${data?.title}`,
-        images: [data?.featured_image],
+        title: data?.title && data?.title,
+        description: `مجله ${data?.title && data?.title}`,
+        images: [data?.featured_image && data?.featured_image],
       },
       viewport: 'width=device-width, initial-scale=1.0',
       robots: {
@@ -77,7 +77,7 @@ export async function generateMetadata({ params }) {
       authors: [
         {
           name: 'Cyborg Tech Creative Agency',
-          url: 'https://portfolio-poorya.vercel.app/',
+          url: 'https://cyborgtech.co/',
         },
       ],
     };

@@ -179,26 +179,29 @@ export default function StorySinglePage({ param }) {
               <div className="col-span-6 xl:col-span-9 pl-5">
                 {/*  the title section of the story  */}
                 <div className="mt-14 flex flex-col items-end">
-                  <div
-                    className="w-full font-new-black text-50px md:text-60px lg:text-94px rtl translate-y-200px opacity-0"
-                    id="title"
-                  >
-                    {data?.title}
-                  </div>
+                  {data?.title && (
+                    <div
+                      className="w-full font-new-black text-50px md:text-60px lg:text-94px rtl translate-y-200px opacity-0"
+                      id="title"
+                    >
+                      {data?.title}
+                    </div>
+                  )}
                   <div
                     className="w-full rtl font-common-heavy text-10px md:text-16px lg:text-25px xl:mt-14 flex translate-y-200px opacity-0"
                     ref={collRef}
                   >
                     <div className="ml-1">از مجموعه</div>
-                    {data?.collection.map((coll, index) => (
-                      <Link
-                        href={`/stories/${coll.slug}`}
-                        key={index}
-                        className="ml-3"
-                      >
-                        {coll.name}
-                      </Link>
-                    ))}
+                    {Array.isArray(data?.collection) &&
+                      data?.collection?.map((coll, index) => (
+                        <Link
+                          href={coll.slug && `/stories/${coll.slug}`}
+                          key={index}
+                          className="ml-3"
+                        >
+                          {coll.name}
+                        </Link>
+                      ))}
                   </div>
                   <div className="w-full grid grid-cols-6 xl:grid-cols-9 items-center gap">
                     {/* time */}
@@ -210,9 +213,11 @@ export default function StorySinglePage({ param }) {
                         <b className="font-common-bold text-6px md:text-7px lg:text-12px mt-2 md:mt-1 ml-1 lg:mt-0">
                           زمان:
                         </b>
-                        <p className="font-common-thin mt-10px md:mt-1 text-6px md:text-7px lg:text-12px">
-                          {data?.time}
-                        </p>
+                        {data?.time && (
+                          <p className="font-common-thin mt-10px md:mt-1 text-6px md:text-7px lg:text-12px">
+                            {data?.time}
+                          </p>
+                        )}
                         <p className="font-common-thin mt-10px md:mt-1 text-6px md:text-7px lg:text-12px">
                           دقیقه
                         </p>
@@ -221,9 +226,11 @@ export default function StorySinglePage({ param }) {
                         <b className="font-common-bold text-6px md:text-7px lg:text-12px mt-2 md:mt-1 ml-1 lg:mt-0">
                           تاریخ:
                         </b>
-                        <p className="font-common-thin mt-10px md:mt-1 text-6px md:text-7px lg:text-12px">
-                          {data?.date}
-                        </p>
+                        {data?.date && (
+                          <p className="font-common-thin mt-10px md:mt-1 text-6px md:text-7px lg:text-12px">
+                            {data?.date}
+                          </p>
+                        )}
                       </div>
                     </div>
                     {/* genre */}
@@ -231,20 +238,21 @@ export default function StorySinglePage({ param }) {
                       className="col-span-7 grid grid-cols-4 md:grid-cols-6 translate-y-200px opacity-0"
                       ref={genreRef}
                     >
-                      {data?.categories.map((category, index) => {
-                        if (index < 4) {
-                          return (
-                            <div
-                              className={`cols-span-1 flex justify-start ${
-                                index > 3 ? 'hidden md:block' : ''
-                              }`}
-                              key={index}
-                            >
-                              <Genre title={category?.name} />
-                            </div>
-                          );
-                        }
-                      })}
+                      {Array.isArray(data?.categories) &&
+                        data?.categories?.map((category, index) => {
+                          if (index < 4) {
+                            return (
+                              <div
+                                className={`cols-span-1 flex justify-start ${
+                                  index > 3 ? 'hidden md:block' : ''
+                                }`}
+                                key={index}
+                              >
+                                <Genre title={category?.name} />
+                              </div>
+                            );
+                          }
+                        })}
                     </div>
                   </div>
                   {/* the links of the episodes */}
@@ -254,12 +262,17 @@ export default function StorySinglePage({ param }) {
                   >
                     {/*  it has 3 columns  */}
                     <div className="flex flex-row-reverse justify-between items-center">
-                      <div className="font-common-heavy text-8px md:text-20px lg:text-25px">
-                        قسمت {data?.episode_title}{' '}
-                      </div>
+                      {data?.episode_title && (
+                        <div className="font-common-heavy text-8px md:text-20px lg:text-25px">
+                          قسمت {data?.episode_title}{' '}
+                        </div>
+                      )}
                       <div className="w-[60%] justify-between items-center hidden md:flex flex-row-reverse">
                         <Link
-                          href={`/literarywritings/story/${data?.previous_episode}`}
+                          href={`${
+                            data?.previous_episode &&
+                            `/story/${data?.previous_episode}`
+                          }`}
                           className={`flex flex-row-reverse justify-around items-center font-common-heavy text-lg border-2 border-black ${
                             data?.previous_episode
                               ? ''
@@ -273,7 +286,9 @@ export default function StorySinglePage({ param }) {
                           </p>
                         </Link>
                         <Link
-                          href={`/literarywritings/story/${data?.next_episode}`}
+                          href={`${
+                            data?.next_episode && `/story/${data?.next_episode}`
+                          }`}
                           className={`flex flex-row-reverse justify-around items-center font-common-heavy text-lg border-2 border-black ${
                             data?.next_episode ? '' : 'opacity-0 cursor-default'
                           }
@@ -286,15 +301,20 @@ export default function StorySinglePage({ param }) {
                         </Link>
                       </div>
                       <div className="">
-                        <ArrowLink
-                          title="همه قسمت ها"
-                          path={`/literarywritings/story/episode/${data?.story_slug}`}
-                        />
+                        {data?.story_slug && (
+                          <ArrowLink
+                            title="همه قسمت ها"
+                            path={`/episode/${data?.story_slug}`}
+                          />
+                        )}
                       </div>
                     </div>
                     <div className="w-full flex flex-row-reverse mt-7 justify-between md:hidden">
                       <Link
-                        href={`/literarywritings/story/${data?.previous_episode}`}
+                        href={`${
+                          data?.previous_episode &&
+                          `/story/${data?.previous_episode}`
+                        }`}
                         className={`flex flex-row-reverse justify-around items-center font-common-heavy text-lg border-2 border-black ${
                           data?.previous_episode
                             ? ''
@@ -308,7 +328,9 @@ export default function StorySinglePage({ param }) {
                         </p>
                       </Link>
                       <Link
-                        href={`/literarywritings/story/${data?.next_episode}`}
+                        href={`${
+                          data?.next_episode && `/story/${data?.next_episode}`
+                        }`}
                         className={`flex flex-row-reverse justify-around items-center font-common-heavy text-lg border-2 border-black ${
                           data?.next_episode ? '' : 'opacity-0 cursor-default'
                         }
@@ -323,20 +345,25 @@ export default function StorySinglePage({ param }) {
                   </div>
                 </div>
                 {/*  the story text  */}
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: data?.content,
-                  }}
-                  ref={textRef}
-                  className="font-common-lg text-10px md:text-18px rtl mt-7 translate-y-200px opacity-0"
-                ></div>
+                {data?.content && (
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: data?.content,
+                    }}
+                    ref={textRef}
+                    className="font-common-lg text-10px md:text-18px rtl mt-7 translate-y-200px opacity-0"
+                  ></div>
+                )}
                 {/* the episode section button */}
                 <div
                   className="flex flex-row-reverse justify-between mt-7 translate-y-200px opacity-0"
                   ref={secondLinkRef}
                 >
                   <Link
-                    href={`/literarywritings/story/${data?.previous_episode}`}
+                    href={`${
+                      data?.previous_episode &&
+                      `/story/${data?.previous_episode}`
+                    }`}
                     className={`flex flex-row-reverse justify-around items-center font-common-heavy text-2xl border-2 border-black ${
                       data?.previous_episode ? '' : 'opacity-0 cursor-default'
                     }
@@ -348,7 +375,9 @@ export default function StorySinglePage({ param }) {
                     </p>
                   </Link>
                   <Link
-                    href={`/literarywritings/story/${data?.next_episode}`}
+                    href={`${
+                      data?.next_episode && `/story/${data?.next_episode}`
+                    }`}
                     className={`flex flex-row-reverse justify-around items-center font-common-heavy text-2xl border-2 border-black ${
                       data?.next_episode ? '' : 'opacity-0 cursor-default'
                     }
@@ -372,85 +401,105 @@ export default function StorySinglePage({ param }) {
                     {data?.author?.featured_image ? (
                       <Image
                         src={data?.author?.featured_image}
-                        alt=""
+                        alt={
+                          data?.author?.name ? data?.author?.name : 'not found'
+                        }
                         layout="fill"
                         objectFit="cover"
                         className="absolute"
                       />
                     ) : (
-                      <div>failed to dispaly image</div>
+                      <div></div>
                     )}
                   </div>
                 </div>
                 <div className="w-1/2 xl:w-full flex flex-col mr-7 xl:mr-0 rtl">
-                  <div className="font-common-heavy text-25px md:text-50px rtl mt-7 md:mt-0 xl:mt-7 text-black">
-                    {data?.author?.name}
-                  </div>
+                  {data?.author?.name && (
+                    <div className="font-common-heavy text-25px md:text-50px rtl mt-7 md:mt-0 xl:mt-7 text-black">
+                      {data?.author?.name}
+                    </div>
+                  )}
                   <div className="flex rtl md:mt-7 text-black">
                     <div className="font-common-heavy text-10px md:text-18px ml-1">
                       موقعیت:
                     </div>
-                    <div className="font-common-regular text-10px md:text-18px">
-                      {data?.author?.location}
-                    </div>
+                    {data?.author?.location && (
+                      <div className="font-common-regular text-10px md:text-18px">
+                        {data?.author?.location}
+                      </div>
+                    )}
                   </div>
                   <div className="flex rtl mt-3 text-black">
                     <div className="font-common-heavy text-10px md:text-18px ml-1">
                       وظیفه:
                     </div>
-                    <div className="font-common-regular text-10px md:text-18px">
-                      {data?.author?.job}
-                    </div>
+                    {data?.author?.job && (
+                      <div className="font-common-regular text-10px md:text-18px">
+                        {data?.author?.job}
+                      </div>
+                    )}
                   </div>
                   <div className="flex rtl mt-3 text-black">
                     <div className="font-common-heavy text-10px md:text-18px ml-1">
                       تعداد آثار:
                     </div>
-                    <div className="font-common-regular text-10px md:text-18px">
-                      {data?.author?.total_letters}
-                    </div>
+                    {data?.author?.total_letters && (
+                      <div className="font-common-regular text-10px md:text-18px">
+                        {data?.author?.total_letters}
+                      </div>
+                    )}
                   </div>
                   <div className="flex rtl mt-3 text-black">
                     <div className="font-common-heavy text-10px md:text-18px ml-1">
                       سن:
                     </div>
-                    <div className="font-common-regular text-10px md:text-18px">
-                      {data?.author?.age}
-                    </div>
+                    {data?.author?.age && (
+                      <div className="font-common-regular text-10px md:text-18px">
+                        {data?.author?.age}
+                      </div>
+                    )}
                   </div>
                   <div className="flex md:mt-3">
-                    <Link href={data?.author?.facebook_link || '#'}>
-                      <Image
-                        src="/assets/svg/facebook.svg"
-                        alt="facebook logo"
-                        width={20}
-                        height={20}
-                      />
-                    </Link>
-                    <Link href={data?.author?.instagram_link || '#'}>
-                      <Image
-                        src="/assets/svg/instagram.svg"
-                        alt="instagram logo"
-                        width={20}
-                        height={20}
-                      />
-                    </Link>
-                    <Link href={data?.author?.telegram_link || '#'}>
-                      <Image
-                        src="/assets/svg/telegram.svg"
-                        alt="telegram logo"
-                        width={20}
-                        height={20}
-                      />
-                    </Link>
-                    <Link href={data?.author?.youtube_link || '#'}>
-                      <Image
-                        src="/assets/svg/youtube.svg"
-                        alt="youtube logo"
-                        width={20}
-                        height={20}
-                      />
-                    </Link>
+                    {data?.author?.facebook_link && (
+                      <Link href={data?.author?.facebook_link || '#'}>
+                        <Image
+                          src="/assets/svg/facebook.svg"
+                          alt="facebook logo"
+                          width={20}
+                          height={20}
+                        />
+                      </Link>
+                    )}
+                    {data?.author?.instagram_link && (
+                      <Link href={data?.author?.instagram_link || '#'}>
+                        <Image
+                          src="/assets/svg/instagram.svg"
+                          alt="instagram logo"
+                          width={20}
+                          height={20}
+                        />
+                      </Link>
+                    )}
+                    {data?.author?.telegram_link && (
+                      <Link href={data?.author?.telegram_link || '#'}>
+                        <Image
+                          src="/assets/svg/telegram.svg"
+                          alt="telegram logo"
+                          width={20}
+                          height={20}
+                        />
+                      </Link>
+                    )}
+                    {data?.author?.youtube_link && (
+                      <Link href={data?.author?.youtube_link || '#'}>
+                        <Image
+                          src="/assets/svg/youtube.svg"
+                          alt="youtube logo"
+                          width={20}
+                          height={20}
+                        />
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>

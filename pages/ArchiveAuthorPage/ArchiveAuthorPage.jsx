@@ -109,7 +109,7 @@ export default function AuthorPage({ param }) {
                 {data?.featured_image ? (
                   <Image
                     src={data?.featured_image}
-                    alt={data?.title}
+                    alt={data?.title ? data?.title : 'not found'}
                     layout="fill"
                     objectFit="cover"
                     className="absolute"
@@ -123,31 +123,45 @@ export default function AuthorPage({ param }) {
               className="col-span-6 md:col-span-3 xl:col-span-9 flex flex-col justify-end mr-7 translate-y-200px opacity-0"
               ref={nameRef}
             >
-              <div className="font-common-heavy text-50px md:text-60px rtl text-black">
-                {data?.title}
-              </div>
+              {data?.title && (
+                <div className="font-common-heavy text-50px md:text-60px rtl text-black">
+                  {data?.title}
+                </div>
+              )}
               <div className="flex rtl mt-7 text-black">
                 <div className="font-common-heavy text-20px ml-1">موقعیت:</div>
-                <div className="font-common-regular text-20px">
-                  {data?.location}
-                </div>
+                {data?.location && (
+                  <div className="font-common-regular text-20px">
+                    {data?.location}
+                  </div>
+                )}
               </div>
               <div className="flex rtl mt-3 text-black">
                 <div className="font-common-heavy text-20px ml-1">وظیفه:</div>
-                <div className="font-common-regular text-20px">{data?.job}</div>
+                {data?.job && (
+                  <div className="font-common-regular text-20px">
+                    {data?.job}
+                  </div>
+                )}
               </div>
               <div className="flex rtl mt-3 text-black">
                 <div className="font-common-heavy text-20px ml-1">
                   {' '}
                   تعداد آثار:
                 </div>
-                <div className="font-common-regular text-20px">
-                  {data?.total_letters}
-                </div>
+                {data?.total_letters && (
+                  <div className="font-common-regular text-20px">
+                    {data?.total_letters}
+                  </div>
+                )}
               </div>
               <div className="flex rtl mt-3 text-black">
                 <div className="font-common-heavy text-20px ml-1">سن:</div>
-                <div className="font-common-regular text-20px">{data?.age}</div>
+                {data?.age && (
+                  <div className="font-common-regular text-20px">
+                    {data?.age}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -161,12 +175,14 @@ export default function AuthorPage({ param }) {
               <Heading1 title="معرفی نامه" />
             </div>
             {/*  the text  */}
-            <div
-              dangerouslySetInnerHTML={{
-                __html: data?.content,
-              }}
-              className="font-common-regular col-span-6 xl:col-span-12  text-justify md:text-right text-20px lg:text-25px xl:text-30px rtl mt-7"
-            ></div>
+            {data?.content && (
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: data?.content,
+                }}
+                className="font-common-regular col-span-6 xl:col-span-12  text-justify md:text-right text-20px lg:text-25px xl:text-30px rtl mt-7"
+              ></div>
+            )}
           </div>
           {/* small ad */}
           {/* <SmallAd /> */}

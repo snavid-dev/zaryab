@@ -168,7 +168,7 @@ export default function BookSinglePage({ param }) {
                   {data?.featured_image ? (
                     <Image
                       src={data?.featured_image}
-                      alt="book image"
+                      alt={data?.title || 'book'}
                       layout="fill"
                       objectFit="cover"
                       className="absolute"

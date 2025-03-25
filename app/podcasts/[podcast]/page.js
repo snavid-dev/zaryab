@@ -11,19 +11,19 @@ export async function generateMetadata({ params }) {
     const data = await response.json();
 
     return {
-      title: data?.name,
-      description: `کتاب صوتی ${data?.name}`,
+      title: data?.name && data?.name,
+      description: `کتاب صوتی ${data?.name && data?.name}`,
       openGraph: {
-        title: data?.name,
-        description: `کتاب صوتی ${data?.name}`,
+        title: data?.name && data?.name,
+        description: `کتاب صوتی ${data?.name && data?.name}`,
         url: 'https://zaryb3.vercel.app',
         siteName: 'وبسایت ادبی آوای زریاب',
         images: [
           {
-            url: data?.image,
+            url: data?.image && data?.image,
             width: 1129,
             height: 750,
-            alt: data?.name,
+            alt: data?.name && data?.name,
           },
         ],
         locale: 'fa_IR',
@@ -32,9 +32,9 @@ export async function generateMetadata({ params }) {
       twitter: {
         card: 'summary_large_image',
         site: '@your_twitter_handle',
-        title: data?.name,
-        description: `کتاب صوتی ${data?.name}`,
-        images: [data?.image],
+        title: data?.name && data?.name,
+        description: `کتاب صوتی ${data?.name && data?.name}`,
+        images: [data?.image && data?.image],
       },
       viewport: 'width=device-width, initial-scale=1.0',
       robots: {
@@ -77,15 +77,15 @@ export async function generateMetadata({ params }) {
       authors: [
         {
           name: 'Cyborg Tech Creative Agency',
-          url: 'https://portfolio-poorya.vercel.app/',
+          url: 'https://cyborgtech.co/',
         },
       ],
     };
   } catch (error) {
     console.error('Metadata fetch error:', error);
     return {
-      title: 'خطا در بارگذاری پادکست',
-      description: 'پادکست یافت نشد یا مشکلی در سرور وجود دارد.',
+      title: 'خطا در بارگذاری کتاب صوتی',
+      description: 'کتاب صوتی یافت نشد یا مشکلی در سرور وجود دارد.',
     };
   }
 }

@@ -122,13 +122,14 @@ export default function AuthorPage() {
           </div>
           {/*  the authors section  */}
           <div className="main-container mt-14">
-            {data?.data.map((data, index) => (
-              <OurAuthorCard
-                key={index}
-                data={data}
-                isVisible={isVisible}
-              />
-            ))}
+            {Array.isArray(data?.data) &&
+              data?.data?.map((data, index) => (
+                <OurAuthorCard
+                  key={index}
+                  data={data}
+                  isVisible={isVisible}
+                />
+              ))}
           </div>
           <div
             className="main-container mt-5 translate-y-200px opacity-0"

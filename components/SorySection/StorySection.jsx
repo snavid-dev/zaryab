@@ -134,6 +134,7 @@ export default function StorySection({ type }) {
                     هیچ موردی یافت نشد
                   </div>
                 ) : (
+                  Array.isArray(data) &&
                   data?.map((data, index) => {
                     return (
                       <StoryPoemCard
@@ -155,14 +156,15 @@ export default function StorySection({ type }) {
             id="story"
             className="main-container mt-5 rtl"
           >
-            {alldata?.map((data, index) => (
-              <StoryPoemCard
-                isStory={true}
-                data={data}
-                key={index}
-                isVisible={isVisble}
-              />
-            ))}
+            {Array.isArray(alldata) &&
+              alldata?.map((data, index) => (
+                <StoryPoemCard
+                  isStory={true}
+                  data={data}
+                  key={index}
+                  isVisible={isVisble}
+                />
+              ))}
           </div>
           {/* Pagination controls */}
           <div className="main-container">

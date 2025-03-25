@@ -11,19 +11,23 @@ export async function generateMetadata({ params }) {
     const data = await response.json();
 
     return {
-      title: data?.name,
-      description: `${data?.name} یکی از شاعران و نویسنده های آوای زریاب`,
+      title: data?.name && data?.name,
+      description: `${
+        data?.name && data?.name
+      } یکی از شاعران و نویسنده های آوای زریاب`,
       openGraph: {
-        title: data?.name,
-        description: `${data?.name} یکی از شاعران و نویسنده های آوای زریاب`,
+        title: data?.name && data?.name,
+        description: `${
+          data?.name && data?.name
+        } یکی از شاعران و نویسنده های آوای زریاب`,
         url: 'https://zaryb3.vercel.app',
         siteName: 'وبسایت ادبی آوای زریاب',
         images: [
           {
-            url: data?.featured_image,
+            url: data?.featured_image && data?.featured_image,
             width: 1129,
             height: 750,
-            alt: data?.name,
+            alt: data?.name && data?.name,
           },
         ],
         locale: 'fa_IR',
@@ -32,9 +36,11 @@ export async function generateMetadata({ params }) {
       twitter: {
         card: 'summary_large_image',
         site: '@your_twitter_handle',
-        title: data?.name,
-        description: `${data?.name} یکی از شاعران و نویسنده های آوای زریاب`,
-        images: [data?.featured_image],
+        title: data?.name && data?.name,
+        description: `${
+          data?.name && data?.name
+        } یکی از شاعران و نویسنده های آوای زریاب`,
+        images: [data?.featured_image && data.featured_image],
       },
       viewport: 'width=device-width, initial-scale=1.0',
       robots: {
@@ -77,7 +83,7 @@ export async function generateMetadata({ params }) {
       authors: [
         {
           name: 'Cyborg Tech Creative Agency',
-          url: 'https://portfolio-poorya.vercel.app/',
+          url: 'https://cyborgtech.co',
         },
       ],
     };

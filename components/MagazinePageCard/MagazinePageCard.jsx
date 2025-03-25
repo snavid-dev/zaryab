@@ -46,9 +46,11 @@ export default function MagazinePageCard({ letter, isVisible }) {
           )}
         </div>
       </div>
-      <div className="text-30px border-4 border-black px-6 py-2 mt-3">
-        {letter?.number}
-      </div>
+      {letter?.number && (
+        <div className="text-30px border-4 border-black px-6 py-2 mt-3">
+          {letter?.number}
+        </div>
+      )}
     </div>
   );
 }

@@ -82,13 +82,14 @@ export default function StoryMail() {
       {isVisible && (
         <div className="mt-50px main-container rtl">
           <div className="col-span-6 xl:col-span-9">
-            {data?.map((data, index) => (
-              <StoryHarizontalCard
-                key={index}
-                data={data}
-                isVisible={isVisible}
-              />
-            ))}
+            {Array.isArray(data) &&
+              data?.map((data, index) => (
+                <StoryHarizontalCard
+                  key={index}
+                  data={data}
+                  isVisible={isVisible}
+                />
+              ))}
           </div>
           <div
             className="hidden xl:block xl:col-span-3 translate-y-200px opacity-0"

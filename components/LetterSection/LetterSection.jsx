@@ -108,6 +108,7 @@ export default function LettersSection({ params }) {
                 هیچ موردی یافت نشد
               </div>
             ) : (
+              Array.isArray(data) &&
               data?.map((data, index) => (
                 <LetterCard
                   data={data}

@@ -111,21 +111,25 @@ export default function StoryOfDay() {
                 id="storyTitle"
               >
                 <h1 className="flex flex-row xl:flex-col text-50px md:text-94px 2xl:text-[120px] font-new-black leading-67%">
-                  <Link
-                    href={`/episode/${data?.slug}`}
-                    className="xl:leading-[140px] w-[80%]"
-                  >
-                    {data?.title}
-                  </Link>
+                  {data?.title && (
+                    <Link
+                      href={`/episode/${data?.slug}`}
+                      className="xl:leading-[140px] w-[80%]"
+                    >
+                      {data?.title}
+                    </Link>
+                  )}
                 </h1>
               </div>
               <div
                 className="col-span-6 xl:col-span-7 mt-20px xl:mt-0 placeholder:translate-y-200px opacity-0"
                 id="storyExcerpt"
               >
-                <p className="font-common rtl text-12px md:text-18px">
-                  {data?.excerpt}
-                </p>
+                {data?.excerpt && (
+                  <p className="font-common rtl text-12px md:text-18px">
+                    {data?.excerpt}
+                  </p>
+                )}
               </div>
               <div className="col-span-6 xl:col-span-12 main-container">
                 <div className="hidden xl:block xl:col-span-5"></div>
@@ -141,9 +145,11 @@ export default function StoryOfDay() {
                       <p className="font-common-thin ml-1 text-12px md:text-18px xl:text-14px font-bold">
                         نویسنده:
                       </p>
-                      <p className="font-common-thin text-12px md:text-18px xl:text-14px">
-                        {data?.author}
-                      </p>
+                      {data?.author && (
+                        <p className="font-common-thin text-12px md:text-18px xl:text-14px">
+                          {data?.author}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <div className="col-span-1 xl:mt-6">
@@ -151,9 +157,11 @@ export default function StoryOfDay() {
                       <p className="font-common-thin ml-1 text-12px md:text-18px xl:text-14px font-bold">
                         تاریخ:
                       </p>
-                      <p className="font-common-thin text-12px md:text-18px xl:text-14px">
-                        {data?.date}
-                      </p>
+                      {data?.date && (
+                        <p className="font-common-thin text-12px md:text-18px xl:text-14px">
+                          {data?.date}
+                        </p>
+                      )}
                     </div>
                   </div>
                   <div className="col-span-1 xl:mt-6">
@@ -161,9 +169,11 @@ export default function StoryOfDay() {
                       <p className="font-common-thin ml-1 text-12px md:text-18px xl:text-14px font-bold">
                         زمان:
                       </p>
-                      <p className="font-common-thin text-12px md:text-18px xl:text-14px">
-                        {data?.duration}{' '}
-                      </p>
+                      {data?.duration && (
+                        <p className="font-common-thin text-12px md:text-18px xl:text-14px">
+                          {data?.duration}{' '}
+                        </p>
+                      )}
                       <p className="font-common-thin text-12px md:text-18px xl:text-14px">
                         دقیقه
                       </p>
@@ -174,17 +184,18 @@ export default function StoryOfDay() {
                   className="col-span-6 xl:col-span-2 grid grid-cols-4 xl:grid-cols-2 gap translate-y-200px opacity-0"
                   id="storyGenre"
                 >
-                  {data?.categories.map(
-                    (category, index) =>
-                      index + 1 < 5 && (
-                        <div
-                          className="col-span-1 flex justify-center"
-                          key={index}
-                        >
-                          <Genre title={category.name} />
-                        </div>
-                      )
-                  )}
+                  {Array.isArray(data?.categories) &&
+                    data?.categories.map(
+                      (category, index) =>
+                        index + 1 < 5 && (
+                          <div
+                            className="col-span-1 flex justify-center"
+                            key={index}
+                          >
+                            <Genre title={category.name} />
+                          </div>
+                        )
+                    )}
                 </div>
               </div>
               <div
@@ -198,7 +209,7 @@ export default function StoryOfDay() {
                   {data?.featured_image ? (
                     <Image
                       src={data?.featured_image}
-                      alt={data?.title}
+                      alt={data?.title ? data?.title : 'not found'}
                       layout="fill"
                       objectFit="cover"
                       className="absolute"

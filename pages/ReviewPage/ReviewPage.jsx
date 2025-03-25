@@ -155,7 +155,7 @@ export default function ReviewsAndOpinionsSinglePage({ param }) {
               {data?.big_image ? (
                 <Image
                   src={data?.big_image}
-                  alt={data?.title}
+                  alt={data?.title ? data?.title : 'not found'}
                   layout="fill"
                   objectFit="cover"
                   className="absolute"
@@ -171,12 +171,14 @@ export default function ReviewsAndOpinionsSinglePage({ param }) {
             <div className="col-span-6 xl:col-span-9 pl-5">
               {/*  the title section of the story  */}
               <div className="mt-14 flex flex-col items-end">
-                <div
-                  className="w-full font-new-black text-50px md:text-60px lg:text-94px rtl translate-y-200px opacity-0"
-                  ref={titleRef}
-                >
-                  {data?.title}
-                </div>
+                {data?.title && (
+                  <div
+                    className="w-full font-new-black text-50px md:text-60px lg:text-94px rtl translate-y-200px opacity-0"
+                    ref={titleRef}
+                  >
+                    {data?.title}
+                  </div>
+                )}
                 <div className="w-full grid grid-cols-6 md:grid-cols-9 items-center gap">
                   {/* time */}
                   <div
@@ -187,9 +189,11 @@ export default function ReviewsAndOpinionsSinglePage({ param }) {
                       <b className="font-common-bold text-12px md:text-7px lg:text-12px mt-2 md:mt-1 ml-1 lg:mt-0">
                         زمان:
                       </b>
-                      <p className="font-common-thin mt-10px md:mt-1 text-12px md:text-7px lg:text-12px">
-                        {data?.time}
-                      </p>
+                      {data?.time && (
+                        <p className="font-common-thin mt-10px md:mt-1 text-12px md:text-7px lg:text-12px">
+                          {data?.time}
+                        </p>
+                      )}
                       <p className="font-common-thin mt-10px md:mt-1 text-12px md:text-7px lg:text-12px">
                         دقیقه
                       </p>
@@ -198,9 +202,11 @@ export default function ReviewsAndOpinionsSinglePage({ param }) {
                       <b className="font-common-bold text-12px md:text-7px lg:text-12px mt-2 md:mt-1 ml-1 lg:mt-0">
                         تاریخ:
                       </b>
-                      <p className="font-common-thin mt-10px md:mt-1 text-12px md:text-7px lg:text-12px">
-                        {data?.date_shamsi}
-                      </p>
+                      {data?.date_shamsi && (
+                        <p className="font-common-thin mt-10px md:mt-1 text-12px md:text-7px lg:text-12px">
+                          {data?.date_shamsi}
+                        </p>
+                      )}
                     </div>
                   </div>
                   {/* genre */}
@@ -208,31 +214,34 @@ export default function ReviewsAndOpinionsSinglePage({ param }) {
                     className="col-span-7 grid grid-cols-4 md:grid-cols-6 translate-y-200px opacity-0"
                     ref={genreRef}
                   >
-                    {data?.categories.map((category, index) => {
-                      if (index < 6) {
-                        return (
-                          <div
-                            className={`cols-span-1 flex justify-start ${
-                              index > 3 ? 'hidden md:flex' : ''
-                            }`}
-                            key={index}
-                          >
-                            <Genre title={category.name} />
-                          </div>
-                        );
-                      }
-                    })}
+                    {Array.isArray(data?.categories) &&
+                      data?.categories?.map((category, index) => {
+                        if (index < 6) {
+                          return (
+                            <div
+                              className={`cols-span-1 flex justify-start ${
+                                index > 3 ? 'hidden md:flex' : ''
+                              }`}
+                              key={index}
+                            >
+                              <Genre title={category.name} />
+                            </div>
+                          );
+                        }
+                      })}
                   </div>
                 </div>
               </div>
               {/*  the story text  */}
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: data?.content,
-                }}
-                className="font-common-lg text-10px md:text-18px rtl mt-7 translate-y-200px opacity-0"
-                ref={textRef}
-              ></div>
+              {data?.content && (
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: data?.content,
+                  }}
+                  className="font-common-lg text-10px md:text-18px rtl mt-7 translate-y-200px opacity-0"
+                  ref={textRef}
+                ></div>
+              )}
             </div>
             {/* the author section */}
             <div
@@ -245,7 +254,9 @@ export default function ReviewsAndOpinionsSinglePage({ param }) {
                   {data?.author?.featured_image ? (
                     <Image
                       src={data?.author?.featured_image}
-                      alt={data?.author?.name}
+                      alt={
+                        data?.author?.name ? data?.author?.name : 'not found'
+                      }
                       layout="fill"
                       objectFit="cover"
                       className="absolute"
@@ -256,74 +267,92 @@ export default function ReviewsAndOpinionsSinglePage({ param }) {
                 </div>
               </div>
               <div className="w-1/2 xl:w-full flex flex-col mr-7 xl:mr-0 rtl">
-                <div className="font-common-heavy text-25px md:text-50px rtl mt-7 md:mt-0 xl:mt-7 text-black">
-                  {data?.author?.name}
-                </div>
+                {data?.author?.name && (
+                  <div className="font-common-heavy text-25px md:text-50px rtl mt-7 md:mt-0 xl:mt-7 text-black">
+                    {data?.author?.name}
+                  </div>
+                )}
                 <div className="flex rtl md:mt-7 text-black">
                   <div className="font-common-heavy text-10px md:text-18px ml-1">
                     موقعیت:
                   </div>
-                  <div className="font-common-regular text-10px md:text-18px">
-                    {data?.author?.location}
-                  </div>
+                  {data?.author?.location && (
+                    <div className="font-common-regular text-10px md:text-18px">
+                      {data?.author?.location}
+                    </div>
+                  )}
                 </div>
                 <div className="flex rtl mt-3 text-black">
                   <div className="font-common-heavy text-10px md:text-18px ml-1">
                     وظیفه:
                   </div>
-                  <div className="font-common-regular text-10px md:text-18px">
-                    {data?.author?.job}
-                  </div>
+                  {data?.author?.job && (
+                    <div className="font-common-regular text-10px md:text-18px">
+                      {data?.author?.job}
+                    </div>
+                  )}
                 </div>
                 <div className="flex rtl mt-3 text-black">
                   <div className="font-common-heavy text-10px md:text-18px ml-1">
                     تعداد آثار:
                   </div>
-                  <div className="font-common-regular text-10px md:text-18px">
-                    {data?.author?.total_letters}
-                  </div>
+                  {data?.author?.total_letters && (
+                    <div className="font-common-regular text-10px md:text-18px">
+                      {data?.author?.total_letters}
+                    </div>
+                  )}
                 </div>
                 <div className="flex rtl mt-3 text-black">
                   <div className="font-common-heavy text-10px md:text-18px ml-1">
                     سن:
                   </div>
-                  <div className="font-common-regular text-10px md:text-18px">
-                    {data?.author?.age}
-                  </div>
+                  {data?.author?.age && (
+                    <div className="font-common-regular text-10px md:text-18px">
+                      {data?.author?.age}
+                    </div>
+                  )}
                 </div>
                 <div className="flex md:mt-3">
-                  <Link href={data?.author?.facebook || '#'}>
-                    <Image
-                      src="/assets/svg/facebook.svg"
-                      alt="facebook logo"
-                      width={20}
-                      height={20}
-                    />
-                  </Link>
-                  <Link href={data?.author?.instagram || '#'}>
-                    <Image
-                      src="/assets/svg/instagram.svg"
-                      alt="instagram logo"
-                      width={20}
-                      height={20}
-                    />
-                  </Link>
-                  <Link href={data?.author?.telegram || '#'}>
-                    <Image
-                      src="/assets/svg/telegram.svg"
-                      alt="telegram logo"
-                      width={20}
-                      height={20}
-                    />
-                  </Link>
-                  <Link href={data?.author?.youtube || '#'}>
-                    <Image
-                      src="/assets/svg/youtube.svg"
-                      alt="youtube logo"
-                      width={20}
-                      height={20}
-                    />
-                  </Link>
+                  {data?.author?.facebook && (
+                    <Link href={data?.author?.facebook || '#'}>
+                      <Image
+                        src="/assets/svg/facebook.svg"
+                        alt="facebook logo"
+                        width={20}
+                        height={20}
+                      />
+                    </Link>
+                  )}
+                  {data?.author?.instagram && (
+                    <Link href={data?.author?.instagram || '#'}>
+                      <Image
+                        src="/assets/svg/instagram.svg"
+                        alt="instagram logo"
+                        width={20}
+                        height={20}
+                      />
+                    </Link>
+                  )}
+                  {data?.author?.telegram && (
+                    <Link href={data?.author?.telegram || '#'}>
+                      <Image
+                        src="/assets/svg/telegram.svg"
+                        alt="telegram logo"
+                        width={20}
+                        height={20}
+                      />
+                    </Link>
+                  )}
+                  {data?.author?.youtube && (
+                    <Link href={data?.author?.youtube || '#'}>
+                      <Image
+                        src="/assets/svg/youtube.svg"
+                        alt="youtube logo"
+                        width={20}
+                        height={20}
+                      />
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>

@@ -10,16 +10,18 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function LetterCard({ data, isVisible }) {
   const handleDownload = () => {
-    const fileUrl = data?.pdf;
+    if (data?.pdf) {
+      const fileUrl = data?.pdf;
 
-    // Create a temporary <a> element to simulate a download
-    const link = document.createElement('a');
-    link.href = fileUrl;
+      // Create a temporary <a> element to simulate a download
+      const link = document.createElement('a');
+      link.href = fileUrl;
 
-    link.download = fileUrl.split('/')[fileUrl.split('/').length - 1]; // Specify the file name for download
-    document.body.appendChild(link); // Append link to the body
-    link.click(); // Trigger the download
-    document.body.removeChild(link); // Clean up by removing the link
+      link.download = fileUrl.split('/')[fileUrl.split('/').length - 1]; // Specify the file name for download
+      document.body.appendChild(link); // Append link to the body
+      link.click(); // Trigger the download
+      document.body.removeChild(link); // Clean up by removing the link
+    }
   };
 
   // animation
@@ -51,7 +53,7 @@ export default function LetterCard({ data, isVisible }) {
         {data?.featured_image ? (
           <Image
             src={data?.featured_image}
-            alt={data?.title}
+            alt={data?.title ? data?.title : 'not found'}
             layout="fill"
             objectFit="cover"
             className="absolute"
@@ -65,25 +67,31 @@ export default function LetterCard({ data, isVisible }) {
           <p className="font-common-heavy text-30px md:text-25px lg:text-30px xl:text-20px ml-1">
             عنوان:
           </p>
-          <p className="font-common-regular text-30px md:text-25px lg:text-30px xl:text-20px">
-            {data?.title}
-          </p>
+          {data?.title && (
+            <p className="font-common-regular text-30px md:text-25px lg:text-30px xl:text-20px">
+              {data?.title}
+            </p>
+          )}
         </div>
         <div className="flex rtl items-center">
           <p className="font-common-heavy text-30px md:text-25px lg:text-30px xl:text-20px ml-1">
             شماره:
           </p>
-          <p className="font-common-regular text-30px md:text-25px lg:text-30px xl:text-20px">
-            {data?.number}
-          </p>
+          {data?.number && (
+            <p className="font-common-regular text-30px md:text-25px lg:text-30px xl:text-20px">
+              {data?.number}
+            </p>
+          )}
         </div>
         <div className="flex rtl items-center">
           <p className="font-common-heavy text-30px md:text-25px lg:text-30px xl:text-20px ml-1">
             تاریخ نشر:
           </p>
-          <p className="font-common-regular text-30px md:text-25px lg:text-30px xl:text-20px">
-            {data?.release_date}
-          </p>
+          {data?.release_date && (
+            <p className="font-common-regular text-30px md:text-25px lg:text-30px xl:text-20px">
+              {data?.release_date}
+            </p>
+          )}
         </div>
       </div>
       <div className=" w-full flex flex-row-reverse justify-between items-center mt-5">
@@ -95,13 +103,15 @@ export default function LetterCard({ data, isVisible }) {
         >
           دانلود
         </Link>
-        <Link
-          href={`/magazines/${data?.slug}`}
-          className="w-[47%] py-1 text-white flex justify-center items-center bg-black font-common-lg text-28px
+        {data?.slug && (
+          <Link
+            href={`/magazines/${data?.slug}`}
+            className="w-[47%] py-1 text-white flex justify-center items-center bg-black font-common-lg text-28px
                 border-2 border-black hover:bg-white hover:text-black transition-all duration-700"
-        >
-          خواندن
-        </Link>
+          >
+            خواندن
+          </Link>
+        )}
       </div>
     </div>
   );

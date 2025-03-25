@@ -36,7 +36,7 @@ export default function AuthorWeekCard({ data, isVisible }) {
         {data?.featured_image ? (
           <Image
             src={data?.featured_image}
-            alt={data?.title}
+            alt={data?.title ? data?.title : 'not found'}
             fill
             className="absolute object-cover hover:scale-110 transition-all duration-300"
           />
@@ -45,20 +45,26 @@ export default function AuthorWeekCard({ data, isVisible }) {
         )}
       </div>
       <div className="w-full">
-        <h3 className="font-common-lg mt-5 text-28px md:text-20px lg:text-59px rtl">
-          {data?.title}
-        </h3>
+        {data?.title && (
+          <h3 className="font-common-lg mt-5 text-28px md:text-20px lg:text-59px rtl">
+            {data?.title}
+          </h3>
+        )}
       </div>
       <div>
-        <p className="rtl mt-4 font-common text-10px md:text-12px lg:text-17px">
-          {truncateString(data?.excerpt, 300)}
-        </p>
+        {data?.excerpt && (
+          <p className="rtl mt-4 font-common text-10px md:text-12px lg:text-17px">
+            {truncateString(data?.excerpt, 300)}
+          </p>
+        )}
       </div>
       <div className="w-full flex justify-center items-center mt-7">
-        <ArrowLink
-          title="بیشتر بخوانید"
-          path={`/author/${data?.slug}`}
-        />
+        {data?.slug && (
+          <ArrowLink
+            title="بیشتر بخوانید"
+            path={`/author/${data?.slug}`}
+          />
+        )}
       </div>
     </div>
   );

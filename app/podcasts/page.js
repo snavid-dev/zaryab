@@ -115,13 +115,14 @@ export default function PodcastsPage({ searchParams }) {
           </div>
           {/* the body of the page the cards sections */}
           <div className="main-container mt-7 rtl">
-            {data?.map((data, index) => (
-              <PodcastCard
-                isVisible={isVisible}
-                data={data}
-                key={index}
-              />
-            ))}
+            {Array.isArray(data) &&
+              data?.map((data, index) => (
+                <PodcastCard
+                  isVisible={isVisible}
+                  data={data}
+                  key={index}
+                />
+              ))}
           </div>
           {/* Pagination controls */}
           <div

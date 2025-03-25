@@ -89,13 +89,14 @@ export default function Podcasts() {
             />
           </div>
           <div className="main-container">
-            {data?.map((data, index) => (
-              <PodcastCard
-                data={data}
-                key={index}
-                isVisible={isVisible}
-              />
-            ))}
+            {Array.isArray(data) &&
+              data?.map((data, index) => (
+                <PodcastCard
+                  data={data}
+                  key={index}
+                  isVisible={isVisible}
+                />
+              ))}
           </div>
         </div>
       )}

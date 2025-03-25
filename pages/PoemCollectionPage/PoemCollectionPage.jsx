@@ -87,6 +87,7 @@ export default function StoryCollectionPage({ param }) {
                 setFilter={setTypeFilter}
                 setCategoryFilter={setCategoryFilter}
                 setFilterDone={setFilterDone}
+                setHasFetched={setHasFetched}
               />
             </div>
           </div>
@@ -97,7 +98,9 @@ export default function StoryCollectionPage({ param }) {
               className="col-span-6 xl:col-span-12 rtl translate-y-200px opacity-0"
               id="title"
             >
-              <Heading1 title={data?.collection_name} />
+              {data?.collection_name && (
+                <Heading1 title={data?.collection_name} />
+              )}
             </div>
           </div>
 
@@ -107,6 +110,7 @@ export default function StoryCollectionPage({ param }) {
                 هیچ موردی یافت نشد
               </div>
             ) : (
+              Array.isArray(data?.data) &&
               data?.data?.map((data, index) => (
                 <StoryPoemCard
                   isStory={false}

@@ -11,7 +11,6 @@ import SmallAd from '@/components/SmallAd/SmallAd';
 import StoryMail from '@/components/StoryMailDesk/StoryMail';
 import StoryOfDay from '@/components/StoryOfDay/StoryOfDay';
 import Winner from '@/components/Winner/Winner';
-import { useEffect, useRef, useState } from 'react';
 
 export default function Home() {
   return (

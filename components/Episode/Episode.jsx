@@ -50,34 +50,38 @@ export default function Episode({ data, isVisible }) {
         {data?.featured_image ? (
           <Image
             src={data?.featured_image}
-            alt=""
+            alt={data?.title ? data?.title : 'not found'}
             layout="fill"
             objectFit="cover"
             className={`absolute transition-all duration-700
                 ${isHovered ? 'opacity-50' : 'opacity-100'}`}
           />
         ) : (
-          <div className="h-full w-full flex justify-center items-center">
-            story image not found
+          <div className="h-full w-full flex justify-center items-center"></div>
+        )}
+      </div>
+      {data?.title && (
+        <div className="w-full font-new-extra-bold text-36px md:text-76px lg:text-50px mt-3 rtl">
+          {data?.title}
+        </div>
+      )}
+      <div className="w-full flex justify-end mt-3">
+        {data?.episode_title && (
+          <div className="font-common-heavy text-25px">
+            قسمت {data?.episode_title}
           </div>
         )}
       </div>
-      <div className="w-full font-new-extra-bold text-36px md:text-76px lg:text-50px mt-3 rtl">
-        {data?.title}
-      </div>
-      <div className="w-full flex justify-end mt-3">
-        <div className="font-common-heavy text-25px">
-          قسمت {data?.episode_title}
-        </div>
-      </div>
       <div className="w-full mt-3">
-        <Link
-          href={`/story/${data?.slug}`}
-          className="w-full py-2 font-common-heavy text-20px md:text-43px lg:text-28px border-2 border-black flex justify-center items-center
+        {data?.slug && (
+          <Link
+            href={`/story/${data?.slug}`}
+            className="w-full py-2 font-common-heavy text-20px md:text-43px lg:text-28px border-2 border-black flex justify-center items-center
                 bg-black text-white hover:bg-white hover:text-black transition-all duration-700"
-        >
-          خواندن داستان
-        </Link>
+          >
+            خواندن داستان
+          </Link>
+        )}
       </div>
     </div>
   );

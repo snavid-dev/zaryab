@@ -59,7 +59,9 @@ export default function Mail() {
       {/* it has three rows */}
       <div className="w-full flex flex-col items-start">
         <Heading2 title="مجله جدید" />
-        <p className="mt-5 md:mt-0">{newLetter?.release_date}</p>
+        {newLetter?.release_date && (
+          <p className="mt-5 md:mt-0">{newLetter?.release_date}</p>
+        )}
         <div className="relative w-full xl:h-400px 2xl:h-500px mt-5 md:mt-0">
           {newLetter?.featured_image ? (
             <Image
@@ -72,31 +74,35 @@ export default function Mail() {
             <div className="h-full w-full flex justify-center items-center"></div>
           )}
         </div>
-        <Link
-          href={`/magazines/${newLetter?.slug}`}
-          className="w-full h-10 flex justify-center items-center border border-black font-common-lg text-27px text-black bg-white lg:text-white lg:bg-black
+        {newLetter?.slug && (
+          <Link
+            href={`/magazines/${newLetter?.slug}`}
+            className="w-full h-10 flex justify-center items-center border border-black font-common-lg text-27px text-black bg-white lg:text-white lg:bg-black
           lg:hover:bg-white lg:hover:text-black transition-all duration-300"
-        >
-          خواندن نامه
-        </Link>
+          >
+            خواندن نامه
+          </Link>
+        )}
       </div>
       <div className="w-full hidden md:flex flex-col items-start mt-7">
         <Heading2 title="مجله های قدیم" />
-        {data?.map((data, index) => (
-          <OldMails
-            data={data}
-            key={index}
-          />
-        ))}
+        {Array.isArray(data) &&
+          data?.map((data, index) => (
+            <OldMails
+              data={data}
+              key={index}
+            />
+          ))}
       </div>
       <div className="w-full hidden md:flex flex-col items-start mt-7">
         <Heading2 title="مقاله های جدید" />
-        {data2?.map((data, index) => (
-          <NewArticle
-            data={data}
-            key={index}
-          />
-        ))}
+        {Array.isArray(data2) &&
+          data2?.map((data, index) => (
+            <NewArticle
+              data={data}
+              key={index}
+            />
+          ))}
       </div>
     </div>
   );

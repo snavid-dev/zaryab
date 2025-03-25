@@ -4,7 +4,7 @@ export default function Genre({ title }) {
   return (
     <div className="flex group flex-row-reverse rtl">
       <div className="font-common-thin text-10px md:text-12px font-bold text-right mt-2px md:mt-0">
-        {title}
+        {title && title}
       </div>
       <div className="w-20px h-20px relative">
         <svg

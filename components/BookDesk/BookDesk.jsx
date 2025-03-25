@@ -49,16 +49,18 @@ export default function BookDesk() {
   };
 
   const handleDownload = () => {
-    const fileUrl = data?.pdf;
+    if (data?.pdf) {
+      const fileUrl = data?.pdf;
 
-    // Create a temporary <a> element to simulate a download
-    const link = document.createElement('a');
-    link.href = fileUrl;
+      // Create a temporary <a> element to simulate a download
+      const link = document.createElement('a');
+      link.href = fileUrl;
 
-    link.download = fileUrl.split('/')[fileUrl.split('/').length - 1]; // Specify the file name for download
-    document.body.appendChild(link); // Append link to the body
-    link.click(); // Trigger the download
-    document.body.removeChild(link); // Clean up by removing the link
+      link.download = fileUrl.split('/')[fileUrl.split('/').length - 1]; // Specify the file name for download
+      document.body.appendChild(link); // Append link to the body
+      link.click(); // Trigger the download
+      document.body.removeChild(link); // Clean up by removing the link
+    }
   };
 
   // animation
@@ -154,7 +156,7 @@ export default function BookDesk() {
                 {data?.featured_image ? (
                   <Image
                     src={data?.featured_image}
-                    alt={data?.title}
+                    alt={data?.title ? data?.title : 'not found'}
                     fill
                     className="absolute object-cover"
                   />
@@ -166,19 +168,23 @@ export default function BookDesk() {
             <div className="hidden md:block md:col-span-1 xl:hidden"></div>
             <div className="col-span-6">
               <div className="flex flex-col w-full items-start">
-                <h3
-                  ref={subtitleRef}
-                  className="font-common-lg text-30px xl:text-65px 2xl:text-92px flex flex-col items-end justify-between lg:mt-5 translate-y-200px opacity-0"
-                >
-                  {data?.title}
-                </h3>
-                <div
-                  ref={textRef}
-                  dangerouslySetInnerHTML={{
-                    __html: data?.excerpt,
-                  }}
-                  className="rtl mt-7 font-common-regular text-14px xl:text-20px 2xl:text-28px translate-y-200px opacity-0"
-                ></div>
+                {data?.title && (
+                  <h3
+                    ref={subtitleRef}
+                    className="font-common-lg text-30px xl:text-65px 2xl:text-92px flex flex-col items-end justify-between lg:mt-5 translate-y-200px opacity-0"
+                  >
+                    {data?.title}
+                  </h3>
+                )}
+                {data?.excerpt && (
+                  <div
+                    ref={textRef}
+                    dangerouslySetInnerHTML={{
+                      __html: data?.excerpt,
+                    }}
+                    className="rtl mt-7 font-common-regular text-14px xl:text-20px 2xl:text-28px translate-y-200px opacity-0"
+                  ></div>
+                )}
               </div>
             </div>
           </div>
@@ -196,13 +202,15 @@ export default function BookDesk() {
               دانلود کتاب
             </Link>
 
-            <Link
-              href={`/book/${data?.slug}`}
-              className="w-full h-[50px] lg:h-[100px] bg-footerBtn flex justify-center items-center mt-7
+            {data?.slug && (
+              <Link
+                href={`/book/${data?.slug}`}
+                className="w-full h-[50px] lg:h-[100px] bg-footerBtn flex justify-center items-center mt-7
                 font-common-heavy text-28px lg:text-59px text-white hover:text-footerBtn hover:bg-white transition-all duration-500 border-4 border-footerBtn"
-            >
-              خلاصه کتاب
-            </Link>
+              >
+                خلاصه کتاب
+              </Link>
+            )}
           </div>
         </div>
       )}

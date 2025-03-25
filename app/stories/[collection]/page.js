@@ -11,19 +11,23 @@ export async function generateMetadata({ params }) {
     const data = await response.json();
 
     return {
-      title: `مجموعه ${data?.collection_name}`,
-      description: `مجموعه داستان های ${data?.collection_name}`,
+      title: `مجموعه ${data?.collection_name && data?.collection_name}`,
+      description: `مجموعه داستان های ${
+        data?.collection_name && data?.collection_name
+      }`,
       openGraph: {
-        title: `مجموعه ${data?.collection_name}`,
-        description: `مجموعه داستان های ${data?.collection_name}`, // it is temporary
+        title: `مجموعه ${data?.collection_name && data?.collection_name}`,
+        description: `مجموعه داستان های ${
+          data?.collection_name && data?.collection_name
+        }`, // it is temporary
         url: 'https://zaryb3.vercel.app',
         siteName: 'وبسایت ادبی آوای زریاب',
         images: [
           {
-            url: data?.data[0]?.featured_image,
+            url: data?.data[0]?.featured_image && data?.data[0]?.featured_image,
             width: 1129,
             height: 750,
-            alt: `مجموعه ${data?.collection_name}`,
+            alt: `مجموعه ${data?.collection_name && data?.collection_name}`,
           },
         ],
         locale: 'fa_IR',
@@ -32,9 +36,13 @@ export async function generateMetadata({ params }) {
       twitter: {
         card: 'summary_large_image',
         site: '@your_twitter_handle',
-        title: `مجموعه ${data?.collection_name}`,
-        description: `مجموعه داستان های ${data?.collection_name}`, // it is temporary
-        images: [data?.data[0]?.featured_image],
+        title: `مجموعه ${data?.collection_name && data?.collection_name}`,
+        description: `مجموعه داستان های ${
+          data?.collection_name && data?.collection_name
+        }`, // it is temporary
+        images: [
+          data?.data[0]?.featured_image && data?.data[0]?.featured_image,
+        ],
       },
       viewport: 'width=device-width, initial-scale=1.0',
       robots: {
@@ -77,7 +85,7 @@ export async function generateMetadata({ params }) {
       authors: [
         {
           name: 'Cyborg Tech Creative Agency',
-          url: 'https://portfolio-poorya.vercel.app/',
+          url: 'https://cyborgtech.co/',
         },
       ],
     };

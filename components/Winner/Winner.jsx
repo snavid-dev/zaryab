@@ -159,18 +159,20 @@ export default function Winner() {
           </div>
           {/* data */}
           <div className="col-span-6 md:col-span-3 xl:col-span-6 rtl relative">
-            <p
-              className="font-new-black text-40px md:text-50px xl:text-60px 2xl:text-80px translate-y-200px opacity-0"
-              ref={subTitleRef}
-            >
-              {data?.story?.title}
-            </p>
+            {data?.story?.title && (
+              <p
+                className="font-new-black text-40px md:text-50px xl:text-60px 2xl:text-80px translate-y-200px opacity-0"
+                ref={subTitleRef}
+              >
+                {data?.story?.title}
+              </p>
+            )}
             <div
               className="flex font-common-heavy text-footerBtn text-16px md:text-20px xl:text-20px 2xl:text-30px mt-3 translate-y-200px opacity-0"
               ref={authorRef}
             >
               <p className="ml-1">نویسنده:</p>
-              <p>{data?.author?.name}</p>
+              {data?.author?.name && <p>{data?.author?.name}</p>}
             </div>
             <div
               className="mt-3 font-common-regular text-14px md:text-18px xl:text-25px 2xl:text-30px translate-y-200px opacity-0"
@@ -185,21 +187,25 @@ export default function Winner() {
               ref={buttonRef}
             >
               <div>
-                <Link
-                  className="font-common-heavy px-30px py-10px md:px-30px md:py-10px xl:px-50px xl:py-20px border-black border-2 bg-black text-white xl:text-30px"
-                  href={`/episode/${data?.story?.slug}`}
-                >
-                  خواندن داستان
-                </Link>
+                {data?.story?.slug && (
+                  <Link
+                    className="font-common-heavy px-30px py-10px md:px-30px md:py-10px xl:px-50px xl:py-20px border-black border-2 bg-black text-white xl:text-30px"
+                    href={`/episode/${data?.story?.slug}`}
+                  >
+                    خواندن داستان
+                  </Link>
+                )}
               </div>
 
               <div>
-                <Link
-                  className="font-common-heavy px-30px py-10px md:px-30px md:py-10px xl:px-50px xl:py-20px border-footerBtn border-2 bg-white text-footerBtn xl:text-30px"
-                  href={`/authors/${data?.author?.slug}`}
-                >
-                  درباره نویسنده
-                </Link>
+                {data?.author?.slug && (
+                  <Link
+                    className="font-common-heavy px-30px py-10px md:px-30px md:py-10px xl:px-50px xl:py-20px border-footerBtn border-2 bg-white text-footerBtn xl:text-30px"
+                    href={`/authors/${data?.author?.slug}`}
+                  >
+                    درباره نویسنده
+                  </Link>
+                )}
               </div>
             </div>
           </div>

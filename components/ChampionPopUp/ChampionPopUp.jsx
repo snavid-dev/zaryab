@@ -31,7 +31,7 @@ export default function ChampionPopUp() {
           <div className="w-full relative h-280px md:h-400px xl:h-360px mt-1">
             <Image
               src="/assets/img/amanullah-khan.png"
-              alt=""
+              alt="amanullah khan image"
               layout="fill"
               objectFit="cover"
               className="absolute"

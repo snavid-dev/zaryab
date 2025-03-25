@@ -9,22 +9,21 @@ export async function generateMetadata({ params }) {
 
     if (!response.ok) throw new Error('Failed to fetch metadata');
     const data = await response.json();
-    console.log(data, 'data');
 
     return {
-      title: data?.title,
-      description: data?.title,
+      title: data?.title && data?.title,
+      description: data?.title && data?.title,
       openGraph: {
-        title: data?.title,
-        description: data?.title,
+        title: data?.title && data?.title,
+        description: data?.title && data?.title,
         url: 'https://zaryb3.vercel.app',
         siteName: 'وبسایت ادبی آوای زریاب',
         images: [
           {
-            url: data?.big_image,
+            url: data?.big_image && data?.big_image,
             width: 1129,
             height: 750,
-            alt: data?.title,
+            alt: data?.title && data?.title,
           },
         ],
         locale: 'fa_IR',
@@ -33,9 +32,9 @@ export async function generateMetadata({ params }) {
       twitter: {
         card: 'summary_large_image',
         site: '@your_twitter_handle',
-        title: data?.title,
-        description: data?.title,
-        images: [data?.big_image],
+        title: data?.title && data?.title,
+        description: data?.title && data?.title,
+        images: [data?.big_image && data?.big_image],
       },
       viewport: 'width=device-width, initial-scale=1.0',
       robots: {
@@ -78,15 +77,15 @@ export async function generateMetadata({ params }) {
       authors: [
         {
           name: 'Cyborg Tech Creative Agency',
-          url: 'https://portfolio-poorya.vercel.app/',
+          url: 'https://cyborgtech.co/',
         },
       ],
     };
   } catch (error) {
     console.error('Metadata fetch error:', error);
     return {
-      title: 'خطا در بارگذاری داستان',
-      description: 'داستان یافت نشد یا مشکلی در سرور وجود دارد.',
+      title: 'خطا در بارگذاری نقد و نظر',
+      description: 'نقد و نظر یافت نشد یا مشکلی در سرور وجود دارد.',
     };
   }
 }

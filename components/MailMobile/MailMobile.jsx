@@ -75,8 +75,10 @@ export default function MailMobile() {
         >
           {/* it has three rows */}
           <div className="w-full flex flex-col items-end">
-            <Heading2 title="نامه جدید" />
-            <p className="text-3xl mt-7">{newLetter?.release_date}</p>
+            <Heading2 title="مجله جدید" />
+            {newLetter?.release_date && (
+              <p className="text-3xl mt-7">{newLetter?.release_date}</p>
+            )}
             <div className="relative w-full h-490px md:h-500px mt-7">
               {newLetter?.featured_image ? (
                 <Image
@@ -90,13 +92,15 @@ export default function MailMobile() {
                 <div className="h-full w-full flex justify-center items-center"></div>
               )}
             </div>
-            <Link
-              href={`/letters/${newLetter?.slug}`}
-              className="w-full h-10 flex justify-center items-center mt-7 border border-black font-common-lg text-28px
+            {newLetter?.slug && (
+              <Link
+                href={`/letters/${newLetter?.slug}`}
+                className="w-full h-10 flex justify-center items-center mt-7 border border-black font-common-lg text-28px
           bg-white text-black transition-all duration-300"
-            >
-              خواندن نامه
-            </Link>
+              >
+                خواندن نامه
+              </Link>
+            )}
           </div>
         </div>
       )}

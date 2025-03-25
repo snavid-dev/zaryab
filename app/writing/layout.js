@@ -67,7 +67,7 @@ export const metadata = {
   authors: [
     {
       name: 'Cyborg Tech Creative Agency',
-      url: 'https://portfolio-poorya.vercel.app/',
+      url: 'https://cyborgtech.co/',
     },
   ],
 

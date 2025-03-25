@@ -77,15 +77,15 @@ export async function generateMetadata({ params }) {
       authors: [
         {
           name: 'Cyborg Tech Creative Agency',
-          url: 'https://portfolio-poorya.vercel.app/',
+          url: 'https://cyborgtech.co/',
         },
       ],
     };
   } catch (error) {
     console.error('Metadata fetch error:', error);
     return {
-      title: 'خطا در بارگذاری داستان',
-      description: 'داستان یافت نشد یا مشکلی در سرور وجود دارد.',
+      title: 'خطا در بارگذاری کتاب',
+      description: 'کتاب یافت نشد یا مشکلی در سرور وجود دارد.',
     };
   }
 }

@@ -38,7 +38,6 @@ export default function EposidesPage({ param }) {
 
         setData(response.data);
         setTotalPages(response.data.meta.page);
-        setHasFetched(false);
       } catch (err) {
         setError(err.response?.data?.message || err.message);
       }
@@ -57,7 +56,14 @@ export default function EposidesPage({ param }) {
 
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
-  }, [typeFilter, categoryFilter, currentPage, searchTitle, searchNumber]);
+  }, [
+    typeFilter,
+    categoryFilter,
+    currentPage,
+    searchTitle,
+    searchNumber,
+    hasFetched,
+  ]);
 
   // animation
 
@@ -91,8 +97,10 @@ export default function EposidesPage({ param }) {
 
   const handleSearch = () => {
     if (notOnlyNumbers(searchItem)) {
+      setHasFetched(false);
       setSearchTitle(searchItem);
     } else {
+      setHasFetched(false);
       setSearchNumber(searchItem);
     }
     setFilterDone(true);
@@ -102,6 +110,7 @@ export default function EposidesPage({ param }) {
     setSearchTitle('');
     setSearchNumber('');
     setSearchItem('');
+    setHasFetched(false);
     setFilterDone(false);
   };
 
@@ -126,6 +135,7 @@ export default function EposidesPage({ param }) {
                 setFilter={setTypeFilter}
                 setCategoryFilter={setCategoryFilter}
                 setFilterDone={setFilterDone}
+                setHasFetched={setHasFetched}
               />
             </div>
           </div>
@@ -135,7 +145,7 @@ export default function EposidesPage({ param }) {
               className="col-span-6 xl:col-span-6 translate-y-200px opacity-0"
               id="title"
             >
-              <Heading1 title={data?.story_title} />
+              {data?.story_title && <Heading1 title={data?.story_title} />}
             </div>
 
             {/*  the search bar of the eposides  */}
@@ -169,7 +179,8 @@ export default function EposidesPage({ param }) {
                 هیچ موردی یافت نشد
               </div>
             ) : (
-              data?.data.map((data, index) => (
+              Array.isArray(data?.data) &&
+              data?.data?.map((data, index) => (
                 <Episode
                   data={data}
                   key={index}

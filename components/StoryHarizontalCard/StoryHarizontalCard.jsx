@@ -38,7 +38,7 @@ export default function StoryHarizontalCard({ data, isVisible }) {
         {data?.featured_image ? (
           <Image
             src={data?.featured_image}
-            alt={data?.title}
+            alt={data?.title ? data?.title : 'not found'}
             layout="fill"
             objectFit="cover"
             className="absolute"
@@ -48,21 +48,27 @@ export default function StoryHarizontalCard({ data, isVisible }) {
         )}
       </div>
       <div className="col-span-4 xl:col-span-7 gap relative">
-        <div className="col-span-4 text-20px md:text-40px font-new-extra-black">
-          {data?.title}
-        </div>
-        <div className="col-span-4 text-6px md:text-12px font-bold font-smallText">
-          {truncateString(data?.excerpt, 500)}
-        </div>
+        {data?.title && (
+          <div className="col-span-4 text-20px md:text-40px font-new-extra-black">
+            {data?.title}
+          </div>
+        )}
+        {data?.excerpt && (
+          <div className="col-span-4 text-6px md:text-12px font-bold font-smallText">
+            {truncateString(data?.excerpt, 500)}
+          </div>
+        )}
         <div className="col-span-4 xl:col-span-7 w-full grid grid-cols-3 xl:grid-cols-10 gap-10px absolute bottom-0">
           <div className="col-span-1 xl:col-span-2">
             <div className="rtl flex text-right">
               <p className="font-common-thin ml-1 text-6px md:text-12px 2xl:text-14px font-bold">
                 نویسنده:
               </p>
-              <p className="font-common-thin text-6px md:text-12px 2xl:text-14px">
-                {data?.author}
-              </p>
+              {data?.author && (
+                <p className="font-common-thin text-6px md:text-12px 2xl:text-14px">
+                  {data?.author}
+                </p>
+              )}
             </div>
           </div>
           <div className="col-span-1 xl:col-span-2">
@@ -70,9 +76,11 @@ export default function StoryHarizontalCard({ data, isVisible }) {
               <p className="font-common-thin ml-1 text-6px md:text-12px 2xl:text-14px font-bold">
                 تاریخ:
               </p>
-              <p className="font-common-thin text-6px md:text-12px 2xl:text-14px">
-                {data?.date}
-              </p>
+              {data?.date && (
+                <p className="font-common-thin text-6px md:text-12px 2xl:text-14px">
+                  {data?.date}
+                </p>
+              )}
             </div>
           </div>
           <div className="col-span-1 xl:col-span-2">
@@ -80,27 +88,30 @@ export default function StoryHarizontalCard({ data, isVisible }) {
               <p className="font-common-thin ml-1 text-6px md:text-12px 2xl:text-14px font-bold">
                 زمان:
               </p>
-              <p className="font-common-thin text-6px md:text-12px 2xl:text-14px">
-                {data?.duration}
-              </p>
+              {data?.duration && (
+                <p className="font-common-thin text-6px md:text-12px 2xl:text-14px">
+                  {data?.duration}
+                </p>
+              )}
               <p className="font-common-thin text-6px md:text-12px 2xl:text-14px">
                 دقیقه
               </p>
             </div>
           </div>
           <div className="xl:col-span-4 xl:grid xl:grid-cols-4 hidden">
-            {data?.categories.map((cate, index) => {
-              if (index < 2) {
-                return (
-                  <div
-                    className="col-span-2"
-                    key={index}
-                  >
-                    <Genre title={cate?.name} />
-                  </div>
-                );
-              }
-            })}
+            {Array.isArray(data?.categories) &&
+              data?.categories.map((cate, index) => {
+                if (index < 2) {
+                  return (
+                    <div
+                      className="col-span-2"
+                      key={index}
+                    >
+                      <Genre title={cate?.name} />
+                    </div>
+                  );
+                }
+              })}
           </div>
         </div>
       </div>

@@ -264,7 +264,7 @@ export default function PodcastSinglePage({ param }) {
                 {podcast?.image ? (
                   <Image
                     src={podcast?.image}
-                    alt={podcast?.name}
+                    alt={podcast?.name ? podcast?.name : 'not found'}
                     layout="fill"
                     objectFit="cover"
                     className="absolute"
@@ -277,12 +277,14 @@ export default function PodcastSinglePage({ param }) {
             </div>
             <div className="hidden md:block md:col-span-1 xl:col-span-3"></div>
             {/* the title of the podcast */}
-            <div
-              className="col-span-6 xl:col-span-12 flex justify-center rtl mt-5 font-common-heavy text-20px md:text-25px lg:text-30px translate-y-200px opacity-0"
-              ref={titleRef}
-            >
-              {podcast?.name}
-            </div>
+            {podcast?.name && (
+              <div
+                className="col-span-6 xl:col-span-12 flex justify-center rtl mt-5 font-common-heavy text-20px md:text-25px lg:text-30px translate-y-200px opacity-0"
+                ref={titleRef}
+              >
+                {podcast?.name}
+              </div>
+            )}
             {/* the host and guest section */}
             <div className="hidden md:block md:col-span-1 xl:col-span-3"></div>
             <div
@@ -293,17 +295,21 @@ export default function PodcastSinglePage({ param }) {
                 <div className="font-common-lg text-12px md:text-16px xl:text-20px ml-1">
                   گوینده:
                 </div>
-                <div className="font-common-regular text-12px md:text-16px xl:text-20px">
-                  {podcast?.host}
-                </div>
+                {podcast?.host && (
+                  <div className="font-common-regular text-12px md:text-16px xl:text-20px">
+                    {podcast?.host}
+                  </div>
+                )}
               </div>
               <div className="flex justify-start items-center rtl w-1/2">
                 <div className="font-common-lg text-12px md:text-16px xl:text-20px ml-1">
                   نویسنده/شاعر:
                 </div>
-                <div className="font-common-regular text-12px md:text-16px xl:text-20px">
-                  {podcast?.guest}
-                </div>
+                {podcast?.guest && (
+                  <div className="font-common-regular text-12px md:text-16px xl:text-20px">
+                    {podcast?.guest}
+                  </div>
+                )}
               </div>
             </div>
             <div className="hidden md:block md:col-span-1 xl:col-span-3"></div>
@@ -313,11 +319,13 @@ export default function PodcastSinglePage({ param }) {
               className="w-full xl:mt-14 col-span-6 md:col-span-4 xl:col-span-6 flex flex-col items-center translate-y-200px opacity-0"
               ref={palyerRef}
             >
-              <audio
-                ref={audioRef}
-                src={podcast?.mp3_file}
-                onTimeUpdate={handleTimeUpdate}
-              />
+              {podcast?.mp3_file && (
+                <audio
+                  ref={audioRef}
+                  src={podcast?.mp3_file}
+                  onTimeUpdate={handleTimeUpdate}
+                />
+              )}
               {/* Progress Bar */}
               <div className="relative w-full">
                 <div className="relative w-full h-2 mt-4 bg-gray">
@@ -326,10 +334,12 @@ export default function PodcastSinglePage({ param }) {
                     style={{ width: `${progress}%` }}
                   ></div>
                 </div>
+
                 <div
                   className="absolute w-5 h-5 rotate-45 bg-black top-[10px]"
                   style={{ left: `${progress}%` }}
                 ></div>
+
                 {/* the time section */}
                 <div className="flex justify-between items-center mt-7 font-common-lg text-16px">
                   <div>{formatTime(currentTime)}</div>
@@ -431,14 +441,16 @@ export default function PodcastSinglePage({ param }) {
               <Heading1 title="نوشتار کتاب صوتی" />
             </div>
             <div className="col-span-6 xl:col-span-12">
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: podcast?.content,
-                }}
-                className="w-full border-t-4 border-b-4 border-black whitespace-pre-wrap rtl font-common-lg
+              {podcast?.content && (
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: podcast?.content,
+                  }}
+                  className="w-full border-t-4 border-b-4 border-black whitespace-pre-wrap rtl font-common-lg
                     text-16px md:text-25px xl:text-30px py-5 translate-y-200px opacity-0"
-                ref={textRef}
-              ></div>
+                  ref={textRef}
+                ></div>
+              )}
             </div>
             {/* small ad */}
             {/* <SmallAd /> */}
@@ -456,6 +468,7 @@ export default function PodcastSinglePage({ param }) {
               </div>
               <div className="main-container mt-7 rtl">
                 {isVisible &&
+                  Array.isArray(data) &&
                   data?.map((data, index) => (
                     <PodcastCard
                       data={data}

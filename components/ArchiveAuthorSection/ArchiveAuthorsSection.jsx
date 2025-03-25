@@ -102,13 +102,14 @@ export default function ArchiveAuthorsSection() {
 
           {/*  the pagination section  */}
           <div className="main-container rtl">
-            {data?.map((data, index) => (
-              <AuthorWeekCard
-                key={index}
-                data={data}
-                isVisible={isVisible}
-              />
-            ))}
+            {Array.isArray(data) &&
+              data?.map((data, index) => (
+                <AuthorWeekCard
+                  key={index}
+                  data={data}
+                  isVisible={isVisible}
+                />
+              ))}
           </div>
           {/* small ad */}
           {/* <SmallAd /> */}

@@ -223,31 +223,31 @@ export default function Footer() {
               </div>
             </div>
             <div className="hidden md:block md:col-span-1 xl:hidden"></div>
-            <div className="col-span-6 md:col-span-3 xl:col-span-3">
-              <div className="relative w-full h-490px md:h-510px xl:h-390px 2xl:h-510px mt-20px xl:mt-0">
-                {newLetter?.featured_image ? (
-                  <Image
-                    src={newLetter?.featured_image}
-                    alt="new magazine"
-                    layout="fill"
-                    objectFit="cover"
-                    className="absolute"
-                  />
-                ) : (
-                  <div className="w-full h-full flex justify-center items-center">
-                    image not found
-                  </div>
-                )}
-              </div>
-              <Link
-                href={`/magazines/${newLetter?.slug}`}
-                className="w-full h-10 mt-3 flex justify-center items-center font-common-heavy text-white
+            {newLetter && (
+              <div className="col-span-6 md:col-span-3 xl:col-span-3">
+                <div className="relative w-full h-490px md:h-510px xl:h-390px 2xl:h-510px mt-20px xl:mt-0">
+                  {newLetter?.featured_image ? (
+                    <Image
+                      src={newLetter?.featured_image}
+                      alt="new magazine"
+                      layout="fill"
+                      objectFit="cover"
+                      className="absolute"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex justify-center items-center"></div>
+                  )}
+                </div>
+                <Link
+                  href={`/magazines/${newLetter?.slug}`}
+                  className="w-full h-10 mt-3 flex justify-center items-center font-common-heavy text-white
                    bg-footerBtn hover:bg-footer transition-all border-2 border-footerBtn text-27px md:text-28px
                    "
-              >
-                خواندن مجله
-              </Link>
-            </div>
+                >
+                  خواندن مجله
+                </Link>
+              </div>
+            )}
           </div>
           <div className="hidden xl:block xl:col-span-1"></div>
           <div className="col-span-6 xl:col-span-8 rtl text-white mt-50px xl:mt-100px">
@@ -399,17 +399,18 @@ export default function Footer() {
           <div className="col-span-1 xl:col-span-2"></div>
           <div className="col-span-1 xl:col-span-2"></div>
 
-          {literary?.map((data, index) => (
-            <div
-              className="col-span-1 xl:col-span-2"
-              key={index}
-            >
-              <Link2
-                link={`/writing/?type=${data?.slug}`}
-                title={data?.name}
-              />
-            </div>
-          ))}
+          {Array.isArray(literary) &&
+            literary?.map((data, index) => (
+              <div
+                className="col-span-1 xl:col-span-2"
+                key={index}
+              >
+                <Link2
+                  link={`/writing/?type=${data?.slug}`}
+                  title={data?.name}
+                />
+              </div>
+            ))}
         </div>
 
         <div className="main-container mt-10px border-t-4 border-b-4 border-footerBorder py-10px">
@@ -426,17 +427,18 @@ export default function Footer() {
           <div className="col-span-1 xl:col-span-2"></div>
           <div className="col-span-1 xl:col-span-2"></div>
 
-          {articles?.map((data, index) => (
-            <div
-              className="col-span-1 xl:col-span-2"
-              key={index}
-            >
-              <Link2
-                link={`/articles/?article_type=${data?.slug}`}
-                title={data?.name}
-              />
-            </div>
-          ))}
+          {Array.isArray(articles) &&
+            articles?.map((data, index) => (
+              <div
+                className="col-span-1 xl:col-span-2"
+                key={index}
+              >
+                <Link2
+                  link={`/articles/?article_type=${data?.slug}`}
+                  title={data?.name}
+                />
+              </div>
+            ))}
         </div>
         <div className="main-container mt-10px border-t-4 border-b-4 border-footerBorder py-10px">
           <div className="col-span-1 xl:col-span-2">
@@ -452,19 +454,20 @@ export default function Footer() {
           <div className="col-span-1 xl:col-span-2"></div>
           <div className="col-span-1 xl:col-span-2"></div>
 
-          {review?.map((data, index) => (
-            <div
-              key={index}
-              className={`col-span-1 xl:col-span-2 ${
-                index + 1 === 3 ? ' col-span-2 xl:col-span-4' : ''
-              }`}
-            >
-              <Link2
-                link={`/review/?review_type=${data?.slug}`}
-                title={data?.name}
-              />
-            </div>
-          ))}
+          {Array.isArray(review) &&
+            review?.map((data, index) => (
+              <div
+                key={index}
+                className={`col-span-1 xl:col-span-2 ${
+                  index + 1 === 3 ? ' col-span-2 xl:col-span-4' : ''
+                }`}
+              >
+                <Link2
+                  link={`/review/?review_type=${data?.slug}`}
+                  title={data?.name}
+                />
+              </div>
+            ))}
         </div>
         <div className="main-container mt-10px border-t-4 border-b-4 border-footerBorder py-10px">
           <div className={`col-span-1 xl:col-span-2`}>
@@ -480,17 +483,18 @@ export default function Footer() {
           <div className="col-span-1 xl:col-span-2"></div>
           <div className="col-span-1 xl:col-span-2"></div>
 
-          {podcast?.map((data, index) => (
-            <div
-              className="col-span-1 xl:col-span-2"
-              key={index}
-            >
-              <Link2
-                link={`/podcasts/?podcast_type=${data?.slug}`}
-                title={data?.name}
-              />
-            </div>
-          ))}
+          {Array.isArray(podcast) &&
+            podcast?.map((data, index) => (
+              <div
+                className="col-span-1 xl:col-span-2"
+                key={index}
+              >
+                <Link2
+                  link={`/podcasts/?podcast_type=${data?.slug}`}
+                  title={data?.name}
+                />
+              </div>
+            ))}
         </div>
         <div className="main-container mt-10px border-t-4 border-b-4 border-footerBorder py-10px">
           <div className="col-span-1 xl:col-span-2">
@@ -506,17 +510,18 @@ export default function Footer() {
           <div className="col-span-1 xl:col-span-2"></div>
           <div className="col-span-1 xl:col-span-2"></div>
 
-          {letter?.map((data, index) => (
-            <div
-              className="col-span-1 xl:col-span-2"
-              key={index}
-            >
-              <Link2
-                link={`/magazines/?magazine_type=${data?.slug}`}
-                title={data?.name}
-              />
-            </div>
-          ))}
+          {Array.isArray(letter) &&
+            letter?.map((data, index) => (
+              <div
+                className="col-span-1 xl:col-span-2"
+                key={index}
+              >
+                <Link2
+                  link={`/magazines/?magazine_type=${data?.slug}`}
+                  title={data?.name}
+                />
+              </div>
+            ))}
         </div>
         <div className="main-container mt-10px border-t-4 border-b-4 border-footerBorder py-10px">
           <div className="col-span-1 xl:col-span-2">
@@ -532,19 +537,20 @@ export default function Footer() {
           <div className="col-span-1 xl:col-span-2"></div>
           <div className="col-span-1 xl:col-span-2"></div>
 
-          {categories?.map((data, index) => (
-            <div
-              className="col-span-1 xl:col-span-2"
-              key={index}
-            >
-              {data?.name && (
-                <Link2
-                  link={`/search/?category=${data.slug}`}
-                  title={data.name}
-                />
-              )}
-            </div>
-          ))}
+          {Array.isArray(categories) &&
+            categories?.map((data, index) => (
+              <div
+                className="col-span-1 xl:col-span-2"
+                key={index}
+              >
+                {data?.name && (
+                  <Link2
+                    link={`/search/?category=${data.slug}`}
+                    title={data.name}
+                  />
+                )}
+              </div>
+            ))}
         </div>
       </div>
       {/* copyrighting policy */}

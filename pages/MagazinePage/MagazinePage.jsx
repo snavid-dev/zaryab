@@ -143,7 +143,7 @@ export default function LetterSinglePage({ param }) {
               className="col-span-6 xl:col-span-12 rtl translate-y-200px opacity-0"
               ref={numberRef}
             >
-              <Heading1 title={data?.number} />
+              {data?.number && <Heading1 title={data?.number} />}
             </div>
           </div>
           {/*  title of the letter  */}
@@ -152,7 +152,7 @@ export default function LetterSinglePage({ param }) {
               className="col-span-6 xl:col-span-12 rtl translate-y-200px opacity-0"
               ref={titleRef}
             >
-              <Heading1 title={data?.title} />
+              {data?.title && <Heading1 title={data?.title} />}
             </div>
           </div>
           {/* border */}
@@ -163,18 +163,19 @@ export default function LetterSinglePage({ param }) {
           {/*  the letter pictures  */}
 
           <div className="main-container">
-            {data?.images.map((letter, index) => (
-              <div
-                className="col-span-6 md:col-span-3 xl:col-span-3"
-                key={index}
-                onClick={() => modalHandle(index)}
-              >
-                <MagazinePageCard
-                  letter={letter}
-                  isVisible={isVisible}
-                />
-              </div>
-            ))}
+            {Array.isArray(data?.images) &&
+              data?.images?.map((letter, index) => (
+                <div
+                  className="col-span-6 md:col-span-3 xl:col-span-3"
+                  key={index}
+                  onClick={() => modalHandle(index)}
+                >
+                  <MagazinePageCard
+                    letter={letter}
+                    isVisible={isVisible}
+                  />
+                </div>
+              ))}
           </div>
           {/* full ad */}
           {/* <FullAd /> */}
@@ -207,14 +208,15 @@ export default function LetterSinglePage({ param }) {
             <div className="relative w-full h-full py-5 overflow-hidden flex items-center justify-center">
               {/* Images */}
               <div className="w-full h-full relative">
-                {data?.images.map((image, index) => (
-                  <LetterSliderPagesCard
-                    image={image?.image}
-                    index={index}
-                    currentIndex={currentIndex}
-                    key={index}
-                  />
-                ))}
+                {Array.isArray(data?.images) &&
+                  data?.images?.map((image, index) => (
+                    <LetterSliderPagesCard
+                      image={image?.image}
+                      index={index}
+                      currentIndex={currentIndex}
+                      key={index}
+                    />
+                  ))}
               </div>
 
               {/* Navigation Buttons */}

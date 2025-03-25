@@ -90,14 +90,15 @@ export default function StoriesPoemSection() {
             </div>
           </div>
           <div className="main-container mt-7">
-            {data?.map((data, index) => (
-              <StoryPoemCard
-                data={data}
-                key={index}
-                isStory={false}
-                isVisible={isVisible}
-              />
-            ))}
+            {Array.isArray(data) &&
+              data?.map((data, index) => (
+                <StoryPoemCard
+                  data={data}
+                  key={index}
+                  isStory={false}
+                  isVisible={isVisible}
+                />
+              ))}
           </div>
         </div>
       )}

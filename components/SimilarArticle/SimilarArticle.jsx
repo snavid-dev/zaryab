@@ -80,14 +80,15 @@ export default function SimilarArticle({ slug }) {
             </div>
           </div>
           <div className="main-container rtl">
-            {data?.map((data, index) => (
-              <SimilarHorizontalCard
-                key={index}
-                data={data}
-                isArticle={true}
-                isVisible={isVisible}
-              />
-            ))}
+            {Array.isArray(data) &&
+              data?.map((data, index) => (
+                <SimilarHorizontalCard
+                  key={index}
+                  data={data}
+                  isArticle={true}
+                  isVisible={isVisible}
+                />
+              ))}
           </div>
         </div>
       )}

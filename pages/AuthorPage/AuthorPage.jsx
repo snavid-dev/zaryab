@@ -162,7 +162,7 @@ export default function AuthorPage({ param }) {
                 {data?.featured_image ? (
                   <Image
                     src={data?.featured_image}
-                    alt={data?.name}
+                    alt={data?.name ? data?.name : 'not found'}
                     layout="fill"
                     objectFit="cover"
                     className="absolute"
@@ -176,65 +176,87 @@ export default function AuthorPage({ param }) {
               className="col-span-6 md:col-span-3 xl:col-span-9 flex flex-col justify-end mr-7 translate-y-200px opacity-0"
               ref={nameRef}
             >
-              <div className="font-common-heavy text-50px md:text-60px rtl text-black">
-                {data?.name}
-              </div>
+              {data?.name && (
+                <div className="font-common-heavy text-50px md:text-60px rtl text-black">
+                  {data?.name}
+                </div>
+              )}
               <div className="flex rtl mt-7 text-black">
                 <div className="font-common-heavy text-20px ml-1">موقعیت:</div>
-                <div className="font-common-regular text-20px">
-                  {data?.location}
-                </div>
+                {data?.location && (
+                  <div className="font-common-regular text-20px">
+                    {data?.location}
+                  </div>
+                )}
               </div>
               <div className="flex rtl mt-3 text-black">
                 <div className="font-common-heavy text-20px ml-1">وظیفه:</div>
-                <div className="font-common-regular text-20px">{data?.job}</div>
+                {data?.job && (
+                  <div className="font-common-regular text-20px">
+                    {data?.job}
+                  </div>
+                )}
               </div>
               <div className="flex rtl mt-3 text-black">
                 <div className="font-common-heavy text-20px ml-1">
                   {' '}
                   تعداد آثار:
                 </div>
-                <div className="font-common-regular text-20px">
-                  {data?.total_letters}
-                </div>
+                {data?.total_letters && (
+                  <div className="font-common-regular text-20px">
+                    {data?.total_letters}
+                  </div>
+                )}
               </div>
               <div className="flex rtl mt-3 text-black">
                 <div className="font-common-heavy text-20px ml-1">سن:</div>
-                <div className="font-common-regular text-20px">{data?.age}</div>
+                {data?.age && (
+                  <div className="font-common-regular text-20px">
+                    {data?.age}
+                  </div>
+                )}
               </div>
               <div className="flex mt-3 justify-start">
-                <Link href={data?.facebook || '#'}>
-                  <Image
-                    src="/assets/svg/facebook.svg"
-                    alt="facebook logo"
-                    width={20}
-                    height={20}
-                  />
-                </Link>
-                <Link href={data?.instagram || '#'}>
-                  <Image
-                    src="/assets/svg/instagram.svg"
-                    alt="instagram logo"
-                    width={20}
-                    height={20}
-                  />
-                </Link>
-                <Link href={data?.telegram || '#'}>
-                  <Image
-                    src="/assets/svg/telegram.svg"
-                    alt="telegram logo"
-                    width={20}
-                    height={20}
-                  />
-                </Link>
-                <Link href={data?.youtube || '#'}>
-                  <Image
-                    src="/assets/svg/youtube.svg"
-                    alt="youtube logo"
-                    width={20}
-                    height={20}
-                  />
-                </Link>
+                {data?.facebook && (
+                  <Link href={data?.facebook || '#'}>
+                    <Image
+                      src="/assets/svg/facebook.svg"
+                      alt="facebook logo"
+                      width={20}
+                      height={20}
+                    />
+                  </Link>
+                )}
+                {data?.instagram && (
+                  <Link href={data?.instagram || '#'}>
+                    <Image
+                      src="/assets/svg/instagram.svg"
+                      alt="instagram logo"
+                      width={20}
+                      height={20}
+                    />
+                  </Link>
+                )}
+                {data?.telegram && (
+                  <Link href={data?.telegram || '#'}>
+                    <Image
+                      src="/assets/svg/telegram.svg"
+                      alt="telegram logo"
+                      width={20}
+                      height={20}
+                    />
+                  </Link>
+                )}
+                {data?.youtube && (
+                  <Link href={data?.youtube || '#'}>
+                    <Image
+                      src="/assets/svg/youtube.svg"
+                      alt="youtube logo"
+                      width={20}
+                      height={20}
+                    />
+                  </Link>
+                )}
               </div>
             </div>
           </div>
@@ -248,12 +270,14 @@ export default function AuthorPage({ param }) {
               <Heading1 title="معرفی نامه" />
             </div>
             {/*  the text  */}
-            <div
-              dangerouslySetInnerHTML={{
-                __html: data?.content,
-              }}
-              className="font-common-regular col-span-6 xl:col-span-12  text-justify md:text-right text-20px lg:text-25px xl:text-30px rtl mt-7"
-            ></div>
+            {data?.content && (
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: data?.content,
+                }}
+                className="font-common-regular col-span-6 xl:col-span-12  text-justify md:text-right text-20px lg:text-25px xl:text-30px rtl mt-7"
+              ></div>
+            )}
           </div>
           {/* full ad */}
           {/* <FullAd /> */}
@@ -276,6 +300,7 @@ export default function AuthorPage({ param }) {
                 ref={ref1}
               >
                 {isVisible1 &&
+                  Array.isArray(similarData) &&
                   similarData?.map((data, index) => (
                     <OurAuthorCard
                       key={index}

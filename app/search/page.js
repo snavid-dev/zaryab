@@ -8,19 +8,22 @@ import { IoIosSearch } from 'react-icons/io';
 
 export default function SearchPage({ searchParams }) {
   const [searchItem, setSearchItem] = useState('');
-  const [searchKeyWord, setSearchKeyWord] = useState(null);
+  const [searchKeyWord, setSearchKeyWord] = useState('');
   const [data, setData] = useState(null);
   const [Error, setError] = useState(null);
   const [searchDone, setSearchDone] = useState(false);
   const [categoryFilter, setCategoryFilter] = useState('');
   const [filterDone, setFilterDone] = useState(false);
   const [filter, setFilter] = useState(''); // it is useless to prevent error
+  const [loading, setLoading] = useState(false);
 
   const param = use(searchParams);
   const searchCategory = param.category || '';
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
+      setData(null);
       try {
         const response = await axios.get(
           `v1/global-search?keyword=${searchKeyWord}&categories=${
@@ -38,20 +41,18 @@ export default function SearchPage({ searchParams }) {
       } catch (error) {
         setError(err.response?.data?.message || err.message);
       }
+      setLoading(false);
     };
     fetchData();
   }, [searchKeyWord, categoryFilter, searchCategory]);
-  console.log(data, 'data');
 
   const handleSearch = () => {
     if (searchItem.length > 1) {
       if (!searchDone) {
         setSearchKeyWord(searchItem);
-        setSearchDone(true);
       } else {
         setSearchDone(false);
         setSearchKeyWord(searchItem);
-        setSearchDone(true);
       }
     }
   };
@@ -85,7 +86,7 @@ export default function SearchPage({ searchParams }) {
         </div>
       </div>
 
-      {(searchDone || filterDone) && (
+      {(searchDone || filterDone) && !loading && data && (
         <div className="w-full flex flex-col items-center transition-all duration-700">
           <div className="main-container mt-30px">
             <div className="col-span-6 xl:col-span-12 rtl">

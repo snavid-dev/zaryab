@@ -78,13 +78,14 @@ export default function Authors() {
             />
           </div>
           <div className="main-container mt-7 rtl">
-            {data?.map((data, index) => (
-              <OurAuthorCard
-                key={index}
-                data={data}
-                isVisible={isVisible}
-              />
-            ))}
+            {Array.isArray(data) &&
+              data?.map((data, index) => (
+                <OurAuthorCard
+                  key={index}
+                  data={data}
+                  isVisible={isVisible}
+                />
+              ))}
           </div>
         </div>
       )}

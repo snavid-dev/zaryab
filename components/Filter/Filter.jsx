@@ -151,14 +151,18 @@ export default function Filter({
               {title}
             </div>
             <div className="flex flex-col h-100px md:h-150px xl:h-200px flex-wrap rtl">
-              {categoryType?.map((category, index) => (
-                <FilterItem
-                  key={index}
-                  data={category}
-                  filteredItems={filteredItems}
-                  setFilteredItems={setFilteredItems}
-                />
-              ))}
+              {Array.isArray(categoryType) &&
+                categoryType?.map(
+                  (category, index) =>
+                    category?.slug && (
+                      <FilterItem
+                        key={index}
+                        data={category}
+                        filteredItems={filteredItems}
+                        setFilteredItems={setFilteredItems}
+                      />
+                    )
+                )}
             </div>
           </div>
         )}
@@ -168,17 +172,19 @@ export default function Filter({
               جانر ها
             </div>
             <div className="flex flex-col h-[200px] flex-wrap rtl">
-              {categories?.map(
-                (data, index) =>
-                  data?.name && (
-                    <FilterItem
-                      key={index}
-                      data={data}
-                      filteredItems={categoryItems}
-                      setFilteredItems={setCategoryItems}
-                    />
-                  )
-              )}
+              {Array.isArray(categories) &&
+                categories?.map(
+                  (data, index) =>
+                    data?.name &&
+                    data?.slug && (
+                      <FilterItem
+                        key={index}
+                        data={data}
+                        filteredItems={categoryItems}
+                        setFilteredItems={setCategoryItems}
+                      />
+                    )
+                )}
             </div>
           </div>
         )}

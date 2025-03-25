@@ -76,13 +76,14 @@ export default function AuthorWeek() {
             <Heading1 title="نویسنده و شاعر هفته" />
           </div>
           <div className="col-span-6 xl:col-span-12 main-container rtl">
-            {data?.map((data, index) => (
-              <AuthorWeekCard
-                key={index}
-                data={data}
-                isVisible={isVisible}
-              />
-            ))}
+            {Array.isArray(data) &&
+              data?.map((data, index) => (
+                <AuthorWeekCard
+                  key={index}
+                  data={data}
+                  isVisible={isVisible}
+                />
+              ))}
           </div>
         </div>
       )}

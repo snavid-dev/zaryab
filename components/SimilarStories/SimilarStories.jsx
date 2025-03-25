@@ -80,14 +80,15 @@ export default function SimilarStories({ slug }) {
             </div>
           </div>
           <div className="main-container rtl">
-            {data?.map((data, index) => (
-              <SimilarHorizontalStoryCard
-                data={data}
-                key={index}
-                isStory={true}
-                isVisible={isVisible}
-              />
-            ))}
+            {Array.isArray(data) &&
+              data?.map((data, index) => (
+                <SimilarHorizontalStoryCard
+                  data={data}
+                  key={index}
+                  isStory={true}
+                  isVisible={isVisible}
+                />
+              ))}
           </div>
         </div>
       )}

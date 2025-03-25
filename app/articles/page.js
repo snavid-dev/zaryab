@@ -148,6 +148,7 @@ export default function ArticlesPage({ searchParams }) {
                 هیچ موردی یافت نشد
               </div>
             ) : (
+              Array.isArray(data) &&
               data?.map((data, index) => (
                 <SimilarHorizontalCard
                   data={data}

@@ -38,7 +38,9 @@ export default function SimilarHorizontalCard({
 
   return (
     <Link
-      href={`/${isArticle ? 'articles' : 'review'}/${data?.slug}`}
+      href={`${
+        data?.slug && `/${isArticle ? 'articles' : 'review'}/${data?.slug}`
+      }`}
       className="col-span-6 xl:col-span-12 grid grid-cols-6 xl:grid-cols-9 gap border-b-4 py-20px border-black translate-y-200px opacity-0"
       ref={cardRef}
     >
@@ -46,7 +48,7 @@ export default function SimilarHorizontalCard({
         {data?.image ? (
           <Image
             src={data?.image}
-            alt={data?.title}
+            alt={data?.title ? data?.title : 'not found'}
             layout="fill"
             objectFit="cover"
             className="absolute"
@@ -56,12 +58,16 @@ export default function SimilarHorizontalCard({
         )}
       </div>
       <div className="col-span-4 xl:col-span-7 gap relative">
-        <div className="col-span-4 text-16px md:text-30px xl:text-43px font-new-extra-black">
-          {data?.title}
-        </div>
-        <div className="col-span-4 text-6px md:text-12px xl:text-14px 2xl:text-20px font-smallText font-bold">
-          {truncateString(data?.excerpt, 500)}
-        </div>
+        {data?.title && (
+          <div className="col-span-4 text-16px md:text-30px xl:text-43px font-new-extra-black">
+            {data?.title}
+          </div>
+        )}
+        {data?.excerpt && (
+          <div className="col-span-4 text-6px md:text-12px xl:text-14px 2xl:text-20px font-smallText font-bold">
+            {truncateString(data?.excerpt, 500)}
+          </div>
+        )}
         <div className="w-full xl:col-span-7 xl:grid xl:grid-cols-7 xl:gap absolute bottom-0">
           <div className="w-full flex md:col-span-3 md:grid md:grid-cols-3 gap-10px font-bold">
             <div className="xl:col-span-1">
@@ -69,9 +75,11 @@ export default function SimilarHorizontalCard({
                 <p className="font-common-thin ml-1 text-8px md:text-12px 2xl:text-14px">
                   نویسنده:
                 </p>
-                <p className="font-common-thin text-8px md:text-12px 2xl:text-14px">
-                  {data?.author}
-                </p>
+                {data?.author && (
+                  <p className="font-common-thin text-8px md:text-12px 2xl:text-14px">
+                    {data?.author}
+                  </p>
+                )}
               </div>
             </div>
             <div className="xl:col-span-1">
@@ -79,9 +87,11 @@ export default function SimilarHorizontalCard({
                 <p className="font-common-thin ml-1 text-8px md:text-12px 2xl:text-14px">
                   تاریخ:
                 </p>
-                <p className="font-common-thin text-8px md:text-12px 2xl:text-14px">
-                  {data?.date_shamsi}
-                </p>
+                {data?.date_shamsi && (
+                  <p className="font-common-thin text-8px md:text-12px 2xl:text-14px">
+                    {data?.date_shamsi}
+                  </p>
+                )}
               </div>
             </div>
             <div className="xl:col-span-1">
@@ -89,9 +99,11 @@ export default function SimilarHorizontalCard({
                 <p className="font-common-thin ml-1 text-8px md:text-12px 2xl:text-14px">
                   زمان:
                 </p>
-                <p className="font-common-thin text-8px md:text-12px 2xl:text-14px">
-                  {data?.time}
-                </p>
+                {data?.time && (
+                  <p className="font-common-thin text-8px md:text-12px 2xl:text-14px">
+                    {data?.time}
+                  </p>
+                )}
                 <p className="font-common-thin text-8px md:text-12px 2xl:text-14px">
                   دقیقه
                 </p>
@@ -100,17 +112,18 @@ export default function SimilarHorizontalCard({
           </div>
           <div className="col-span-1 h-5 hidden xl:block"></div>
           <div className="col-span-3 md:grid grid-cols-3 md:mt-2 xl:mt-0 gap-10px hidden">
-            {data?.categories.map(
-              (category, index) =>
-                index + 1 < 4 && (
-                  <div
-                    className="col-span-1 flex justify-start"
-                    key={index}
-                  >
-                    <Genre title={category.name} />
-                  </div>
-                )
-            )}
+            {Array.isArray(data?.categories) &&
+              data?.categories.map(
+                (category, index) =>
+                  index + 1 < 4 && (
+                    <div
+                      className="col-span-1 flex justify-start"
+                      key={index}
+                    >
+                      <Genre title={category.name} />
+                    </div>
+                  )
+              )}
           </div>
         </div>
       </div>
