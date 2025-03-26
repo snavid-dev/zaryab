@@ -15,7 +15,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function AuthorPage({ param }) {
+export default function MyAuthorPage({ param }) {
   const [data, setData] = useState(null);
   const [Error, setError] = useState(null);
   const [similarData, setSimilarData] = useState(null);
@@ -142,7 +142,6 @@ export default function AuthorPage({ param }) {
       });
     }
   }, [isVisible1, similarData]);
-
   return (
     // the main container of the page
     <div

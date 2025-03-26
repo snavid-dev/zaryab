@@ -10,7 +10,7 @@ import axios from '@/utils/api';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 
-export default function StoryCollectionPage({ param }) {
+export default function MyStoryCollectionPage({ param }) {
   const [data, setData] = useState(null);
   const [Error, setError] = useState(null);
   const [filterDone, setFilterDone] = useState(false);
@@ -66,7 +66,6 @@ export default function StoryCollectionPage({ param }) {
       });
     }
   }, [isVisible, data]);
-
   return (
     // the main container of the page
     <div
@@ -127,7 +126,7 @@ export default function StoryCollectionPage({ param }) {
             <Authors />
           </div>
           {/* small ad
-      <SmallAd /> */}
+          <SmallAd /> */}
         </div>
       )}
     </div>

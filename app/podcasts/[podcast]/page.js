@@ -1,4 +1,4 @@
-import PodcastPage from '@/pages/PodcastPage/PodcastPage';
+import MyPodcastPage from '@/components/MyPodcastPage/MyPodcastPage';
 
 export async function generateMetadata({ params }) {
   try {
@@ -92,5 +92,5 @@ export async function generateMetadata({ params }) {
 
 export default async function PodcastSinglePage({ params }) {
   const param = await params.podcast;
-  return <PodcastPage param={param} />;
+  return <MyPodcastPage param={param} />;
 }

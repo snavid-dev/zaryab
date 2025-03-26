@@ -17,7 +17,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function BookSinglePage({ param }) {
+export default function MyBookPage({ param }) {
   const [data, setData] = useState(null);
   const [Error, setError] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -146,7 +146,6 @@ export default function BookSinglePage({ param }) {
       });
     }
   }, [isVisible, data]);
-
   return (
     // the main container of the page
     <div

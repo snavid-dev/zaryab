@@ -1,4 +1,4 @@
-import ReviewPage from '@/pages/ReviewPage/ReviewPage';
+import MyReviewPage from '@/components/MyReviewPage/MyReviewPage';
 
 export async function generateMetadata({ params }) {
   try {
@@ -92,5 +92,5 @@ export async function generateMetadata({ params }) {
 
 export default async function ReviewsAndOpinionsSinglePage({ params }) {
   const param = await params.review;
-  return <ReviewPage param={param} />;
+  return <MyReviewPage param={param} />;
 }

@@ -1,4 +1,4 @@
-import StoryCollectionPage from '@/pages/StoryCollectionPage/StoryCollectionPage';
+import MyStoryCollectionPage from '@/components/MyStoryCollectionPage/MyStoryCollectionPage';
 
 export async function generateMetadata({ params }) {
   try {
@@ -100,5 +100,5 @@ export async function generateMetadata({ params }) {
 
 export default async function StoryCollectionPage1({ params }) {
   const param = await params.collection;
-  return <StoryCollectionPage param={param} />;
+  return <MyStoryCollectionPage param={param} />;
 }

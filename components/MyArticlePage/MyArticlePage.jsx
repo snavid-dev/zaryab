@@ -21,7 +21,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function ArticleSinglePage({ param }) {
+export default function MyArticlePage({ param }) {
   // fetch data
 
   const [data, setData] = useState(null);
@@ -138,7 +138,6 @@ export default function ArticleSinglePage({ param }) {
       });
     }
   }, [isVisible, data]);
-
   return (
     // the main container of the page
     <div

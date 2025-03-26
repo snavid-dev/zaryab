@@ -10,7 +10,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { useEffect, useRef, useState } from 'react';
 
-export default function StoryCollectionPage({ param }) {
+export default function MyPoemCollection({ param }) {
   const [data, setData] = useState(null);
   const [Error, setError] = useState(null);
 
@@ -66,7 +66,6 @@ export default function StoryCollectionPage({ param }) {
       });
     }
   }, [isVisible, data]);
-
   return (
     // the main container of the page
     <div

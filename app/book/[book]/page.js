@@ -1,4 +1,4 @@
-import BookPage from '@/pages/BookPage/BookPage';
+import BookPage from '@/singlePages/BookPage/BookPage';
 
 export async function generateMetadata({ params }) {
   try {

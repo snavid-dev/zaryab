@@ -1,4 +1,4 @@
-import StoryPage from '@/pages/StoryPage/StoryPage';
+import MyStoryPage from '@/components/MyStoryPage/MyStoryPage';
 
 export async function generateMetadata({ params }) {
   try {
@@ -104,5 +104,5 @@ export async function generateMetadata({ params }) {
 
 export default async function StorySinglePage({ params }) {
   const param = await params.story;
-  return <StoryPage param={param} />;
+  return <MyStoryPage param={param} />;
 }

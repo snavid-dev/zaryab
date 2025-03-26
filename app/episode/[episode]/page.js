@@ -1,4 +1,4 @@
-import EpisodePage from '@/pages/EpisodePage/EpisodePage';
+import MyEpisodePage from '@/components/MyEpisodePage/MyEpisodePage';
 
 export async function generateMetadata({ params }) {
   try {
@@ -92,5 +92,5 @@ export async function generateMetadata({ params }) {
 
 export default async function EposidesPage1({ params }) {
   const param = await params.episode;
-  return <EpisodePage param={param} />;
+  return <MyEpisodePage param={param} />;
 }

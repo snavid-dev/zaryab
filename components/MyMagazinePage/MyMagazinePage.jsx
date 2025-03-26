@@ -20,7 +20,7 @@ import MagazinePageCard from '@/components/MagazinePageCard/MagazinePageCard';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function LetterSinglePage({ param }) {
+export default function MyMagazinePage({ param }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [modal, setModal] = useState(false);
   const [data, setData] = useState(null);
@@ -127,8 +127,6 @@ export default function LetterSinglePage({ param }) {
     }
   }, [isVisible, data]);
 
-  console.log(isVisible, 'isvisible');
-
   return (
     // main container of the page
     <div
@@ -187,10 +185,10 @@ export default function LetterSinglePage({ param }) {
 
           {/*  the letter archive  */}
           {/* <div className="mt-14">
-        <ArchivedLettersSection />
-      </div>
-
-      <div className="main-container h-1 bg-black mt-14"></div> */}
+            <ArchivedLettersSection />
+          </div>
+    
+          <div className="main-container h-1 bg-black mt-14"></div> */}
           {/*  podcast section  */}
 
           <div className="mt-14 mb-14">

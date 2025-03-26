@@ -1,4 +1,4 @@
-import ArchiveAuthorPage from '@/pages/ArchiveAuthorPage/ArchiveAuthorPage';
+import MyArchiveAuthorPage from '@/components/MyArchiveAuthorPage/MyArchiveAuthorPage';
 
 export async function generateMetadata({ params }) {
   try {
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }) {
         siteName: 'وبسایت ادبی آوای زریاب',
         images: [
           {
-            url: data?.featured_image && data > featured_image,
+            url: data?.featured_image && data?.featured_image,
             width: 1129,
             height: 750,
             alt: data?.title,
@@ -92,5 +92,5 @@ export async function generateMetadata({ params }) {
 
 export default async function AuthorPage({ params }) {
   const param = await params.archive;
-  return <ArchiveAuthorPage param={param} />;
+  return <MyArchiveAuthorPage param={param} />;
 }

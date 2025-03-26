@@ -1,4 +1,4 @@
-import MagazinePage from '@/pages/MagazinePage/MagazinePage';
+import MyMagazinePage from '@/components/MyMagazinePage/MyMagazinePage';
 
 export async function generateMetadata({ params }) {
   try {
@@ -92,5 +92,5 @@ export async function generateMetadata({ params }) {
 
 export default async function LetterSinglePage({ params }) {
   const param = await params.magazine;
-  return <MagazinePage param={param} />;
+  return <MyMagazinePage param={param} />;
 }

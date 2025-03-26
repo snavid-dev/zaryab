@@ -15,7 +15,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function PodcastSinglePage({ param }) {
+export default function MyPodcastPage({ param }) {
   // fetch data all authors
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
@@ -242,7 +242,6 @@ export default function PodcastSinglePage({ param }) {
       });
     }
   }, [data, isVisible]);
-
   return (
     // the main container of the page
     <div
@@ -377,7 +376,7 @@ export default function PodcastSinglePage({ param }) {
                 <button
                   onClick={togglePlayPause}
                   className={`bg-black text-white text-[46px] px-4 py-4 flex justify-center items-center rounded-full 
-                             `}
+                                 `}
                 >
                   {isPlaying && currentTime < duration ? (
                     <FaPause onClick={pause} />
@@ -447,7 +446,7 @@ export default function PodcastSinglePage({ param }) {
                     __html: podcast?.content,
                   }}
                   className="w-full border-t-4 border-b-4 border-black whitespace-pre-wrap rtl font-common-lg
-                    text-16px md:text-25px xl:text-30px py-5 translate-y-200px opacity-0"
+                        text-16px md:text-25px xl:text-30px py-5 translate-y-200px opacity-0"
                   ref={textRef}
                 ></div>
               )}

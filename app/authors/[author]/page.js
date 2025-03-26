@@ -1,4 +1,4 @@
-import AuthorPage from '@/pages/AuthorPage/AuthorPage';
+import MyAuthorPage from '@/components/MyAuthorPage/MyAuthorPage';
 
 export async function generateMetadata({ params }) {
   try {
@@ -98,5 +98,5 @@ export async function generateMetadata({ params }) {
 
 export default async function AuthorPage1({ params }) {
   const param = await params.author;
-  return <AuthorPage param={param} />;
+  return <MyAuthorPage param={param} />;
 }

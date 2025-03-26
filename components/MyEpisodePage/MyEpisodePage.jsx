@@ -13,7 +13,7 @@ import gsap from 'gsap';
 import { useEffect, useRef, useState } from 'react';
 import { IoIosSearch } from 'react-icons/io';
 
-export default function EposidesPage({ param }) {
+export default function MyEpisodePage({ param }) {
   const [data, setData] = useState(null);
   const [Error, setError] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -113,7 +113,6 @@ export default function EposidesPage({ param }) {
     setHasFetched(false);
     setFilterDone(false);
   };
-
   return (
     <div
       ref={ref}

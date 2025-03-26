@@ -23,7 +23,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function StorySinglePage({ param }) {
+export default function MyStoryPage({ param }) {
   // fetch data
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);

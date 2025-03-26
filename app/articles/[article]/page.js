@@ -1,4 +1,4 @@
-import ArticlePage from '@/pages/ArticlePage/ArticlePage';
+import MyArticlePage from '@/components/MyArticlePage/MyArticlePage';
 
 export async function generateMetadata({ params }) {
   try {
@@ -92,5 +92,5 @@ export async function generateMetadata({ params }) {
 
 export default async function ArticleSinglePage({ params }) {
   const param = await params.article;
-  return <ArticlePage param={param} />;
+  return <MyArticlePage param={param} />;
 }

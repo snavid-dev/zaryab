@@ -12,7 +12,7 @@ import SmallAd from '@/components/SmallAd/SmallAd';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 
-export default function AuthorPage({ param }) {
+export default function MyArchiveAuthorPage({ param }) {
   const [data, setData] = useState(null);
   const [Error, setError] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
@@ -89,7 +89,6 @@ export default function AuthorPage({ param }) {
       });
     }
   }, [isVisible, data]);
-
   return (
     // the main container of the page
     <div

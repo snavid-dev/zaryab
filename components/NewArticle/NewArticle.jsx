@@ -3,7 +3,7 @@ import React from 'react';
 
 export default function NewArticle({ data }) {
   return (
-    <div className="mt-7">
+    <div className="mt-7 w-full">
       <div>
         {data?.title && data?.slug && (
           <p className="rtl font-common-med text-3xl">
@@ -11,7 +11,7 @@ export default function NewArticle({ data }) {
           </p>
         )}
       </div>
-      <div className="flex rtl justify-between items-center">
+      <div className="flex rtl gap-10px items-center">
         <div className="rtl flex text-right items-center text-[8px]">
           <b className="font-smallTitle">نویسنده:</b>
           {data?.author && <p className="font-smallText">{data?.author}</p>}

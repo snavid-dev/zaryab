@@ -1,4 +1,4 @@
-import PoemCollectionPage from '@/pages/PoemCollectionPage/PoemCollectionPage';
+import MyPoemCollection from '@/components/MyPoemCollection/MyPoemCollection';
 
 export async function generateMetadata({ params }) {
   try {
@@ -100,5 +100,5 @@ export async function generateMetadata({ params }) {
 
 export default async function PoemCollectionPage1({ params }) {
   const param = await params.collection;
-  return <PoemCollectionPage param={param} />;
+  return <MyPoemCollection param={param} />;
 }
