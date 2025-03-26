@@ -1,4 +1,4 @@
-import BookPage from '@/singlePages/BookPage/BookPage';
+import MyBookPage from '@/components/MyBookPage/MyBookPage';
 
 export async function generateMetadata({ params }) {
   try {
@@ -92,5 +92,5 @@ export async function generateMetadata({ params }) {
 
 export default async function BookSinglePage({ params }) {
   const param = await params.book;
-  return <BookPage param={param} />;
+  return <MyBookPage param={param} />;
 }
