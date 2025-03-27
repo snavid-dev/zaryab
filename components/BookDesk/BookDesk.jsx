@@ -171,7 +171,7 @@ export default function BookDesk() {
                 {data?.title && (
                   <h3
                     ref={subtitleRef}
-                    className="font-common-lg text-30px xl:text-65px 2xl:text-92px flex flex-col items-end justify-between lg:mt-5 translate-y-200px opacity-0"
+                    className="font-pashto text-30px xl:text-65px 2xl:text-92px flex flex-col items-end justify-between lg:mt-5 translate-y-200px opacity-0"
                   >
                     {data?.title}
                   </h3>
@@ -182,7 +182,7 @@ export default function BookDesk() {
                     dangerouslySetInnerHTML={{
                       __html: data?.excerpt,
                     }}
-                    className="rtl mt-7 font-common-regular text-14px xl:text-20px 2xl:text-28px translate-y-200px opacity-0"
+                    className="rtl mt-7 font-pashto text-14px xl:text-20px 2xl:text-28px translate-y-200px opacity-0"
                   ></div>
                 )}
               </div>

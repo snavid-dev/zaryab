@@ -54,7 +54,7 @@ export default function PodcastCard({ data, isVisible }) {
             </div>
             <div className="w-full">
               {data?.name && (
-                <h3 className="font-common-heavy rtl text-30px md:text-36px mt-3 w-full rtl">
+                <h3 className="font-pashto font-extrabold rtl text-30px md:text-36px mt-3 w-full rtl">
                   {data?.name}
                 </h3>
               )}
@@ -68,9 +68,7 @@ export default function PodcastCard({ data, isVisible }) {
                   گوینده:
                 </p>
                 {data?.host && (
-                  <p className="font-common-regular text-xl text-20px ">
-                    {data?.host}
-                  </p>
+                  <p className="font-pashto text-xl text-20px ">{data?.host}</p>
                 )}
               </div>
               <div className="rtl flex">
@@ -78,7 +76,7 @@ export default function PodcastCard({ data, isVisible }) {
                   نویسنده/شاعر:
                 </p>
                 {data?.guest && (
-                  <p className="font-common-regular text-xl text-20px ">
+                  <p className="font-pashto text-xl text-20px ">
                     {data?.guest}
                   </p>
                 )}
@@ -90,7 +88,7 @@ export default function PodcastCard({ data, isVisible }) {
                   تاریخ:
                 </p>
                 {data?.date && (
-                  <p className="font-common-regular text-12px md:text-18px">
+                  <p className="font-pashto text-12px md:text-18px">
                     {data?.date}
                   </p>
                 )}
@@ -101,7 +99,7 @@ export default function PodcastCard({ data, isVisible }) {
                 </p>
                 <p className="font-common-regular text-12px md:text-18px">
                   {data?.duration && (
-                    <span className="font-common-heavy text-12px md:text-18px">
+                    <span className="font-pashto text-12px md:text-18px">
                       {data?.duration}
                     </span>
                   )}

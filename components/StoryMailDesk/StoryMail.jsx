@@ -18,12 +18,21 @@ export default function StoryMail() {
   const ref = useRef(null);
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/v1/stories?per_page=5');
+        setData(response.data.data);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && !hasFetched) {
-          fetchData();
           setHasFetched(true);
           setIsVisible(true);
+          fetchData();
         }
       },
       { threshold: 0.1 } // Trigger when 10% of the component is visible
@@ -32,15 +41,6 @@ export default function StoryMail() {
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, [hasFetched]);
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get('/v1/stories?per_page=5');
-      setData(response.data.data);
-    } catch (err) {
-      setError(err.response?.data?.message || err.message);
-    }
-  };
 
   // animation
   const mailRef = useRef(null);

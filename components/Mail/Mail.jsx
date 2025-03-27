@@ -10,6 +10,12 @@ import axios from '@/utils/api';
 export default function Mail() {
   const [data, setData] = useState(null);
   const [Error, setError] = useState(null);
+  const ref = useRef(null);
+
+  // fetch section data
+  const [isVisible, setIsVisible] = useState(false);
+  const [hasFetched, setHasFetched] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -22,8 +28,20 @@ export default function Mail() {
         setError(err.response?.data?.message || err.message);
       }
     };
-    fetchData();
-  }, []);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !hasFetched) {
+          fetchData();
+          setIsVisible(true);
+          setHasFetched(true);
+        }
+      },
+      { threshold: 0.1 } // Trigger when 10% of the component is visible
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [hasFetched]);
 
   const [data2, setData2] = useState(null);
   useEffect(() => {
@@ -36,8 +54,20 @@ export default function Mail() {
         setError(err.response?.data?.message || err.message);
       }
     };
-    fetchData();
-  }, []);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !hasFetched) {
+          fetchData();
+          setIsVisible(true);
+          setHasFetched(true);
+        }
+      },
+      { threshold: 0.1 } // Trigger when 10% of the component is visible
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [hasFetched]);
 
   const [newLetter, setNewLetter] = useState(null);
   useEffect(() => {
@@ -51,59 +81,78 @@ export default function Mail() {
         setError(err.response?.data?.message || err.message);
       }
     };
-    fetchData();
-  }, []);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !hasFetched) {
+          fetchData();
+          setIsVisible(true);
+          setHasFetched(true);
+        }
+      },
+      { threshold: 0.1 } // Trigger when 10% of the component is visible
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [hasFetched]);
 
   return (
-    <div className="w-full rtl">
-      {/* it has three rows */}
-      <div className="w-full flex flex-col items-start">
-        <Heading2 title="مجله جدید" />
-        {newLetter?.release_date && (
-          <p className="mt-5 md:mt-0">{newLetter?.release_date}</p>
-        )}
-        <div className="relative w-full xl:h-400px 2xl:h-500px mt-5 md:mt-0">
-          {newLetter?.featured_image ? (
-            <Image
-              src={newLetter?.featured_image}
-              alt="new magazine"
-              fill
-              className="absolute object-cover"
-            />
-          ) : (
-            <div className="h-full w-full flex justify-center items-center"></div>
-          )}
-        </div>
-        {newLetter?.slug && (
-          <Link
-            href={`/magazines/${newLetter?.slug}`}
-            className="w-full h-10 flex justify-center items-center border border-black font-common-lg text-27px text-black bg-white lg:text-white lg:bg-black
+    <section
+      className="w-full"
+      ref={ref}
+    >
+      {isVisible && (
+        <div className="w-full rtl">
+          {/* it has three rows */}
+          <div className="w-full flex flex-col items-start">
+            <Heading2 title="مجله جدید" />
+            {newLetter?.release_date && (
+              <p className="mt-5 md:mt-0">{newLetter?.release_date}</p>
+            )}
+            <div className="relative w-full xl:h-400px 2xl:h-500px mt-5 md:mt-0">
+              {newLetter?.featured_image ? (
+                <Image
+                  src={newLetter?.featured_image}
+                  alt="new magazine"
+                  fill
+                  className="absolute object-cover"
+                />
+              ) : (
+                <div className="h-full w-full flex justify-center items-center"></div>
+              )}
+            </div>
+            {newLetter?.slug && (
+              <Link
+                href={`/magazines/${newLetter?.slug}`}
+                className="w-full h-10 flex justify-center items-center border border-black font-common-lg text-27px text-black bg-white lg:text-white lg:bg-black
           lg:hover:bg-white lg:hover:text-black transition-all duration-300 mt-5"
-          >
-            خواندن نامه
-          </Link>
-        )}
-      </div>
-      <div className="w-full hidden md:flex flex-col items-start mt-7">
-        <Heading2 title="مجله های قدیم" />
-        {Array.isArray(data) &&
-          data?.map((data, index) => (
-            <OldMails
-              data={data}
-              key={index}
-            />
-          ))}
-      </div>
-      <div className="w-full hidden md:flex flex-col items-start mt-7">
-        <Heading2 title="مقاله های جدید" />
-        {Array.isArray(data2) &&
-          data2?.map((data, index) => (
-            <NewArticle
-              data={data}
-              key={index}
-            />
-          ))}
-      </div>
-    </div>
+              >
+                خواندن نامه
+              </Link>
+            )}
+          </div>
+          <div className="w-full hidden md:flex flex-col items-start mt-7">
+            <Heading2 title="مجله های قدیم" />
+            {Array.isArray(data) &&
+              data?.map((data, index) => (
+                <OldMails
+                  data={data}
+                  key={index}
+                />
+              ))}
+          </div>
+          <div className="w-full hidden md:flex flex-col items-start mt-7">
+            <Heading2 title="مقاله های جدید" />
+            {Array.isArray(data2) &&
+              data2?.map((data, index) => (
+                <NewArticle
+                  data={data}
+                  key={index}
+                />
+              ))}
+          </div>
+        </div>
+      )}
+    </section>
   );
 }

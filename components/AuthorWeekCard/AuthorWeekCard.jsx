@@ -46,14 +46,14 @@ export default function AuthorWeekCard({ data, isVisible }) {
       </div>
       <div className="w-full">
         {data?.title && (
-          <h3 className="font-common-lg mt-5 text-28px md:text-20px lg:text-59px rtl">
+          <h3 className="font-pashto mt-5 text-28px md:text-20px lg:text-59px rtl">
             {data?.title}
           </h3>
         )}
       </div>
       <div>
         {data?.excerpt && (
-          <p className="rtl mt-4 font-common text-10px md:text-12px lg:text-17px">
+          <p className="rtl mt-4 font-pashto text-10px md:text-12px lg:text-17px">
             {truncateString(data?.excerpt, 300)}
           </p>
         )}

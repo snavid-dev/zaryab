@@ -14,9 +14,6 @@ export default function Podcasts() {
   const [hasFetched, setHasFetched] = useState(false);
   const ref = useRef(null);
 
-  // check for tablets
-  const [isTablet, setIsTablet] = useState(false);
-
   useEffect(() => {
     // check screen width
 

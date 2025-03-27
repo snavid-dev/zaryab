@@ -161,21 +161,21 @@ export default function Winner() {
           <div className="col-span-6 md:col-span-3 xl:col-span-6 rtl relative">
             {data?.story?.title && (
               <p
-                className="font-new-black text-40px md:text-50px xl:text-60px 2xl:text-80px translate-y-200px opacity-0"
+                className="font-pashto text-40px md:text-50px xl:text-60px 2xl:text-80px translate-y-200px opacity-0"
                 ref={subTitleRef}
               >
                 {data?.story?.title}
               </p>
             )}
             <div
-              className="flex font-common-heavy text-footerBtn text-16px md:text-20px xl:text-20px 2xl:text-30px mt-3 translate-y-200px opacity-0"
+              className="flex font-pashto text-footerBtn text-16px md:text-20px xl:text-20px 2xl:text-30px mt-3 translate-y-200px opacity-0"
               ref={authorRef}
             >
               <p className="ml-1">نویسنده:</p>
               {data?.author?.name && <p>{data?.author?.name}</p>}
             </div>
             <div
-              className="mt-3 font-common-regular text-14px md:text-18px xl:text-25px 2xl:text-30px translate-y-200px opacity-0"
+              className="mt-3 font-pashto text-14px md:text-18px xl:text-25px 2xl:text-30px translate-y-200px opacity-0"
               ref={textRef}
             >
               {data?.story?.excerpt &&

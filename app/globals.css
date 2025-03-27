@@ -122,6 +122,15 @@ body {
   src: url('/assets/fonts/Ray-Light.ttf');
 }
 
+@font-face {
+  font-family: pashto;
+  src: url('/assets/fonts/pashto.ttf');
+}
+
+.font-pashto {
+  font-family: pashto;
+}
+
 .font-common {
   font-family: Yekan Bakh;
 }

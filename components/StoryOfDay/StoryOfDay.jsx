@@ -16,6 +16,16 @@ export default function StoryOfDay() {
   const ref = useRef(null);
   // use effect
   useEffect(() => {
+    // fetch data
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/v1/featured-story');
+        setData(response.data);
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && !hasFetched) {
@@ -30,15 +40,6 @@ export default function StoryOfDay() {
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, [hasFetched]);
-  // fetch data
-  const fetchData = async () => {
-    try {
-      const response = await axios.get('/v1/featured-story');
-      setData(response.data);
-    } catch (err) {
-      setError(err.response?.data?.message || err.message);
-    }
-  };
   // animation because it is the first component of the page does not need scroll animation
 
   useGSAP(() => {
@@ -110,7 +111,7 @@ export default function StoryOfDay() {
                 className="col-span-6 xl:col-span-5 translate-y-200px opacity-0"
                 id="storyTitle"
               >
-                <h1 className="flex flex-row xl:flex-col text-50px md:text-94px 2xl:text-[120px] font-new-black leading-67%">
+                <h1 className="flex flex-row xl:flex-col text-50px md:text-94px 2xl:text-[120px] font-pashto leading-67%">
                   {data?.title && (
                     <Link
                       href={`/episode/${data?.slug}`}
@@ -126,7 +127,7 @@ export default function StoryOfDay() {
                 id="storyExcerpt"
               >
                 {data?.excerpt && (
-                  <p className="font-common rtl text-12px md:text-18px">
+                  <p className="font-pashto rtl text-12px md:text-18px">
                     {data?.excerpt}
                   </p>
                 )}
@@ -146,7 +147,7 @@ export default function StoryOfDay() {
                         نویسنده:
                       </p>
                       {data?.author && (
-                        <p className="font-common-thin text-12px md:text-18px xl:text-14px">
+                        <p className="font-pashto text-12px md:text-18px xl:text-14px">
                           {data?.author}
                         </p>
                       )}
@@ -158,7 +159,7 @@ export default function StoryOfDay() {
                         تاریخ:
                       </p>
                       {data?.date && (
-                        <p className="font-common-thin text-12px md:text-18px xl:text-14px">
+                        <p className="font-pashto text-12px md:text-18px xl:text-14px">
                           {data?.date}
                         </p>
                       )}
@@ -170,7 +171,7 @@ export default function StoryOfDay() {
                         زمان:
                       </p>
                       {data?.duration && (
-                        <p className="font-common-thin text-12px md:text-18px xl:text-14px">
+                        <p className="font-pashto text-12px md:text-18px xl:text-14px">
                           {data?.duration}{' '}
                         </p>
                       )}

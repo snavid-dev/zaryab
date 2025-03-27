@@ -90,7 +90,7 @@ export default function BookMobile() {
             <Heading2 title="کتاب هفته" />
           </div>
           <div className="w-full flex flex-col ">
-            <h3 className="font-common-heading w-full text-28px text-right mt-3">
+            <h3 className="font-pashto w-full text-28px text-right mt-3">
               {data?.title && <p>{data?.title}</p>}
             </h3>
 

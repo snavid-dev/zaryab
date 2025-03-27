@@ -49,12 +49,12 @@ export default function StoryHarizontalCard({ data, isVisible }) {
       </div>
       <div className="col-span-4 xl:col-span-7 gap relative">
         {data?.title && (
-          <div className="col-span-4 text-20px md:text-40px font-new-extra-black">
+          <div className="col-span-4 text-20px md:text-40px font-pashto font-extrabold">
             {data?.title}
           </div>
         )}
         {data?.excerpt && (
-          <div className="col-span-4 text-6px md:text-12px font-bold font-smallText">
+          <div className="col-span-4 text-6px md:text-12px font-pashto">
             {truncateString(data?.excerpt, 500)}
           </div>
         )}
@@ -65,7 +65,7 @@ export default function StoryHarizontalCard({ data, isVisible }) {
                 نویسنده:
               </p>
               {data?.author && (
-                <p className="font-common-thin text-6px md:text-12px 2xl:text-14px">
+                <p className="font-pashto text-6px md:text-12px 2xl:text-14px">
                   {data?.author}
                 </p>
               )}
@@ -77,7 +77,7 @@ export default function StoryHarizontalCard({ data, isVisible }) {
                 تاریخ:
               </p>
               {data?.date && (
-                <p className="font-common-thin text-6px md:text-12px 2xl:text-14px">
+                <p className="font-pashto text-6px md:text-12px 2xl:text-14px">
                   {data?.date}
                 </p>
               )}
@@ -89,7 +89,7 @@ export default function StoryHarizontalCard({ data, isVisible }) {
                 زمان:
               </p>
               {data?.duration && (
-                <p className="font-common-thin text-6px md:text-12px 2xl:text-14px">
+                <p className="font-pashto text-6px md:text-12px 2xl:text-14px">
                   {data?.duration}
                 </p>
               )}
