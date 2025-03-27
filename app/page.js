@@ -1,4 +1,3 @@
-'use client';
 import Authors from '@/components/Authors/Authors';
 import AuthorWeek from '@/components/AuthorWeek/AuthorWeek';
 import BookDesk from '@/components/BookDesk/BookDesk';

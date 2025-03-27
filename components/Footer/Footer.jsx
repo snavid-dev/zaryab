@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link2 from '../Link2/Link2';
 import axios from '@/utils/api';
 import NewsLetterForm from '../NewsLetterForm/NewsLetterForm';
@@ -9,6 +9,11 @@ import NewsLetterForm from '../NewsLetterForm/NewsLetterForm';
 export default function Footer() {
   const [categories, setCategories] = useState(null);
   const [Error, setError] = useState(null);
+
+  // category fetch
+  const [categoryIsVisible, setCategoryIsVisible] = useState(false);
+  const [categoryHasFetched, setCategoryHasFetched] = useState(false);
+  const footerRef = useRef(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,11 +35,25 @@ export default function Footer() {
       }
     };
 
-    fetchData();
-  }, []);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !categoryHasFetched) {
+          fetchData();
+          setCategoryIsVisible(true);
+          setCategoryHasFetched(true);
+        }
+      },
+      { threshold: 0.1 } // Trigger when 10% of the component is visible
+    );
 
-  // literary writings
+    if (footerRef.current) observer.observe(footerRef.current);
+    return () => observer.disconnect();
+  }, [categoryHasFetched]);
+
+  // writings
   const [literary, setLiterary] = useState([]);
+  const [writingsIsVisible, setWritingsIsVisible] = useState(false);
+  const [writingsHasFetched, setWritingsHasFetched] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -67,12 +86,26 @@ export default function Footer() {
       }
     };
 
-    fetchData();
-  }, []);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !writingsHasFetched) {
+          fetchData();
+          setWritingsIsVisible(true);
+          setWritingsHasFetched(true);
+        }
+      },
+      { threshold: 0.1 } // Trigger when 10% of the component is visible
+    );
+
+    if (footerRef.current) observer.observe(footerRef.current);
+    return () => observer.disconnect();
+  }, [writingsHasFetched]);
 
   // articles
 
   const [articles, setArticles] = useState(null);
+  const [isArticleVisible, setIsArtivleVisible] = useState(false);
+  const [articleHasFetched, setArticleHasFetched] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -94,12 +127,26 @@ export default function Footer() {
       }
     };
 
-    fetchData();
-  }, []);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !articleHasFetched) {
+          fetchData();
+          setIsArtivleVisible(true);
+          setArticleHasFetched(true);
+        }
+      },
+      { threshold: 0.1 } // Trigger when 10% of the component is visible
+    );
+
+    if (footerRef.current) observer.observe(footerRef.current);
+    return () => observer.disconnect();
+  }, [articleHasFetched]);
 
   // reviews
 
   const [review, setReview] = useState(null);
+  const [isReviewVisible, setIsReviewVisible] = useState(false);
+  const [reviewHasFetched, setReviewHasFetched] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -121,12 +168,26 @@ export default function Footer() {
       }
     };
 
-    fetchData();
-  }, []);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !reviewHasFetched) {
+          fetchData();
+          setIsReviewVisible(true);
+          setReviewHasFetched(true);
+        }
+      },
+      { threshold: 0.1 } // Trigger when 10% of the component is visible
+    );
+
+    if (footerRef.current) observer.observe(footerRef.current);
+    return () => observer.disconnect();
+  }, [setReviewHasFetched]);
 
   // podcasts
 
   const [podcast, setPodcast] = useState(null);
+  const [isPodcastVisible, setIsPodcastVisible] = useState(false);
+  const [podcastHasFetched, setPodcastHasFetched] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -148,12 +209,26 @@ export default function Footer() {
       }
     };
 
-    fetchData();
-  }, []);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !podcastHasFetched) {
+          fetchData();
+          setIsPodcastVisible(true);
+          setPodcastHasFetched(true);
+        }
+      },
+      { threshold: 0.1 } // Trigger when 10% of the component is visible
+    );
+
+    if (footerRef.current) observer.observe(footerRef.current);
+    return () => observer.disconnect();
+  }, [podcastHasFetched]);
 
   // letters
 
   const [letter, setLetter] = useState(null);
+  const [isLetterVisible, setIsLetterVisible] = useState(false);
+  const [letterHasFetched, setLetterHasFetched] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -175,11 +250,25 @@ export default function Footer() {
       }
     };
 
-    fetchData();
-  }, []);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !letterHasFetched) {
+          fetchData();
+          setIsLetterVisible(true);
+          setLetterHasFetched(true);
+        }
+      },
+      { threshold: 0.1 } // Trigger when 10% of the component is visible
+    );
+
+    if (footerRef.current) observer.observe(footerRef.current);
+    return () => observer.disconnect();
+  }, [letterHasFetched]);
 
   // mail section
   const [newLetter, setNewLetter] = useState(null);
+  const [isNewLetterVisible, setIsNewLetterVisible] = useState(false);
+  const [newLetterHasFetched, setNewLetterHasFetched] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -191,12 +280,26 @@ export default function Footer() {
         setError(err.response?.data?.message || err.message);
       }
     };
-    fetchData();
-  }, []);
-  console.log(newLetter, 'new');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !newLetterHasFetched) {
+          fetchData();
+          setIsNewLetterVisible(true);
+          setNewLetterHasFetched(true);
+        }
+      },
+      { threshold: 0.1 } // Trigger when 10% of the component is visible
+    );
+
+    if (footerRef.current) observer.observe(footerRef.current);
+    return () => observer.disconnect();
+  }, [newLetterHasFetched]);
 
   return (
-    <footer className="bg-footer">
+    <footer
+      className="bg-footer"
+      ref={footerRef}
+    >
       {/*main div of footer*/}
       <div className="bg-footerPic bg-no-repeat bg-bottom bg-auto flex flex-col items-center rtl py-50px">
         {/* text logo and others things */}
@@ -400,6 +503,7 @@ export default function Footer() {
           <div className="col-span-1 xl:col-span-2"></div>
 
           {Array.isArray(literary) &&
+            writingsIsVisible &&
             literary?.map((data, index) => (
               <div
                 className="col-span-1 xl:col-span-2"
@@ -428,6 +532,7 @@ export default function Footer() {
           <div className="col-span-1 xl:col-span-2"></div>
 
           {Array.isArray(articles) &&
+            isArticleVisible &&
             articles?.map((data, index) => (
               <div
                 className="col-span-1 xl:col-span-2"
@@ -455,6 +560,7 @@ export default function Footer() {
           <div className="col-span-1 xl:col-span-2"></div>
 
           {Array.isArray(review) &&
+            isReviewVisible &&
             review?.map((data, index) => (
               <div
                 key={index}
@@ -484,6 +590,7 @@ export default function Footer() {
           <div className="col-span-1 xl:col-span-2"></div>
 
           {Array.isArray(podcast) &&
+            isPodcastVisible &&
             podcast?.map((data, index) => (
               <div
                 className="col-span-1 xl:col-span-2"
@@ -511,6 +618,7 @@ export default function Footer() {
           <div className="col-span-1 xl:col-span-2"></div>
 
           {Array.isArray(letter) &&
+            isLetterVisible &&
             letter?.map((data, index) => (
               <div
                 className="col-span-1 xl:col-span-2"
@@ -538,6 +646,7 @@ export default function Footer() {
           <div className="col-span-1 xl:col-span-2"></div>
 
           {Array.isArray(categories) &&
+            categoryIsVisible &&
             categories?.map((data, index) => (
               <div
                 className="col-span-1 xl:col-span-2"
