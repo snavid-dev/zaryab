@@ -122,8 +122,6 @@ export default async function Home() {
 
   const podcastMobileData = await podcastMobileRes.json();
 
-  console.log(podcastDeskData.data, 'data');
-
   return (
     <main className="w-full flex flex-col items-center mt-100px xl:mt-0 pb-50px min-h-100vh">
       {/* story of the day */}

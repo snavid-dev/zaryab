@@ -1,12 +1,11 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import Heading1 from '../Heading1/Heading1';
-import axios from '@/utils/api';
 
 gsap.registerPlugin(ScrollTrigger);
 

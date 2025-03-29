@@ -1,9 +1,7 @@
 'use client';
-import axios from '@/utils/api';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useEffect, useRef, useState } from 'react';
-import Heading1 from '../Heading1/Heading1';
+import React, { useRef } from 'react';
 import { truncateString } from '@/utils/GeneralFuncions/GeneralFunctions';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';

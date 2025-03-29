@@ -1,9 +1,7 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
-
+import React, { useRef } from 'react';
 import AuthorWeekCard from '../AuthorWeekCard/AuthorWeekCard';
 import Heading1 from '../Heading1/Heading1';
-import axios from '@/utils/api';
 import { useGSAP } from '@gsap/react';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import gsap from 'gsap';

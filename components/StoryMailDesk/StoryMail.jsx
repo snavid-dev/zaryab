@@ -1,9 +1,8 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import StoryHarizontalCard from '../StoryHarizontalCard/StoryHarizontalCard';
 import Mail from '../Mail/Mail';
 import ArrowLink from '../ArrowLink/ArrowLink';
-import axios from '@/utils/api';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
