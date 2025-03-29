@@ -8,11 +8,11 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function OurAuthorCard({ data, isVisible }) {
+export default function OurAuthorCard({ data }) {
   const ref = useRef(null);
 
   useGSAP(() => {
-    if (isVisible && data) {
+    if (data) {
       gsap.to(ref.current, {
         y: 0,
         opacity: 1,
@@ -25,7 +25,7 @@ export default function OurAuthorCard({ data, isVisible }) {
         },
       });
     }
-  }, [isVisible, data]);
+  }, [data]);
   return (
     <div
       ref={ref}

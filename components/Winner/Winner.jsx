@@ -11,38 +11,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Winner() {
-  const [data, setData] = useState(null);
-  const [Error, setError] = useState(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [hasFetched, setHasFetched] = useState(false);
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('v1/story-champion/latest');
-        setData(response.data);
-      } catch (err) {
-        setError(err.response?.data?.message || err.message);
-      }
-    };
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !hasFetched) {
-          fetchData();
-          setHasFetched(true);
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 } // Trigger when 10% of the component is visible
-    );
-
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [hasFetched]);
-
+export default function Winner({ data }) {
   //   animation
 
   const titleRef = useRef(null);
@@ -53,7 +22,7 @@ export default function Winner() {
   const buttonRef = useRef(null);
 
   useGSAP(() => {
-    if (isVisible && data) {
+    if (data) {
       gsap.to(titleRef.current, {
         y: 0,
         opacity: 1,
@@ -126,14 +95,11 @@ export default function Winner() {
         },
       });
     }
-  }, [isVisible, data]);
+  }, [data]);
 
   return (
-    <section
-      className="w-full flex justify-center mt-50px"
-      ref={ref}
-    >
-      {isVisible && data?.author?.name && data?.story?.title && (
+    <section className="w-full flex justify-center mt-50px">
+      {data?.author?.name && data?.story?.title && (
         <div className="main-container mt-50px rtl">
           <div
             className="col-span-6 xl:col-span-12 rtl font-common-lg text-24px md:28px xl:text-60px translate-y-200px opacity-0"

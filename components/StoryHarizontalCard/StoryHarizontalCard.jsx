@@ -10,11 +10,11 @@ import Genre from '../Genre/Genre';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function StoryHarizontalCard({ data, isVisible }) {
+export default function StoryHarizontalCard({ data }) {
   const storyCardRef = useRef(null);
 
   useGSAP(() => {
-    if (isVisible && data) {
+    if (data) {
       gsap.to(storyCardRef.current, {
         y: 0,
         opacity: 1,
@@ -27,7 +27,7 @@ export default function StoryHarizontalCard({ data, isVisible }) {
         },
       });
     }
-  }, [isVisible, data]);
+  }, [data]);
   return (
     <Link
       href={`/episode/${data?.slug}`}

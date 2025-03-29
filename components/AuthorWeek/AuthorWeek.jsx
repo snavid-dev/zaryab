@@ -10,34 +10,13 @@ import gsap from 'gsap';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function AuthorWeek() {
-  const [data, setData] = useState(null);
-  const [Error, setError] = useState(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [hasFetched, setHasFetched] = useState(false);
-  const ref = useRef(null);
+export default function AuthorWeek({ data }) {
   const titleRef = useRef(null);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !hasFetched) {
-          fetchData();
-          setHasFetched(true);
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 } // Trigger when 10% of the component is visible
-    );
-
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [hasFetched]);
-
-  // animation
+  // // animation
 
   useGSAP(() => {
-    if (isVisible && data) {
+    if (data) {
       gsap.to(titleRef.current, {
         y: 0,
         opacity: 1,
@@ -50,43 +29,29 @@ export default function AuthorWeek() {
         },
       });
     }
-  }, [isVisible, data]);
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get('/v1/authors-archive?per_page=2');
-      setData(response.data.data);
-    } catch (err) {
-      setError(err.response?.data?.message || err.message);
-    }
-  };
+  }, [data]);
 
   return (
-    <section
-      className="w-full flex justify-center"
-      ref={ref}
-    >
+    <section className="w-full flex justify-center">
       {/* it has two rows */}
-      {isVisible && (
-        <div className="main-contianer mt-50px">
-          <div
-            className="col-span-6 xl:col-span-12 rtl translate-y-200px opacity-0"
-            ref={titleRef}
-          >
-            <Heading1 title="نویسنده و شاعر هفته" />
-          </div>
-          <div className="col-span-6 xl:col-span-12 main-container rtl">
-            {Array.isArray(data) &&
-              data?.map((data, index) => (
-                <AuthorWeekCard
-                  key={index}
-                  data={data}
-                  isVisible={isVisible}
-                />
-              ))}
-          </div>
+
+      <div className="main-contianer mt-50px">
+        <div
+          className="col-span-6 xl:col-span-12 rtl translate-y-200px opacity-0"
+          ref={titleRef}
+        >
+          <Heading1 title="نویسنده و شاعر هفته" />
         </div>
-      )}
+        <div className="col-span-6 xl:col-span-12 main-container rtl">
+          {Array.isArray(data) &&
+            data?.map((data, index) => (
+              <AuthorWeekCard
+                key={index}
+                data={data}
+              />
+            ))}
+        </div>
+      </div>
     </section>
   );
 }

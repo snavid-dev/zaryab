@@ -9,10 +9,10 @@ import { truncateString } from '@/utils/GeneralFuncions/GeneralFunctions';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function AuthorWeekCard({ data, isVisible }) {
+export default function AuthorWeekCard({ data }) {
   const cardRef = useRef(null);
   useGSAP(() => {
-    if (isVisible && data) {
+    if (data) {
       gsap.to(cardRef.current, {
         y: 0,
         opacity: 1,
@@ -25,7 +25,7 @@ export default function AuthorWeekCard({ data, isVisible }) {
         },
       });
     }
-  }, [isVisible, data]);
+  }, [data]);
   return (
     <div
       className="border-4 border-black p-25px xl:p-50px w-full col-span-6 md:col-span-3 xl:col-span-6 mt-7 flex flex-col items-end translate-y-200px opacity-0"

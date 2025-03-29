@@ -6,7 +6,6 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'zariab.cyborgtech.co',
-        pathname: '/wp-content/uploads/**', // Allow all images from this path
       },
     ],
   },

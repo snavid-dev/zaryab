@@ -10,44 +10,12 @@ import axios from '@/utils/api';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function BookDesk() {
+export default function BookDesk({ data }) {
   const titleRef = useRef(null);
   const imageRef = useRef(null);
   const subtitleRef = useRef(null);
   const textRef = useRef(null);
   const buttonRef = useRef(null);
-  const ref = useRef(null);
-  // data states
-  const [data, setData] = useState(null);
-  const [Error, setError] = useState(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [hasFetched, setHasFetched] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !hasFetched) {
-          fetchData();
-          setHasFetched(true);
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 } // Trigger when 10% of the component is visible
-    );
-
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [hasFetched]);
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get('/v1/books/featured');
-      setData(response.data);
-    } catch (err) {
-      setError(err.response?.data?.message || err.message);
-    }
-  };
-
   const handleDownload = () => {
     if (data?.pdf) {
       const fileUrl = data?.pdf;
@@ -66,7 +34,7 @@ export default function BookDesk() {
   // animation
 
   useGSAP(() => {
-    if (isVisible && data) {
+    if (data) {
       gsap.to(titleRef.current, {
         y: 0,
         opacity: 1,
@@ -130,90 +98,85 @@ export default function BookDesk() {
         },
       });
     }
-  }, [isVisible, data]);
+  }, [data]);
 
   return (
-    <section
-      className="w-full flex justify-center"
-      ref={ref}
-    >
-      {isVisible && (
-        <div className="main-container mt-50px">
+    <section className="w-full flex justify-center">
+      <div className="main-container mt-50px">
+        <div
+          className="col-span-6 xl:col-span-12 rtl translate-y-200px opacity-0"
+          ref={titleRef}
+        >
+          <Heading1 title="کتاب هفته" />
+        </div>
+        <div className="main-container rtl">
+          {/*  it has two columns  */}
+          <div className="hidden md:block md:col-span-1 xl:hidden"></div>
           <div
-            className="col-span-6 xl:col-span-12 rtl translate-y-200px opacity-0"
-            ref={titleRef}
+            ref={imageRef}
+            className="col-span-6 md:col-span-4 xl:col-span-6 translate-y-200px opacity-0"
           >
-            <Heading1 title="کتاب هفته" />
-          </div>
-          <div className="main-container rtl">
-            {/*  it has two columns  */}
-            <div className="hidden md:block md:col-span-1 xl:hidden"></div>
-            <div
-              ref={imageRef}
-              className="col-span-6 md:col-span-4 xl:col-span-6 translate-y-200px opacity-0"
-            >
-              <div className="relative w-full h-500px md:h-670px xl:h-780px 2xl:h-1020px flex flex-col">
-                {data?.featured_image ? (
-                  <Image
-                    src={data?.featured_image}
-                    alt={data?.title ? data?.title : 'not found'}
-                    fill
-                    className="absolute object-cover"
-                  />
-                ) : (
-                  <div className="w-full h-full flex justify-center items-center"></div>
-                )}
-              </div>
-            </div>
-            <div className="hidden md:block md:col-span-1 xl:hidden"></div>
-            <div className="col-span-6">
-              <div className="flex flex-col w-full items-start">
-                {data?.title && (
-                  <h3
-                    ref={subtitleRef}
-                    className="font-pashto text-30px xl:text-65px 2xl:text-92px flex flex-col items-end justify-between lg:mt-5 translate-y-200px opacity-0"
-                  >
-                    {data?.title}
-                  </h3>
-                )}
-                {data?.excerpt && (
-                  <div
-                    ref={textRef}
-                    dangerouslySetInnerHTML={{
-                      __html: data?.excerpt,
-                    }}
-                    className="rtl mt-7 font-pashto text-14px xl:text-20px 2xl:text-28px translate-y-200px opacity-0"
-                  ></div>
-                )}
-              </div>
+            <div className="relative w-full h-500px md:h-670px xl:h-780px 2xl:h-1020px flex flex-col">
+              {data?.featured_image ? (
+                <Image
+                  src={data?.featured_image}
+                  alt={data?.title ? data?.title : 'not found'}
+                  fill
+                  className="absolute object-cover"
+                />
+              ) : (
+                <div className="w-full h-full flex justify-center items-center"></div>
+              )}
             </div>
           </div>
-          {/*  buttons   */}
-          <div
-            ref={buttonRef}
-            className="col-span-6 xl:col-span-12 gap-4 grid grid-cols-2 translate-y-200px opacity-0"
-          >
-            <Link
-              href="#"
-              onClick={handleDownload}
-              className="w-full h-[50px] lg:h-[100px] bg-black flex justify-center items-center mt-7
-                font-common-heavy text-28px lg:text-59px text-white hover:text-black hover:bg-white transition-all duration-500 border-4 border-black"
-            >
-              دانلود کتاب
-            </Link>
-
-            {data?.slug && (
-              <Link
-                href={`/book/${data?.slug}`}
-                className="w-full h-[50px] lg:h-[100px] bg-footerBtn flex justify-center items-center mt-7
-                font-common-heavy text-28px lg:text-59px text-white hover:text-footerBtn hover:bg-white transition-all duration-500 border-4 border-footerBtn"
-              >
-                خلاصه کتاب
-              </Link>
-            )}
+          <div className="hidden md:block md:col-span-1 xl:hidden"></div>
+          <div className="col-span-6">
+            <div className="flex flex-col w-full items-start">
+              {data?.title && (
+                <h3
+                  ref={subtitleRef}
+                  className="font-pashto text-30px xl:text-65px 2xl:text-92px flex flex-col items-end justify-between lg:mt-5 translate-y-200px opacity-0"
+                >
+                  {data?.title}
+                </h3>
+              )}
+              {data?.excerpt && (
+                <div
+                  ref={textRef}
+                  dangerouslySetInnerHTML={{
+                    __html: data?.excerpt,
+                  }}
+                  className="rtl mt-7 font-pashto text-14px xl:text-20px 2xl:text-28px translate-y-200px opacity-0"
+                ></div>
+              )}
+            </div>
           </div>
         </div>
-      )}
+        {/*  buttons   */}
+        <div
+          ref={buttonRef}
+          className="col-span-6 xl:col-span-12 gap-4 grid grid-cols-2 translate-y-200px opacity-0"
+        >
+          <Link
+            href="#"
+            onClick={handleDownload}
+            className="w-full h-[50px] lg:h-[100px] bg-black flex justify-center items-center mt-7
+                font-common-heavy text-28px lg:text-59px text-white hover:text-black hover:bg-white transition-all duration-500 border-4 border-black"
+          >
+            دانلود کتاب
+          </Link>
+
+          {data?.slug && (
+            <Link
+              href={`/book/${data?.slug}`}
+              className="w-full h-[50px] lg:h-[100px] bg-footerBtn flex justify-center items-center mt-7
+                font-common-heavy text-28px lg:text-59px text-white hover:text-footerBtn hover:bg-white transition-all duration-500 border-4 border-footerBtn"
+            >
+              خلاصه کتاب
+            </Link>
+          )}
+        </div>
+      </div>
     </section>
   );
 }

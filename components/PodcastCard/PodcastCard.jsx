@@ -5,11 +5,11 @@ import Link from 'next/link';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 
-export default function PodcastCard({ data, isVisible }) {
+export default function PodcastCard({ data }) {
   const ref = useRef(null);
 
   useGSAP(() => {
-    if (isVisible && data) {
+    if (data) {
       gsap.to(ref.current, {
         y: 0,
         opacity: 1,
@@ -22,7 +22,7 @@ export default function PodcastCard({ data, isVisible }) {
         },
       });
     }
-  }, [isVisible, data]);
+  }, [data]);
 
   return (
     // it has two rows
