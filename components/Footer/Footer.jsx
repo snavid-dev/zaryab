@@ -1,305 +1,126 @@
-'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
 import Link2 from '../Link2/Link2';
-import axios from '@/utils/api';
 import NewsLetterForm from '../NewsLetterForm/NewsLetterForm';
 
-export default function Footer() {
-  const [categories, setCategories] = useState(null);
-  const [Error, setError] = useState(null);
+export default async function Footer() {
+  // categories
+  const categoriesRes = await fetch(
+    'https://zariab.cyborgtech.co/wp-json/v1/categories',
+    {
+      next: { revalidate: 14400 },
+    }
+  );
 
-  // category fetch
-  const [categoryIsVisible, setCategoryIsVisible] = useState(false);
-  const [categoryHasFetched, setCategoryHasFetched] = useState(false);
-  const footerRef = useRef(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('/v1/categories');
-        let data = response.data;
-
-        // محاسبه نزدیک‌ترین مضرب 6 بزرگتر از طول آرایه
-        const nextMultipleOfSix = Math.ceil(data.length / 6) * 6;
-
-        // اضافه کردن استرینگ خالی تا رسیدن به مضرب 6
-        while (data.length < nextMultipleOfSix) {
-          data.push({ name: '', slug: '#' });
-        }
-
-        setCategories(data);
-      } catch (err) {
-        setError(err.response?.data?.message || err.message);
-      }
-    };
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !categoryHasFetched) {
-          fetchData();
-          setCategoryIsVisible(true);
-          setCategoryHasFetched(true);
-        }
-      },
-      { threshold: 0.1 } // Trigger when 10% of the component is visible
-    );
-
-    if (footerRef.current) observer.observe(footerRef.current);
-    return () => observer.disconnect();
-  }, [categoryHasFetched]);
+  let categoriesData = await categoriesRes.json();
+  const nextMultipleOfSix = Math.ceil(categoriesData.length / 6) * 6;
+  while (categoriesData.length < nextMultipleOfSix) {
+    categoriesData.push({ name: '', slug: '#' });
+  }
 
   // writings
-  const [literary, setLiterary] = useState([]);
-  const [writingsIsVisible, setWritingsIsVisible] = useState(false);
-  const [writingsHasFetched, setWritingsHasFetched] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [storyRes, poemRes] = await Promise.all([
-          axios.get('/v1/story_type'),
-          axios.get('/v1/poem_type'),
-        ]);
+  const storiesRes = await fetch(
+    'https://zariab.cyborgtech.co/wp-json/v1/story_type',
+    {
+      next: { revalidate: 14400 },
+    }
+  );
+  const poemsRes = await fetch(
+    'https://zariab.cyborgtech.co/wp-json/v1/poem_type',
+    { next: { revalidate: 14400 } }
+  );
 
-        const stories = storyRes.data; // لیست داستان‌ها
-        const poems = poemRes.data; // لیست شعرها
+  const storiesData = await storiesRes.json();
+  const poemsData = await poemsRes.json();
 
-        const totalLength = Math.ceil((stories.length + poems.length) / 6) * 6;
-        let result = new Array(totalLength).fill(null);
+  const totalLength =
+    Math.ceil((storiesData.length + poemsData.length) / 6) * 6;
+  let result = new Array(totalLength).fill(null);
 
-        let storyIndex = 0;
-        let poemIndex = 0;
+  let storyIndex = 0;
+  let poemIndex = 0;
 
-        for (let i = 0; i < totalLength; i++) {
-          if ((i % 6 === 0 || i % 6 === 1) && storyIndex < stories.length) {
-            result[i] = stories[storyIndex++];
-          } else if (poemIndex < poems.length) {
-            result[i] = poems[poemIndex++];
-          }
-        }
-
-        setLiterary(result);
-      } catch (err) {
-        setError(err.response?.data?.message || err.message);
-      }
-    };
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !writingsHasFetched) {
-          fetchData();
-          setWritingsIsVisible(true);
-          setWritingsHasFetched(true);
-        }
-      },
-      { threshold: 0.1 } // Trigger when 10% of the component is visible
-    );
-
-    if (footerRef.current) observer.observe(footerRef.current);
-    return () => observer.disconnect();
-  }, [writingsHasFetched]);
+  for (let i = 0; i < totalLength; i++) {
+    if ((i % 6 === 0 || i % 6 === 1) && storyIndex < storiesData.length) {
+      result[i] = storiesData[storyIndex++];
+    } else if (poemIndex < poemsData.length) {
+      result[i] = poemsData[poemIndex++];
+    }
+  }
 
   // articles
 
-  const [articles, setArticles] = useState(null);
-  const [isArticleVisible, setIsArtivleVisible] = useState(false);
-  const [articleHasFetched, setArticleHasFetched] = useState(false);
+  const articleRes = await fetch(
+    'https://zariab.cyborgtech.co/wp-json/v1/article_type',
+    {
+      next: { revalidate: 14400 },
+    }
+  );
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('/v1/article_type');
-        let data = response.data;
-
-        // محاسبه نزدیک‌ترین مضرب 6 بزرگتر از طول آرایه
-        const nextMultipleOfSix = Math.ceil(data.length / 6) * 6;
-
-        // اضافه کردن استرینگ خالی تا رسیدن به مضرب 6
-        while (data.length < nextMultipleOfSix) {
-          data.push({ name: '', slug: '#' });
-        }
-
-        setArticles(data);
-      } catch (err) {
-        setError(err.response?.data?.message || err.message);
-      }
-    };
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !articleHasFetched) {
-          fetchData();
-          setIsArtivleVisible(true);
-          setArticleHasFetched(true);
-        }
-      },
-      { threshold: 0.1 } // Trigger when 10% of the component is visible
-    );
-
-    if (footerRef.current) observer.observe(footerRef.current);
-    return () => observer.disconnect();
-  }, [articleHasFetched]);
+  let articleData = await articleRes.json();
+  const nextMultipleOfSixArticle = Math.ceil(articleData.length / 6) * 6;
+  while (articleData.length < nextMultipleOfSixArticle) {
+    articleData.push({ name: '', slug: '#' });
+  }
 
   // reviews
 
-  const [review, setReview] = useState(null);
-  const [isReviewVisible, setIsReviewVisible] = useState(false);
-  const [reviewHasFetched, setReviewHasFetched] = useState(false);
+  const reviewRes = await fetch(
+    'https://zariab.cyborgtech.co/wp-json/v1/review_type',
+    {
+      next: { revalidate: 14400 },
+    }
+  );
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('/v1/review_type');
-        let data = response.data;
-
-        // محاسبه نزدیک‌ترین مضرب 6 بزرگتر از طول آرایه
-        const nextMultipleOfSix = Math.ceil(data.length / 6) * 6;
-
-        // اضافه کردن استرینگ خالی تا رسیدن به مضرب 6
-        while (data.length < nextMultipleOfSix) {
-          data.push({ name: '', slug: '#' });
-        }
-
-        setReview(data);
-      } catch (err) {
-        setError(err.response?.data?.message || err.message);
-      }
-    };
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !reviewHasFetched) {
-          fetchData();
-          setIsReviewVisible(true);
-          setReviewHasFetched(true);
-        }
-      },
-      { threshold: 0.1 } // Trigger when 10% of the component is visible
-    );
-
-    if (footerRef.current) observer.observe(footerRef.current);
-    return () => observer.disconnect();
-  }, [setReviewHasFetched]);
+  let reviewData = await reviewRes.json();
+  const nextMultipleOfSixReview = Math.ceil(reviewData.length / 5) * 5;
+  while (reviewData.length < nextMultipleOfSixReview) {
+    reviewData.push({ name: '', slug: '#' });
+  }
 
   // podcasts
 
-  const [podcast, setPodcast] = useState(null);
-  const [isPodcastVisible, setIsPodcastVisible] = useState(false);
-  const [podcastHasFetched, setPodcastHasFetched] = useState(false);
+  const podcastRes = await fetch(
+    'https://zariab.cyborgtech.co/wp-json/v1/podcast_type',
+    {
+      next: { revalidate: 14400 },
+    }
+  );
+  let podcastData = await podcastRes.json();
+  const nextMultipleOfSixPodcast = Math.ceil(podcastData.length / 6) * 6;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('/v1/podcast_type');
-        let data = response.data;
-
-        // محاسبه نزدیک‌ترین مضرب 6 بزرگتر از طول آرایه
-        const nextMultipleOfSix = Math.ceil(data.length / 6) * 6;
-
-        // اضافه کردن استرینگ خالی تا رسیدن به مضرب 6
-        while (data.length < nextMultipleOfSix) {
-          data.push({ name: '', slug: '#' });
-        }
-
-        setPodcast(data);
-      } catch (err) {
-        setError(err.response?.data?.message || err.message);
-      }
-    };
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !podcastHasFetched) {
-          fetchData();
-          setIsPodcastVisible(true);
-          setPodcastHasFetched(true);
-        }
-      },
-      { threshold: 0.1 } // Trigger when 10% of the component is visible
-    );
-
-    if (footerRef.current) observer.observe(footerRef.current);
-    return () => observer.disconnect();
-  }, [podcastHasFetched]);
+  while (podcastData.length < nextMultipleOfSixPodcast) {
+    podcastData.push({ name: '', slug: '#' });
+  }
 
   // letters
+  const letterRes = await fetch(
+    'https://zariab.cyborgtech.co/wp-json/v1/letter_type',
+    {
+      next: { revalidate: 14400 },
+    }
+  );
 
-  const [letter, setLetter] = useState(null);
-  const [isLetterVisible, setIsLetterVisible] = useState(false);
-  const [letterHasFetched, setLetterHasFetched] = useState(false);
+  let letterData = await letterRes.json();
+  const nextMultipleOfSixLetter = Math.ceil(letterData.length / 6) * 6;
+  while (letterData.length < nextMultipleOfSixLetter) {
+    letterData.push({ name: '', slug: '#' });
+  }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('/v1/letter_type');
-        let data = response.data;
+  // new magazine
 
-        // محاسبه نزدیک‌ترین مضرب 6 بزرگتر از طول آرایه
-        const nextMultipleOfSix = Math.ceil(data.length / 6) * 6;
+  const newMagazineRes = await fetch(
+    'https://zariab.cyborgtech.co/wp-json/v1/letters/?type=non-archive&per_page=1',
+    {
+      next: { revalidate: 14400 },
+    }
+  );
 
-        // اضافه کردن استرینگ خالی تا رسیدن به مضرب 6
-        while (data.length < nextMultipleOfSix) {
-          data.push({ name: '', slug: '#' });
-        }
-
-        setLetter(data);
-      } catch (err) {
-        setError(err.response?.data?.message || err.message);
-      }
-    };
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !letterHasFetched) {
-          fetchData();
-          setIsLetterVisible(true);
-          setLetterHasFetched(true);
-        }
-      },
-      { threshold: 0.1 } // Trigger when 10% of the component is visible
-    );
-
-    if (footerRef.current) observer.observe(footerRef.current);
-    return () => observer.disconnect();
-  }, [letterHasFetched]);
-
-  // mail section
-  const [newLetter, setNewLetter] = useState(null);
-  const [isNewLetterVisible, setIsNewLetterVisible] = useState(false);
-  const [newLetterHasFetched, setNewLetterHasFetched] = useState(false);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `/v1/letters/?type=non-archive&per_page=1`
-        );
-        setNewLetter(response.data.data[0]);
-      } catch (err) {
-        setError(err.response?.data?.message || err.message);
-      }
-    };
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !newLetterHasFetched) {
-          fetchData();
-          setIsNewLetterVisible(true);
-          setNewLetterHasFetched(true);
-        }
-      },
-      { threshold: 0.1 } // Trigger when 10% of the component is visible
-    );
-
-    if (footerRef.current) observer.observe(footerRef.current);
-    return () => observer.disconnect();
-  }, [newLetterHasFetched]);
+  const newMagazineData = await newMagazineRes.json();
 
   return (
-    <footer
-      className="bg-footer"
-      ref={footerRef}
-    >
+    <footer className="bg-footer">
       {/*main div of footer*/}
       <div className="bg-footerPic bg-no-repeat bg-bottom bg-auto flex flex-col items-center rtl py-50px">
         {/* text logo and others things */}
@@ -326,12 +147,12 @@ export default function Footer() {
               </div>
             </div>
             <div className="hidden md:block md:col-span-1 xl:hidden"></div>
-            {newLetter && (
+            {newMagazineData?.data && (
               <div className="col-span-6 md:col-span-3 xl:col-span-3">
                 <div className="relative w-full h-490px md:h-510px xl:h-390px 2xl:h-510px mt-20px xl:mt-0">
-                  {newLetter?.featured_image ? (
+                  {newMagazineData?.data[0]?.featured_image ? (
                     <Image
-                      src={newLetter?.featured_image}
+                      src={newMagazineData?.data[0]?.featured_image}
                       alt="new magazine"
                       layout="fill"
                       objectFit="cover"
@@ -342,7 +163,7 @@ export default function Footer() {
                   )}
                 </div>
                 <Link
-                  href={`/magazines/${newLetter?.slug}`}
+                  href={`/magazines/${newMagazineData?.data[0]?.slug}`}
                   className="w-full h-10 mt-3 flex justify-center items-center font-common-heavy text-white
                    bg-footerBtn hover:bg-footer transition-all border-2 border-footerBtn text-27px md:text-28px
                    "
@@ -502,9 +323,8 @@ export default function Footer() {
           <div className="col-span-1 xl:col-span-2"></div>
           <div className="col-span-1 xl:col-span-2"></div>
 
-          {Array.isArray(literary) &&
-            writingsIsVisible &&
-            literary?.map((data, index) => (
+          {Array.isArray(result) &&
+            result?.map((data, index) => (
               <div
                 className="col-span-1 xl:col-span-2"
                 key={index}
@@ -531,9 +351,8 @@ export default function Footer() {
           <div className="col-span-1 xl:col-span-2"></div>
           <div className="col-span-1 xl:col-span-2"></div>
 
-          {Array.isArray(articles) &&
-            isArticleVisible &&
-            articles?.map((data, index) => (
+          {Array.isArray(articleData) &&
+            articleData?.map((data, index) => (
               <div
                 className="col-span-1 xl:col-span-2"
                 key={index}
@@ -559,9 +378,8 @@ export default function Footer() {
           <div className="col-span-1 xl:col-span-2"></div>
           <div className="col-span-1 xl:col-span-2"></div>
 
-          {Array.isArray(review) &&
-            isReviewVisible &&
-            review?.map((data, index) => (
+          {Array.isArray(reviewData) &&
+            reviewData?.map((data, index) => (
               <div
                 key={index}
                 className={`col-span-1 xl:col-span-2 ${
@@ -589,9 +407,8 @@ export default function Footer() {
           <div className="col-span-1 xl:col-span-2"></div>
           <div className="col-span-1 xl:col-span-2"></div>
 
-          {Array.isArray(podcast) &&
-            isPodcastVisible &&
-            podcast?.map((data, index) => (
+          {Array.isArray(podcastData) &&
+            podcastData?.map((data, index) => (
               <div
                 className="col-span-1 xl:col-span-2"
                 key={index}
@@ -617,9 +434,8 @@ export default function Footer() {
           <div className="col-span-1 xl:col-span-2"></div>
           <div className="col-span-1 xl:col-span-2"></div>
 
-          {Array.isArray(letter) &&
-            isLetterVisible &&
-            letter?.map((data, index) => (
+          {Array.isArray(letterData) &&
+            letterData?.map((data, index) => (
               <div
                 className="col-span-1 xl:col-span-2"
                 key={index}
@@ -645,9 +461,8 @@ export default function Footer() {
           <div className="col-span-1 xl:col-span-2"></div>
           <div className="col-span-1 xl:col-span-2"></div>
 
-          {Array.isArray(categories) &&
-            categoryIsVisible &&
-            categories?.map((data, index) => (
+          {Array.isArray(categoriesData) &&
+            categoriesData?.map((data, index) => (
               <div
                 className="col-span-1 xl:col-span-2"
                 key={index}
