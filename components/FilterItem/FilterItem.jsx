@@ -42,7 +42,7 @@ export default function FilterItem({ data, setFilteredItems, filteredItems }) {
       </div>
       {data?.name && (
         <div
-          className={`font-common-regular text-12px md:text-15px xl:text-25px mr-1 xl:mr-3 rtl ${
+          className={`font-pashto text-12px md:text-15px xl:text-25px mr-1 xl:mr-3 rtl ${
             data?.name.length === 0 ? 'opacity-0' : 'opacity-100'
           }`}
         >

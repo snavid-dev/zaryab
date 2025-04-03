@@ -11,7 +11,7 @@ import { truncateString } from '@/utils/GeneralFuncions/GeneralFunctions';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function StoryPoemCard({ data, isStory, isVisible }) {
+export default function StoryPoemCard({ data, isStory }) {
   const [isHovered, setIsHovered] = useState(false);
   const cardRef = useRef(null);
 
@@ -34,7 +34,7 @@ export default function StoryPoemCard({ data, isStory, isVisible }) {
   // animation
 
   useGSAP(() => {
-    if ((isVisible, data)) {
+    if (data) {
       gsap.to(cardRef.current, {
         y: 0,
         opacity: 1,
@@ -47,7 +47,7 @@ export default function StoryPoemCard({ data, isStory, isVisible }) {
         },
       });
     }
-  }, [isVisible, data]);
+  }, [data]);
 
   return (
     //     main container of the card
@@ -74,29 +74,32 @@ export default function StoryPoemCard({ data, isStory, isVisible }) {
         )}
       </div>
       {data?.title && (
-        <div className="font-new-extra-bold text-36px w-full rtl md:text-76px lg:text-50px mt-3">
+        <div className="font-pashto text-36px w-full rtl md:text-76px lg:text-50px mt-3">
           {truncateString1(data?.title)}
         </div>
       )}
       {isStory ? (
-        <div className="font-common-thin text-8px md:text-18px lg:text-17px mt-3 text-right font-bold">
+        <div className="font-pashto text-8px md:text-18px lg:text-17px mt-3 text-right font-bold">
           {data?.excerpt && truncateString(data?.excerpt, 300)}
         </div>
       ) : (
-        <div className="font-common-thin text-8px md:text-18px lg:text-17px mt-3 text-right font-bold">
+        <div className="font-pashto text-8px md:text-18px lg:text-17px mt-3 text-right font-bold">
           {data?.excerpt && (
             <div
               dangerouslySetInnerHTML={{ __html: data?.excerpt.split('\n')[0] }}
+              suppressHydrationWarning
             ></div>
           )}
           {data?.excerpt && (
             <div
               dangerouslySetInnerHTML={{ __html: data?.excerpt.split('\n')[1] }}
+              suppressHydrationWarning
             ></div>
           )}
           {data?.excerpt && (
             <div
               dangerouslySetInnerHTML={{ __html: data?.excerpt.split('\n')[2] }}
+              suppressHydrationWarning
             ></div>
           )}
         </div>
@@ -107,7 +110,7 @@ export default function StoryPoemCard({ data, isStory, isVisible }) {
             زمان:
           </b>
           {data?.duration && (
-            <p className="font-common-thin md:mt-1 text-8px md:text-18px lg:text-12px">
+            <p className="font-pashto md:mt-1 text-8px md:text-18px lg:text-12px">
               {data?.duration}
             </p>
           )}
@@ -120,7 +123,7 @@ export default function StoryPoemCard({ data, isStory, isVisible }) {
             تاریخ:
           </b>
           {data?.date && (
-            <p className="font-common-thin md:mt-1 text-8px md:text-18px lg:text-12px">
+            <p className="font-pashto md:mt-1 text-8px md:text-18px lg:text-12px">
               {data?.date}
             </p>
           )}
@@ -130,7 +133,7 @@ export default function StoryPoemCard({ data, isStory, isVisible }) {
             نویسنده:
           </b>
           {data?.author && (
-            <p className="font-common-thin md:mt-1 text-8px md:text-18px lg:text-12px">
+            <p className="font-pashto md:mt-1 text-8px md:text-18px lg:text-12px">
               {data?.author}
             </p>
           )}

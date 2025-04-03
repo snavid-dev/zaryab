@@ -6,71 +6,17 @@ import axios from '@/utils/api';
 export default function Filter({
   title,
   type,
+  categories1,
   setFilter,
   setCategoryFilter,
   setFilterDone,
   setHasFetched,
 }) {
   const [showFilterBody, setShowFilterBody] = useState(false);
-  const [categories, setCategories] = useState(null);
-  const [Error, setError] = useState(null);
-  const [categoryType, setCategoryType] = useState(null);
+  const [categories, setCategories] = useState(categories1);
+  const [categoryType, setCategoryType] = useState(type);
   const [filteredItems, setFilteredItems] = useState([]);
   const [categoryItems, setCategoryItems] = useState([]);
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await axios.get('/v1/categories');
-        let data = response.data;
-
-        // محاسبه نزدیک‌ترین مضرب 6 بزرگتر از طول آرایه
-        const nextMultipleOfSix = Math.ceil(data.length / 6) * 6;
-
-        // اضافه کردن استرینگ خالی تا رسیدن به مضرب 6
-        while (data.length < nextMultipleOfSix) {
-          data.push({ name: '', slug: '#' });
-        }
-
-        setCategories(data);
-      } catch (err) {
-        setError(err.response?.data?.message || err.message);
-      }
-    };
-
-    const fetchCategoryType = async () => {
-      const urlMap = {
-        story: '/v1/story_type',
-        poem: '/v1/poem_type',
-        article: '/v1/article_type',
-        review: '/v1/review_type',
-        letter: '/v1/letter_type',
-        podcast: '/v1/podcast_type',
-      };
-
-      const url = urlMap[type];
-      if (!url) return;
-
-      try {
-        const response = await axios.get(url);
-        let data = response.data;
-
-        // محاسبه نزدیک‌ترین مضرب 6 بزرگتر از طول آرایه
-        const nextMultipleOfSix = Math.ceil(data.length / 5) * 5;
-
-        // اضافه کردن استرینگ خالی تا رسیدن به مضرب 6
-        while (data.length < nextMultipleOfSix) {
-          data.push({ name: '', slug: '#' });
-        }
-        setCategoryType(data);
-      } catch (err) {
-        setError(err.response?.data?.message || err.message);
-      }
-    };
-
-    fetchCategories();
-    fetchCategoryType();
-  }, [type]); // حالا هر بار `type` تغییر کند، دیتا آپدیت می‌شود
 
   const filterDone = () => {
     if (filteredItems) {

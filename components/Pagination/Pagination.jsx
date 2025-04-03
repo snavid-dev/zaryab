@@ -1,17 +1,12 @@
-'use client';
-import React, { useState } from 'react';
-
 export default function Pagination({
   totalPages,
   currentPage,
   setCurrentPage,
-  setHasFetched,
+  setPaginationStart,
 }) {
-  // const totalPages = totalPages; // or dynamic total pages
-
   const handlePageChange = (page) => {
+    setPaginationStart(true);
     setCurrentPage(page);
-    setHasFetched(false);
   };
 
   const getVisiblePages = () => {
