@@ -118,7 +118,7 @@ export default async function StorySinglePage({ params }) {
   // similar story
 
   const similarStoryRes = await fetch(
-    `https://zariab.cyborgtech.co/wp-json/v1/stories/similar/${storyData?.story_slug}?per_page=5`,
+    `https://zariab.cyborgtech.co/wp-json/v1/stories/similar/${param}?per_page=5`,
     {
       next: { revalidate: 14400 },
     }
