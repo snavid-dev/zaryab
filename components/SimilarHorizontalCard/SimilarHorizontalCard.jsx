@@ -10,18 +10,13 @@ import { truncateString } from '@/utils/GeneralFuncions/GeneralFunctions';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function SimilarHorizontalCard({
-  data,
-  isArticle,
-  isStory,
-  isVisible,
-}) {
+export default function SimilarHorizontalCard({ data, isArticle, isStory }) {
   // animation
 
   const cardRef = useRef(null);
 
   useGSAP(() => {
-    if ((isVisible, data)) {
+    if (data) {
       gsap.to(cardRef.current, {
         y: 0,
         opacity: 1,
@@ -34,7 +29,7 @@ export default function SimilarHorizontalCard({
         },
       });
     }
-  }, [isVisible, data]);
+  }, [data]);
 
   return (
     <Link
@@ -59,12 +54,12 @@ export default function SimilarHorizontalCard({
       </div>
       <div className="col-span-4 xl:col-span-7 gap relative">
         {data?.title && (
-          <div className="col-span-4 text-16px md:text-30px xl:text-43px font-new-extra-black">
+          <div className="col-span-4 text-16px md:text-30px xl:text-43px font-pashto">
             {data?.title}
           </div>
         )}
         {data?.excerpt && (
-          <div className="col-span-4 text-6px md:text-12px xl:text-14px 2xl:text-20px font-smallText font-bold">
+          <div className="col-span-4 text-6px md:text-12px xl:text-14px 2xl:text-20px font-pashto">
             {truncateString(data?.excerpt, 500)}
           </div>
         )}
@@ -76,7 +71,7 @@ export default function SimilarHorizontalCard({
                   نویسنده:
                 </p>
                 {data?.author && (
-                  <p className="font-common-thin text-8px md:text-12px 2xl:text-14px">
+                  <p className="font-pashto text-8px md:text-12px 2xl:text-14px">
                     {data?.author}
                   </p>
                 )}
