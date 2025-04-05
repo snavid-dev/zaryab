@@ -58,16 +58,16 @@ export default function SimilarHorizontalStoryCard({
           </div>
           <div className="col-span-4 xl:col-span-7 gap relative">
             {data?.title && (
-              <div className="col-span-4 text-16px md:text-30px xl:text-43px font-new-extra-black">
+              <div className="col-span-4 text-16px md:text-30px xl:text-43px font-pashto font-extrabold">
                 {data?.title}
               </div>
             )}
             {isStory ? (
-              <div className="col-span-4 text-6px md:text-12px font-bold xl:text-14px 2xl:text-20px font-smallText">
+              <div className="col-span-4 text-6px md:text-12px xl:text-14px 2xl:text-20px font-pashto">
                 {data?.excerpt && truncateString(data?.excerpt, 400)}
               </div>
             ) : (
-              <div className="font-common-thin text-8px md:text-18px lg:text-17px mt-3 text-right">
+              <div className="font-pashto text-8px md:text-18px lg:text-17px mt-3 text-right">
                 {data?.excerpt && (
                   <div
                     dangerouslySetInnerHTML={{
@@ -99,7 +99,7 @@ export default function SimilarHorizontalStoryCard({
                       نویسنده:
                     </p>
                     {data?.author && (
-                      <p className="font-common-thin text-8px md:text-12px xl:text-14px">
+                      <p className="font-pashto text-8px md:text-12px xl:text-14px">
                         {data?.author}
                       </p>
                     )}

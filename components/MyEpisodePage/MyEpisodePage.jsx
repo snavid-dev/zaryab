@@ -134,7 +134,12 @@ export default function MyEpisodePage({
             className="col-span-6 xl:col-span-6 translate-y-200px opacity-0"
             id="title"
           >
-            {data?.story_title && <Heading1 title={data?.story_title} />}
+            {data?.story_title && (
+              <Heading1
+                title={data?.story_title}
+                pashto={true}
+              />
+            )}
           </div>
 
           {/*  the search bar of the eposides  */}

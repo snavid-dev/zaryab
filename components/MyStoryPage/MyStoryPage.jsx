@@ -144,14 +144,14 @@ export default function MyStoryPage({
               <div className="mt-14 flex flex-col items-end">
                 {data?.title && (
                   <div
-                    className="w-full font-new-black text-50px md:text-60px lg:text-94px rtl translate-y-200px opacity-0"
+                    className="w-full font-pashto text-50px md:text-60px lg:text-94px rtl translate-y-200px opacity-0"
                     id="title"
                   >
                     {data?.title}
                   </div>
                 )}
                 <div
-                  className="w-full rtl font-common-heavy text-10px md:text-16px lg:text-25px xl:mt-14 flex translate-y-200px opacity-0"
+                  className="w-full rtl font-pashto text-10px md:text-16px lg:text-25px xl:mt-14 flex translate-y-200px opacity-0"
                   ref={collRef}
                 >
                   <div className="ml-1">از مجموعه</div>
@@ -226,7 +226,7 @@ export default function MyStoryPage({
                   {/*  it has 3 columns  */}
                   <div className="flex flex-row-reverse justify-between items-center">
                     {data?.episode_title && (
-                      <div className="font-common-heavy text-8px md:text-20px lg:text-25px">
+                      <div className="font-pashto text-8px md:text-20px lg:text-25px">
                         قسمت {data?.episode_title}{' '}
                       </div>
                     )}
@@ -312,7 +312,7 @@ export default function MyStoryPage({
                     __html: data?.content,
                   }}
                   ref={textRef}
-                  className="font-common-lg text-10px md:text-18px rtl mt-7 translate-y-200px opacity-0"
+                  className="font-pashto text-10px md:text-18px rtl mt-7 translate-y-200px opacity-0"
                 ></div>
               )}
               {/* the episode section button */}
@@ -375,7 +375,7 @@ export default function MyStoryPage({
               </div>
               <div className="w-1/2 xl:w-full flex flex-col mr-7 xl:mr-0 rtl">
                 {data?.author?.name && (
-                  <div className="font-common-heavy text-25px md:text-50px rtl mt-7 md:mt-0 xl:mt-7 text-black">
+                  <div className="font-pashto text-25px md:text-50px rtl mt-7 md:mt-0 xl:mt-7 text-black">
                     {data?.author?.name}
                   </div>
                 )}
@@ -384,7 +384,7 @@ export default function MyStoryPage({
                     موقعیت:
                   </div>
                   {data?.author?.location && (
-                    <div className="font-common-regular text-10px md:text-18px">
+                    <div className="font-pashto text-10px md:text-18px">
                       {data?.author?.location}
                     </div>
                   )}
@@ -394,7 +394,7 @@ export default function MyStoryPage({
                     وظیفه:
                   </div>
                   {data?.author?.job && (
-                    <div className="font-common-regular text-10px md:text-18px">
+                    <div className="font-pashto text-10px md:text-18px">
                       {data?.author?.job}
                     </div>
                   )}

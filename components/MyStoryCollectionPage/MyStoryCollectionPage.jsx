@@ -91,7 +91,10 @@ export default function MyStoryCollectionPage({
             id="title"
           >
             {data?.collection_name && (
-              <Heading1 title={data?.collection_name} />
+              <Heading1
+                title={data?.collection_name}
+                pashto={true}
+              />
             )}
           </div>
         </div>

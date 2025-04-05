@@ -61,13 +61,13 @@ export default function Episode({ data }) {
         )}
       </div>
       {data?.title && (
-        <div className="w-full font-new-extra-bold text-36px md:text-76px lg:text-50px mt-3 rtl">
+        <div className="w-full font-pashto text-36px md:text-76px lg:text-50px mt-3 rtl">
           {data?.title}
         </div>
       )}
       <div className="w-full flex justify-end mt-3">
         {data?.episode_title && (
-          <div className="font-common-heavy text-25px">
+          <div className="font-pashto text-25px">
             قسمت {data?.episode_title}
           </div>
         )}
