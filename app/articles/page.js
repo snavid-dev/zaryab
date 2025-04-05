@@ -56,8 +56,6 @@ export default async function ArticlesPage1({ searchParams }) {
     articleType.push({ name: '', slug: '#' });
   }
 
-  console.log(articlesData, 'data');
-
   return (
     <ArticlesPage
       type={type}
