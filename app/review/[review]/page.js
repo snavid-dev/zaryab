@@ -92,5 +92,56 @@ export async function generateMetadata({ params }) {
 
 export default async function ReviewsAndOpinionsSinglePage({ params }) {
   const param = await params.review;
-  return <MyReviewPage param={param} />;
+
+  // review data
+
+  const reviewRes = await fetch(
+    `https://zariab.cyborgtech.co/wp-json/v1/author-reviews/${param}`,
+    {
+      next: { revalidate: 14400 },
+    }
+  );
+
+  const reviewData = await reviewRes.json();
+
+  // similar Reviews
+
+  const similarReviewsRes = await fetch(
+    `https://zariab.cyborgtech.co/wp-json/v1/author-reviews/similar/${param}?per_page=6`,
+    {
+      next: { revalidate: 14400 },
+    }
+  );
+
+  const similarReviewsData = await similarReviewsRes.json();
+
+  // story
+
+  const storyRes = await fetch(
+    'https://zariab.cyborgtech.co/wp-json/v1/stories?per_page=4',
+    {
+      next: { revalidate: 14400 },
+    }
+  );
+
+  const storyData = await storyRes.json();
+
+  // author
+  const authorRes = await fetch(
+    'https://zariab.cyborgtech.co/wp-json/v1/authors?per_page=8',
+    {
+      next: { revalidate: 14400 },
+    }
+  );
+
+  const authorData = await authorRes.json();
+
+  return (
+    <MyReviewPage
+      data={reviewData}
+      similarReviewsData={similarReviewsData?.data}
+      storyData={storyData}
+      authorData={authorData}
+    />
+  );
 }
