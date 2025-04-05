@@ -10,50 +10,18 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function PoemsStorySection() {
-  const [data, setData] = useState(null);
-  const [Error, setError] = useState(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [hasFetched, setHasFetched] = useState(false);
-  const ref = useRef(null);
+export default function PoemsStorySection({ data }) {
+  const checkScreenWidth = () => {
+    const width = window.innerWidth;
 
-  useEffect(() => {
-    const checkScreenWidth = () => {
-      const width = window.innerWidth;
-
-      return width > 766 && width < 1280;
-    };
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `/v1/stories?per_page=${checkScreenWidth() ? 4 : 3}`
-        );
-        setData(response.data.data);
-      } catch (err) {
-        setError(err.response?.data?.message || err.message);
-      }
-    };
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !hasFetched) {
-          fetchData();
-          setIsVisible(true);
-          setHasFetched(true);
-        }
-      },
-      { threshold: 0.1 } // Trigger when 10% of the component is visible
-    );
-
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [hasFetched]);
-
+    return width > 766 && width < 1280;
+  };
   // animation
 
   const titleRef = useRef(null);
 
   useGSAP(() => {
-    if (isVisible && data) {
+    if (data) {
       gsap.to(titleRef.current, {
         y: 0,
         opacity: 1,
@@ -66,42 +34,50 @@ export default function PoemsStorySection() {
         },
       });
     }
-  }, [data, isVisible]);
+  }, [data]);
 
   return (
-    <div
-      className="w-full"
-      ref={ref}
-    >
-      {isVisible && (
-        <div className="w-full flex flex-col items-center">
-          <div
-            className="main-container mt-14 rtl translate-y-200px opacity-0"
-            ref={titleRef}
-          >
-            <div className="col-span-6 md:col-span-3 xl:col-span-6">
-              <Heading1 title="داستان ها" />
-            </div>
-            <div className="col-span-6 md:col-span-3 xl:col-span-6 flex items-center justify-start md:justify-end">
-              <ArrowLink
-                title="همه داستان ها"
-                path="/writing"
-              />
-            </div>
+    <div className="w-full">
+      <div className="w-full flex flex-col items-center">
+        <div
+          className="main-container mt-14 rtl translate-y-200px opacity-0"
+          ref={titleRef}
+        >
+          <div className="col-span-6 md:col-span-3 xl:col-span-6">
+            <Heading1 title="داستان ها" />
           </div>
-          <div className="main-container mt-7 rtl">
-            {Array.isArray(data) &&
-              data?.map((data, index) => (
-                <StoryPoemCard
-                  data={data}
-                  key={index}
-                  isStory={true}
-                  isVisible={isVisible}
-                />
-              ))}
+          <div className="col-span-6 md:col-span-3 xl:col-span-6 flex items-center justify-start md:justify-end">
+            <ArrowLink
+              title="همه داستان ها"
+              path="/writing"
+            />
           </div>
         </div>
-      )}
+        <div className="main-container mt-7 rtl">
+          {Array.isArray(data) &&
+            data?.map((data, index) => {
+              if (!checkScreenWidth()) {
+                if (index < 3) {
+                  return (
+                    <StoryPoemCard
+                      data={data}
+                      key={index}
+                      isStory={true}
+                    />
+                  );
+                }
+              } else {
+                return (
+                  <StoryPoemCard
+                    data={data}
+                    key={index}
+                    isStory={true}
+                  />
+                );
+              }
+            })}
+        </div>
+      </div>
     </div>
   );
 }

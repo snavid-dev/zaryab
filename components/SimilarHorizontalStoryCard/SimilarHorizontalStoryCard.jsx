@@ -73,6 +73,7 @@ export default function SimilarHorizontalStoryCard({
                     dangerouslySetInnerHTML={{
                       __html: data?.excerpt.split('\n')[0],
                     }}
+                    suppressHydrationWarning
                   ></div>
                 )}
                 {data?.excerpt && (
@@ -80,6 +81,7 @@ export default function SimilarHorizontalStoryCard({
                     dangerouslySetInnerHTML={{
                       __html: data?.excerpt.split('\n')[1],
                     }}
+                    suppressHydrationWarning
                   ></div>
                 )}
                 {data?.excerpt && (
@@ -87,6 +89,7 @@ export default function SimilarHorizontalStoryCard({
                     dangerouslySetInnerHTML={{
                       __html: data?.excerpt.split('\n')[2],
                     }}
+                    suppressHydrationWarning
                   ></div>
                 )}
               </div>
