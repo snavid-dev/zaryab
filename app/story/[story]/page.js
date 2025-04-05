@@ -104,5 +104,56 @@ export async function generateMetadata({ params }) {
 
 export default async function StorySinglePage({ params }) {
   const param = await params.story;
-  return <MyStoryPage param={param} />;
+
+  // story single page data
+  const storyRes = await fetch(
+    `https://zariab.cyborgtech.co/wp-json/v1/episodes/${param}`,
+    {
+      next: { revalidate: 14400 },
+    }
+  );
+
+  const storyData = await storyRes.json();
+
+  // similar story
+
+  const similarStoryRes = await fetch(
+    `https://zariab.cyborgtech.co/wp-json/v1/stories/similar/${storyData?.story_slug}?per_page=5`,
+    {
+      next: { revalidate: 14400 },
+    }
+  );
+
+  const similarStoryData = await similarStoryRes.json();
+
+  // poems
+
+  const poemsRes = await fetch(
+    'https://zariab.cyborgtech.co/wp-json/v1/poems?per_page=4',
+    {
+      next: { revalidate: 14400 },
+    }
+  );
+
+  const poemsData = await poemsRes.json();
+
+  // author
+  const authorRes = await fetch(
+    'https://zariab.cyborgtech.co/wp-json/v1/authors?per_page=8',
+    {
+      next: { revalidate: 14400 },
+    }
+  );
+
+  const authorData = await authorRes.json();
+
+  return (
+    <MyStoryPage
+      param={param}
+      data={storyData}
+      similarStoryData={similarStoryData}
+      poemsData={poemsData?.data}
+      authorData={authorData}
+    />
+  );
 }

@@ -100,5 +100,68 @@ export async function generateMetadata({ params }) {
 
 export default async function StoryCollectionPage1({ params }) {
   const param = await params.collection;
-  return <MyStoryCollectionPage param={param} />;
+
+  // story collection data
+
+  const collectionRes = await fetch(
+    `https://zariab.cyborgtech.co/wp-json/v1/stories/collection/${param}`,
+    {
+      next: { revalidate: 14400 },
+    }
+  );
+
+  const collectionData = await collectionRes.json();
+
+  // filter data storyTypes
+  const storiesRes = await fetch(
+    'https://zariab.cyborgtech.co/wp-json/v1/story_type',
+    {
+      next: { revalidate: 14400 },
+    }
+  );
+
+  let storiesType = await storiesRes.json();
+
+  const nextMultipleOfSix = Math.ceil(storiesType.length / 6) * 6;
+
+  while (storiesType.length < nextMultipleOfSix) {
+    storiesType.push({ name: '', slug: '#' });
+  }
+
+  // filter data categories
+
+  const categoriesRes = await fetch(
+    'https://zariab.cyborgtech.co/wp-json/v1/categories',
+    {
+      next: { revalidate: 14400 },
+    }
+  );
+
+  let categoriesType = await categoriesRes.json();
+
+  const nextMultipleOfSixCategories = Math.ceil(categoriesType.length / 6) * 6;
+
+  while (categoriesType.length < nextMultipleOfSixCategories) {
+    categoriesType.push({ name: '', slug: '#' });
+  }
+
+  // author
+  const authorRes = await fetch(
+    'https://zariab.cyborgtech.co/wp-json/v1/authors?per_page=8',
+    {
+      next: { revalidate: 14400 },
+    }
+  );
+
+  const authorData = await authorRes.json();
+
+  return (
+    <MyStoryCollectionPage
+      param={param}
+      serverData={collectionData}
+      types={storiesType}
+      categories={categoriesType}
+      authorData={authorData}
+    />
+  );
 }

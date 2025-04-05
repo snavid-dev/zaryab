@@ -9,7 +9,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Episode({ data, isVisible }) {
+export default function Episode({ data }) {
   const [isHovered, setIsHovered] = useState(false);
   const cardRef = useRef(null);
 
@@ -22,7 +22,7 @@ export default function Episode({ data, isVisible }) {
   };
 
   useGSAP(() => {
-    if (isVisible && data) {
+    if (data) {
       gsap.to(cardRef.current, {
         y: 0,
         opacity: 1,
@@ -35,7 +35,7 @@ export default function Episode({ data, isVisible }) {
         },
       });
     }
-  }, []);
+  }, [data]);
   return (
     //     main container of the card
     <div

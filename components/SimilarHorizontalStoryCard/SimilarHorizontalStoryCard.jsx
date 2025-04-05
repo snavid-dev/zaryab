@@ -13,13 +13,12 @@ export default function SimilarHorizontalStoryCard({
   data,
   isArticle,
   isStory,
-  isVisible,
 }) {
   // animation
   const cardRef = useRef(null);
 
   useGSAP(() => {
-    if (isVisible && data) {
+    if (data) {
       gsap.to(cardRef.current, {
         y: 0,
         opacity: 1,
@@ -32,7 +31,7 @@ export default function SimilarHorizontalStoryCard({
         },
       });
     }
-  }, []);
+  }, [data]);
 
   return (
     <div

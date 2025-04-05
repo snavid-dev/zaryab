@@ -1,6 +1,5 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
-import axios from '@/utils/api';
+import React, { useRef } from 'react';
 import StoryPoemCard from '../StoryPoemCard/StoryPoemCard';
 import Heading1 from '../Heading1/Heading1';
 import ArrowLink from '../ArrowLink/ArrowLink';
@@ -10,50 +9,18 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function StoriesPoemSection() {
-  const [data, setData] = useState(null);
-  const [Error, setError] = useState(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [hasFetched, setHasFetched] = useState(false);
-  const ref = useRef(null);
+export default function StoriesPoemSection({ data }) {
+  const checkScreenWidth = () => {
+    const width = window.innerWidth;
 
-  useEffect(() => {
-    const checkScreenWidth = () => {
-      const width = window.innerWidth;
-
-      return width > 766 && width < 1280;
-    };
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `/v1/poems?per_page=${checkScreenWidth() ? 4 : 3}`
-        );
-        setData(response.data.data);
-      } catch (err) {
-        setError(err.response?.data?.message || err.message);
-      }
-    };
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !hasFetched) {
-          fetchData();
-          setIsVisible(true);
-          setHasFetched(true);
-        }
-      },
-      { threshold: 0.1 } // Trigger when 10% of the component is visible
-    );
-
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [hasFetched]);
-
+    return width > 766 && width < 1280;
+  };
   // animation
 
   const poemTitleRef = useRef(null);
 
   useGSAP(() => {
-    if (data && isVisible) {
+    if (data) {
       gsap.to(poemTitleRef.current, {
         y: 0,
         opacity: 1,
@@ -66,42 +33,52 @@ export default function StoriesPoemSection() {
         },
       });
     }
-  }, [isVisible, data]);
+  }, [data]);
+
+  console.log(checkScreenWidth(), 'width');
 
   return (
-    <div
-      className="w-full"
-      ref={ref}
-    >
-      {isVisible && (
-        <div className="w-full flex flex-col items-center">
-          <div
-            className="main-container mt-50px rtl translate-y-200px opacity-0"
-            ref={poemTitleRef}
-          >
-            <div className="col-span-6 md:col-span-3 xl:col-span-6">
-              <Heading1 title="اشعار" />
-            </div>
-            <div className="col-span-6 md:col-span-3 xl:col-span-6 flex justify-start md:justify-end">
-              <ArrowLink
-                title="همه اشعار"
-                path="/writing"
-              />
-            </div>
+    <div className="w-full">
+      <div className="w-full flex flex-col items-center">
+        <div
+          className="main-container mt-50px rtl translate-y-200px opacity-0"
+          ref={poemTitleRef}
+        >
+          <div className="col-span-6 md:col-span-3 xl:col-span-6">
+            <Heading1 title="اشعار" />
           </div>
-          <div className="main-container mt-7">
-            {Array.isArray(data) &&
-              data?.map((data, index) => (
-                <StoryPoemCard
-                  data={data}
-                  key={index}
-                  isStory={false}
-                  isVisible={isVisible}
-                />
-              ))}
+          <div className="col-span-6 md:col-span-3 xl:col-span-6 flex justify-start md:justify-end">
+            <ArrowLink
+              title="همه اشعار"
+              path="/writing"
+            />
           </div>
         </div>
-      )}
+        <div className="main-container mt-7">
+          {Array.isArray(data) &&
+            data?.map((data, index) => {
+              if (!checkScreenWidth()) {
+                if (index < 3) {
+                  return (
+                    <StoryPoemCard
+                      data={data}
+                      key={index}
+                      isStory={false}
+                    />
+                  );
+                }
+              } else {
+                return (
+                  <StoryPoemCard
+                    data={data}
+                    key={index}
+                    isStory={false}
+                  />
+                );
+              }
+            })}
+        </div>
+      </div>
     </div>
   );
 }
