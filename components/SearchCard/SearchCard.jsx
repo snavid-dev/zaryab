@@ -35,7 +35,7 @@ export default function SearchCard({ data, type }) {
           <div className="w-full h-full"></div>
         )}
       </div>
-      <div className="w-full font-new-extra-bold text-20px 2xl:text-27px mt-3">
+      <div className="w-full font-pashto text-20px 2xl:text-27px mt-3">
         {data?.title}
       </div>
       <div className="w-full mt-3">
