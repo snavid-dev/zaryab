@@ -3,14 +3,14 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { useRef, useState } from 'react';
 
-export default function AboutCord({ title, text, data, isVisible }) {
+export default function AboutCord({ title, text, data }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   // animation
   const cardRef = useRef(null);
 
   useGSAP(() => {
-    if (data && isVisible) {
+    if (data) {
       gsap.to(cardRef.current, {
         y: 0,
         opacity: 1,
@@ -23,7 +23,7 @@ export default function AboutCord({ title, text, data, isVisible }) {
         },
       });
     }
-  }, [isVisible, data]);
+  }, [data]);
 
   return (
     <div
@@ -57,12 +57,12 @@ export default function AboutCord({ title, text, data, isVisible }) {
             />
           </svg>
         </div>
-        <div className="font-common-heavy text-30px md:text-40px lg:text-46px text-white">
+        <div className="font-pashto text-30px md:text-40px lg:text-46px text-white">
           {title}
         </div>
       </div>
       <div
-        className="rtl py-7 text-white font-common-regular text-20px md:text-30px xl:text-40px"
+        className="rtl py-7 text-white font-pashto text-20px md:text-30px xl:text-40px"
         dangerouslySetInnerHTML={{ __html: text }}
       ></div>
     </div>
