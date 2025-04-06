@@ -4,7 +4,10 @@ export async function generateMetadata({ params }) {
   try {
     const review = await params.review;
     const response = await fetch(
-      `https://zariab.cyborgtech.co/wp-json/v1/author-reviews/${review}`
+      `https://zariab.cyborgtech.co/wp-json/v1/author-reviews/${review}`,
+      {
+        next: { revalidate: 14400 },
+      }
     );
 
     if (!response.ok) throw new Error('Failed to fetch metadata');

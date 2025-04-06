@@ -4,7 +4,10 @@ export async function generateMetadata({ params }) {
   try {
     const collection = await params.collection;
     const response = await fetch(
-      `https://zariab.cyborgtech.co/wp-json/v1/stories/collection/${collection}`
+      `https://zariab.cyborgtech.co/wp-json/v1/stories/collection/${collection}`,
+      {
+        next: { revalidate: 14400 },
+      }
     );
 
     if (!response.ok) throw new Error('Failed to fetch metadata');
