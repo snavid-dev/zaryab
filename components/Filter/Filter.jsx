@@ -1,7 +1,6 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import FilterItem from '../FilterItem/FilterItem';
-import axios from '@/utils/api';
 
 export default function Filter({
   title,
@@ -121,8 +120,8 @@ export default function Filter({
               جانر ها
             </div>
             <div className="flex flex-col h-[200px] flex-wrap rtl">
-              {Array.isArray(categories) &&
-                categories?.map(
+              {Array.isArray(categories1) &&
+                categories1?.map(
                   (data, index) =>
                     data?.name &&
                     data?.slug && (

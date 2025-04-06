@@ -13,8 +13,6 @@ export default async function PodcastsPage1({ searchParams }) {
 
   const podcastsData = await podcastsRes.json();
 
-  console.log(podcastsData, 'data');
-
   return (
     <PodcastsPage
       type={type}

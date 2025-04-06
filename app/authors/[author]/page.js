@@ -4,7 +4,10 @@ export async function generateMetadata({ params }) {
   try {
     const author = await params.author;
     const response = await fetch(
-      `https://zariab.cyborgtech.co/wp-json/v1/authors/${author}`
+      `https://zariab.cyborgtech.co/wp-json/v1/authors/${author}`,
+      {
+        next: { revalidate: 14400 },
+      }
     );
 
     if (!response.ok) throw new Error('Failed to fetch metadata');
@@ -98,5 +101,32 @@ export async function generateMetadata({ params }) {
 
 export default async function AuthorPage1({ params }) {
   const param = await params.author;
-  return <MyAuthorPage param={param} />;
+
+  // author data
+  const authorRes = await fetch(
+    `https://zariab.cyborgtech.co/wp-json/v1/authors/${param}`,
+    {
+      next: { revalidate: 14400 },
+    }
+  );
+
+  const authorData = await authorRes.json();
+
+  // similar author data
+
+  const similarAuthorRes = await fetch(
+    `https://zariab.cyborgtech.co/wp-json/v1/authors/similar/${param}/?per_page=8`,
+    {
+      next: { revalidate: 14400 },
+    }
+  );
+
+  const similarAuthorData = await similarAuthorRes.json();
+
+  return (
+    <MyAuthorPage
+      data={authorData}
+      similarData={similarAuthorData?.data}
+    />
+  );
 }

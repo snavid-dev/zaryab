@@ -15,6 +15,7 @@ export default function SearchPage({ searchParams }) {
   const [categoryFilter, setCategoryFilter] = useState('');
   const [filterDone, setFilterDone] = useState(false);
   const [filter, setFilter] = useState(''); // it is useless to prevent error
+  const [categories, setCategories] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const param = use(searchParams);
@@ -23,7 +24,6 @@ export default function SearchPage({ searchParams }) {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      setData(null);
       try {
         const response = await axios.get(
           `v1/global-search?keyword=${searchKeyWord}&categories=${
@@ -46,8 +46,23 @@ export default function SearchPage({ searchParams }) {
     fetchData();
   }, [searchKeyWord, categoryFilter, searchCategory]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('/v1/categories');
+
+        setCategories(response.data);
+      } catch (error) {
+        setError(err.response?.data?.message || err.message);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const handleSearch = () => {
     if (searchItem.length > 1) {
+      setSearchDone(true);
       if (!searchDone) {
         setSearchKeyWord(searchItem);
       } else {
@@ -67,7 +82,8 @@ export default function SearchPage({ searchParams }) {
             setCategoryFilter={setCategoryFilter}
             setFilterDone={setFilterDone}
             setFilter={setFilter}
-            setHasFetched={false}
+            categories1={categories}
+            type1="search"
           />
         </div>
       </div>
@@ -86,7 +102,7 @@ export default function SearchPage({ searchParams }) {
         </div>
       </div>
 
-      {(searchDone || filterDone) && !loading && data && (
+      {(searchDone || filterDone) && data && !loading && (
         <div className="w-full flex flex-col items-center transition-all duration-700">
           <div className="main-container mt-30px">
             <div className="col-span-6 xl:col-span-12 rtl">
