@@ -4,7 +4,10 @@ export async function generateMetadata({ params }) {
   try {
     const podcast = await params.podcast;
     const response = await fetch(
-      `https://zariab.cyborgtech.co/wp-json/v1/podcasts/${podcast}`
+      `https://zariab.cyborgtech.co/wp-json/v1/podcasts/${podcast}`,
+      {
+        next: { revalidate: 14400 },
+      }
     );
 
     if (!response.ok) throw new Error('Failed to fetch metadata');
@@ -92,5 +95,35 @@ export async function generateMetadata({ params }) {
 
 export default async function PodcastSinglePage({ params }) {
   const param = await params.podcast;
-  return <MyPodcastPage param={param} />;
+
+  // podcasts data
+
+  const podcastRes = await fetch(
+    `https://zariab.cyborgtech.co/wp-json/v1/podcasts/${param}`,
+    {
+      next: { revalidate: 14400 },
+    }
+  );
+
+  const podcastData = await podcastRes.json();
+
+  // podcast similar
+
+  const similarPodcastRes = await fetch(
+    `https://zariab.cyborgtech.co/wp-json/v1/podcasts/similar/${param}?per_page=9`,
+    {
+      next: { revalidate: 14400 },
+    }
+  );
+
+  const similarPodcastData = await similarPodcastRes.json();
+
+  console.log(similarPodcastData, 'data');
+
+  return (
+    <MyPodcastPage
+      podcast={podcastData}
+      data={similarPodcastData?.data}
+    />
+  );
 }
