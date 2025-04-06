@@ -136,7 +136,7 @@ export default async function Home() {
         data={storiesData?.data}
         newMail={mailData?.data[0]}
         oldMailData={oldMailData}
-        newArticle={newArticleData.data}
+        newArticle={newArticleData?.data}
       />
 
       {/* ad */}
@@ -158,7 +158,7 @@ export default async function Home() {
       {/* <FullAd /> */}
       {/* author of the week */}
 
-      <AuthorWeek data={archiveAuthorData.data} />
+      <AuthorWeek data={archiveAuthorData?.data} />
 
       {/* ad */}
       {/* <SmallAd /> */}
@@ -169,7 +169,7 @@ export default async function Home() {
       <Winner data={winnerData} />
 
       <div>
-        <Authors data={authorData.data} />
+        <Authors data={authorData?.data} />
       </div>
 
       {/* harizontal line */}
@@ -177,10 +177,10 @@ export default async function Home() {
       {/* podcasts */}
 
       <div className="w-full hidden xl:flex justify-center">
-        <Podcasts data={podcastDeskData.data} />
+        <Podcasts data={podcastDeskData?.data} />
       </div>
       <div className="w-full flex xl:hidden justify-center">
-        <Podcasts data={podcastMobileData.data} />
+        <Podcasts data={podcastMobileData?.data} />
       </div>
 
       {/* ad */}

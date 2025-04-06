@@ -7,11 +7,11 @@ import React, { useRef } from 'react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function MagazinePageCard({ letter, isVisible }) {
+export default function MagazinePageCard({ letter }) {
   const cardRef = useRef(null);
 
   useGSAP(() => {
-    if (letter && isVisible) {
+    if (letter) {
       gsap.to(cardRef.current, {
         y: 0,
         opacity: 1,
@@ -24,7 +24,7 @@ export default function MagazinePageCard({ letter, isVisible }) {
         },
       });
     }
-  }, [letter, isVisible]);
+  }, [letter]);
 
   return (
     <div

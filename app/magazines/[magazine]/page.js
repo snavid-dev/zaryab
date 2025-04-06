@@ -4,7 +4,10 @@ export async function generateMetadata({ params }) {
   try {
     const magazine = await params.magazine;
     const response = await fetch(
-      `https://zariab.cyborgtech.co/wp-json/v1/letters/${magazine}`
+      `https://zariab.cyborgtech.co/wp-json/v1/letters/${magazine}`,
+      {
+        next: { revalidate: 14400 },
+      }
     );
 
     if (!response.ok) throw new Error('Failed to fetch metadata');
@@ -92,5 +95,34 @@ export async function generateMetadata({ params }) {
 
 export default async function LetterSinglePage({ params }) {
   const param = await params.magazine;
-  return <MyMagazinePage param={param} />;
+
+  // magazine data
+
+  const magazineRes = await fetch(
+    `https://zariab.cyborgtech.co/wp-json/v1/letters/${param}`,
+    {
+      next: { revalidate: 14400 },
+    }
+  );
+
+  const magazineData = await magazineRes.json();
+
+  //desktop podcast
+  const podcastMobileRes = await fetch(
+    'https://zariab.cyborgtech.co/wp-json/v1/podcasts?per_page=4',
+    {
+      next: { revalidate: 14400 },
+    }
+  );
+
+  const podcastMobileData = await podcastMobileRes.json();
+
+  console.log(magazineData, 'data');
+
+  return (
+    <MyMagazinePage
+      data={magazineData}
+      podcastMobileData={podcastMobileData}
+    />
+  );
 }

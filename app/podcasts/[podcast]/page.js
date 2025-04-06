@@ -117,9 +117,6 @@ export default async function PodcastSinglePage({ params }) {
   );
 
   const similarPodcastData = await similarPodcastRes.json();
-
-  console.log(similarPodcastData, 'data');
-
   return (
     <MyPodcastPage
       podcast={podcastData}

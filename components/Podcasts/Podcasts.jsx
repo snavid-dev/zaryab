@@ -7,6 +7,11 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 
 export default function Podcasts({ data }) {
+  const checkScreenWidth = () => {
+    const width = window.innerWidth;
+
+    return width > 766 && width < 1280;
+  };
   // animation
   const titleRef = useRef(null);
 
@@ -41,12 +46,25 @@ export default function Podcasts({ data }) {
         </div>
         <div className="main-container">
           {Array.isArray(data) &&
-            data?.map((data, index) => (
-              <PodcastCard
-                data={data}
-                key={index}
-              />
-            ))}
+            data?.map((data, index) => {
+              if (checkScreenWidth) {
+                if (index < 3) {
+                  return (
+                    <PodcastCard
+                      data={data}
+                      key={index}
+                    />
+                  );
+                }
+              } else {
+                return (
+                  <PodcastCard
+                    data={data}
+                    key={index}
+                  />
+                );
+              }
+            })}
         </div>
       </div>
     </section>

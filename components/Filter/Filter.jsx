@@ -11,6 +11,7 @@ export default function Filter({
   setCategoryFilter,
   setFilterDone,
   setHasFetched,
+  type1,
 }) {
   const [showFilterBody, setShowFilterBody] = useState(false);
   const [categories, setCategories] = useState(categories1);
@@ -39,7 +40,9 @@ export default function Filter({
       setCategoryItems([]);
     }
     setFilter([]);
-    setCategoryFilter([]);
+    if (setCategoryFilter) {
+      setCategoryFilter([]);
+    }
     setFilterDone(false);
     if (setHasFetched) {
       setHasFetched(false);
@@ -91,7 +94,7 @@ export default function Filter({
               showFilterBody ? 'h-full block' : 'h-0 hidden'
             } transition-all duration-700`}
       >
-        {!(type == 'search') && (
+        {!(type1 == 'search') && (
           <div className="w-full border-t-2 border-b-2 border-black mt-1">
             <div className="w-full flex justify-end font-common-heavy text-20px md:text-30px my-5">
               {title}
@@ -112,7 +115,7 @@ export default function Filter({
             </div>
           </div>
         )}
-        {!(type === 'letter') && (
+        {!(type1 === 'letter') && (
           <div className="w-full border-t-2 border-b-2 border-black mt-1">
             <div className="w-full flex justify-end font-common-heavy text-20px md:text-30px my-5">
               جانر ها

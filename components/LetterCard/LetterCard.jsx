@@ -8,7 +8,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function LetterCard({ data, isVisible }) {
+export default function LetterCard({ data }) {
   const handleDownload = () => {
     if (data?.pdf) {
       const fileUrl = data?.pdf;
@@ -28,7 +28,7 @@ export default function LetterCard({ data, isVisible }) {
   const cardRef = useRef(null);
 
   useGSAP(() => {
-    if (isVisible && data) {
+    if (data) {
       gsap.to(cardRef.current, {
         y: 0,
         opacity: 1,
@@ -41,7 +41,7 @@ export default function LetterCard({ data, isVisible }) {
         },
       });
     }
-  }, [isVisible, data]);
+  }, [data]);
   return (
     // the letter cord main container
     <div
