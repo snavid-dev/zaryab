@@ -112,7 +112,7 @@ export default function Winner({ data }) {
           >
             {data?.featured_image || true ? (
               <Image
-                src={data?.featured_image || '/assets/img/story.jpg'}
+                src={data?.featured_image}
                 alt="champions"
                 fill
                 className="absolute object-cover"

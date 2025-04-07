@@ -154,19 +154,23 @@ export default function MyBookPage({
                   className="inline  relative p-[1px] box-border translate-y-200px opacity-0"
                   ref={titleRef}
                 >
-                  <p
-                    className={`font-pashto inline text-26px md:text-52px lg:text-60px`}
-                  >
-                    {data?.title || 'خلاصه هری پاتر و سنگ فلاسفر'}
-                  </p>
+                  {data?.title && (
+                    <p
+                      className={`font-pashto inline text-26px md:text-52px lg:text-60px`}
+                    >
+                      {data?.title}
+                    </p>
+                  )}
                 </div>
               </div>
-              <div
-                className="w-full flex flex-row-reverse justify-end rtl font-pashto text-10px md:text-16px lg:text-25px translate-y-200px opacity-0"
-                ref={collRef}
-              >
-                {data?.collection}
-              </div>
+              {data?.collection && (
+                <div
+                  className="w-full flex flex-row-reverse justify-end rtl font-pashto text-10px md:text-16px lg:text-25px translate-y-200px opacity-0"
+                  ref={collRef}
+                >
+                  {data?.collection}
+                </div>
+              )}
               <div className="w-full grid grid-cols-9 gap-20px md:gap-30px items-center">
                 {/* time */}
                 <div
@@ -177,9 +181,11 @@ export default function MyBookPage({
                     <b className="font-common-bold text-12px md:text-7px lg:text-12px ml-1">
                       زمان:
                     </b>
-                    <p className="font-common-thin mt-1 md:mt-2 text-12px md:text-7px lg:text-12px">
-                      {data?.time}
-                    </p>
+                    {data?.time && (
+                      <p className="font-common-thin mt-1 md:mt-2 text-12px md:text-7px lg:text-12px">
+                        {data?.time}
+                      </p>
+                    )}
                     <p className="font-common-thin mt-1 md:mt-2 text-12px md:text-7px lg:text-12px">
                       دقیقه
                     </p>
@@ -188,9 +194,11 @@ export default function MyBookPage({
                     <b className="font-common-bold text-12px md:text-7px lg:text-12px ml-1">
                       تاریخ:
                     </b>
-                    <p className="font-common-thin mt-1 md:mt-2 text-12px md:text-7px lg:text-12px">
-                      {data?.date_shamsi}
-                    </p>
+                    {data?.date_shamsi && (
+                      <p className="font-common-thin mt-1 md:mt-2 text-12px md:text-7px lg:text-12px">
+                        {data?.date_shamsi}
+                      </p>
+                    )}
                   </div>
                 </div>
                 {/* genre */}
@@ -198,31 +206,34 @@ export default function MyBookPage({
                   className="col-span-9 md:col-span-6 grid grid-cols-4 xl:grid-cols-6 gap items-center mt-2 translate-y-200px opacity-0"
                   ref={genreRef}
                 >
-                  {data?.categories.map((category, index) => {
-                    if (index < 6) {
-                      return (
-                        <div
-                          className={`col-span-1 flex justify-start ${
-                            index > 3 ? 'hidden xl:flex' : ''
-                          }`}
-                          key={index}
-                        >
-                          <Genre title={category.name} />
-                        </div>
-                      );
-                    }
-                  })}
+                  {Array.isArray(data?.categories) &&
+                    data?.categories.map((category, index) => {
+                      if (index < 6) {
+                        return (
+                          <div
+                            className={`col-span-1 flex justify-start ${
+                              index > 3 ? 'hidden xl:flex' : ''
+                            }`}
+                            key={index}
+                          >
+                            <Genre title={category.name} />
+                          </div>
+                        );
+                      }
+                    })}
                 </div>
               </div>
             </div>
             {/*  the story text  */}
-            <div
-              className="font-pashto text-10px md:text-12px lg:text-18px rtl mt-7 translate-y-200px opacity-0"
-              dangerouslySetInnerHTML={{
-                __html: data?.content,
-              }}
-              ref={textRef}
-            ></div>
+            {data?.content && (
+              <div
+                className="font-pashto text-10px md:text-12px lg:text-18px rtl mt-7 translate-y-200px opacity-0"
+                dangerouslySetInnerHTML={{
+                  __html: data?.content,
+                }}
+                ref={textRef}
+              ></div>
+            )}
           </div>
           {/* the author section */}
           <div
@@ -246,74 +257,92 @@ export default function MyBookPage({
               </div>
             </div>
             <div className="flex flex-col items-start mr-4 xl:mr-0 lg:mb-10 xl:mb-0">
-              <div className="font-pashto text-25px md:text-50px rtl text-black">
-                {data?.author?.name}
-              </div>
+              {data?.author?.name && (
+                <div className="font-pashto text-25px md:text-50px rtl text-black">
+                  {data?.author?.name}
+                </div>
+              )}
               <div className="flex rtl md:mt-7 text-black">
                 <div className="font-common-heavy text-10px md:text-18px">
                   موقعیت:
                 </div>
-                <div className="font-pashto text-10px md:text-18px mr-1">
-                  {data?.author?.location}
-                </div>
+                {data?.author?.location && (
+                  <div className="font-pashto text-10px md:text-18px mr-1">
+                    {data?.author?.location}
+                  </div>
+                )}
               </div>
               <div className="flex rtl mt-3 lg:mt-5 xl:mt-3 text-black">
                 <div className="font-common-heavy text-10px md:text-18px">
                   وظیفه:
                 </div>
-                <div className="font-pashto text-10px md:text-18px mr-1">
-                  {data?.author?.job}
-                </div>
+                {data?.author?.job && (
+                  <div className="font-pashto text-10px md:text-18px mr-1">
+                    {data?.author?.job}
+                  </div>
+                )}
               </div>
               <div className="flex rtl mt-3 lg:mt-5 xl:mt-3 text-black">
                 <div className="font-common-heavy text-10px md:text-18px">
                   تعداد آثار:
                 </div>
-                <div className="font-common-regular text-10px md:text-18px mr-1">
-                  {data?.author?.total_letters}
-                </div>
+                {data?.author?.total_letters && (
+                  <div className="font-common-regular text-10px md:text-18px mr-1">
+                    {data?.author?.total_letters}
+                  </div>
+                )}
               </div>
               <div className="flex rtl mt-3 lg:mt-5 xl:mt-3 text-black">
                 <div className="font-common-heavy text-10px md:text-18px">
                   سن:
                 </div>
-                <div className="font-common-regular text-10px md:text-18px mr-1">
-                  {data?.author?.age}
-                </div>
+                {data?.author?.age && (
+                  <div className="font-common-regular text-10px md:text-18px mr-1">
+                    {data?.author?.age}
+                  </div>
+                )}
               </div>
               <div className="flex mt-1 lg:mt-5 xl:mt-3">
-                <Link href={data?.author?.facebook || '#'}>
-                  <Image
-                    src="/assets/svg/facebook.svg"
-                    alt="facebook logo"
-                    width={20}
-                    height={20}
-                  />
-                </Link>
-                <Link href={data?.author?.instagram || '#'}>
-                  <Image
-                    src="/assets/svg/instagram.svg"
-                    alt="instagram logo"
-                    width={20}
-                    height={20}
-                  />
-                </Link>
-                <Link href={data?.author?.telegram || '#'}>
-                  <Image
-                    src="/assets/svg/telegram.svg"
-                    alt="telegram logo"
-                    width={20}
-                    height={20}
-                  />
-                </Link>
-                <Link href={data?.author?.youtube || '#'}>
-                  <Image
-                    src="/assets/svg/youtube.svg"
-                    alt="youtube logo"
-                    width={20}
-                    height={20}
-                  />
-                </Link>
+                {data?.author?.facebook && (
+                  <Link href={data?.author?.facebook || '#'}>
+                    <Image
+                      src="/assets/svg/facebook.svg"
+                      alt="facebook logo"
+                      width={20}
+                      height={20}
+                    />
+                  </Link>
+                )}
+                {data?.author?.instagram && (
+                  <Link href={data?.author?.instagram || '#'}>
+                    <Image
+                      src="/assets/svg/instagram.svg"
+                      alt="instagram logo"
+                      width={20}
+                      height={20}
+                    />
+                  </Link>
+                )}
+                {data?.author?.telegram && (
+                  <Link href={data?.author?.telegram || '#'}>
+                    <Image
+                      src="/assets/svg/telegram.svg"
+                      alt="telegram logo"
+                      width={20}
+                      height={20}
+                    />
+                  </Link>
+                )}
+                {data?.author?.youtube && (
+                  <Link href={data?.author?.youtube || '#'}>
+                    <Image
+                      src="/assets/svg/youtube.svg"
+                      alt="youtube logo"
+                      width={20}
+                      height={20}
+                    />
+                  </Link>
+                )}
               </div>
             </div>
           </div>

@@ -120,6 +120,7 @@ export default function MyEpisodePage({
           >
             <Filter
               type={types}
+              type1="episode"
               categories1={categories}
               title="انواع داستان ها"
               setFilter={setTypeFilter}

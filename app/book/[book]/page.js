@@ -13,12 +13,14 @@ export async function generateMetadata({ params }) {
     if (!response.ok) throw new Error('Failed to fetch metadata');
     const data = await response.json();
 
+    console.log(data, 'book');
+
     return {
-      title: 'کتاب هفته',
-      description: `کتاب هفته`,
+      title: data?.title,
+      description: `کتاب ${data?.title}`,
       openGraph: {
-        title: 'کتاب هفته',
-        description: 'کتاب هفته',
+        title: data?.title,
+        description: `کتاب ${data?.title}`,
         url: 'https://zaryb3.vercel.app',
         siteName: 'وبسایت ادبی آوای زریاب',
         images: [
@@ -26,7 +28,7 @@ export async function generateMetadata({ params }) {
             url: data?.featured_image,
             width: 1129,
             height: 750,
-            alt: data?.story_title,
+            alt: data?.title,
           },
         ],
         locale: 'fa_IR',
@@ -35,8 +37,8 @@ export async function generateMetadata({ params }) {
       twitter: {
         card: 'summary_large_image',
         site: '@your_twitter_handle',
-        title: 'کتاب هفته',
-        description: 'کتاب هفته',
+        title: data?.title,
+        description: `کتاب ${data?.title}`,
         images: [data?.featured_image],
       },
       viewport: 'width=device-width, initial-scale=1.0',
