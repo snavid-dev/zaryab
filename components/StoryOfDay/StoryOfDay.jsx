@@ -74,7 +74,7 @@ export default function StoryOfDay({ data }) {
               className="col-span-6 xl:col-span-5 translate-y-200px opacity-0"
               id="storyTitle"
             >
-              <h1 className="flex flex-row xl:flex-col text-50px md:text-94px 2xl:text-[120px] font-pashto leading-67%">
+              <h1 className="flex flex-row xl:flex-col text-40px md:text-94px 2xl:text-[120px] font-pashto leading-67%">
                 {data?.title && (
                   <Link
                     href={`/episode/${data?.slug}`}
