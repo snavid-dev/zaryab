@@ -23,7 +23,7 @@ export async function generateMetadata({ params }) {
         description: `مجموعه شعر ${
           data?.collection_name && data?.collection_name
         }`,
-        url: 'https://zaryb3.vercel.app',
+        url: 'https://avayezaryab.cyborgtech.co/',
         siteName: 'وبسایت ادبی آوای زریاب',
         images: [
           {
@@ -54,7 +54,7 @@ export async function generateMetadata({ params }) {
       },
 
       alternates: {
-        canonical: 'https://zaryb3.vercel.app',
+        canonical: 'https://avayezaryab.cyborgtech.co/',
       },
 
       keywords: [

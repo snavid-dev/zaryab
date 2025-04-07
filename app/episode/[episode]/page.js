@@ -19,7 +19,7 @@ export async function generateMetadata({ params }) {
       openGraph: {
         title: data?.story_title && data?.story_title,
         description: `داستان ${data?.story_title && data?.story_title}`,
-        url: 'https://zaryb3.vercel.app',
+        url: 'https://avayezaryab.cyborgtech.co/',
         siteName: 'وبسایت ادبی آوای زریاب',
         images: [
           {
@@ -46,7 +46,7 @@ export async function generateMetadata({ params }) {
       },
 
       alternates: {
-        canonical: 'https://zaryb3.vercel.app',
+        canonical: 'https://avayezaryab.cyborgtech.co/',
       },
 
       keywords: [

@@ -6,11 +6,11 @@ export const metadata = {
   openGraph: {
     title: 'نوشته های ادبی',
     description: 'داستان ها و اشعار ادبی',
-    url: 'https://zaryb3.vercel.app',
+    url: 'https://avayezaryab.cyborgtech.co/',
     siteName: 'وبسایت ادبی آوای زریاب',
     images: [
       {
-        url: 'https://images.pexels.com/photos/1831744/pexels-photo-1831744.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        url: 'https://canin-cdn.cyborgtech.co/zaryab/writingsPage.PNG',
         width: 1129,
         height: 750,
         alt: 'نوشته های ادبی',
@@ -24,9 +24,7 @@ export const metadata = {
     site: '@your_twitter_handle',
     title: 'نوشته های ادبی',
     description: 'داستان ها و اشعار ادبی',
-    images: [
-      'https://images.pexels.com/photos/1831744/pexels-photo-1831744.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    ],
+    images: ['https://canin-cdn.cyborgtech.co/zaryab/writingsPage.PNG'],
   },
   viewport: 'width=device-width, initial-scale=1.0',
   robots: {
@@ -35,7 +33,7 @@ export const metadata = {
   },
 
   alternates: {
-    canonical: 'https://zaryb3.vercel.app',
+    canonical: 'https://avayezaryab.cyborgtech.co/',
   },
 
   keywords: [
