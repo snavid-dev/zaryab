@@ -1,3 +1,4 @@
+import Advertise from '@/components/Advertise/Advertise';
 import Authors from '@/components/Authors/Authors';
 import AuthorWeek from '@/components/AuthorWeek/AuthorWeek';
 import BookDesk from '@/components/BookDesk/BookDesk';
@@ -124,6 +125,10 @@ export default async function Home() {
 
   return (
     <main className="w-full flex flex-col items-center mt-100px xl:mt-0 pb-50px min-h-100vh">
+      {/* advertise section */}
+
+      <Advertise />
+
       {/* story of the day */}
 
       <StoryOfDay data={storyData} />
