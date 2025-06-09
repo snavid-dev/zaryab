@@ -127,7 +127,7 @@ export default async function Home() {
     <main className="w-full flex flex-col items-center mt-100px xl:mt-0 pb-50px min-h-100vh">
       {/* advertise section */}
 
-      <Advertise />
+      {/* <Advertise /> */}
 
       {/* story of the day */}
 
