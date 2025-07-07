@@ -1,3 +1,4 @@
+import Head from 'next/head'; // Import the Head component
 import Header from '@/components/Header/Header';
 import './globals.css';
 import Wrapper from '@/components/Wrapper/Wrapper';
@@ -37,11 +38,9 @@ export const metadata = {
     index: true,
     follow: true,
   },
-
   alternates: {
     canonical: 'https://avayezaryab.cyborgtech.co/',
   },
-
   keywords: [
     'ادبیات',
     'شعر',
@@ -69,20 +68,21 @@ export const metadata = {
     'مقاله های ادبی',
     'نقد و نظر آثار ادبی',
   ],
-
   authors: [
     {
       name: 'Cyborg Tech Creative Agency',
       url: 'https://cyborgtech.co/',
     },
   ],
-
   manifest: '/site.webmanifest',
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="fa"> {/* Changed lang to "fa" for Persian 😉 */}
+      <Head>
+        <meta name="google-site-verification" content="RoPaVdppgngDu9Qru6kdoKWDqDBGpcUb47b7yP6aqIc" />
+      </Head>
       <body>
         <Wrapper>
           <Header />
